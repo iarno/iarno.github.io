@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="kong, 网关, plugins, konga" name="keywords">
+<meta content="Kong - 自定义插件开发(一) - 阿諾同學" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Kong - 自定义插件开发(一)&nbsp;&ndash;&nbsp;阿諾同學</title><link rel="stylesheet" href="/css/core.min.53f73ea0cd025271b90f129a8e48f75757a6319a53c4f190b3c0aeef760af35af0282f5247cc5085b2cee5d7d51ddd7d.css" integrity="sha384-U/c&#43;oM0CUnG5DxKajkj3V1emMZpTxPGQs8Cu73YK81rwKC9SR8xQhbLO5dfVHd19"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Kong - 自定义插件开发(一)" /><body><section id="header">
+    <title>Kong - 自定义插件开发(一) - 阿諾同學</title>
+    <meta content="服务端开发 - kong开发自定义插件" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">阿諾同學</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="https://github.com/iarno"target="_blank"></a><a class="nav item" href="121598454583_.pic.jpg"></a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Kong - 自定义插件开发(一)</h1><p class="article date">July 13, 2021</p></section><article class="article markdown-body"><h2 id="介绍">介绍</h2>
+<p>将您的插件视为一组<a href="http://www.lua.org/manual/5.1/manual.html#6.3"target="_blank">Lua 模块</a>。本章中描述的每个文件都被视为一个单独的模块。如果它们的名称遵循以下约定，Kong 将检测并加载您的插件模块：</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">kong</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.&lt;</span><span class="nx">plugin_name</span><span class="p">&gt;.&lt;</span><span class="nx">module_name</span><span class="p">&gt;</span>
+</code></pre></div><blockquote>
+<p>你的模块当然需要通过你的<a href="http://www.lua.org/manual/5.1/manual.html#pdf-package.path"target="_blank">package.path</a> 变量访问 ，它可以通过<a href="https://docs.konghq.com/2.2.x/configuration/#lua_package_path"target="_blank">lua_package_path</a> 配置属性调整到你的需要 。然而，安装插件的首选方式是通过 <a href="https://luarocks.org/"target="_blank">LuaRocks</a>，Kong 与它本地集成。</p>
+</blockquote>
+<p>为了让 Kong 意识到它必须寻找你插件的模块，你必须将它添加到配置文件中的 <a href="https://docs.konghq.com/2.2.x/configuration/#plugins"target="_blank">plugins</a>属性中，这是一个逗号分隔的列表。例如：</p>
+<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="n">plugins</span> <span class="o">=</span> <span class="n">bundled</span><span class="p">,</span><span class="n">my</span><span class="o">-</span><span class="n">custom</span><span class="o">-</span><span class="n">plugin</span>  <span class="o">#</span> <span class="n">your</span> <span class="n">plugin</span> <span class="n">name</span> <span class="n">here</span>
+</code></pre></div><p>或者，如果您不想加载任何捆绑的插件：</p>
+<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="n">plugins</span> <span class="o">=</span> <span class="n">my</span><span class="o">-</span><span class="n">custom</span><span class="o">-</span><span class="n">plugin</span> <span class="o">#</span> <span class="n">your</span> <span class="n">plugin</span> <span class="n">name</span> <span class="n">here</span>
+</code></pre></div><p>现在，Kong 将尝试从以下命名空间加载几个 Lua 模块：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">kong.plugins.my-custom-plugin.&lt;module_name&gt;
+</code></pre></div><p>其中一些模块是强制性的（例如<code>handler.lua</code>），一些是可选的，并且允许插件实现一些额外的功能（例如<code>api.lua</code>扩展管理 API 端点）。</p>
+<p>现在让我们准确描述您可以实现的模块是什么以及它们的目的是什么。</p>
+<h2 id="基本插件模块">基本插件模块</h2>
+<p>在最纯粹的形式中，插件由两个强制性模块组成：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">simple-plugin
+├── handler.lua
+└── schema.lua
+</code></pre></div><ul>
+<li><strong><a href="https://docs.konghq.com/gateway-oss/2.2.x/plugin-development/custom-logic/"target="_blank">handler.lua</a></strong>：插件的核心。它是一个要实现的接口，其中每个函数都将在请求/连接的生命周期中的所需时刻运行。</li>
+<li><strong><a href="https://docs.konghq.com/gateway-oss/2.2.x/plugin-development/plugin-configuration/"target="_blank">schema.lua</a></strong>：您的插件可能必须保留用户输入的一些配置。该模块保存该配置的<em>架构</em>并在其上定义规则，以便用户只能输入有效的配置值。</li>
+</ul>
+<h2 id="高级插件模块">高级插件模块</h2>
+<p>一些插件可能需要与 Kong 更深入地集成：在数据库中有自己的表，在 Admin API 中公开端点等。每一个都可以通过向插件添加一个新模块来完成。如果插件实现了所有可选模块，那么它的结构如下所示：</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="n">complete</span><span class="o">-</span><span class="n">plugin</span>
+<span class="err">├──</span> <span class="n">api</span><span class="p">.</span><span class="n">lua</span>
+<span class="err">├──</span> <span class="n">daos</span><span class="p">.</span><span class="n">lua</span>
+<span class="err">├──</span> <span class="n">handler</span><span class="p">.</span><span class="n">lua</span>
+<span class="err">├──</span> <span class="n">migrations</span>
+<span class="err">│</span>   <span class="err">├──</span> <span class="n">init</span><span class="p">.</span><span class="n">lua</span>
+<span class="err">│</span>   <span class="err">└──</span> <span class="mi">000</span><span class="n">_base_complete_plugin</span><span class="p">.</span><span class="n">lua</span>
+<span class="err">└──</span> <span class="k">schema</span><span class="p">.</span><span class="n">lua</span>
+</code></pre></div><p>这是可能要实现的模块的完整列表以及它们的用途的简要说明。本指南将详细介绍，让您掌握其中的每一个。</p>
+<table>
+<thead>
+<tr>
+<th align="left">模块名称</th>
+<th align="left">必需的</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><strong><a href="https://docs.konghq.com/gateway-oss/2.2.x/plugin-development/admin-api/"target="_blank">api.lua</a></strong></td>
+<td align="left">不</td>
+<td align="left">定义可在 Admin API 中使用的端点列表，以与插件处理的自定义实体进行交互。</td>
+</tr>
+<tr>
+<td align="left"><strong><a href="https://docs.konghq.com/gateway-oss/2.2.x/plugin-development/custom-entities/"target="_blank">daos.lua</a></strong></td>
+<td align="left">不</td>
+<td align="left">定义一个 DAO（数据库访问对象）列表，它们是插件所需的自定义实体的抽象，并存储在数据存储中。</td>
+</tr>
+<tr>
+<td align="left"><strong><a href="https://docs.konghq.com/gateway-oss/2.2.x/plugin-development/custom-logic/"target="_blank">handler.lua</a></strong></td>
+<td align="left">是的</td>
+<td align="left">要实现的接口。每个函数都将由 Kong 在请求/连接的生命周期中的所需时刻运行。</td>
+</tr>
+<tr>
+<td align="left"><strong><a href="https://docs.konghq.com/gateway-oss/2.2.x/plugin-development/custom-entities/"target="_blank">migrations/*.lua</a></strong></td>
+<td align="left">不</td>
+<td align="left">数据库迁移（例如创建表）。仅当您的插件必须将自定义实体存储在数据库中并通过<a href="https://docs.konghq.com/gateway-oss/2.2.x/plugin-development/custom-entities/"target="_blank">daos.lua</a>定义的 DAO 之一与它们交互时，才需要迁移。</td>
+</tr>
+<tr>
+<td align="left"><strong><a href="https://docs.konghq.com/gateway-oss/2.2.x/plugin-development/plugin-configuration/"target="_blank">schema.lua</a></strong></td>
+<td align="left">是的</td>
+<td align="left">保存插件配置的架构，以便用户只能输入有效的配置值。</td>
+</tr>
+</tbody>
+</table>
+<p>该<a href="https://docs.konghq.com/hub/kong-inc/key-auth/"target="_blank">密钥的验证插件</a>与此文件结构插件的例子。有关更多详细信息，请参阅<a href="https://github.com/Kong/kong/tree/master/kong/plugins/key-auth"target="_blank">其源代码</a>。</p>
+<h2 id="参考">参考</h2>
+<p><a href="https://docs.konghq.com/gateway-oss/2.2.x/plugin-development/file-structure/">https://docs.konghq.com/gateway-oss/2.2.x/plugin-development/file-structure/</a></p>
+</article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/%E7%BD%91%E5%85%B3/>网关</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">阿諾</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/plugin-dev2/"><span class="iconfont icon-article"></span>Kong - 自定义插件开发(二)</a></p><p><a class="link" href="/article/rate-limiting/"><span class="iconfont icon-article"></span>限流算法实践</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2021 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

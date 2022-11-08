@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>PHP on IARNO</title>
+    <link>/categories/php/</link>
+    <description>Recent content in PHP on IARNO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2022 Arno.</copyright>
+    <lastBuildDate>Sat, 29 Aug 2020 07:47:20 +0800</lastBuildDate>
+    
+        <atom:link href="/categories/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>pcntl_fork 多进程</title>
+      <link>/article/pcntl-fork-%E5%A4%9A%E8%BF%9B%E7%A8%8B/</link>
+      <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
+      
+      <guid>/article/pcntl-fork-%E5%A4%9A%E8%BF%9B%E7%A8%8B/</guid>
+      <description>&lt;h2 id=&#34;pcntl-简介&#34;&gt;pcntl 简介&lt;/h2&gt;
+&lt;p&gt;PHP的进程控制支持实现了Unix方式的进程创建, 程序执行, 信号处理以及进程的中断。 进程控制不能被应用在Web服务器环境，当其被用于Web服务环境时可能会带来意外的结果。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>PHP内容缓存Yac</title>
+      <link>/article/php%E5%86%85%E5%AE%B9%E7%BC%93%E5%AD%98yac/</link>
+      <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
+      
+      <guid>/article/php%E5%86%85%E5%AE%B9%E7%BC%93%E5%AD%98yac/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Yac 是为PHP实现的一个基于共享内存, 无锁的内容Cache&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;yac的两个应用场景&#34;&gt;Yac的两个应用场景:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;让PHP进程之间共享一些简单的数据&lt;/li&gt;
+&lt;li&gt;高效地缓存一些页面结果&lt;/li&gt;
+&lt;/ul&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>跨域</title>
+      <link>/article/%E8%B7%A8%E5%9F%9F/</link>
+      <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
+      
+      <guid>/article/%E8%B7%A8%E5%9F%9F/</guid>
+      <description>&lt;h2 id=&#34;一什么是跨域&#34;&gt;一、什么是跨域&lt;/h2&gt;
+&lt;h5 id=&#34;url的组成&#34;&gt;url的组成&lt;/h5&gt;
+&lt;p&gt;JavaScript出于安全方面的考虑，不允许跨域调用其他页面的对象。那什么是跨域呢，简单地理解就是因为JavaScript同源策略的限制，&lt;code&gt;a.com&lt;/code&gt;域名下的js无法操作&lt;code&gt;b.com&lt;/code&gt;或是&lt;code&gt;c.a.com&lt;/code&gt;域名下的对象。&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

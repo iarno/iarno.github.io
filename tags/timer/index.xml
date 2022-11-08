@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>timer on IARNO</title>
+    <link>/tags/timer/</link>
+    <description>Recent content in timer on IARNO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2022 Arno.</copyright>
+    <lastBuildDate>Mon, 19 Apr 2021 21:36:52 +0800</lastBuildDate>
+    
+        <atom:link href="/tags/timer/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>openresty 跑定时任务配置、ngx.timer.every接口使用</title>
+      <link>/article/lua-timer/</link>
+      <pubDate>Mon, 19 Apr 2021 21:36:52 +0800</pubDate>
+      
+      <guid>/article/lua-timer/</guid>
+      <description>&lt;p&gt;openresty的定时任务是要跟worker绑定的。如果不绑定特定的worker，那么所有启动的woker都会去执行定时任务。&lt;/p&gt;
+&lt;p&gt;一般情况下默认绑定worker_id=0的，这样在nginx整个进程里面，就只执行一个timer。&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

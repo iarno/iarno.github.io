@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="网关, kong, centos" name="keywords">
+<meta content="centos7 安装kong网关 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>centos7 安装kong网关&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="centos7 安装kong网关" /><body><section id="header">
+    <title>centos7 安装kong网关 - IARNO</title>
+    <meta content="阿諾个人博客 - centos安装kong网关" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">centos7 安装kong网关</h1><p class="article date">November 14, 2020</p></section><article class="article markdown-body"><h2 id="下载安装包">下载安装包：</h2>
+<p><a href="https://bintray.com/kong/kong-community-edition-rpm/download_file?file_path=centos/7/kong-community-edition-1.0.2.el7.noarch.rpm">https://bintray.com/kong/kong-community-edition-rpm/download_file?file_path=centos/7/kong-community-edition-1.0.2.el7.noarch.rpm</a></p>
+<h2 id="运行下面的两个命令进行安装">运行下面的两个命令进行安装</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ sudo yum install epel-release
+$ sudo yum install kong-community-edition-1.0.2.el7.noarch.rpm --nogpgcheck
+</code></pre></div><h2 id="准备数据库">准备数据库</h2>
+<blockquote>
+<p>安装<code>PostgreSQL</code>请参考<a href="https://www.iarno.cn/article/postgresql-centos/"target="_blank">centos7安装PostgreSQL</a></p>
+</blockquote>
+<p><code>KONG</code> 使用<a href="http://www.postgresql.org/"target="_blank">PostgreSQL 9.5+</a> 或 <a href="http://cassandra.apache.org/"target="_blank">Cassandra 3.x.x</a> 作为数据存储。这里使用 <code>PostgreSQL</code>，需要事先准备好。创建一个名为 kong 的用户，并且创建一个名为 kong 的数据库。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ sudo -s -u postgres
+psql
+CREATE USER kong WITH PASSWORD <span class="s1">&#39;123456&#39;</span><span class="p">;</span> 
+CREATE DATABASE kong OWNER kong<span class="p">;</span>
+GRANT ALL PRIVILEGES ON DATABASE kong to kong<span class="p">;</span>
+</code></pre></div><h2 id="数据库连接配置">数据库连接配置</h2>
+<p>复制配置文件：<code> cp /etc/kong/kong.conf.default /etc/kong/kong.conf</code></p>
+<p>编辑 <code>/etc/kong/kong.conf</code>， 配置下面几项</p>
+<p><img  src="https://i.loli.net/2020/11/17/36WSe8fgurndRYm.png"
+        alt="img"/></p>
+<h2 id="配置完后运行下面的命令">配置完后，运行下面的命令</h2>
+<pre><code>$ kong migrations bootstrap -c /etc/kong/kong.conf
+</code></pre><h2 id="启动-kong">启动 KONG</h2>
+<p><code>--vv</code> 可以打印更多的启动日志</p>
+<pre><code>kong start -c /etc/kong/kong.conf --vv
+</code></pre><h2 id="检查-kong-是否正确运行">检查 KONG 是否正确运行</h2>
+<pre><code>$ curl -i http://localhost:8001/
+或者
+kong health
+</code></pre><h2 id="停止-kong">停止 KONG</h2>
+<pre><code>$ kong stop
+</code></pre><h2 id="参考">参考</h2>
+<p><a href="https://docs.konghq.com/install/centos/?_ga=2.186851116.589591982.1605191133-180474188.1599576441">https://docs.konghq.com/install/centos/?_ga=2.186851116.589591982.1605191133-180474188.1599576441</a></p></article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/%E7%BD%91%E5%85%B3/>网关</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/postgresql-centos/"><span class="iconfont icon-article"></span>centos7安装Postgresql</a></p><p><a class="link" href="/article/image-url-size/"><span class="iconfont icon-article"></span>通过图片url获取图片尺寸大小</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="负载均衡, 网关, konga" name="keywords">
+<meta content="Kong网关配置负载均衡 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Kong网关配置负载均衡&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Kong网关配置负载均衡" /><body><section id="header">
+    <title>Kong网关配置负载均衡 - IARNO</title>
+    <meta content="阿諾个人博客 - kong网关负载均衡配置" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Kong网关配置负载均衡</h1><p class="article date">October 27, 2020</p></section><article class="article markdown-body"><p><strong>环境说明</strong></p>
+<blockquote>
+<p>注：由于docker network原因，宿主机127.0.0.1可能会访问不到，可直接使用外网域名+端口</p>
+</blockquote>
+<pre><code># 开放两个测试的微服务接口
+http://myhost1:8881
+http://myhost2:8882
+</code></pre><h1 id="通过konga实现">通过konga实现</h1>
+<h2 id="1-配置upstream">1. 配置upstream</h2>
+<p>打开Konga左侧列表菜单中的<code>UPSTREAMS</code>, 点击 <code>CREATE UPSTREAM</code></p>
+<p><img  src="https://i.loli.net/2020/10/27/sVitydWzbSqYwOD.png"
+        alt="img"/></p>
+<p>这里，只需要写一个<code>Name</code>，保证<code>Service</code>的配置可以正确匹配到我们就可以了。</p>
+<p><img  src="https://i.loli.net/2020/10/27/E7sWIyKGQz1vbL2.png"
+        alt="img"/></p>
+<p>既然是负载均衡，自然少不了后端服务，接下来配置在<code>Upstreams</code>进行负载均衡的终端——<code>Targets</code>。
+找到我们刚才创建的upstream，然后点击<code>DETALS</code></p>
+<p><img  src="https://i.loli.net/2020/10/27/WsCbFVPQJqIyMkx.png"
+        alt="img"/></p>
+<p><code>Targets</code> to <code>+ ADD TARGET</code>，填写测试接口信息，完成对<code>UPSTREAM</code>的配置</p>
+<p><img  src="https://i.loli.net/2020/10/27/5BA2YnfFoXC8RqK.png"
+        alt="img"/></p>
+<p><img  src="https://i.loli.net/2020/10/27/FbClugM6Xt38UVi.png"
+        alt="img"/></p>
+<h2 id="2-配置service发布">2. 配置Service发布</h2>
+<p>配置一个<code>Service</code>，字段<code>Url</code>填写我们刚刚配置的<code>Upstream</code>的<code>Name</code></p>
+<p><img  src="https://i.loli.net/2020/10/27/2iptUPEAqv7z8yk.png"
+        alt="img"/></p>
+<h2 id="3-配置route匹配规则">3. 配置Route，匹配规则</h2>
+<p><img  src="https://i.loli.net/2020/10/27/RhupyBSzQKLebdw.png"
+        alt="img"/></p>
+<p><img  src="https://i.loli.net/2020/10/27/1afObKz2sTvg7BZ.png"
+        alt="img"/></p>
+<blockquote>
+<p><strong>提示</strong>： 在输入 <code>hosts,paths,methods</code>时，要按回车！！！</p>
+</blockquote>
+<h2 id="4-验证结果">4. 验证结果</h2>
+<p><strong>浏览器测试</strong>
+通过<code>Shift+F5 或 Ctrl+Shift+R</code>，不使用缓存进行请求测试</p>
+<p><img  src="https://mrgao.oss-cn-beijing.aliyuncs.com/md/kong/19-12-13/kong_20191213104236.png?x-oss-process=style/watermark"
+        alt="img"/></p>
+<p><strong>命令行API 测试</strong></p>
+<pre><code>$ curl -i -X GET --url http://localhost:8000 --header 'Host: test.app.com'
+</code></pre><hr>
+<h1 id="通过-kong-admin-api实现">通过 Kong Admin API实现</h1>
+<p><code>route</code>根据<code>paths</code>转发给相应的<code>service</code>根据<code>host（upstream的name）</code>转发给 <code>upstream</code>负载均衡至<code>targets</code>，这就是kong的负载均衡执行流程。</p>
+<p>下面再学习一下通过<code>Admin API</code>如何完成负责均衡配置</p>
+<h2 id="1-配置upstream-1">1. 配置upstream</h2>
+<p>创建upstream</p>
+<pre><code>$ curl -X POST localhost:8001/upstreams \
+--data &quot;name=app.com&quot;
+</code></pre><p>为upstream配置target</p>
+<pre><code>$ curl -X POST localhost:8001/upstreams/app.com/targets \
+--data &quot;target=myhost1:8881&quot; \
+--data &quot;weight=100&quot;
+
+$ curl -X POST localhost:8001/upstreams/app.com/targets \
+--data &quot;target=myhost2:8882&quot; \
+--data &quot;weight=100&quot;
+</code></pre><p>等同于创建了如下配置：</p>
+<pre><code>upstream upstream.api {
+    server myhost1:8881 weight=100;
+    server myhost2:8882 weight=100;
+}
+</code></pre><h2 id="2-配置service">2. 配置service</h2>
+<pre><code>$ curl -X POST localhost:8001/services \
+--data &quot;name=my-app-service&quot; \
+--data &quot;host=app.com&quot;
+</code></pre><h2 id="3-配置routemorehttpsdocskonghqcom10xadmin-apiadd-route">3. 配置route(<a href="https://docs.konghq.com/1.0.x/admin-api/#add-route"target="_blank">more</a>)</h2>
+<pre><code>$ curl -X POST localhost:8001/services/a9b8a3e9-826b-47fa-ae78-0fcf111662a1/routes \
+--data &quot;name=test-app-route&quot; \
+--data &quot;hosts[]=test.app.com&quot; \
+--data 'strip_path=false'
+</code></pre><p>或者</p>
+<pre><code>$ curl -X POST localhost:8001/routes \
+--data &quot;name=test-app-route&quot; \
+--data &quot;hosts[]=test.app.com&quot; \
+--data &quot;service.id=a9b8a3e9-826b-47fa-ae78-0fcf111662a1&quot; \
+--data 'strip_path=false'
+</code></pre><hr>
+</article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/%E7%BD%91%E5%85%B3/>网关</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/image-url-size/"><span class="iconfont icon-article"></span>通过图片url获取图片尺寸大小</a></p><p><a class="link" href="/article/network/"><span class="iconfont icon-article"></span>宽带、带宽、流量、网速、内网、外网之间的区别</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

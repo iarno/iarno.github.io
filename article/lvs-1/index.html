@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="lvs, 负载均衡, rs, 负载" name="keywords">
+<meta content="LVS负载均衡实践 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>LVS负载均衡实践&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="LVS负载均衡实践" /><body><section id="header">
+    <title>LVS负载均衡实践 - IARNO</title>
+    <meta content="阿諾个人博客 - LVS 操作实践" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">LVS负载均衡实践</h1><p class="article date">September 16, 2021</p></section><article class="article markdown-body"><p>LVS负载均衡操作与实践。</p>
+<h2 id="机器说明">机器说明</h2>
+<p><code>192.168.199.10</code>lvs服务器、<code>192.168.199.11</code>web服务器1、<code>192.168.199.12</code>web服务器2、<code>192.168.199.100</code>vip。</p>
+<table>
+<thead>
+<tr>
+<th>IP</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.199.10</td>
+<td>LVS服务器</td>
+</tr>
+<tr>
+<td>192.168.199.11</td>
+<td>WEB服务器1</td>
+</tr>
+<tr>
+<td>192.168.199.12</td>
+<td>WEB服务器2</td>
+</tr>
+<tr>
+<td>192.168.199.100</td>
+<td>VIP(虚拟IP)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lvs服务器">LVS服务器</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 安装ipvsadm</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span> yum install ipvsadm -y
+
+<span class="c1"># 配置VIP网卡</span>
+<span class="c1"># 注意！！！ 我的网卡是ens33，请根据自己的实际网卡来配置比如eth0网卡</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span> ifconfig ens33:8 192.168.199.100/24
+
+<span class="c1"># 使用ipvsadm配置VIP</span>
+<span class="c1"># -A 参数添加VIP</span>
+<span class="c1"># -t 参数tcp协议</span>
+<span class="c1"># 192.168.199.100:80 VIP端口是80</span>
+<span class="c1"># -s 参数负载算法，rr为轮询</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span> ipvsadm -A -t 192.168.199.100:80 -s rr
+</code></pre></div><h2 id="web服务器1">WEB服务器1</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 安装nginx服务</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span> yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel
+<span class="o">[</span>root@localhost ~<span class="o">]</span> wget https://nginx.org/download/nginx-1.21.3.tar.gz <span class="o">&amp;&amp;</span> tar -zxf nginx-1.21.3.tar.gz <span class="o">&amp;&amp;</span> <span class="nb">cd</span> nginx-1.21.3/
+<span class="o">[</span>root@localhost ~<span class="o">]</span> ./configure <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> make install
+<span class="o">[</span>root@localhost ~<span class="o">]</span> /usr/local/nginx/sbin/nginx
+
+<span class="c1"># 配置index.html文件</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span> cat /usr/local/nginx/html/index.html
+192.168.199.11
+
+<span class="c1"># 修改arp_ignore和arp_announce配置</span>
+<span class="c1"># 注意！！！我的网卡是ens33，按自己实际网卡来操作，比如eth0目录下</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span> <span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/net/ipv4/conf/ens33/arp_ignore
+<span class="o">[</span>root@localhost ~<span class="o">]</span> <span class="nb">echo</span> <span class="m">2</span> &gt; /proc/sys/net/ipv4/conf/ens33/arp_announce
+<span class="o">[</span>root@localhost ~<span class="o">]</span> <span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/net/ipv4/conf/all/arp_ignore
+<span class="o">[</span>root@localhost ~<span class="o">]</span> <span class="nb">echo</span> <span class="m">2</span> &gt; /proc/sys/net/ipv4/conf/all/arp_announce
+
+<span class="c1"># 环回接口配置VIP，实现对内可见对外隐藏</span>
+<span class="c1"># 切记！！！ 切记！！！ 掩码是4个255</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span> ifconfig lo:2 192.168.199.100 netmask 255.255.255.255
+</code></pre></div><h2 id="web服务器2">WEB服务器2</h2>
+<p>操作同WEB服务器1</p>
+<h2 id="lvs服务器-1">LVS服务器</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># lvs添加rs</span>
+<span class="c1"># -a 参数添加rs</span>
+<span class="c1"># -t 参数tcp协议</span>
+<span class="c1"># 192.168.199.100:80 如上第一配置的vip及端口</span>
+<span class="c1"># -r rs服务器ip即WEB服务1或WEB服务器2对应的IP</span>
+<span class="c1"># -g 参数lvs模式，不填默认为DR模式</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span> ipvsadm -a -t 192.168.199.100:80 -r 192.168.199.11 -g
+<span class="o">[</span>root@localhost ~<span class="o">]</span> ipvsadm -a -t 192.168.199.100:80 -r 192.168.199.12 -g
+
+<span class="c1"># ipvsadm 查看rs情况</span>
+<span class="c1"># ipvsadm -lnc 会查看当前连接情况</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span> ipvsadm -ln
+IP Virtual Server version 1.2.1 <span class="o">(</span><span class="nv">size</span><span class="o">=</span>4096<span class="o">)</span>
+Prot LocalAddress:Port Scheduler Flags
+  -&gt; RemoteAddress:Port           Forward Weight ActiveConn InActConn
+TCP  192.168.199.100:80 rr
+  -&gt; 192.168.199.11:80            Route   <span class="m">1</span>      <span class="m">0</span>          <span class="m">0</span>
+  -&gt; 192.168.199.12:80            Route   <span class="m">1</span>      <span class="m">0</span>          <span class="m">0</span>
+</code></pre></div><h2 id="访问vip">访问VIP</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 请求结果会轮着来</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span> curl -X GET http://192.168.199.100:80
+192.168.199.11
+<span class="o">[</span>root@localhost ~<span class="o">]</span> curl -X GET http://192.168.199.100:80
+192.168.199.12
+</code></pre></div></article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/lvs/>lvs</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/lvs-2/"><span class="iconfont icon-article"></span>LVS + Keepalived实现集群高可用</a></p><p><a class="link" href="/article/mac-vm/"><span class="iconfont icon-article"></span>Mac 安装VM虚拟机及网络配置</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="dig, 域名解析, dns" name="keywords">
+<meta content="Dig 命令使用详解 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Dig 命令使用详解&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Dig 命令使用详解" /><meta name="twitter:image" content="https://s2.loli.net/2022/06/22/dzhbckuf7fr4p51.png" /><body><section id="header">
+    <title>Dig 命令使用详解 - IARNO</title>
+    <meta content="阿諾个人博客 - dig查看域名解析" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Dig 命令使用详解</h1><p class="article date">June 27, 2022</p></section><article class="article markdown-body"><p><img class="cover" src="https://s2.loli.net/2022/06/22/dzhbcKUF7fR4P51.png" alt></p><p>dig 命令使用详解。</p>
+<p>Linux下解析域名除了使用<code>nslookup</code>之外，开可以使用<code>dig</code><a href="https://www.linuxcool.com/"target="_blank">命令</a>来解析域名。</p>
+<p>dig<a href="https://www.linuxcool.com/"target="_blank">命令</a>可以得到更多的域名信息。dig 命令主要用来从 DNS 域名服务器查询主机地址信息。dig的全称是 (<code>domain information groper</code>)。它是一个用来灵活探测DNS的工具。它会打印出&gt;DNS name server的回应。</p>
+<h2 id="查询单个域名的dns信息">查询单个域名的DNS信息</h2>
+<p><code>dig</code> 命令最典型的用法就是查询单个主机的信息。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">linuxidc</span><span class="err">@</span><span class="nx">linuxidc</span><span class="p">:</span><span class="err">~$</span> <span class="nx">dig</span> <span class="nx">www</span><span class="p">.</span><span class="nx">linuxidc</span><span class="p">.</span><span class="nx">com</span> <span class="p">[</span><span class="o">+</span><span class="nx">trace</span><span class="p">]</span>
+
+<span class="p">;</span> <span class="p">&lt;</span> <span class="p">&lt;</span><span class="o">&gt;&gt;</span> <span class="nx">DiG</span> <span class="mf">9.11.3</span><span class="o">-</span><span class="mi">1</span><span class="nx">Ubuntu1</span><span class="mf">.5</span><span class="o">-</span><span class="nx">Ubuntu</span> <span class="p">&lt;</span> <span class="p">&lt;</span><span class="o">&gt;&gt;</span> <span class="nx">www</span><span class="p">.</span><span class="nx">linuxidc</span><span class="p">.</span><span class="nx">com</span>
+<span class="p">;;</span> <span class="nx">global</span> <span class="nx">options</span><span class="p">:</span> <span class="o">+</span><span class="nx">cmd</span>
+<span class="p">;;</span> <span class="nx">Got</span> <span class="nx">answer</span><span class="p">:</span>
+<span class="p">;;</span> <span class="o">-&gt;&gt;</span><span class="nx">HEADER</span><span class="p">&lt;</span> <span class="o">&lt;-</span> <span class="nx">opcode</span><span class="p">:</span> <span class="nx">QUERY</span><span class="p">,</span> <span class="nx">status</span><span class="p">:</span> <span class="nx">NOERROR</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="mi">17774</span>
+<span class="p">;;</span> <span class="nx">flags</span><span class="p">:</span> <span class="nx">qr</span> <span class="nx">rd</span> <span class="nx">ra</span><span class="p">;</span> <span class="nx">QUERY</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">ANSWER</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">AUTHORITY</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">ADDITIONAL</span><span class="p">:</span> <span class="mi">1</span>
+
+<span class="p">;;</span> <span class="nx">OPT</span> <span class="nx">PSEUDOSECTION</span><span class="p">:</span>
+<span class="p">;</span> <span class="nx">EDNS</span><span class="p">:</span> <span class="nx">version</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">flags</span><span class="p">:;</span> <span class="nx">udp</span><span class="p">:</span> <span class="mi">65494</span>
+<span class="p">;;</span> <span class="nx">QUESTION</span> <span class="nx">SECTION</span><span class="p">:</span>
+<span class="p">;</span><span class="nx">www</span><span class="p">.</span><span class="nx">linuxidc</span><span class="p">.</span><span class="nx">com</span><span class="p">.</span>  <span class="nx">IN</span> <span class="nx">A</span>
+
+<span class="p">;;</span> <span class="nx">ANSWER</span> <span class="nx">SECTION</span><span class="p">:</span>
+<span class="nx">www</span><span class="p">.</span><span class="nx">linuxidc</span><span class="p">.</span><span class="nx">com</span><span class="p">.</span> <span class="mi">5</span> <span class="nx">IN</span> <span class="nx">A</span> <span class="mf">122.228.238.15</span>
+<span class="nx">www</span><span class="p">.</span><span class="nx">linuxidc</span><span class="p">.</span><span class="nx">com</span><span class="p">.</span> <span class="mi">5</span> <span class="nx">IN</span> <span class="nx">A</span> <span class="mf">106.42.25.203</span>
+
+<span class="p">;;</span> <span class="nx">Query</span> <span class="nx">time</span><span class="p">:</span> <span class="mi">10</span> <span class="nx">msec</span>
+<span class="p">;;</span> <span class="nx">SERVER</span><span class="p">:</span> <span class="mf">127.0.0.53</span><span class="err">#</span><span class="mi">53</span><span class="p">(</span><span class="mf">127.0.0.53</span><span class="p">)</span>
+<span class="p">;;</span> <span class="nx">WHEN</span><span class="p">:</span> <span class="nx">Sun</span> <span class="nx">Mar</span> <span class="mo">03</span> <span class="mi">10</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">35</span> <span class="nx">CST</span> <span class="mi">2019</span>
+<span class="p">;;</span> <span class="nx">MSG</span> <span class="nx">SIZE</span>  <span class="nx">rcvd</span><span class="p">:</span> <span class="mi">77</span>
+</code></pre></div><p>​																																																																																																		<img src="https://s2.loli.net/2022/06/27/Q1f6xlzat8J2u39.png" alt="Linux下解析域名命令-dig 命令使用详解Linux下解析域名命令-dig 命令使用详解" style="zoom:150%;" /></p>
+<h4 id="输出说明">输出说明</h4>
+<p>第一部分显示 dig 命令的版本和输入的参数。
+第二部分显示服务返回的一些技术详情，比较重要的是 status。如果 status 的值为 NOERROR 则说明本次查询成功结束。
+第三部分中的 &ldquo;QUESTION SECTION&rdquo; 显示我们要查询的域名。
+第四部分的 &ldquo;ANSWER SECTION&rdquo; 是查询到的结果。
+第五部分则是本次查询的一些统计信息，比如用了多长时间，查询了哪个 DNS 服务器，在什么时间进行的查询等等。</p>
+<p>默认情况下 dig 命令查询 A 记录，上图中显示的 A 即说明查询的记录类型为 A 记录。在尝试查询其它类型的记录前让我们先来了解一下常见的 DNS 记录类型。</p>
+<h2 id="从指定的-dns-服务器上查询">从指定的 DNS 服务器上查询</h2>
+<p>由于一些原因，希望从指定的 DNS 服务器上进行查询(从默认的 DNS 服务器上获得的结果可能不准确)。指定 DNS 服务器的方式为使用 @ 符号：</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">linuxidc</span><span class="err">@</span><span class="nx">linuxidc</span><span class="p">:</span><span class="err">~$</span> <span class="nx">dig</span> <span class="err">@</span><span class="mf">8.8.8.8</span> <span class="nx">m</span><span class="p">.</span><span class="nx">linuxidc</span><span class="p">.</span><span class="nx">com</span>
+
+<span class="p">;</span> <span class="p">&lt;</span> <span class="p">&lt;</span><span class="o">&gt;&gt;</span> <span class="nx">DiG</span> <span class="mf">9.11.3</span><span class="o">-</span><span class="mi">1</span><span class="nx">ubuntu1</span><span class="mf">.5</span><span class="o">-</span><span class="nx">Ubuntu</span> <span class="p">&lt;</span> <span class="p">&lt;</span><span class="o">&gt;&gt;</span> <span class="err">@</span><span class="mf">8.8.8.8</span> <span class="nx">m</span><span class="p">.</span><span class="nx">linuxidc</span><span class="p">.</span><span class="nx">com</span>
+<span class="p">;</span> <span class="p">(</span><span class="mi">1</span> <span class="nx">server</span> <span class="nx">found</span><span class="p">)</span>
+<span class="p">;;</span> <span class="nx">global</span> <span class="nx">options</span><span class="p">:</span> <span class="o">+</span><span class="nx">cmd</span>
+<span class="p">;;</span> <span class="nx">Got</span> <span class="nx">answer</span><span class="p">:</span>
+<span class="p">;;</span> <span class="o">-&gt;&gt;</span><span class="nx">HEADER</span><span class="p">&lt;</span> <span class="o">&lt;-</span> <span class="nx">opcode</span><span class="p">:</span> <span class="nx">QUERY</span><span class="p">,</span> <span class="nx">status</span><span class="p">:</span> <span class="nx">NOERROR</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="mi">38966</span>
+<span class="p">;;</span> <span class="nx">flags</span><span class="p">:</span> <span class="nx">qr</span> <span class="nx">rd</span> <span class="nx">ra</span><span class="p">;</span> <span class="nx">QUERY</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">ANSWER</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">AUTHORITY</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">ADDITIONAL</span><span class="p">:</span> <span class="mi">1</span>
+
+<span class="p">;;</span> <span class="nx">OPT</span> <span class="nx">PSEUDOSECTION</span><span class="p">:</span>
+<span class="p">;</span> <span class="nx">EDNS</span><span class="p">:</span> <span class="nx">version</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">flags</span><span class="p">:;</span> <span class="nx">udp</span><span class="p">:</span> <span class="mi">512</span>
+<span class="p">;;</span> <span class="nx">QUESTION</span> <span class="nx">SECTION</span><span class="p">:</span>
+<span class="p">;</span><span class="nx">m</span><span class="p">.</span><span class="nx">linuxidc</span><span class="p">.</span><span class="nx">com</span><span class="p">.</span>   <span class="nx">IN</span> <span class="nx">A</span>
+
+<span class="p">;;</span> <span class="nx">ANSWER</span> <span class="nx">SECTION</span><span class="p">:</span>
+<span class="nx">m</span><span class="p">.</span><span class="nx">linuxidc</span><span class="p">.</span><span class="nx">com</span><span class="p">.</span>  <span class="mi">199</span> <span class="nx">IN</span> <span class="nx">A</span> <span class="mf">122.228.238.71</span>
+<span class="nx">m</span><span class="p">.</span><span class="nx">linuxidc</span><span class="p">.</span><span class="nx">com</span><span class="p">.</span>  <span class="mi">199</span> <span class="nx">IN</span> <span class="nx">A</span> <span class="mf">113.107.238.155</span>
+
+<span class="p">;;</span> <span class="nx">Query</span> <span class="nx">time</span><span class="p">:</span> <span class="mi">120</span> <span class="nx">msec</span>
+<span class="p">;;</span> <span class="nx">SERVER</span><span class="p">:</span> <span class="mf">8.8.8.8</span><span class="err">#</span><span class="mi">53</span><span class="p">(</span><span class="mf">8.8.8.8</span><span class="p">)</span>
+<span class="p">;;</span> <span class="nx">WHEN</span><span class="p">:</span> <span class="nx">Sun</span> <span class="nx">Mar</span> <span class="mo">03</span> <span class="mi">11</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="mi">48</span> <span class="nx">CST</span> <span class="mi">2019</span>
+<span class="p">;;</span> <span class="nx">MSG</span> <span class="nx">SIZE</span>  <span class="nx">rcvd</span><span class="p">:</span> <span class="mi">75</span>
+</code></pre></div><p>从上图可以看到本次查询的 DNS 服务器为 <code>8.8.8.8</code>。</p>
+<p>如果不指定 DNS 服务器，dig 会依次使用 <code>/etc/resolv.conf </code>里的地址作为 DNS 服务器：</p>
+<p><img src="https://s2.loli.net/2022/06/27/zXuMYR5yKAhZniV.png" alt="Linux下解析域名命令-dig 命令使用详解Linux下解析域名命令-dig 命令使用详解" style="zoom:150%;" /></p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">linuxidc</span><span class="err">@</span><span class="nx">linuxidc</span><span class="p">:</span><span class="err">~$</span> <span class="nx">dig</span> <span class="nx">m</span><span class="p">.</span><span class="nx">linuxidc</span><span class="p">.</span><span class="nx">com</span>
+</code></pre></div><p><strong>上面查询的 DNS 服务器就变成了：</strong></p>
+<p><img src="https://s2.loli.net/2022/06/27/ywGaSPYQIAtMfW1.png" alt="Linux下解析域名命令-dig 命令使用详解Linux下解析域名命令-dig 命令使用详解" style="zoom: 200%;" /></p>
+<h2 id="反向查询">反向查询</h2>
+<p>在前面的查询中我们指定了查询服务器为 <code>8.8.8.8</code>，这是谁家的 DNS 服务器？其实我们可以使用 dig 的 -x 选项来反向解析 IP 地址对应的域名：</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">linuxidc</span><span class="err">@</span><span class="nx">linuxidc</span><span class="p">:</span><span class="err">~$</span> <span class="nx">dig</span> <span class="o">-</span><span class="nx">x</span> <span class="mf">8.8.8.8</span> <span class="o">+</span><span class="nx">short</span>
+<span class="nx">google</span><span class="o">-</span><span class="nx">public</span><span class="o">-</span><span class="nx">dns</span><span class="o">-</span><span class="nx">a</span><span class="p">.</span><span class="nx">google</span><span class="p">.</span><span class="nx">com</span><span class="p">.</span>
+</code></pre></div></article><section class="article labels"><a class="category" href=/categories/linux/>Linux</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/core/"><span class="iconfont icon-article"></span>Core 文件分析</a></p><p><a class="link" href="/article/gomonkey/"><span class="iconfont icon-article"></span>Gomonkey测试框架</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

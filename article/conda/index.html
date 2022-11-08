@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="conda, 包管理工具, conda python" name="keywords">
+<meta content="Conda 包管理工具 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Conda 包管理工具&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Conda 包管理工具" /><meta name="twitter:image" content="https://s2.loli.net/2022/06/30/q5uw1jenv6ogajy.jpg" /><body><section id="header">
+    <title>Conda 包管理工具 - IARNO</title>
+    <meta content="阿諾个人博客 - Conda 包管理工具" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Conda 包管理工具</h1><p class="article date">June 30, 2022</p></section><article class="article markdown-body"><p><img class="cover" src="https://s2.loli.net/2022/06/30/Q5UW1jenv6OgAJY.jpg" alt></p><p>Conda是一个开源软件包管理系统和环境管理系统。</p>
+<p>支持语言包括 Python，R，Ruby，Lua，Scala，Java，JavaScript，C / C ++，FORTRAN。</p>
+<h2 id="安装">安装</h2>
+<p><a href="https://conda.io/en/latest/miniconda.html">https://conda.io/en/latest/miniconda.html</a></p>
+<p>查看官网或网上🏄🏻自行下载安装。</p>
+<h2 id="设置镜像源">设置镜像源</h2>
+<p><code>vim ~/.condarc</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="p">(</span><span class="nx">python3</span><span class="mf">.9.6</span><span class="p">)</span> <span class="err">➜</span>  <span class="err">~</span> <span class="nx">cat</span> <span class="err">~</span><span class="o">/</span><span class="p">.</span><span class="nx">condarc</span>
+<span class="nx">show_channel_urls</span><span class="p">:</span> <span class="kc">true</span>
+<span class="nx">ssl_verify</span><span class="p">:</span> <span class="kc">false</span>
+<span class="nx">channels</span><span class="p">:</span>
+  <span class="o">-</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/osx-64/
+</span><span class="c1"></span>  <span class="o">-</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/osx-64/
+</span><span class="c1"></span><span class="nx">auto_activate_base</span><span class="p">:</span> <span class="kc">false</span>
+</code></pre></div><p>可以通过<code>.condare</code>文件设置源，也可以通过命令来设置。</p>
+<h2 id="案例">案例</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="err">#</span> <span class="nx">创建</span> <span class="nx">python3</span><span class="mf">.9.6</span> <span class="nx">版本</span>
+<span class="err">➜</span>  <span class="err">~</span> <span class="nx">conda</span> <span class="nx">create</span> <span class="o">--</span><span class="nx">name</span> <span class="nx">python3</span><span class="mf">.9.6</span> <span class="nx">python</span><span class="p">=</span><span class="mf">3.9.6</span>
+<span class="nx">输入y即可创建成功</span>
+
+<span class="err">#</span> <span class="nx">激活</span> <span class="nx">python3</span><span class="mf">.9.6</span>
+<span class="err">➜</span>  <span class="err">~</span> <span class="nx">conda</span> <span class="nx">activate</span> <span class="nx">python3</span><span class="mf">.9.6</span>
+<span class="p">(</span><span class="nx">python3</span><span class="mf">.9.6</span><span class="p">)</span> <span class="err">➜</span>  <span class="err">~</span> <span class="nx">python</span> <span class="o">--</span><span class="nx">version</span>
+<span class="nx">Python</span> <span class="mf">3.9.6</span>
+
+<span class="err">#</span> <span class="nx">退出激活</span>
+<span class="err">➜</span>  <span class="err">~</span> <span class="nx">conda</span> <span class="nx">deactivate</span>
+</code></pre></div><h2 id="问题">问题</h2>
+<h5 id="设置清华源问题">设置清华源问题</h5>
+<blockquote>
+<p>CondaHTTPError: HTTP 000 CONNECTION FAILED</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="nx">Collecting</span> <span class="kn">package</span> <span class="nf">metadata</span> <span class="p">(</span><span class="nx">current_repodata</span><span class="p">.</span><span class="nx">json</span><span class="p">):</span> <span class="nx">failed</span>
+
+<span class="nx">CondaHTTPError</span><span class="p">:</span> <span class="nx">HTTP</span> <span class="mo">000</span> <span class="nx">CONNECTION</span> <span class="nx">FAILED</span> <span class="k">for</span> <span class="nx">url</span> <span class="p">&lt;</span><span class="nx">https</span><span class="p">:</span><span class="c1">//repo.anaconda.com/pkgs/main/linux-64/current_repodata.json&gt;
+</span><span class="c1"></span><span class="nx">Elapsed</span><span class="p">:</span> <span class="o">-</span>
+
+<span class="nx">An</span> <span class="nx">HTTP</span> <span class="kt">error</span> <span class="nx">occurred</span> <span class="nx">when</span> <span class="nx">trying</span> <span class="nx">to</span> <span class="nx">retrieve</span> <span class="nx">this</span> <span class="nx">URL</span><span class="p">.</span>
+<span class="nx">HTTP</span> <span class="nx">errors</span> <span class="nx">are</span> <span class="nx">often</span> <span class="nx">intermittent</span><span class="p">,</span> <span class="nx">and</span> <span class="nx">a</span> <span class="nx">simple</span> <span class="nx">retry</span> <span class="nx">will</span> <span class="nx">get</span> <span class="nx">you</span> <span class="nx">on</span> <span class="nx">your</span> <span class="nx">way</span><span class="p">.</span>
+
+<span class="nx">If</span> <span class="nx">your</span> <span class="nx">current</span> <span class="nx">network</span> <span class="nx">has</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//www.anaconda.com blocked, please file
+</span><span class="c1"></span><span class="nx">a</span> <span class="nx">support</span> <span class="nx">request</span> <span class="nx">with</span> <span class="nx">your</span> <span class="nx">network</span> <span class="nx">engineering</span> <span class="nx">team</span><span class="p">.</span>
+
+<span class="err">&#39;</span><span class="nx">https</span><span class="p">:</span><span class="c1">//repo.anaconda.com/pkgs/main/linux-64&#39;
+</span></code></pre></div><p>问题原因是不能使用清华的<code>https</code>源地址，需切换为<code>http</code>地址。</p>
+<h5 id="激活后包版本没变">激活后包版本没变</h5>
+<p>出现这种情况一般有两种可能:</p>
+<ol>
+<li>环境变量未设置，需要在path中加上anaconda的bin目录</li>
+<li>环境变量顺序不对 Linux中默认的环境变量为 <code>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin</code></li>
+</ol>
+<p>只有在<code>conda activate</code>激活状态<code>echo $PAHT</code>才可以看出对应的环境变量配置。</p>
+<h2 id="参考">参考</h2>
+<p><a href="https://conda.io/projects/conda/en/latest/"target="_blank">Conda 官方文档</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/89356758"target="_blank">Conda 安装使用详解 </a></p>
+<p><a href="https://www.jianshu.com/p/b2b117ac5561">https://www.jianshu.com/p/b2b117ac5561</a></p>
+<p><a href="https://cxyzjd.com/article/qq_32202099/116306675"target="_blank">Linux安装anaconda之后运行python版本未切换问题</a></p></article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/py-except/"><span class="iconfont icon-article"></span>Python 文件篇</a></p><p><a class="link" href="/article/core/"><span class="iconfont icon-article"></span>Core 文件分析</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

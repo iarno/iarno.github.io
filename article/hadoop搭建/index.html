@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="hadoop, spark, hdfs, yarn, 大数据, bigdata, java" name="keywords">
+<meta content="Hadoop 环境搭建（一） - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Hadoop 环境搭建（一）&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Hadoop 环境搭建（一）" /><body><section id="header">
+    <title>Hadoop 环境搭建（一） - IARNO</title>
+    <meta content="阿諾个人博客 - hadoop环境搭建" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Hadoop 环境搭建（一）</h1><p class="article date">April 21, 2022</p></section><article class="article markdown-body"><p>大多数教程都是从  <a href="http://s.iarno.cn/pegHbK">http://s.iarno.cn/pegHbK</a> 下载安装包，目前该网站已收费，所以另寻途径安装hadoop环境。</p>
+<h2 id="背景信息">背景信息</h2>
+<p>Hadoop是一款由Apache基金会用Java语言开发的分布式开源软件框架，用户可以在不了解分布式底层细节的情况下，开发分布式程序，充分利用集群的能力进行高速运算和存储。Hadoop的核心部件是HDFS（Hadoop Distributed File System）和MapReduce：</p>
+<ul>
+<li>HDFS：是一个分布式文件系统，可对应用程序数据进行分布式储存和读取。</li>
+<li>MapReduce：是一个分布式计算框架，MapReduce的核心思想是把计算任务分配给集群内的服务器执行。通过对计算任务的拆分（Map计算和Reduce计算），再根据任务调度器（JobTracker）对任务进行分布式计算。</li>
+</ul>
+<p>更多信息，请参见<a href="https://hadoop.apache.org/"target="_blank">Hadoop官网</a>。</p>
+<h2 id="操作步骤">操作步骤</h2>
+<p>在ECS实例上快速搭建Hadoop伪分布式环境的操作步骤如下：</p>
+<ol>
+<li><a href="https://help.aliyun.com/document_detail/424731.html?spm=5176.21213303.J_6704733920.35.359a53c9HKeCOH&amp;scm=20140722.S_help%40%40%e6%96%87%e6%a1%a3%40%40424731._.ID_help%40%40%e6%96%87%e6%a1%a3%40%40424731-RL_hadoop%e5%ae%89%e8%a3%85-LOC_main-OR_ser-V_2-P0_9#section-7f2-ah8-2i7"target="_blank">步骤一：安装JDK</a></li>
+<li><a href="https://help.aliyun.com/document_detail/424731.html?spm=5176.21213303.J_6704733920.35.359a53c9HKeCOH&amp;scm=20140722.S_help%40%40%e6%96%87%e6%a1%a3%40%40424731._.ID_help%40%40%e6%96%87%e6%a1%a3%40%40424731-RL_hadoop%e5%ae%89%e8%a3%85-LOC_main-OR_ser-V_2-P0_9#section-bx8-wr9-28y"target="_blank">步骤二：安装Hadoop</a></li>
+<li><a href="https://help.aliyun.com/document_detail/424731.html?spm=5176.21213303.J_6704733920.35.359a53c9HKeCOH&amp;scm=20140722.S_help%40%40%e6%96%87%e6%a1%a3%40%40424731._.ID_help%40%40%e6%96%87%e6%a1%a3%40%40424731-RL_hadoop%e5%ae%89%e8%a3%85-LOC_main-OR_ser-V_2-P0_9#section-u3l-l1i-pza"target="_blank">步骤三：配置Hadoop</a></li>
+<li><a href="https://help.aliyun.com/document_detail/424731.html?spm=5176.21213303.J_6704733920.35.359a53c9HKeCOH&amp;scm=20140722.S_help%40%40%e6%96%87%e6%a1%a3%40%40424731._.ID_help%40%40%e6%96%87%e6%a1%a3%40%40424731-RL_hadoop%e5%ae%89%e8%a3%85-LOC_main-OR_ser-V_2-P0_9#section-3bu-wl6-zlw"target="_blank">步骤四：配置SSH免密登录</a></li>
+<li><a href="https://help.aliyun.com/document_detail/424731.html?spm=5176.21213303.J_6704733920.35.359a53c9HKeCOH&amp;scm=20140722.S_help%40%40%e6%96%87%e6%a1%a3%40%40424731._.ID_help%40%40%e6%96%87%e6%a1%a3%40%40424731-RL_hadoop%e5%ae%89%e8%a3%85-LOC_main-OR_ser-V_2-P0_9#section-8wn-dbe-wea"target="_blank">步骤五：启动Hadoop</a></li>
+</ol>
+<h2 id="步骤一安装jdk">步骤一：安装JDK</h2>
+<h4 id="远程连接已创建的ecs实例">远程连接已创建的ECS实例。</h4>
+<p>具体操作，请参见<a href="https://help.aliyun.com/document_detail/71529.htm#concept-tmr-pgx-wdb"target="_blank">连接方式概述</a>。</p>
+<ol>
+<li>
+<p>执行以下命令，下载JDK 1.8安装包。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">wget https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz
+</code></pre></div></li>
+<li>
+<p>执行以下命令，解压下载的JDK 1.8安装包。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">tar -zxvf openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz
+</code></pre></div></li>
+<li>
+<p>执行以下命令，移动并重命名JDK安装包。</p>
+<p>本示例中将JDK安装包重命名为<code>java8</code>，您可以根据需要使用其他名称。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">mv java-se-8u41-ri/ /usr/java8
+</code></pre></div></li>
+<li>
+<p>执行以下命令，配置Java环境变量。</p>
+<p>如果您将JDK安装包重命名为其他名称，需将以下命令中的<code>java8</code>替换为实际的名称。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s1">&#39;export JAVA_HOME=/usr/java8&#39;</span> &gt;&gt; /etc/profile
+<span class="nb">echo</span> <span class="s1">&#39;export PATH=$PATH:$JAVA_HOME/bin&#39;</span> &gt;&gt; /etc/profile
+<span class="nb">source</span> /etc/profile
+</code></pre></div></li>
+<li>
+<p>执行以下命令，查看Java是否成功安装。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">java -version
+</code></pre></div><p>如果返回以下信息，则表示Java已安装成功。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">openjdk version <span class="s2">&#34;1.8.0_41&#34;</span>
+OpenJDK Runtime Environment <span class="o">(</span>build 1.8.0_41-b04<span class="o">)</span>
+OpenJDK 64-Bit Server VM <span class="o">(</span>build 25.40-b25, mixed mode<span class="o">)</span>
+</code></pre></div></li>
+</ol>
+<h2 id="步骤二安装hadoop">步骤二：安装Hadoop</h2>
+<ol>
+<li>
+<p>执行以下命令，下载Hadoop安装包。</p>
+<div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="n">wget</span> <span class="ss">https</span><span class="p">:</span><span class="sr">//mi</span><span class="n">rrors</span><span class="o">.</span><span class="n">bfsu</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">apache</span><span class="o">/</span><span class="n">hadoop</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">hadoop</span><span class="o">-</span><span class="mi">2</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">hadoop</span><span class="o">-</span><span class="mi">2</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</code></pre></div></li>
+<li>
+<p>执行以下命令，解压Hadoop安装包至/opt/hadoop。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">tar -zxvf hadoop-2.10.1.tar.gz -C /opt/
+mv /opt/hadoop-2.10.1 /opt/hadoop
+</code></pre></div></li>
+<li>
+<p>执行以下命令，配置Hadoop环境变量。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s1">&#39;export HADOOP_HOME=/opt/hadoop/&#39;</span> &gt;&gt; /etc/profile
+<span class="nb">echo</span> <span class="s1">&#39;export PATH=$PATH:$HADOOP_HOME/bin&#39;</span> &gt;&gt; /etc/profile
+<span class="nb">echo</span> <span class="s1">&#39;export PATH=$PATH:$HADOOP_HOME/sbin&#39;</span> &gt;&gt; /etc/profile
+<span class="nb">source</span> /etc/profile    
+</code></pre></div></li>
+<li>
+<p>执行以下命令，修改配置文件yarn-env.sh和hadoop-env.sh。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;export JAVA_HOME=/usr/java8&#34;</span> &gt;&gt; /opt/hadoop/etc/hadoop/yarn-env.sh
+<span class="nb">echo</span> <span class="s2">&#34;export JAVA_HOME=/usr/java8&#34;</span> &gt;&gt; /opt/hadoop/etc/hadoop/hadoop-env.sh
+</code></pre></div></li>
+<li>
+<p>执行以下命令，测试Hadoop是否安装成功。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">hadoop version
+</code></pre></div><p>如果返回以下信息，则表示安装成功。</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">Hadoop</span> <span class="m">2.10</span><span class="p">.</span><span class="m">1</span>
+<span class="n">Subversion</span> <span class="n">https</span><span class="p">:</span><span class="c1">//github.com/apache/hadoop -r 1827467c9a56f133025f28557bfc2c562d78e816
+</span><span class="c1"></span><span class="n">Compiled</span> <span class="k">by</span> <span class="n">centos</span> <span class="k">on</span> <span class="m">2020</span><span class="p">-</span><span class="m">09</span><span class="p">-</span><span class="m">14</span><span class="n">T13</span><span class="p">:</span><span class="m">17</span><span class="n">Z</span>
+<span class="n">Compiled</span> <span class="n">with</span> <span class="n">protoc</span> <span class="m">2.5</span><span class="p">.</span><span class="m">0</span>
+<span class="n">From</span> <span class="n">source</span> <span class="n">with</span> <span class="n">checksum</span> <span class="m">3114</span><span class="n">edef868f1f3824e7d0f68be03650</span>
+<span class="n">This</span> <span class="n">command</span> <span class="n">was</span> <span class="n">run</span> <span class="k">using</span> <span class="err">/</span><span class="nn">opt</span><span class="p">/</span><span class="n">hadoop</span><span class="p">/</span><span class="n">share</span><span class="p">/</span><span class="n">hadoop</span><span class="p">/</span><span class="n">common</span><span class="p">/</span><span class="n">hadoop</span><span class="p">-</span><span class="n">common</span><span class="p">-</span><span class="m">2.10</span><span class="p">.</span><span class="m">1.</span><span class="n">jar</span>
+</code></pre></div></li>
+</ol>
+<h2 id="步骤三配置hadoop">步骤三：配置Hadoop</h2>
+<h4 id="修改hadoop配置文件core-sitexml">修改Hadoop配置文件core-site.xml。</h4>
+<ol>
+<li>
+<p>执行以下命令，进入编辑页面。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">vim /opt/hadoop/etc/hadoop/core-site.xml
+</code></pre></div></li>
+<li>
+<p>输入<code>i</code>，进入编辑模式。</p>
+</li>
+<li>
+<p>在<code>&lt;configuration&gt;&lt;/configuration&gt;</code>节点内，插入如下内容。</p>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;property&gt;</span>
+        <span class="nt">&lt;name&gt;</span>hadoop.tmp.dir<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;value&gt;</span>file:/opt/hadoop/tmp<span class="nt">&lt;/value&gt;</span> <span class="c">&lt;!-- 自行修改 --&gt;</span>
+        <span class="nt">&lt;description&gt;</span>location to store temporary files<span class="nt">&lt;/description&gt;</span>
+    <span class="nt">&lt;/property&gt;</span>
+    <span class="nt">&lt;property&gt;</span>
+        <span class="nt">&lt;name&gt;</span>fs.defaultFS<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;value&gt;</span>hdfs://localhost:8020<span class="nt">&lt;/value&gt;</span> <span class="c">&lt;!--  host+port自行修改 --&gt;</span>
+    <span class="nt">&lt;/property&gt;</span>
+</code></pre></div></li>
+<li>
+<p>按<code>Esc</code>，退出编辑模式，并输入<code>:wq</code>保存并退出。</p>
+</li>
+</ol>
+<h4 id="修改hadoop配置文件hdfs-sitexml">修改Hadoop配置文件hdfs-site.xml。</h4>
+<ol>
+<li>
+<p>执行以下命令，进入编辑页面。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">vim /opt/hadoop/etc/hadoop/hdfs-site.xml
+</code></pre></div></li>
+<li>
+<p>输入<code>i</code>，进入编辑模式。</p>
+</li>
+<li>
+<p>在<code>&lt;configuration&gt;&lt;/configuration&gt;</code>节点内，插入如下内容。</p>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;property&gt;</span>
+        <span class="nt">&lt;name&gt;</span>dfs.replication<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;value&gt;</span>1<span class="nt">&lt;/value&gt;</span>
+    <span class="nt">&lt;/property&gt;</span>
+    <span class="nt">&lt;property&gt;</span>
+        <span class="nt">&lt;name&gt;</span>dfs.namenode.name.dir<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;value&gt;</span>file:/opt/hadoop/tmp/dfs/name<span class="nt">&lt;/value&gt;</span>
+    <span class="nt">&lt;/property&gt;</span>
+    <span class="nt">&lt;property&gt;</span>
+        <span class="nt">&lt;name&gt;</span>dfs.datanode.data.dir<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;value&gt;</span>file:/opt/hadoop/tmp/dfs/data<span class="nt">&lt;/value&gt;</span>
+    <span class="nt">&lt;/property&gt;</span>
+</code></pre></div></li>
+<li>
+<p>按<code>Esc</code>，退出编辑模式，并输入<code>:wq</code>后保存并退出。</p>
+</li>
+</ol>
+<h2 id="步骤四配置ssh免密登录">步骤四：配置SSH免密登录</h2>
+<ol>
+<li>
+<p>执行以下命令，创建公钥和私钥。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa
+</code></pre></div><p>回显信息如下所示，表示创建公钥和私钥成功。</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="na">[root@iZbp1chrrv37a2kts7sydsZ ~]</span><span class="err">#</span> <span class="n">ssh</span><span class="p">-</span><span class="n">keygen</span> <span class="p">-</span><span class="n">t</span> <span class="n">rsa</span>
+<span class="n">Generating</span> <span class="k">public</span><span class="p">/</span><span class="k">private</span> <span class="n">rsa</span> <span class="n">key</span> <span class="n">pair</span><span class="p">.</span>
+<span class="n">Enter</span> <span class="n">file</span> <span class="k">in</span> <span class="n">which</span> <span class="n">to</span> <span class="n">save</span> <span class="n">the</span> <span class="n">key</span> <span class="p">(/</span><span class="n">root</span><span class="p">/.</span><span class="n">ssh</span><span class="p">/</span><span class="n">id_rsa</span><span class="p">):</span>
+<span class="n">Enter</span> <span class="n">passphrase</span> <span class="p">(</span><span class="n">empty</span> <span class="k">for</span> <span class="n">no</span> <span class="n">passphrase</span><span class="p">):</span>
+<span class="n">Enter</span> <span class="n">same</span> <span class="n">passphrase</span> <span class="n">again</span><span class="p">:</span>
+<span class="n">Your</span> <span class="n">identification</span> <span class="n">has</span> <span class="n">been</span> <span class="n">saved</span> <span class="k">in</span> <span class="p">/</span><span class="n">root</span><span class="p">/.</span><span class="n">ssh</span><span class="p">/</span><span class="n">id_rsa</span><span class="p">.</span>
+<span class="n">Your</span> <span class="k">public</span> <span class="n">key</span> <span class="n">has</span> <span class="n">been</span> <span class="n">saved</span> <span class="k">in</span> <span class="p">/</span><span class="n">root</span><span class="p">/.</span><span class="n">ssh</span><span class="p">/</span><span class="n">id_rsa</span><span class="p">.</span><span class="n">pub</span><span class="p">.</span>
+<span class="n">The</span> <span class="n">key</span> <span class="n">fingerprint</span> <span class="k">is</span><span class="p">:</span>
+<span class="n">SHA256</span><span class="p">:</span><span class="n">gjWO5mgARst</span><span class="p">+</span><span class="n">O5VUaTnGs</span><span class="p">+</span><span class="n">LxVhfmCJnQwKfEBTro2oQ</span> <span class="n">root@iZbp1chrrv37a2kts7s</span><span class="p">****</span>
+<span class="n">The</span> <span class="n">key</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">randomart</span> <span class="n">image</span> <span class="k">is</span><span class="p">:</span>
+<span class="p">+---[</span><span class="n">RSA</span> <span class="m">2048</span><span class="p">]----+</span>
+<span class="p">|</span> <span class="p">.</span>  <span class="n">o</span><span class="p">+</span><span class="n">Bo</span><span class="p">=</span>        <span class="p">|</span>
+<span class="p">|</span><span class="n">o</span> <span class="n">o</span> <span class="p">.+.</span><span class="err">#</span>   <span class="n">o</span>     <span class="p">|</span>
+<span class="p">|.=</span> <span class="n">o</span><span class="p">..</span><span class="n">B</span> <span class="p">=</span> <span class="p">+</span> <span class="p">.</span>    <span class="p">|</span>
+<span class="p">|=.</span>  <span class="n">oO</span><span class="p">.</span><span class="n">o</span> <span class="n">o</span> <span class="n">o</span>     <span class="p">|</span>
+<span class="p">|</span><span class="n">Eo</span><span class="p">..=</span><span class="n">o</span><span class="p">*</span> <span class="n">S</span> <span class="p">.</span>      <span class="p">|</span>
+<span class="p">|.+.+</span><span class="n">o</span><span class="p">.</span> <span class="p">+</span>         <span class="p">|</span>
+<span class="p">|.</span> <span class="p">+</span><span class="n">o</span><span class="p">.</span> <span class="p">.</span>          <span class="p">|</span>
+<span class="p">|</span> <span class="p">.</span>  <span class="p">.</span>            <span class="p">|</span>
+<span class="p">|</span>                 <span class="p">|</span>
+<span class="p">+----[</span><span class="n">SHA256</span><span class="p">]-----+</span>
+                           
+</code></pre></div></li>
+<li>
+<p>执行以下命令，将公钥添加到authorized_keys文件中。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> .ssh
+cat id_rsa.pub &gt;&gt; authorized_keys
+</code></pre></div></li>
+</ol>
+<h2 id="步骤五启动hadoop">步骤五：启动Hadoop</h2>
+<ol>
+<li>
+<p>执行以下命令，初始化<code>namenode </code>。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">hadoop</span> <span class="n">namenode</span> <span class="o">-</span><span class="n">format</span>
+</code></pre></div></li>
+<li>
+<p>依次执行以下命令，启动Hadoop。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">start</span><span class="o">-</span><span class="n">dfs</span><span class="p">.</span><span class="n">sh</span>
+</code></pre></div><p>在弹出的提示中，依次输入<code>yes</code>。<img  src="https://s2.loli.net/2022/04/21/SyP4ARcFKJGdlMW.png"
+        alt="adada"/></p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">start</span><span class="o">-</span><span class="n">yarn</span><span class="p">.</span><span class="n">sh</span>
+</code></pre></div><p>回显信息如下所示。</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="na">[root@iZbp1chrrv37a2kts7s**** .ssh]</span><span class="err">#</span> <span class="n">start</span><span class="p">-</span><span class="n">yarn</span><span class="p">.</span><span class="n">sh</span>
+<span class="n">starting</span> <span class="n">yarn</span> <span class="n">daemons</span>
+<span class="n">starting</span> <span class="n">resourcemanager</span><span class="p">,</span> <span class="n">logging</span> <span class="n">to</span> <span class="p">/</span><span class="n">opt</span><span class="p">/</span><span class="n">hadoop</span><span class="p">/</span><span class="n">logs</span><span class="p">/</span><span class="n">yarn</span><span class="p">-</span><span class="n">root</span><span class="p">-</span><span class="n">resourcemanager</span><span class="p">-</span><span class="n">iZbp1chrrv37a2kts7sydsZ</span><span class="p">.</span><span class="k">out</span>
+<span class="n">localhost</span><span class="p">:</span> <span class="n">starting</span> <span class="n">nodemanager</span><span class="p">,</span> <span class="n">logging</span> <span class="n">to</span> <span class="p">/</span><span class="n">opt</span><span class="p">/</span><span class="n">hadoop</span><span class="p">/</span><span class="n">logs</span><span class="p">/</span><span class="n">yarn</span><span class="p">-</span><span class="n">root</span><span class="p">-</span><span class="n">nodemanager</span><span class="p">-</span><span class="n">iZbp1chrrv37a2kts7sydsZ</span><span class="p">.</span><span class="k">out</span>
+</code></pre></div></li>
+<li>
+<p>执行以下命令，可查看成功启动的进程。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">jps
+</code></pre></div><p>成功启动的进程如下所示。</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="na">[root@iZbp1chrrv37a2kts7s**** .ssh]</span><span class="err">#</span> <span class="n">jps</span>
+<span class="m">11620</span> <span class="n">DataNode</span>
+<span class="m">11493</span> <span class="n">NameNode</span>
+<span class="m">11782</span> <span class="n">SecondaryNameNode</span>
+<span class="m">11942</span> <span class="n">ResourceManager</span>
+<span class="m">12344</span> <span class="n">Jps</span>
+<span class="m">12047</span> <span class="n">NodeManager</span>
+</code></pre></div></li>
+<li>
+<p>打开浏览器访问<code>http://&lt;ECS公网IP&gt;:8088</code>和<code>http://&lt;ECS公网IP&gt;:50070</code>。</p>
+<p>显示如下界面，则表示Hadoop伪分布式环境已搭建完成。</p>
+<p><strong>注意</strong> 需确保在ECS实例所在安全组的入方向中放行Hadoop所需的8088和50070端口，否则无法访问。具体操作，请参见<a href="https://help.aliyun.com/document_detail/25471.htm#concept-sm5-2wz-xdb"target="_blank">添加安全组规则</a>。</p>
+<p><img  src="https://s2.loli.net/2022/04/21/ugzdpiAKQf9SeLV.png"
+        alt="application"/><img  src="https://s2.loli.net/2022/04/21/WOcBx1LVClat72m.png"
+        alt="adasdad"/></p>
+</li>
+</ol>
+<h2 id="参考链接">参考链接</h2>
+<p><a href="http://s.iarno.cn/fRVfE9">http://s.iarno.cn/fRVfE9</a></p>
+<p><a href="http://s.iarno.cn/WrjzRC">http://s.iarno.cn/WrjzRC</a></p></article><section class="article labels"><a class="category" href=/categories/bigdata/>BigData</a><a class="tag" href=/tags/hadoop/>hadoop</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/py_list/"><span class="iconfont icon-article"></span>第3章 列表</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

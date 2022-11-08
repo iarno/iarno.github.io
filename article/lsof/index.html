@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="linux, 文件句柄不释放" name="keywords">
+<meta content="too many open files 问题定位 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>too many open files 问题定位&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="too many open files 问题定位" /><body><section id="header">
+    <title>too many open files 问题定位 - IARNO</title>
+    <meta content="阿諾个人博客 - 文件打开资源不释放问题定位" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">too many open files 问题定位</h1><p class="article date">March 17, 2021</p></section><article class="article markdown-body"><h2 id="错误">错误</h2>
+<p><code>socket：too many open files</code></p>
+<h4 id="问题原因">问题原因</h4>
+<ul>
+<li>系统资源限制小（<code>ulimit -a</code> 查看<code>open files</code>限制）</li>
+<li>数据库打开文件限制小（登录数据库  <code>show variables like '%open%';</code>命令查看 <code>open_files_limit</code> 限制）</li>
+<li>程序代码问题，进程打开文件句柄不释放。</li>
+</ul>
+<h2 id="ulimit命令查看资源限制">ulimit命令查看资源限制</h2>
+<p>显示目前资源限制的设定</p>
+<h4 id="示例">示例</h4>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@ ~<span class="o">]</span><span class="c1"># ulimit -a</span>
+core file size     <span class="o">(</span>blocks, -c<span class="o">)</span> <span class="m">0</span>
+data seg size      <span class="o">(</span>kbytes, -d<span class="o">)</span> unlimited
+file size        <span class="o">(</span>blocks, -f<span class="o">)</span> unlimited
+pending signals         <span class="o">(</span>-i<span class="o">)</span> <span class="m">1024</span>
+max locked memory    <span class="o">(</span>kbytes, -l<span class="o">)</span> <span class="m">32</span>
+max memory size     <span class="o">(</span>kbytes, -m<span class="o">)</span> unlimited
+open files           <span class="o">(</span>-n<span class="o">)</span> <span class="m">1024</span>  <span class="c1"># 打开文件数限制</span>
+pipe size      <span class="o">(</span><span class="m">512</span> bytes, -p<span class="o">)</span> <span class="m">8</span>
+POSIX message queues   <span class="o">(</span>bytes, -q<span class="o">)</span> <span class="m">819200</span>
+stack size       <span class="o">(</span>kbytes, -s<span class="o">)</span> <span class="m">10240</span>
+cpu <span class="nb">time</span>        <span class="o">(</span>seconds, -t<span class="o">)</span> unlimited
+max user processes       <span class="o">(</span>-u<span class="o">)</span> <span class="m">4096</span>
+virtual memory     <span class="o">(</span>kbytes, -v<span class="o">)</span> unlimited
+file locks           <span class="o">(</span>-x<span class="o">)</span> unlimited
+</code></pre></div><h4 id="参数">参数</h4>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">-a 显示目前资源限制的设定。
+-c &lt;core文件上限&gt; 　设定core文件的最大值，单位为区块。
+-d &lt;数据节区大小&gt; 　程序数据节区的最大值，单位为KB。
+-f &lt;文件大小&gt; 　shell所能建立的最大文件，单位为区块。
+-H 设定资源的硬性限制，也就是管理员所设下的限制。
+-m &lt;内存大小&gt; 　指定可使用内存的上限，单位为KB。
+-n &lt;文件数目&gt; 　指定同一时间最多可开启的文件数。
+-p &lt;缓冲区大小&gt; 　指定管道缓冲区的大小，单位512字节。
+-s &lt;堆叠大小&gt; 　指定堆叠的上限，单位为KB。
+-S 设定资源的弹性限制。
+-t &lt;CPU时间&gt; 　指定CPU使用时间的上限，单位为秒。
+-u &lt;程序数目&gt; 　用户最多可开启的程序数目。
+-v &lt;虚拟内存大小&gt; 　指定可使用的虚拟内存上限，单位为KB。
+</code></pre></div><h4 id="调整当前用户打开文件数">调整当前用户打开文件数</h4>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@ ~<span class="o">]</span><span class="c1"># ulimit -n 1234</span>
+</code></pre></div><p><font color="#dd0000">注：</font>此命令是设置当前用户的限制并且是临时性的。 打开数由大到小设置，否则设置不成功。</p>
+<h2 id="lsof-查看打开文件数">lsof 查看打开文件数</h2>
+<h4 id="查看某个进程打开文件数">查看某个进程打开文件数</h4>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@ ~<span class="o">]</span><span class="c1"># lsof -p 进程ID |wc -l</span>
+<span class="o">[</span>root@ ~<span class="o">]</span><span class="c1"># 123</span>
+</code></pre></div><h4 id="查看当前系统打开文件数">查看当前系统打开文件数</h4>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@ ~<span class="o">]</span><span class="c1"># lsof |wc -l</span>
+<span class="o">[</span>root@ ~<span class="o">]</span><span class="c1"># 1234</span>
+</code></pre></div><h4 id="参数-1">参数</h4>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">-a 列出打开文件存在的进程
+
+-c&lt;进程名&gt; 列出指定进程所打开的文件
+
+-g 列出GID号进程详情
+
+-d&lt;文件号&gt; 列出占用该文件号的进程
+
++d&lt;目录&gt; 列出目录下被打开的文件
+
++D&lt;目录&gt; 递归列出目录下被打开的文件
+
+-n&lt;目录&gt; 列出使用NFS的文件
+
+-i&lt;条件&gt; 列出符合条件的进程。（4、6、协议、:端口、 @ip ）
+
+-p&lt;进程号&gt; 列出指定进程号所打开的文件
+
+-u 列出UID号进程详情
+
+-h 显示帮助信息
+
+-v 显示版本信息
+</code></pre></div></article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/linux/>linux</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/lua-timer/"><span class="iconfont icon-article"></span>openresty 跑定时任务配置、ngx.timer.every接口使用</a></p><p><a class="link" href="/article/pprof/"><span class="iconfont icon-article"></span>Gin pprof性能分析</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

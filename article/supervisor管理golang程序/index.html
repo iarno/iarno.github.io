@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="进程管理, Go" name="keywords">
+<meta content="supervisor管理golang程序 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>supervisor管理golang程序&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="supervisor管理golang程序" /><body><section id="header">
+    <title>supervisor管理golang程序 - IARNO</title>
+    <meta content="阿諾个人博客 - supervisor管理golang程序。" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">supervisor管理golang程序</h1><p class="article date">August 29, 2020</p></section><article class="article markdown-body"><p>最近在鼓捣golang守护进程的实现，无意发现了supervisor这个有意思的东西。supervisor是一个unix的系统进程管理软件，可以用它来管理apache、nginx等服务，若服务挂了可以让它们自动重启。当然也可以用来实现golang的守护进程，下面描述下具体实现。</p>
+<h2 id="安装supervisor">安装supervisor</h2>
+<p>基于centos 6.4。</p>
+<p>supervisor使用python编写的，可以用easy_install安装。centos上默认有python的运行环境，安装起来就非常简单了。</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo yum install python-setuptools
+$ sudo easy_install supervisor
+</code></pre></div><p>如果没有看到什么报错，那么就安装成功了，可以使用echo_supervisord_conf查看配置详情，而后生成配置文件。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="err">$</span> <span class="nx">sudo</span> <span class="nx">echo_supervisord_conf</span> <span class="p">&gt;</span> <span class="o">/</span><span class="nx">etc</span><span class="o">/</span><span class="nx">supervisord</span><span class="p">.</span><span class="nx">conf</span>
+</code></pre></div><h2 id="golang-http服务">golang http服务</h2>
+<p>先整一个简单的golang http服务</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;log&#34;</span>
+	<span class="s">&#34;net/http&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;Hello world&#34;</span><span class="p">)</span>
+	<span class="p">})</span>
+
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="s">&#34;:9090&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;ListenAndServe: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>直接运行这个程序会占用住终端，下面看看如何用supervisor来跑这个程序。</p>
+<h2 id="supervisor配置golang">supervisor配置golang</h2>
+<p>编辑/etc/supervisord.conf，在最后增加运行程序设置</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="p">[</span><span class="nx">program</span><span class="p">:</span><span class="nx">golang</span><span class="o">-</span><span class="nx">http</span><span class="o">-</span><span class="nx">server</span><span class="p">]</span>
+<span class="nx">command</span><span class="p">=</span><span class="o">/</span><span class="nx">home</span><span class="o">/</span><span class="nx">golang</span><span class="o">/</span><span class="nx">simple_http_server</span> <span class="c1">//必须指到bin文件
+</span><span class="c1"></span><span class="nx">autostart</span><span class="p">=</span><span class="kc">true</span>
+<span class="nx">autorestart</span><span class="p">=</span><span class="kc">true</span>
+<span class="nx">startsecs</span><span class="p">=</span><span class="mi">10</span>
+<span class="nx">stdout_logfile</span><span class="p">=</span><span class="o">/</span><span class="kd">var</span><span class="o">/</span><span class="nx">log</span><span class="o">/</span><span class="nx">simple_http_server</span><span class="p">.</span><span class="nx">log</span>
+<span class="nx">stdout_logfile_maxbytes</span><span class="p">=</span><span class="mi">1</span><span class="nx">MB</span>
+<span class="nx">stdout_logfile_backups</span><span class="p">=</span><span class="mi">10</span>
+<span class="nx">stdout_capture_maxbytes</span><span class="p">=</span><span class="mi">1</span><span class="nx">MB</span>
+<span class="nx">stderr_logfile</span><span class="p">=</span><span class="o">/</span><span class="kd">var</span><span class="o">/</span><span class="nx">log</span><span class="o">/</span><span class="nx">simple_http_server</span><span class="p">.</span><span class="nx">log</span>
+<span class="nx">stderr_logfile_maxbytes</span><span class="p">=</span><span class="mi">1</span><span class="nx">MB</span>
+<span class="nx">stderr_logfile_backups</span><span class="p">=</span><span class="mi">10</span>
+<span class="nx">stderr_capture_maxbytes</span><span class="p">=</span><span class="mi">1</span><span class="nx">MB</span>
+</code></pre></div><p>几个配置说明：</p>
+<p><code>command</code>：表示运行的命令，填入完整的路径即可。</p>
+<p><code>autostart</code>：表示是否跟随supervisor一起启动。</p>
+<p><code>autorestart</code>：如果该程序挂了，是否重新启动。</p>
+<p><code>stdout_logfile</code>：终端标准输出重定向文件。</p>
+<p><code>stderr_logfile</code>：终端错误输出重定向文件。</p>
+<p>其余配置说明可以查看官方文档。</p>
+<h2 id="启动supervisor">启动supervisor</h2>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ sudo /usr/bin/supervisord -c /etc/supervisord.conf
+</code></pre></div><p>如果出现什么问题，可以查看日志进行分析，日志文件路径/tmp/supervisord.log</p>
+<p>tips：如果修改了配置文件，可以用kill -HUP重新加载配置文件</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ cat /tmp/supervisord.pid <span class="p">|</span> xargs sudo <span class="nb">kill</span> -HUP
+</code></pre></div><p>补充：</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">#根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而重启。</span>
+supervisorctl update
+<span class="c1">#启动进程</span>
+supervisorctl start <span class="nb">test</span>
+<span class="c1">#重启进程</span>
+supervisorctl restart <span class="nb">test</span>
+<span class="c1">#停止进程</span>
+supervisorctl stop <span class="nb">test</span>
+</code></pre></div><h2 id="查看supervisor运行状态">查看supervisor运行状态</h2>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ supervisorctl
+golang-http-server RUNNING pid 23307, uptime 0:02:55
+supervisor&gt;
+输入help可以查看帮助
+
+supervisor&gt; <span class="nb">help</span>
+default commands <span class="o">(</span><span class="nb">type</span> <span class="nb">help</span> <span class="o">)</span>:
+<span class="o">=====================================</span>
+add clear <span class="nb">fg</span> open quit remove restart start stop update
+avail <span class="nb">exit</span> maintail pid reload reread shutdown status tail version
+</code></pre></div><h2 id="supervisor运行原理">supervisor运行原理</h2>
+<p>supervisor运行后本身是守护进程，通过自身来管理相应的子进程，通过观察相应的进程状态就很明了了。</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ps -ef <span class="p">|</span> grep supervisord
+root <span class="m">23306</span> <span class="m">1</span> <span class="m">0</span> 07:30 ? 00:00:00 /usr/bin/python /usr/bin/supervisord -c /etc/supervisord.conf
+root <span class="m">23331</span> <span class="m">23222</span> <span class="m">0</span> 07:41 pts/0 00:00:00 grep supervisord
+
+$ ps -ef <span class="p">|</span> grep simple_http_server
+root <span class="m">23307</span> <span class="m">23306</span> <span class="m">0</span> 07:30 ? 00:00:00 /home/golang/simple_http_server
+root <span class="m">23333</span> <span class="m">23222</span> <span class="m">0</span> 07:41 pts/0 00:00:00 grep simple_http_server
+</code></pre></div><p>可以很直观的看出golang simple_http_server进程是supervisord的子进程。</p>
+<p>supervisor是否靠谱
+supervisor的诞生已经10年了，现在是3+版本，所以放心使用吧。</p>
+<h2 id="参考">参考</h2>
+<p>supervisor官网：http://supervisord.org/</p>
+<h2 id="转自">转自</h2>
+<p><a href="https://studygolang.com/articles/4951"target="_blank">supervisor运行golang守护进程</a></p>
+<p><a href="https://studygolang.com/articles/8981"target="_blank">supervisor管理golang程序</a></p></article><section class="article labels"><a class="category" href=/categories/go/>Go</a><a class="tag" href=/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/>进程管理</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/php%E5%86%85%E5%AE%B9%E7%BC%93%E5%AD%98yac/"><span class="iconfont icon-article"></span>PHP内容缓存Yac</a></p><p><a class="link" href="/article/utf8-bin%E5%92%8Cutf8-general-ci%E7%BC%96%E7%A0%81%E7%9A%84%E5%8C%BA%E5%88%AB/"><span class="iconfont icon-article"></span>utf8_bin和utf8_general_ci编码的区别</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

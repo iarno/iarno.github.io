@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>excel on IARNO</title>
+    <link>/tags/excel/</link>
+    <description>Recent content in excel on IARNO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2022 Arno.</copyright>
+    <lastBuildDate>Sat, 29 Aug 2020 07:47:20 +0800</lastBuildDate>
+    
+        <atom:link href="/tags/excel/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang excel导出</title>
+      <link>/article/golang-excel%E5%AF%BC%E5%87%BA/</link>
+      <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
+      
+      <guid>/article/golang-excel%E5%AF%BC%E5%87%BA/</guid>
+      <description>&lt;h2 id=&#34;excel-导出&#34;&gt;Excel 导出&lt;/h2&gt;
+&lt;h4 id=&#34;github-地址&#34;&gt;Github 地址&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/360EntSecGroup-Skylar/excelize&#34;&gt;https://github.com/360EntSecGroup-Skylar/excelize&lt;/a&gt;&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

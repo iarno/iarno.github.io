@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>lua on 阿諾同學</title>
+    <link>/tags/lua/</link>
+    <description>Recent content in lua on 阿諾同學</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2021 Arno.</copyright>
+    <lastBuildDate>Mon, 19 Apr 2021 21:36:52 +0800</lastBuildDate>
+    
+        <atom:link href="/tags/lua/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ngx_lua模块中使用lua_shared_dict共享内存变量</title>
+      <link>/article/lua-shared-dict/</link>
+      <pubDate>Mon, 19 Apr 2021 21:36:52 +0800</pubDate>
+      
+      <guid>/article/lua-shared-dict/</guid>
+      <description>lua_shared_dict 在ngx_lua模块中使用共享内存字典项相关API的前提条件是已经使用lua_shared_dict命令定义了一个字典项对象，该命令的具体</description>
+      
+    </item>
+    
+  </channel>
+</rss>

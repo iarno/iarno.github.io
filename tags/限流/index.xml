@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>限流 on IARNO</title>
+    <link>/tags/%E9%99%90%E6%B5%81/</link>
+    <description>Recent content in 限流 on IARNO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2022 Arno.</copyright>
+    <lastBuildDate>Wed, 21 Apr 2021 23:06:53 +0800</lastBuildDate>
+    
+        <atom:link href="/tags/%E9%99%90%E6%B5%81/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>限流算法实践</title>
+      <link>/article/rate-limiting/</link>
+      <pubDate>Wed, 21 Apr 2021 23:06:53 +0800</pubDate>
+      
+      <guid>/article/rate-limiting/</guid>
+      <description>一、限流简介 什么是限流 在不同场景下限流的定义也各不相同，可以是每秒请求数、每秒事务处理数、网络流量。 通常我们所说的限流指的是限制到达系统并发</description>
+      
+    </item>
+    
+  </channel>
+</rss>

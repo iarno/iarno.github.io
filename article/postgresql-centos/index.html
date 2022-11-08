@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="网关, kong, centos, postgresql" name="keywords">
+<meta content="centos7安装Postgresql - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>centos7安装Postgresql&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="centos7安装Postgresql" /><body><section id="header">
+    <title>centos7安装Postgresql - IARNO</title>
+    <meta content="阿諾个人博客 - centos7安装Postgresql" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">centos7安装Postgresql</h1><p class="article date">November 17, 2020</p></section><article class="article markdown-body"><h2 id="1进入官网下载所需版本">1、进入官网下载所需版本</h2>
+<p><a href="https://www.postgresql.org/download/linux/redhat/">https://www.postgresql.org/download/linux/redhat/</a></p>
+<p><img  src="https://i.loli.net/2020/11/17/6yQwYKjJUbh89k3.png"
+        alt="image-20201117222643658"/></p>
+<h2 id="2开始安装">2、开始安装</h2>
+<p><code>yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm -y</code></p>
+<p><img  src="https://i.loli.net/2020/11/17/E2lsY8woGpNz1PO.png"
+        alt="1583389980408312"/></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">yum install postgresql12 -y
+
+yum install postgresql12-server -y
+</code></pre></div><h2 id="3数据库初始化与设置自启动">3、数据库初始化与设置自启动</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">/usr/pgsql-12/bin/postgresql-12-setup initdb
+
+systemctl <span class="nb">enable</span> postgresql-12
+
+systemctl start postgresql-12
+</code></pre></div><p><img  src="https://i.loli.net/2020/11/17/SB76JC39PNwqpTn.png"
+        alt="1583390034343369"/></p>
+<p>这一步初始化数据库命令会在 <code>/var/lib/pgsql</code> 目录下创建名称为12文件夹，12为数据库版本。这里如果已经有对应版本的文件夹了，初始化这一步会报错，需要你自行去删除对应的文件夹再去初始化。</p>
+<h2 id="4默认会创建一个名为postgres的linux登录用户这里进行密码修改">4、默认会创建一个名为postgres的linux登录用户，这里进行密码修改</h2>
+<p><img  src="https://i.loli.net/2020/11/17/3mMDEOrTbZtx2Cc.png"
+        alt="1583390072328781"/></p>
+<h2 id="5修改配置文件">5、修改配置文件</h2>
+<p><img  src="https://i.loli.net/2020/11/17/hk6UAGCfvbtTqmR.png"
+        alt="1583390091997553"/></p>
+<h4 id="51修改postgresqlconf">5.1修改postgresql.conf</h4>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">修改：#listen_addresses <span class="o">=</span> <span class="s1">&#39;localhost&#39;</span>为 <span class="nv">listen_addresses</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
+</code></pre></div><p><img  src="https://i.loli.net/2020/11/17/HOYCrFwJ8gvIj16.png"
+        alt="1583390134353453"/></p>
+<h4 id="52修改pg_hbaconf">5.2修改pg_hba.conf</h4>
+<p><strong>修改前</strong></p>
+<p><img  src="https://i.loli.net/2020/11/17/EmT7LFNb8snuOHk.png"
+        alt="1583390177340619"/></p>
+<p><strong>修改后</strong></p>
+<p><img  src="https://i.loli.net/2020/11/17/kqZ5D6G9K2bWBna.png"
+        alt="1583390189994844"/></p>
+<p><strong>并重新启动</strong></p>
+<p><code>systemctl restart postgresql-12</code></p>
+<h2 id="6设置登录数据库账密">6、设置登录数据库账密</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">su postgres       <span class="c1">#不能使用root用户登录，切换到普通用户</span>
+
+psql -U postgres     
+
+<span class="se">\p</span>assword        <span class="c1">#设置用户密码</span>
+
+<span class="k">select</span> version<span class="o">()</span><span class="p">;</span>    <span class="c1">#查看版本</span>
+</code></pre></div><p><img  src="https://i.loli.net/2020/11/17/53C6tTrFvGOReMP.png"
+        alt="1583390308172626"/></p></article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/%E7%BD%91%E5%85%B3/>网关</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/sync_wait_group/"><span class="iconfont icon-article"></span>Golang 协程异步请求</a></p><p><a class="link" href="/article/kong-centos/"><span class="iconfont icon-article"></span>centos7 安装kong网关</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

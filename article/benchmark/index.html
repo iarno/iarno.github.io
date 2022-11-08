@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="benchmark, go test, 性能测试" name="keywords">
+<meta content="Golang benchmark 性能测试 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Golang benchmark 性能测试&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Golang benchmark 性能测试" /><meta name="twitter:image" content="https://s2.loli.net/2022/06/22/pjymz8hp1uvcoac.png" /><body><section id="header">
+    <title>Golang benchmark 性能测试 - IARNO</title>
+    <meta content="阿諾个人博客 - Go benchmark 性能测试" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Golang benchmark 性能测试</h1><p class="article date">June 22, 2022</p></section><article class="article markdown-body"><p><img class="cover" src="https://s2.loli.net/2022/06/22/pJymZ8hP1UVcoaC.png" alt></p><p>基准测试是测量一个程序在固定工作负载下的性能，Go语言也提供了可以支持基准性能测试的<code>benchmark</code>。</p>
+<h2 id="使用方法">使用方法</h2>
+<p>下面展示一个基准测试的示例代码来剖析下它的使用方式：</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Benchmark_test</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">N</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">s</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+		<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+			<span class="nx">s</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>进行基准测试的文件必须以<code>*_test.go</code>的文件为结尾，这个和测试文件的名称后缀是一样的，例如<code>abc_test.go</code></li>
+<li>参与Benchmark基准性能测试的方法必须以<code>Benchmark</code>为前缀，例如<code>BenchmarkABC()</code></li>
+<li>参与基准测试函数必须接受一个指向<code>Benchmark</code>类型的指针作为唯一参数，<code>*testing.B</code></li>
+<li>基准测试函数不能有返回值</li>
+<li><code>b.ResetTimer</code>是重置计时器，调用时表示重新开始计时，可以忽略测试函数中的一些准备工作</li>
+<li><code>b.N</code>是基准测试框架提供的，表示循环的次数，因为需要反复调用测试的代码，才可以评估性能</li>
+</ul>
+<h2 id="命令及参数">命令及参数</h2>
+<p>性能测试命令为<code>go test [参数]</code>，比如<code>go test -bench=. -benchmem</code>，具体的命令参数及含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-bench regexp</td>
+<td>性能测试，支持表达式对测试函数进行筛选。</td>
+</tr>
+<tr>
+<td>-bench</td>
+<td>. 则是对所有的benchmark函数测试，指定名称则只执行具体测试方法而不是全部</td>
+</tr>
+<tr>
+<td>-benchmem</td>
+<td>性能测试的时候显示测试函数的内存分配的统计信息</td>
+</tr>
+<tr>
+<td>－count n</td>
+<td>运行测试和性能多少此，默认一次</td>
+</tr>
+<tr>
+<td>-run regexp</td>
+<td>只运行特定的测试函数， 比如-run ABC只测试函数名中包含ABC的测试函数</td>
+</tr>
+<tr>
+<td>-timeout t</td>
+<td>测试时间如果超过t, panic,默认10分钟</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示测试的详细信息，也会把Log、Logf方法的日志显示出来</td>
+</tr>
+</tbody>
+</table>
+<h2 id="测试结果">测试结果</h2>
+<p>执行命令后，性能测试的结果展示如下</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ go <span class="nb">test</span> -bench<span class="o">=</span>. -benchmem
+goos: darwin
+goarch: amd64
+pkg: program/benchmark
+cpu: Intel<span class="o">(</span>R<span class="o">)</span> Core<span class="o">(</span>TM<span class="o">)</span> i7-9750H CPU @ 2.60GHz
+Benchmark_test-12        <span class="m">7439091</span>               152.0 ns/op           <span class="m">248</span> B/op          <span class="m">5</span> allocs/op
+PASS
+ok      promgram/benchmark    1.304s
+</code></pre></div><p>对以上结果进行逐一分析：</p>
+<table>
+<thead>
+<tr>
+<th>结果项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Benchmark_test-12</td>
+<td><strong>Benchmark_test</strong> 是测试的函数名 <strong>-12</strong> 表示GOMAXPROCS（线程数）的值为12</td>
+</tr>
+<tr>
+<td>7439091</td>
+<td>表示一共执行了<strong>7439091</strong>次，即<strong>b.N</strong>的值</td>
+</tr>
+<tr>
+<td>152.0 ns/op</td>
+<td>表示平均每次操作花费了<strong>152.0纳秒</strong></td>
+</tr>
+<tr>
+<td>248B/op</td>
+<td>表示每次操作申请了<strong>248Byte</strong>的内存申请</td>
+</tr>
+<tr>
+<td>5 allocs/op</td>
+<td>表示每次操作申请了<strong>5</strong>次内存</td>
+</tr>
+</tbody>
+</table>
+<h2 id="性能对比实例">性能对比实例</h2>
+<p>下面通过一个<strong>数字转换字符串</strong>的实例来对比性能测试效果，并进行分析。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">//Sprintf
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">BenchmarkSprintf</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">num</span> <span class="o">:=</span> <span class="mi">10</span>
+	<span class="nx">b</span><span class="p">.</span><span class="nf">ResetTimer</span><span class="p">()</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="nx">num</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//Format
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">BenchmarkFormat</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">num</span> <span class="o">:=</span> <span class="nb">int64</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+	<span class="nx">b</span><span class="p">.</span><span class="nf">ResetTimer</span><span class="p">()</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">strconv</span><span class="p">.</span><span class="nf">FormatInt</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//Itoa
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">BenchmarkItoa</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">num</span> <span class="o">:=</span> <span class="mi">10</span>
+	<span class="nx">b</span><span class="p">.</span><span class="nf">ResetTimer</span><span class="p">()</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>下面执行命令<code>go test -bench=. -benchmem</code>，收到测试报告如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">%  go <span class="nb">test</span> -bench<span class="o">=</span>. -benchmem
+goos: darwin
+goarch: amd64
+pkg: program/benchmark
+cpu: Intel<span class="o">(</span>R<span class="o">)</span> Core<span class="o">(</span>TM<span class="o">)</span> i7-9750H CPU @ 2.60GHz
+BenchmarkSprintf-12     <span class="m">16364854</span>                63.70 ns/op            <span class="m">2</span> B/op          <span class="m">1</span> allocs/op
+BenchmarkFormat-12      <span class="m">493325650</span>                2.380 ns/op           <span class="m">0</span> B/op          <span class="m">0</span> allocs/op
+BenchmarkItoa-12        <span class="m">481683436</span>                2.503 ns/op           <span class="m">0</span> B/op          <span class="m">0</span> allocs/op
+PASS
+ok      program/benchmark    4.007s
+</code></pre></div><p>可以发现，<strong>BenchmarkSprintf</strong>方法耗时最长，<strong>BenchmarkFormat</strong>最快，<strong>BenchmarkItoa</strong>也很快。差别在于<code>fmt.Sprintf()</code>执行过程中进行了一次内存分配<strong>1 allocs/op</strong>。</p>
+<h2 id="结合pprof分析">结合pprof分析</h2>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+<th>命令示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-cpuprofile [file]</td>
+<td>输出cpu性能文件</td>
+<td><code>go test -bench=. -benchmem -cpuprofile=cpu.out</code></td>
+</tr>
+<tr>
+<td>-memprofile [file]</td>
+<td>输出mem内存性能文件</td>
+<td><code>go test -bench=. -benchmem -memprofile=cpu.out</code></td>
+</tr>
+</tbody>
+</table>
+<p>生成的<strong>CPU、内存</strong>文件可以通过<code>go tool pprof [file]</code>进行查看，然后在pprof中通过<code>list [file]</code>方法查看<strong>CPU、内存</strong>的耗时情况</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">### 内存情况</span>
+<span class="o">(</span>pprof<span class="o">)</span> list BenchmarkArrayAppend
+Total: 36.49GB
+<span class="nv">ROUTINE</span> <span class="o">========================</span> program/benchmark.BenchmarkArrayAppend in /Users/guanjian/workspace/go/program/benchmark/benchmark_test.go
+   11.98GB    11.98GB <span class="o">(</span>flat, cum<span class="o">)</span> 32.83% of Total
+         .          .      7://Array
+         .          .      8:func BenchmarkArrayAppend<span class="o">(</span>b *testing.B<span class="o">)</span> <span class="o">{</span>
+         .          .      9:   <span class="k">for</span> i :<span class="o">=</span> 0<span class="p">;</span> i &lt; b.N<span class="p">;</span> i++ <span class="o">{</span>
+         .          .     10:           var arr <span class="o">[]</span>int
+         .          .     11:           <span class="k">for</span> i :<span class="o">=</span> 0<span class="p">;</span> i &lt; 10000<span class="p">;</span> i++ <span class="o">{</span>
+   11.98GB    11.98GB     12:                   <span class="nv">arr</span> <span class="o">=</span> append<span class="o">(</span>arr, i<span class="o">)</span>
+         .          .     13:           <span class="o">}</span>
+         .          .     14:   <span class="o">}</span>
+         .          .     15:<span class="o">}</span>
+<span class="c1">## CPU情况</span>
+<span class="o">(</span>pprof<span class="o">)</span> list BenchmarkArrayAppend
+Total: 8.86s
+<span class="nv">ROUTINE</span> <span class="o">========================</span> program/benchmark.BenchmarkArrayAppend in /Users/guanjian/workspace/go/program/benchmark/benchmark_test.go
+      10ms      640ms <span class="o">(</span>flat, cum<span class="o">)</span>  7.22% of Total
+         .          .      6:
+         .          .      7://Array
+         .          .      8:func BenchmarkArrayAppend<span class="o">(</span>b *testing.B<span class="o">)</span> <span class="o">{</span>
+         .          .      9:   <span class="k">for</span> i :<span class="o">=</span> 0<span class="p">;</span> i &lt; b.N<span class="p">;</span> i++ <span class="o">{</span>
+         .          .     10:           var arr <span class="o">[]</span>int
+      10ms       10ms     11:           <span class="k">for</span> i :<span class="o">=</span> 0<span class="p">;</span> i &lt; 10000<span class="p">;</span> i++ <span class="o">{</span>
+         .      630ms     12:                   <span class="nv">arr</span> <span class="o">=</span> append<span class="o">(</span>arr, i<span class="o">)</span>
+         .          .     13:           <span class="o">}</span>
+         .          .     14:   <span class="o">}</span>
+         .          .     15:<span class="o">}</span>
+</code></pre></div><h2 id="总结">总结</h2>
+<p>go提供了benchmark性能测试的工具，提供了对函数使用内存、CPU等情况的报告分析，还可以借助pprof获得更好的分析报告等，如果想要深入分析，还可以使用之前介绍的gdb进行底层代码的链路跟踪，以及对代码进行反编译查看具体的性能损耗情况。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://link.juejin.cn?target=https%3A%2F%2Fblog.csdn.net%2Fyzf279533105%2Farticle%2Fdetails%2F94016601"target="_blank">go benchmark 性能测试 单元测试 基准测试 使用方法详解</a></li>
+<li><a href="https://link.juejin.cn?target=https%3A%2F%2Fwww.cnblogs.com%2Fbergus%2Farticles%2Fgo-benchmark-xing-neng-ce-shi.html"target="_blank">go benchmark 性能测试</a></li>
+</ul>
+<h2 id="转载">转载</h2>
+<p><a href="https://juejin.cn/post/6970615934255906830">https://juejin.cn/post/6970615934255906830</a></p></article><section class="article labels"><a class="category" href=/categories/go/>Go</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/golang-json/"><span class="iconfont icon-article"></span>Golang json 性能分析</a></p><p><a class="link" href="/article/maven/"><span class="iconfont icon-article"></span>Maven 安装使用</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

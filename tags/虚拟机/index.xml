@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>虚拟机 on IARNO</title>
+    <link>/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/</link>
+    <description>Recent content in 虚拟机 on IARNO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2022 Arno.</copyright>
+    <lastBuildDate>Sat, 11 Sep 2021 20:00:00 +0800</lastBuildDate>
+    
+        <atom:link href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mac 安装VM虚拟机及网络配置</title>
+      <link>/article/mac-vm/</link>
+      <pubDate>Sat, 11 Sep 2021 20:00:00 +0800</pubDate>
+      
+      <guid>/article/mac-vm/</guid>
+      <description>&lt;h2 id=&#34;安装vmware-fusion&#34;&gt;安装VMware Fusion&lt;/h2&gt;
+&lt;p&gt;Mac 安装VM虚拟机 、centos虚拟机创建、网络相关配置。&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

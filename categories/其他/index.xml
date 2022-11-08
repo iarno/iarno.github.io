@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>其他 on IARNO</title>
+    <link>/categories/%E5%85%B6%E4%BB%96/</link>
+    <description>Recent content in 其他 on IARNO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2022 Arno.</copyright>
+    <lastBuildDate>Thu, 30 Jun 2022 22:54:37 +0800</lastBuildDate>
+    
+        <atom:link href="/categories/%E5%85%B6%E4%BB%96/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Conda 包管理工具</title>
+      <link>/article/conda/</link>
+      <pubDate>Thu, 30 Jun 2022 22:54:37 +0800</pubDate>
+      
+      <guid>/article/conda/</guid>
+      <description>&lt;p&gt;Conda是一个开源软件包管理系统和环境管理系统。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>使用tcpdump查看域名DNS解析过程</title>
+      <link>/article/tcpdump-dns/</link>
+      <pubDate>Wed, 22 Jun 2022 21:52:37 +0800</pubDate>
+      
+      <guid>/article/tcpdump-dns/</guid>
+      <description>&lt;p&gt;使用&lt;code&gt;tcpdump&lt;/code&gt;抓包域名dns解析过程。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>LVS &#43; Keepalived实现集群高可用</title>
+      <link>/article/lvs-2/</link>
+      <pubDate>Fri, 17 Sep 2021 22:00:00 +0800</pubDate>
+      
+      <guid>/article/lvs-2/</guid>
+      <description>&lt;p&gt;LVS + Keepalived集群高可用实践。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>LVS负载均衡实践</title>
+      <link>/article/lvs-1/</link>
+      <pubDate>Thu, 16 Sep 2021 23:00:00 +0800</pubDate>
+      
+      <guid>/article/lvs-1/</guid>
+      <description>&lt;p&gt;LVS负载均衡操作与实践。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Mac 安装VM虚拟机及网络配置</title>
+      <link>/article/mac-vm/</link>
+      <pubDate>Sat, 11 Sep 2021 20:00:00 +0800</pubDate>
+      
+      <guid>/article/mac-vm/</guid>
+      <description>&lt;h2 id=&#34;安装vmware-fusion&#34;&gt;安装VMware Fusion&lt;/h2&gt;
+&lt;p&gt;Mac 安装VM虚拟机 、centos虚拟机创建、网络相关配置。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Kong - 自定义插件开发(四)</title>
+      <link>/article/plugin-dev4/</link>
+      <pubDate>Thu, 15 Jul 2021 21:10:57 +0800</pubDate>
+      
+      <guid>/article/plugin-dev4/</guid>
+      <description>&lt;p&gt;使用Go语言开发自定义插件。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Kong - 自定义插件开发(三)</title>
+      <link>/article/plugin-dev3/</link>
+      <pubDate>Wed, 14 Jul 2021 21:10:57 +0800</pubDate>
+      
+      <guid>/article/plugin-dev3/</guid>
+      <description>&lt;p&gt;使用自定义插件，Docker容器启动相关配置如下：&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Kong - 自定义插件开发(二)</title>
+      <link>/article/plugin-dev2/</link>
+      <pubDate>Tue, 13 Jul 2021 22:12:57 +0800</pubDate>
+      
+      <guid>/article/plugin-dev2/</guid>
+      <description>生命周期 Kong 插件允许您在请求/响应或 tcp 流连接的生命周期的多个入口点注入自定义逻辑（在 Lua 中），因为它由 Kong 代理。为此，必须实现base_plugi</description>
+      
+    </item>
+    
+    <item>
+      <title>Kong - 自定义插件开发(一)</title>
+      <link>/article/plugin-dev1/</link>
+      <pubDate>Tue, 13 Jul 2021 21:41:57 +0800</pubDate>
+      
+      <guid>/article/plugin-dev1/</guid>
+      <description>介绍 将您的插件视为一组Lua 模块。本章中描述的每个文件都被视为一个单独的模块。如果它们的名称遵循以下约定，Kong 将检测并加载您的插件模块：</description>
+      
+    </item>
+    
+    <item>
+      <title>too many open files 问题定位</title>
+      <link>/article/lsof/</link>
+      <pubDate>Wed, 17 Mar 2021 22:10:00 +0800</pubDate>
+      
+      <guid>/article/lsof/</guid>
+      <description>错误 socket：too many open files 问题原因 系统资源限制小（ulimit -a 查看open files限制） 数据库打开文件限制小（登录数据库 show variables like &#39;%o</description>
+      
+    </item>
+    
+    <item>
+      <title>centos7安装Postgresql</title>
+      <link>/article/postgresql-centos/</link>
+      <pubDate>Tue, 17 Nov 2020 22:22:01 +0800</pubDate>
+      
+      <guid>/article/postgresql-centos/</guid>
+      <description>&lt;h2 id=&#34;1进入官网下载所需版本&#34;&gt;1、进入官网下载所需版本&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.postgresql.org/download/linux/redhat/&#34;&gt;https://www.postgresql.org/download/linux/redhat/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://i.loli.net/2020/11/17/6yQwYKjJUbh89k3.png&#34;
+        alt=&#34;image-20201117222643658&#34;/&gt;&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>centos7 安装kong网关</title>
+      <link>/article/kong-centos/</link>
+      <pubDate>Sat, 14 Nov 2020 21:19:05 +0800</pubDate>
+      
+      <guid>/article/kong-centos/</guid>
+      <description>&lt;h2 id=&#34;下载安装包&#34;&gt;下载安装包：&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://bintray.com/kong/kong-community-edition-rpm/download_file?file_path=centos/7/kong-community-edition-1.0.2.el7.noarch.rpm&#34;&gt;https://bintray.com/kong/kong-community-edition-rpm/download_file?file_path=centos/7/kong-community-edition-1.0.2.el7.noarch.rpm&lt;/a&gt;&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Kong网关配置负载均衡</title>
+      <link>/article/upstream/</link>
+      <pubDate>Tue, 27 Oct 2020 23:37:50 +0800</pubDate>
+      
+      <guid>/article/upstream/</guid>
+      <description>环境说明 注：由于docker network原因，宿主机127.0.0.1可能会访问不到，可直接使用外网域名+端口 # 开放两个测试的微服务接口 http://myhost1:8881</description>
+      
+    </item>
+    
+    <item>
+      <title>宽带、带宽、流量、网速、内网、外网之间的区别</title>
+      <link>/article/network/</link>
+      <pubDate>Sun, 25 Oct 2020 20:00:56 +0800</pubDate>
+      
+      <guid>/article/network/</guid>
+      <description>大纲结构 一.带宽与宽带的区别是什么？ 带宽是量词，指的是网速的大小，比如1Mbps的意思是一兆比特每秒，这个数值就是指带宽。 宽带是名词，说明网</description>
+      
+    </item>
+    
+    <item>
+      <title>Konga 插件使用案例</title>
+      <link>/article/kong-plugins/</link>
+      <pubDate>Wed, 21 Oct 2020 22:41:57 +0800</pubDate>
+      
+      <guid>/article/kong-plugins/</guid>
+      <description>CREATE CONSUMER Cerdentials 默认为所有consumer 创建 例： Username: test Password：test Route 添加插件 添加 Basic Auth 插件 添加成功 Postman 发送请求 注：header中的 Autho</description>
+      
+    </item>
+    
+    <item>
+      <title>Konga使用</title>
+      <link>/article/konga/</link>
+      <pubDate>Fri, 16 Oct 2020 21:55:17 +0800</pubDate>
+      
+      <guid>/article/konga/</guid>
+      <description>konga使用 konga安装请参考Docker安装kong网关 Url：http://127.0.0.1:1337 注册账号并登陆平台 配置DAS</description>
+      
+    </item>
+    
+    <item>
+      <title>Docker安装Kong网关</title>
+      <link>/article/docker-kong/</link>
+      <pubDate>Fri, 16 Oct 2020 21:47:24 +0800</pubDate>
+      
+      <guid>/article/docker-kong/</guid>
+      <description>创建Docker network $ docker network create kong-net 创建数据库 本案例使用的是PostgreSQL数据库 Cassandra数据库 $ docker run -d --name kong-database \ --network=kong-net \ -p 9042:9042 \ cassandra:3 Postgr</description>
+      
+    </item>
+    
+    <item>
+      <title>Burp Suite使用</title>
+      <link>/article/user-burp/</link>
+      <pubDate>Sat, 26 Sep 2020 20:37:11 +0800</pubDate>
+      
+      <guid>/article/user-burp/</guid>
+      <description>正版Burp Suite无法修改线程数，本文主要介绍破解版本的使用流程。 破解之后下载的正版无法正常启动 ￣□￣｜｜ 启动 注：如对路径有疑问请查看m</description>
+      
+    </item>
+    
+    <item>
+      <title>MacOS安装BurpSuite并破解</title>
+      <link>/article/burp/</link>
+      <pubDate>Sat, 26 Sep 2020 20:16:02 +0800</pubDate>
+      
+      <guid>/article/burp/</guid>
+      <description>1、官网下载社区版BurpSuite 2、下载注册机 3、载安装的JDK10 （版本太高破解不了） 4、安装JDK1.8 5、按参考链接破解 1、官网下</description>
+      
+    </item>
+    
+    <item>
+      <title>idea 破解</title>
+      <link>/article/idea/</link>
+      <pubDate>Tue, 08 Sep 2020 21:38:21 +0800</pubDate>
+      
+      <guid>/article/idea/</guid>
+      <description>&lt;p&gt;IDEA2020.2激活码，IDEA2020.2破解，IDEA2020破解教程，idea2020最新破解教程&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>hexo博客迁移</title>
+      <link>/article/hexo%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/</link>
+      <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
+      
+      <guid>/article/hexo%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/</guid>
+      <description>&lt;h4 id=&#34;1将你原来电脑上已经配置好并生成的hexo目录拷到你的新电脑上注意无需拷全部只拷如下几个目录&#34;&gt;1.将你原来电脑上已经配置好并生成的hexo目录拷到你的新电脑上，注意无需拷全部，只拷如下几个目录：&lt;/h4&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>博客导流公众号</title>
+      <link>/article/%E5%8D%9A%E5%AE%A2%E5%AF%BC%E6%B5%81%E5%85%AC%E4%BC%97%E5%8F%B7/</link>
+      <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
+      
+      <guid>/article/%E5%8D%9A%E5%AE%A2%E5%AF%BC%E6%B5%81%E5%85%AC%E4%BC%97%E5%8F%B7/</guid>
+      <description>&lt;h2 id=&#34;使用指南&#34;&gt;使用指南&lt;/h2&gt;
+&lt;p&gt;下面您只需要在公众号和博客中做如下设置，然后就等着来自博客的自然增长吧！&lt;/p&gt;
+&lt;h4 id=&#34;第一步公众号设置&#34;&gt;第一步：公众号设置&lt;/h4&gt;
+&lt;p&gt;登录要增粉的微信公众号，按如下规则设置关键词回复&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;关键词，设置为：vip&lt;/li&gt;
+&lt;li&gt;回复内容，设置为如下文本内容：&lt;/li&gt;
+&lt;/ul&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>阿里云服务器搭建vpn</title>
+      <link>/article/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAvpn/</link>
+      <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
+      
+      <guid>/article/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAvpn/</guid>
+      <description>&lt;h4 id=&#34;快速开始&#34;&gt;快速开始&lt;/h4&gt;
+&lt;p&gt;首先，在你的 Linux 服务器* 上全新安装一个 Ubuntu LTS, Debian 或者 CentOS 系统。&lt;/p&gt;
+&lt;p&gt;使用以下命令快速搭建 IPsec VPN 服务器：&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

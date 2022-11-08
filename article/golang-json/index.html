@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="go json, easyjson, ffjson, jsoniter, encoding/json" name="keywords">
+<meta content="Golang json 性能分析 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Golang json 性能分析&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Golang json 性能分析" /><meta name="twitter:image" content="https://s2.loli.net/2022/06/22/4fcydxtomj7rdej.jpg" /><body><section id="header">
+    <title>Golang json 性能分析 - IARNO</title>
+    <meta content="阿諾个人博客 - Golang json 性能分析" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Golang json 性能分析</h1><p class="article date">June 22, 2022</p></section><article class="article markdown-body"><p><img class="cover" src="https://s2.loli.net/2022/06/22/4fcYdxtOMJ7rDEj.jpg" alt></p><p>Json 作为一种重要的数据格式，具有良好的可读性以及自描述性，广泛地应用在各种数据传输场景中。</p>
+<p>Go 语言里面原生支持了这种数据格式的序列化以及反序列化，内部使用反射机制实现，性能有点差，在高度依赖 json 解析的应用里，往往会成为性能瓶颈，好在已有很多第三方库帮我们解决了这个问题，但是这么多库，对于像我这种有选择困难症的人来说，到底要怎么选择呢，下面就给大家来一一分析一下</p>
+<h2 id="ffjson">ffjson</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">go get -u github.com/pquerna/ffjson
+</code></pre></div><p>原生的库性能比较差的主要原因是使用了很多反射的机制，为了解决这个问题，ffjson 通过预编译生成代码，类型的判断在预编译阶段已经确定，避免了在运行时的反射</p>
+<p>但也因此在编译前需要多一个步骤，需要先生成 ffjson 代码，生成代码只需要执行 <code>ffjson &lt;file.go&gt;</code> 就可以了，其中 <code>file.go</code> 是一个包含 json 结构体定义的 go 文件。注意这里 ffjson 是这个库提供的一个代码生成工具，直接执行上面的 <code>go get</code> 会把这个工具安装在 <code>$GOPATH/bin</code> 目录下，把 <code>$GOPATH/bin</code> 加到 <code>$PATH</code> 环境变量里面，可以全局访问</p>
+<p>另外，如果有些结构，不想让 ffjson 生成代码，可以通过增加注释的方式</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// ffjson: skip
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Foo</span> <span class="kd">struct</span> <span class="p">{</span>
+   <span class="nx">Bar</span> <span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="c1">// ffjson: nodecoder
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Foo</span> <span class="kd">struct</span> <span class="p">{</span>
+   <span class="nx">Bar</span> <span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="easyjson">easyjson</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">go get -u github.com/mailru/easyjson/...
+</code></pre></div><p>easyjson 的思想和 ffjson 是一致的，都是增加一个预编译的过程，预先生成对应结构的序列化反序列化代码，除此之外，easyjson 还放弃了一些原生库里面支持的一些不必要的特性，比如：key 类型声明，key 大小写不敏感等等，以达到更高的性能</p>
+<p>生成代码执行 <code>easyjson -all &lt;file.go&gt;</code> 即可，如果不指定 <code>-all</code> 参数，只会对带有 <code>//easyjson:json</code> 的结构生成代码</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">//easyjson:json
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">A</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Bar</span> <span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="jsoniter">jsoniter</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">go get -u github.com/json-iterator/go
+</code></pre></div><p>这是一个很神奇的库，滴滴开发的，不像 easyjson 和 ffjson 都使用了预编译，而且 100% 兼容原生库，但是性能超级好，也不知道怎么实现的，如果有人知道的话，可以告诉我一下吗？</p>
+<p>使用上面，你只要把所有的</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">import</span> <span class="s">&#34;encoding/json&#34;</span>
+</code></pre></div><p>替换成</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">import</span> <span class="s">&#34;github.com/json-iterator/go&#34;</span>
+
+<span class="kd">var</span> <span class="nx">json</span> <span class="p">=</span> <span class="nx">jsoniter</span><span class="p">.</span><span class="nx">ConfigCompatibleWithStandardLibrary</span>
+</code></pre></div><p>就可以了，其它都不需要动</p>
+<h2 id="codec-json">codec-json</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">go get -u github.com/ugorji/go/codec
+</code></pre></div><p>这个库里面其实包含很多内容，json 只是其中的一个功能，比较老，使用起来比较麻烦，性能也不是很好</p>
+<h2 id="jsonparser">jsonparser</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">go get -u github.com/buger/jsonparser
+</code></pre></div><p>严格来说，这个库不属于 json 序列化的库，只是提供了一些 json 解析的接口，使用的时候需要自己去设置结构里面的值，事实上，每次调用都需要重新解析 json 对象，性能并不是很好</p>
+<p>就像名字暗示的那样，这个库只是一个解析库，并没有序列化的接口</p>
+<h2 id="性能测试">性能测试</h2>
+<p>对上面这些 json 库，作了一些性能测试，测试代码在：<a href="https://link.segmentfault.com/?enc=Qxm%2BXg2nNTB8W5%2Bo%2FagbNg%3D%3D.95HfdMip6XLoAs2cbR6i6u1ytzrEXt4B5oBFY9wUMX%2F7DcTx%2FymHb5ghEtcuTVJ1faiCER3YY2vH3RJfKXnzfxDq43FGVfoGkngXaeC%2Bxwx3bBs7gV34Jpa%2FIhiNwHca"target="_blank">https://github.com/hatlonely/&hellip;</a>，下面是在我的 Macbook 上测试的结果（实际结果和库的版本以及机器环境有关，建议自己再测试一遍）：</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">BenchmarkMarshalStdJson</span><span class="o">-</span><span class="mi">4</span>                    <span class="mi">1000000</span>          <span class="mi">1097</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="nx">BenchmarkMarshalJsonIterator</span><span class="o">-</span><span class="mi">4</span>               <span class="mi">2000000</span>           <span class="mi">781</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="nx">BenchmarkMarshalFfjson</span><span class="o">-</span><span class="mi">4</span>                     <span class="mi">2000000</span>           <span class="mi">941</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="nx">BenchmarkMarshalEasyjson</span><span class="o">-</span><span class="mi">4</span>                   <span class="mi">3000000</span>           <span class="mi">513</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="nx">BenchmarkMarshalCodecJson</span><span class="o">-</span><span class="mi">4</span>                  <span class="mi">1000000</span>          <span class="mi">1074</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="nx">BenchmarkMarshalCodecJsonWithBufio</span><span class="o">-</span><span class="mi">4</span>         <span class="mi">1000000</span>          <span class="mi">2161</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="nx">BenchmarkUnMarshalStdJson</span><span class="o">-</span><span class="mi">4</span>                   <span class="mi">500000</span>          <span class="mi">2512</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="nx">BenchmarkUnMarshalJsonIterator</span><span class="o">-</span><span class="mi">4</span>             <span class="mi">2000000</span>           <span class="mi">591</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="nx">BenchmarkUnMarshalFfjson</span><span class="o">-</span><span class="mi">4</span>                   <span class="mi">1000000</span>          <span class="mi">1127</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="nx">BenchmarkUnMarshalEasyjson</span><span class="o">-</span><span class="mi">4</span>                 <span class="mi">2000000</span>           <span class="mi">608</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="nx">BenchmarkUnMarshalCodecJson</span><span class="o">-</span><span class="mi">4</span>                  <span class="mi">20000</span>        <span class="mi">122694</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="nx">BenchmarkUnMarshalCodecJsonWithBufio</span><span class="o">-</span><span class="mi">4</span>        <span class="mi">500000</span>          <span class="mi">3417</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="nx">BenchmarkUnMarshalJsonparser</span><span class="o">-</span><span class="mi">4</span>               <span class="mi">2000000</span>           <span class="mi">877</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+</code></pre></div><p><img  src="https://s2.loli.net/2022/06/22/XkK9TZBm4JDdzgt.png"
+        alt="golang_json_performance"/></p>
+<p>从上面的结果可以看出来：</p>
+<ol>
+<li>easyjson 无论是序列化还是反序列化都是最优的，序列化提升了1倍，反序列化提升了3倍</li>
+<li>jsoniter 性能也很好，接近于easyjson，关键是没有预编译过程，100%兼容原生库</li>
+<li>ffjson 的序列化提升并不明显，反序列化提升了1倍</li>
+<li>codecjson 和原生库相比，差不太多，甚至更差</li>
+<li>jsonparser 不太适合这样的场景，性能提升并不明显，而且没有反序列化</li>
+</ol>
+<p><strong>所以综合考虑，建议大家使用 jsoniter，如果追求极致的性能，考虑 easyjson</strong></p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li>
+<p>ffjson: <a href="https://link.segmentfault.com/?enc=BJym%2FHn745O257yzgcFgCQ%3D%3D.iB5GrM8Vz9tyZSjEZeWYNDkUE9KUDjuLbWxyPvu6JGAIKsS8jcp2t4HIt%2Bi57h1h"target="_blank">https://github.com/pquerna/ff&hellip;</a></p>
+</li>
+<li>
+<p>easyjson: <a href="https://link.segmentfault.com/?enc=fxSrJNERxSBIKhFV7Zhjkg%3D%3D.vi8APCivcnCohD3s0%2FupznM6%2BFCrndHN0hKCNWQjlgaH3%2FxnVTB4skZ%2BDrSA8jEs"target="_blank">https://github.com/mailru/eas&hellip;</a></p>
+</li>
+<li>
+<p>jsoniter: <a href="https://link.segmentfault.com/?enc=cQFqYD80qH7HMTFUUH2XIg%3D%3D.HQm%2FGxpq%2BnRC6NKtvTZGpoF8mFf8UXYgPsnRjex0D4HBHUvq9EzOVL2%2FaEHdqyKQ"target="_blank">https://github.com/json-itera&hellip;</a></p>
+</li>
+<li>
+<p>jsonparser: <a href="https://link.segmentfault.com/?enc=I0QVVh%2BVWntPs6368FX8PA%3D%3D.d4yBdO4%2BZZMlWQhv0sIpRm8mk8uLa2U4JxDT3kdV%2FGiKe0dU6GBBgfKtG1i49QlD"target="_blank">https://github.com/buger/json&hellip;</a></p>
+</li>
+<li>
+<p>codecjson: <a href="https://link.segmentfault.com/?enc=rfJ%2FUZNzvNLQqesGK1b8FA%3D%3D.pKFdNrRpQ8G4OuV5NZ%2FiE1rOfwi%2FVeUR2vXOA%2BkVvycpPRre03MPAV2Orwo37Au8"target="_blank">http://ugorji.net/blog/go-cod&hellip;</a></p>
+</li>
+<li>
+<p>golang-json性能对比:<a href="https://github.com/iarno/golang-json"target="_blank">https://github.com/iarno/golang-json</a></p>
+</li>
+</ul>
+<h2 id="转载">转载</h2>
+<p><a href="https://segmentfault.com/a/1190000013022780">https://segmentfault.com/a/1190000013022780</a></p></article><section class="article labels"><a class="category" href=/categories/go/>Go</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/tcpdump-dns/"><span class="iconfont icon-article"></span>使用tcpdump查看域名DNS解析过程</a></p><p><a class="link" href="/article/benchmark/"><span class="iconfont icon-article"></span>Golang benchmark 性能测试</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

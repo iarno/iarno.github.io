@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="" name="keywords">
+<meta content="pcntl_fork 多进程 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>pcntl_fork 多进程&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="pcntl_fork 多进程" /><body><section id="header">
+    <title>pcntl_fork 多进程 - IARNO</title>
+    <meta content="阿諾个人博客 - " property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">pcntl_fork 多进程</h1><p class="article date">August 29, 2020</p></section><article class="article markdown-body"><h2 id="pcntl-简介">pcntl 简介</h2>
+<p>PHP的进程控制支持实现了Unix方式的进程创建, 程序执行, 信号处理以及进程的中断。 进程控制不能被应用在Web服务器环境，当其被用于Web服务环境时可能会带来意外的结果。</p>
+<p>这份文档用于阐述每个进程控制函数的通常用法。关于Unix进程控制的更多信息建议您查阅 系统文档中关于fork（2）,waitpid（2），signal（2）等的部分或更全面的参考资料比如 《Unix环境高级编程》（作者：W. Richard Stevens，Addison-Wesley出版）。</p>
+<p>PCNTL现在使用了ticks作为信号处理的回调机制，ticks在速度上远远超过了之前的处理机制。 这个变化与“用户ticks”遵循了相同的语义。您可以使用declare() 语句在程序中指定允许发生回调的位置。这使得我们对异步事件处理的开销最小化。在编译PHP时 启用pcntl将始终承担这种开销，不论您的脚本中是否真正使用了pcntl。</p>
+<p>有一个调整是PHP 4.3.0之前的所有pcntl脚本要使其工作，要么在期望允许回调的（代码）部分使用 declare() ，要么使用declare()新的全局语法 使其在整个脚本范围有效。</p>
+<p>Note: 此扩展在 Windows 平台上不可用。</p>
+<h2 id="pcntl_fork">pcntl_fork</h2>
+<p>PHP 4 &gt;= 4.1.0, PHP 5, PHP 7)</p>
+<p>pcntl_fork — 在当前进程当前位置产生分支（子进程）。译注：fork是创建了一个子进程，父进程和子进程 都从fork的位置开始向下继续执行，不同的是父进程执行过程中，得到的fork返回值为子进程 号，而子进程得到的是0。</p>
+<h2 id="说明">说明</h2>
+<p>int pcntl_fork ( void )
+pcntl_fork()函数创建一个子进程，这个子进程仅PID（进程号） 和PPID（父进程号）与其父进程不同。fork怎样在您的系统工作的详细信息请查阅您的系统 的fork（2）手册。</p>
+<h2 id="返回值">返回值</h2>
+<p>成功时，在父进程执行线程内返回产生的子进程的PID，在子进程执行线程内返回0。失败时，在 父进程上下文返回-1，不会创建子进程，并且会引发一个PHP错误。</p>
+<h2 id="代码">代码</h2>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="sd">/**
+</span><span class="sd"> * Created by PhpStorm.
+</span><span class="sd"> * User: Object
+</span><span class="sd"> * Date: 2018/6/11
+</span><span class="sd"> * Time: 10:12
+</span><span class="sd"> */</span>
+
+<span class="k">const</span> <span class="no">NEWLINE</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="se">\n\n</span><span class="s2">&#34;</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">strtolower</span><span class="p">(</span><span class="nx">php_sapi_name</span><span class="p">())</span> <span class="o">!=</span> <span class="s1">&#39;cli&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">die</span><span class="p">(</span><span class="s2">&#34;请在cli模式下运行&#34;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">echo</span> <span class="s2">&#34;当前进程：&#34;</span> <span class="o">.</span> <span class="nx">getmypid</span><span class="p">()</span> <span class="o">.</span> <span class="nx">NEWLINE</span><span class="p">;</span>
+
+<span class="nv">$pid</span> <span class="o">=</span> <span class="nx">pcntl_fork</span><span class="p">();</span> <span class="c1">//fork出子进程
+</span><span class="c1"></span>
+<span class="c1">//fork后父进程会走自己的逻辑，子进程从处开始走自己的逻辑，堆栈信息会完全复制给子进程内存空间，父子进程相互独立
+</span><span class="c1"></span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$pid</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 创建错误，返回-1
+</span><span class="c1"></span>
+    <span class="k">die</span><span class="p">(</span><span class="s1">&#39;进程fork失败&#39;</span><span class="p">);</span>
+
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$pid</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// $pid &gt; 0, 如果fork成功，返回子进程id
+</span><span class="c1"></span>
+    <span class="c1">// 父进程逻辑
+</span><span class="c1"></span>    <span class="nv">$time</span> <span class="o">=</span> <span class="nx">microtime</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+    <span class="k">echo</span> <span class="s2">&#34;我是父进程:</span><span class="si">{</span>$time<span class="si">}</span><span class="s2">&#34;</span><span class="o">.</span><span class="nx">NEWLINE</span><span class="p">;</span>
+
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// $pid = 0
+</span><span class="c1"></span>
+    <span class="c1">// 子进程逻辑
+</span><span class="c1"></span>    <span class="nv">$time</span> <span class="o">=</span> <span class="nx">microtime</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+    <span class="k">echo</span> <span class="s2">&#34;我是子进程:</span><span class="si">{</span>$time<span class="si">}</span><span class="s2">&#34;</span><span class="o">.</span><span class="nx">NEWLINE</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><h5 id="执行结果">执行结果</h5>
+<p>当前进程：17472</p>
+<p>我是父进程:1528697500.2961</p>
+<p>我是子进程:1528697500.2961</p>
+<p>fork后会子进程先执行还是父进程先执行逻辑呢？</p>
+<h2 id="测试代码">测试代码</h2>
+<p>此处我们调换上面代码的父子进程的if顺序</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php">if ($pid == -1) { // 创建错误，返回-1
+
+    die(&#39;进程fork失败&#39;);
+
+} else if (!$pid) { // $pid = 0
+
+    // 子进程逻辑
+    $time = microtime(true);
+    echo &#34;我是子进程:{$time}&#34;.NEWLINE;
+} else if ($pid) { // $pid &gt; 0, 如果fork成功，返回子进程id
+
+    // 父进程逻辑
+    $time = microtime(true);
+    echo &#34;我是父进程:{$time}&#34;.NEWLINE;
+
+}
+</code></pre></div><h5 id="执行结果-1">执行结果</h5>
+<p>当前进程：17472</p>
+<p>我是父进程:1528697500.2961</p>
+<p>我是子进程:1528697500.2961</p>
+<h2 id="测试总结">测试总结</h2>
+<p>fork首先会执行父进程逻辑再执行子进程逻辑</p></article><section class="article labels"><a class="category" href=/categories/php/>PHP</a><a class="tag" href=/tags/pcntl_fork/>pcntl_fork</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/mysql%E6%9F%A5%E8%AF%A2%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5%E9%87%8D%E5%A4%8D%E7%9A%84%E5%80%BC/"><span class="iconfont icon-article"></span>Mysql查询多个字段重复的值</a></p><p><a class="link" href="/article/php%E5%86%85%E5%AE%B9%E7%BC%93%E5%AD%98yac/"><span class="iconfont icon-article"></span>PHP内容缓存Yac</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

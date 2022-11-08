@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>并发 on 阿諾同學</title>
+    <link>/tags/%E5%B9%B6%E5%8F%91/</link>
+    <description>Recent content in 并发 on 阿諾同學</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2020 Arno.</copyright>
+    <lastBuildDate>Sat, 26 Sep 2020 20:16:02 +0800</lastBuildDate>
+    
+        <atom:link href="/tags/%E5%B9%B6%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>macOS安装BurpSuite并破解</title>
+      <link>/article/burp/</link>
+      <pubDate>Sat, 26 Sep 2020 20:16:02 +0800</pubDate>
+      
+      <guid>/article/burp/</guid>
+      <description>1官网下载社区版BurpSuite 2、下载注册机 3、载安装的JDK10 （版本太高破解不了） 4、安装JDK1.8 5、按参考链接破解 1、官网下载</description>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Python编程从入门到实战 on IARNO</title>
+    <link>/tags/python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/</link>
+    <description>Recent content in Python编程从入门到实战 on IARNO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2022 Arno.</copyright>
+    <lastBuildDate>Wed, 24 Aug 2022 22:31:37 +0800</lastBuildDate>
+    
+        <atom:link href="/tags/python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Django 项目实践01</title>
+      <link>/article/django-01/</link>
+      <pubDate>Wed, 24 Aug 2022 22:31:37 +0800</pubDate>
+      
+      <guid>/article/django-01/</guid>
+      <description>&lt;p&gt;Django 项目实践01。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Python 单元测试</title>
+      <link>/article/py-test/</link>
+      <pubDate>Wed, 06 Jul 2022 23:09:37 +0800</pubDate>
+      
+      <guid>/article/py-test/</guid>
+      <description>&lt;p&gt;Python代码测试。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Python 异常处理</title>
+      <link>/article/py-file/</link>
+      <pubDate>Mon, 04 Jul 2022 22:41:37 +0800</pubDate>
+      
+      <guid>/article/py-file/</guid>
+      <description>&lt;p&gt;Python异常处理 try-except。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Python 文件篇</title>
+      <link>/article/py-except/</link>
+      <pubDate>Sun, 03 Jul 2022 20:40:37 +0800</pubDate>
+      
+      <guid>/article/py-except/</guid>
+      <description>&lt;p&gt;Python文件读取、写入。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Python 列表</title>
+      <link>/article/py_list/</link>
+      <pubDate>Wed, 02 Mar 2022 09:38:37 +0800</pubDate>
+      
+      <guid>/article/py_list/</guid>
+      <description>&lt;p&gt;列表由一系列按特定顺序排列的元素组成。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Python 变量和简单数据类型</title>
+      <link>/article/py_string/</link>
+      <pubDate>Mon, 28 Feb 2022 10:46:37 +0800</pubDate>
+      
+      <guid>/article/py_string/</guid>
+      <description>&lt;p&gt;变量和简单数据类型：字符串、整数、浮点数、常量。&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

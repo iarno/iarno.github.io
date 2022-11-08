@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="lua, redis, 限流, 令牌桶算法, 单点限流, 分布式限流" name="keywords">
+<meta content="限流算法实践 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>限流算法实践&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="限流算法实践" /><body><section id="header">
+    <title>限流算法实践 - IARNO</title>
+    <meta content="阿諾个人博客 - 服务限流及实践,令牌桶限流。" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">限流算法实践</h1><p class="article date">April 21, 2021</p></section><article class="article markdown-body"><h2 id="一限流简介">一、限流简介</h2>
+<h3 id="什么是限流">什么是限流</h3>
+<p>在不同场景下限流的定义也各不相同，可以是每秒请求数、每秒事务处理数、网络流量。</p>
+<p>通常我们所说的限流指的是限制到达系统并发请求数，使得系统能够正常的处理部分用户的请求，来保证系统的稳定性。</p>
+<h3 id="为什么限流">为什么限流</h3>
+<p>接口无法控制调用方的行为。热点业务突发请求、恶意请求攻击等会带来瞬时的请求量激增，导致服务占用大量的 CPU、内存等资源，使得其他正常的请求变慢或超时，甚至引起服务器宕机。</p>
+<p>按照请求次数进行收费的接口需要根据客户支付的金额来限制客户可用的次数。</p>
+<h3 id="限流的行为">限流的行为</h3>
+<p>限流的行为指的就是在接口的请求数达到限流的条件时要触发的操作，一般可进行以下行为。</p>
+<ul>
+<li>拒绝服务：把多出来的请求拒绝掉</li>
+<li>服务降级：关闭或是把后端服务做降级处理。这样可以让服务有足够的资源来处理更多的请求</li>
+<li>特权请求：资源不够了，我只能把有限的资源分给重要的用户</li>
+<li>延时处理：一般会有一个队列来缓冲大量的请求，这个队列如果满了，那么就只能拒绝用户了，如果这个队列中的任务超时了，也要返回系统繁忙的错误了</li>
+<li>弹性伸缩：用自动化运维的方式对相应的服务做自动化的伸缩</li>
+</ul>
+<h2 id="二限流架构">二、限流架构</h2>
+<h3 id="单点限流">单点限流</h3>
+<p><img  src="https://i.loli.net/2021/04/21/eYcQxs5kbGiREpu.png"
+        alt="image-20210421232940934"/></p>
+<p>当我们的系统应用只部署在一个节点上来提供服务时，就可以采用单点限流的架构来对应用的接口进行限流，只要单点应用进行了限流，那么他所依赖的各种服务也得到了保护。</p>
+<h3 id="分布式限流">分布式限流</h3>
+<p>为了提供高性能的服务，往往我们的应用都是以集群结构部署在多个节点上的。这时候单点限流只能限制传入单个节点的请求，保护自身节点，无法保护应用依赖的各种服务资源。那么如果在集群中的每个节点上都进行单点限流是否可行呢？</p>
+<p><img  src="https://i.loli.net/2021/04/21/TD2y5MgVfaoZbe7.png"
+        alt="image-20210421232931411"/></p>
+<p>假设我们的应用集群中有三个节点，为了保护应用依赖的资源我们限制资源每秒最大请求数为300个，如果超过这个限制那么资源将因过载导致不再可用。这样分配到集群中的每个应用节点的每秒最大请求数为100个才可以满足保护资源的要求，超过100则拒绝服务提示业务繁忙。</p>
+<p>假如某一秒内有300个请求打到应用集群，应用集群再去请求所依赖的资源服务，是满足资源服务每秒300个最大请求数的限制的，所以这些请求都能够得到处理并且正常返回。</p>
+<p>但是，如果因为种种原因负载均衡调度器把这 300 个请求中的 50 个分配给了节点1，50 个分配给了节点2，剩余 200 个分配给了节点3。因为我们之前限制每个节点的每秒最大请求数为 100，所以就会出现节点1的50个请求全部正常返回、节点2上的 50 个请求全部正常返回，而节点三上的200个请求只有100个正常返回，另外100个被拒绝服务。这种集群中每个节点都进行单点限流的方式显然不能满足我们的业务需要。</p>
+<p>我们可以使用基于各种中间件的分布式限流来解决集群结构下应用限流不准确的问题。将限流的配置以及通过整个集群的请求数都保存在中间件中，然后通过计算来判断是否达到限流行为的触发条件。分布式限流可以统一地限制整个集群的流量，整个集群的请求数得到了限制，那么集群所依赖的资源服务也就得到了保障。</p>
+<p><img  src="https://i.loli.net/2021/04/21/nwgCuqahNo7GfRv.png"
+        alt="image-20210421232924426"/></p>
+<h2 id="三限流算法">三、限流算法</h2>
+<h3 id="固定窗口计数器">固定窗口计数器</h3>
+<p><img  src="https://i.loli.net/2021/04/21/fosGQ6PzCZFayJr.png"
+        alt="image-20210421232914483"/></p>
+<ul>
+<li>将时间按照设定的周期划分为多个窗口</li>
+<li>在当前时间窗口内每来一次请求就将计数器加一</li>
+<li>如果计数器超过了限制数量，则拒绝服务</li>
+<li>当时间到达下一个窗口时，计数器的值重置</li>
+</ul>
+<p>这种算法很好实现，但是会出现限流不准确的问题，例如：</p>
+<p><img  src="https://i.loli.net/2021/04/21/gPAYvMzdoEKftmJ.png"
+        alt="图片"/></p>
+<p>假设限制每秒通过5个请求，时间窗口的大小为1秒，当前时间窗口周期内的后半秒正常通过了5个请求，下一个时间窗口周期内的前半秒正常通过了5个请求，在这两个窗口内都没有超过限制。但是在这两个窗口的中间那一秒实际上通过了 10 个请求，显然不满足每秒5个请求的限制。</p>
+<h3 id="滑动窗口计数器">滑动窗口计数器</h3>
+<p><img  src="https://i.loli.net/2021/04/21/Mp48fNQAZDoadU3.png"
+        alt="image-20210421232852824"/></p>
+<ul>
+<li>将设定的时间周期设为滑动窗口的大小，记录每次请求的时刻</li>
+<li>当有新的请求到来时将窗口滑到该请求来临的时刻</li>
+<li>判断窗口内的请求数是否超过了限制，超过限制则拒绝服务，否则请求通过</li>
+<li>丢弃滑动窗口以外的请求</li>
+</ul>
+<p>这种算法解决了固定窗口计数器出现的通过请求数是限制数两倍的缺陷，但是实现起来较为复杂，并且需要记录窗口周期内的请求，如果限流阈值设置过大，窗口周期内记录的请求就会很多，就会比较占用内存</p>
+<h3 id="漏桶算法">漏桶算法</h3>
+<p><img  src="https://i.loli.net/2021/04/21/dDsXzkjBfvnyxa4.png"
+        alt="image-20210421232828640"/></p>
+<ul>
+<li>将进来的请求流量视为水滴先放入桶内</li>
+<li>水从桶的底部以固定的速率匀速流出，相当于在匀速处理请求</li>
+<li>当漏桶内的水满时(超过了限流阈值)则拒绝服务</li>
+</ul>
+<p>这个算法可以比较平滑均匀的限制请求，Nginx 中的 limit_req 模块的底层实现就是用的这种算法，具体可参考【NGINX和NGINX Plus的速率限制】(<a href="https://www.nginx.com/blog/rate-limiting-nginx">https://www.nginx.com/blog/rate-limiting-nginx</a>)</p>
+<p>但是漏桶算法也有一定的缺陷，因为水从桶的底部以固定的速率匀速流出，当有在服务器可承受范围内的瞬时突发请求进来，这些请求会被先放入桶内，然后再匀速的进行处理，这样就会造成部分请求的延迟。所以他无法应对在限流阈值范围内的突发请求。</p>
+<h3 id="令牌桶算法">令牌桶算法</h3>
+<p><img  src="https://i.loli.net/2021/04/21/bThlfoCOVK8qSHY.png"
+        alt="image-20210421232805491"/></p>
+<ul>
+<li>按照一定的速率生产令牌并放入令牌桶中</li>
+<li>如果桶中令牌已满，则丢弃令牌</li>
+<li>请求过来时先到桶中拿令牌，拿到令牌则放行通过，否则拒绝请求</li>
+</ul>
+<p>这种算法能够把请求均匀的分配在时间区间内，又能接受服务可承受范围内的突发请求。所以令牌桶算法在业内使用也非常广泛。接下来会详细介绍该算法的实现。</p>
+<h2 id="四令牌桶算法实现">四、令牌桶算法实现</h2>
+<p>我们采用 Redis + Lua 脚本的方式来实现令牌桶算法，在 Redis 中使用 Lua 脚本有诸多好处，例如：</p>
+<ul>
+<li>减少网络开销：本来多次网络请求的操作，可以用一个请求完成，原先多次请求的逻辑放在 Redis 服务器上完成。使用脚本，减少了网络往返时延。</li>
+<li>原子操作：Redis会将整个脚本作为一个整体执行，中间不会被其他进程或者进程的命令插入。</li>
+<li>复用：客户端发送的脚本会永久存储在Redis中，意味着其他客户端可以复用这一脚本而不需要使用代码完成同样的逻辑。</li>
+<li>复用：客户端发送的脚本会永久存储在Redis中，意味着其他客户端可以复用这一脚本而不需要使用代码完成同样的逻辑。</li>
+</ul>
+<p>这其中最重要的方法就是原子操作。将 Redis 的多条命令写成一个 Lua 脚本，然后调用脚本执行操作，相当于只有一条执行脚本的命令，所以整个 Lua 脚本中的操作都是原子性的。</p>
+<p>在 Redis 中使用 Lua 脚本主要涉及 <code>Script Load</code>、<code>Eval</code>、<code>Evalsha</code> 三个命令：</p>
+<p><code>Eval ${lua_script}</code> 可以直接执行 Lua 脚本。</p>
+<p><code>Script Load ${lua_script}</code> 命令是将脚本载入 Redis，载入成功后会返回一个脚本的sha1值，一旦载入则永久存储在 Redis 中，后续可以通过 <code>Evalsha ${sha1}</code> 来直接调用此脚本。我们采用先 Load 脚本得到 Sha1 值，再调用这个 sha1 值来执行脚本的方式可以减少像<code>eval ${lua_script}</code> 命令这样每次都向 Redis 中发送一长串 Lua 脚本带来的网络开销。</p>
+<p>使用 Redis 中的 Hash 数据结构来存储限流配置，每个 Hash 表的 Key 为限流的粒度，可以是接口Uri、客户端 IP、应用uuid或者他们的组合形式。每个 Hash 表为一个令牌桶，Hash 表中包含如下字段：</p>
+<ul>
+<li><code>last_time</code> 最近一次请求的时间戳，毫秒级别。</li>
+<li><code>curr_permits</code> 当前桶内剩余令牌数量，单位为：个。</li>
+<li><code>bucket_cap</code> 桶的容量，即桶内可容纳最大令牌数量，代表限流时间周期内允许通过的最大请求数。</li>
+<li><code>period</code> 限流的时间周期，单位为：秒。</li>
+<li><code>rate</code> 令牌产生的速率，单位：个/秒，<code>rate = bucket_cap / period</code></li>
+</ul>
+<p>在上面的令牌桶算法描述中生产令牌的方式是按照一定的速率生产令牌并放入令牌桶中，这种方式需要一个线程不停地按照一定的速率生产令牌并更新相应的桶，如果被限流的接口(每个桶)令牌生产的速率都不一样，那么就需要开多个线程，很浪费资源。</p>
+<p>为了提高系统的性能，减少限流层的资源消耗，我们将令牌的生产方式改为：<strong>每次请求进来时一次性生产上一次请求到本次请求这一段时间内的令牌</strong>。随意每次请求生成的令牌数就是 <code>(curr_time -last_time) / 1000 * rate</code>，注意：这里两次时间戳的差值单位是毫秒，而令牌产生速率的单位是 个/秒，所以要除以 1000，把时间戳的差值的单位也换算成秒。</p>
+<h3 id="令牌桶算法的实现逻辑为">令牌桶算法的实现逻辑为：</h3>
+<p><img  src="https://i.loli.net/2021/04/21/ihYpsoP4tVH6aJM.png"
+        alt="image-20210421232744555"/></p>
+<p>假如我们的限流策略是一分钟内最多能通过100个请求，那么相应的令牌产生速率为 <code>600 / 60 = 10 (个/秒)</code>。那么当限流策略刚刚配置好这一时刻就有突发的10个请求进来，此时令牌桶内还没来的及生产令牌，所以请求拿不到令牌就会被拒绝，这显然不符合我们要求。</p>
+<p>为了解决这一问题，我们在限流策略刚刚配置好后的第一个请求来临时将当前可用令牌的值设置为桶的最大容量 100，将最近一次请求时间设置为本次请求来临时一分钟后的时间戳，减去出本次请求需要的令牌后更新桶。这样，在这一分钟以内，有下一次请求进来时，从 Hash 表内取出配置计算当前时间就会小于最近一次请求的时间，随后计算生成的令牌就会是一个小于0的负数。所以在更新桶这一步，要根据生成的令牌是否为负数来决定是否更新最后一次请求时间的值。</p>
+<h3 id="用-lua-脚本实现上述逻辑">用 Lua 脚本实现上述逻辑：</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="kd">local</span> <span class="n">key</span> <span class="o">=</span> <span class="n">KEYS</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1">-- 要进行限流的Key，可以是 uri</span>
+<span class="kd">local</span> <span class="n">consume_permits</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">ARGV</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1">-- 请求消耗的令牌数，每个请求消耗一个</span>
+<span class="kd">local</span> <span class="n">curr_time</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">ARGV</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="c1">-- 当前时间</span>
+
+<span class="kd">local</span> <span class="n">limiter_info</span> <span class="o">=</span> <span class="n">redis.pcall</span><span class="p">(</span><span class="s2">&#34;HMGET&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&#34;last_time&#34;</span><span class="p">,</span> <span class="s2">&#34;curr_permits&#34;</span><span class="p">,</span> <span class="s2">&#34;bucket_cap&#34;</span><span class="p">,</span> <span class="s2">&#34;rate&#34;</span><span class="p">,</span> <span class="s2">&#34;period&#34;</span><span class="p">)</span>
+<span class="kr">if</span> <span class="ow">not</span> <span class="n">limiter_info</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="kr">then</span>
+    <span class="kr">return</span> <span class="o">-</span><span class="mi">1</span>
+<span class="kr">end</span>
+<span class="kd">local</span> <span class="n">last_time</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
+<span class="kd">local</span> <span class="n">curr_permits</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
+<span class="kd">local</span> <span class="n">bucket_cap</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
+<span class="kd">local</span> <span class="n">rate</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
+<span class="kd">local</span> <span class="n">period</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
+
+<span class="kd">local</span> <span class="n">total_permits</span> <span class="o">=</span> <span class="n">bucket_cap</span>
+<span class="kd">local</span> <span class="n">is_update_time</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="kr">if</span> <span class="n">last_time</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="kr">then</span>
+    <span class="kd">local</span> <span class="n">new_permits</span> <span class="o">=</span> <span class="n">math.floor</span><span class="p">((</span><span class="n">curr_time</span><span class="o">-</span><span class="n">last_time</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">rate</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">new_permits</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="kr">then</span>
+        <span class="n">new_permits</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">is_update_time</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="kr">end</span>
+
+    <span class="n">total_permits</span> <span class="o">=</span> <span class="n">new_permits</span> <span class="o">+</span> <span class="n">curr_permits</span>
+    <span class="kr">if</span> <span class="n">total_permits</span> <span class="o">&gt;</span> <span class="n">bucket_cap</span> <span class="kr">then</span>
+        <span class="n">total_permits</span> <span class="o">=</span> <span class="n">bucket_cap</span>
+    <span class="kr">end</span>
+<span class="kr">else</span>
+    <span class="n">last_time</span> <span class="o">=</span> <span class="n">curr_time</span> <span class="o">+</span> <span class="n">period</span> <span class="o">*</span> <span class="mi">1000</span>
+<span class="kr">end</span>
+
+<span class="kd">local</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kr">if</span> <span class="n">total_permits</span> <span class="o">&gt;=</span> <span class="n">consume_permits</span> <span class="kr">then</span>
+    <span class="n">total_permits</span> <span class="o">=</span> <span class="n">total_permits</span> <span class="o">-</span> <span class="n">consume_permits</span>
+<span class="kr">else</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kr">end</span>
+
+<span class="kr">if</span> <span class="n">is_update_time</span> <span class="kr">then</span>
+    <span class="n">redis.pcall</span><span class="p">(</span><span class="s2">&#34;HMSET&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&#34;curr_permits&#34;</span><span class="p">,</span> <span class="n">total_permits</span><span class="p">,</span> <span class="s2">&#34;last_time&#34;</span><span class="p">,</span> <span class="n">curr_time</span><span class="p">)</span>
+<span class="kr">else</span>
+    <span class="n">redis.pcall</span><span class="p">(</span><span class="s2">&#34;HSET&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&#34;curr_permits&#34;</span><span class="p">,</span> <span class="n">total_permits</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="kr">return</span> <span class="n">res</span>
+</code></pre></div><p>上述脚本在调用时接收三个参数，分别为：限流的key、请求消耗的令牌数、 当前时间戳(毫秒级别)。</p>
+<p>在我们的业务代码中，先调用 Redis 的 <code>SCRIPT LOAD</code> 命令将上述脚本 Load 到 Redis 中并将该命令返回的脚本 sha1 值保存。</p>
+<p>在后续的请求进来时，调用 Redis 的<code> EVALSHA</code> 命令执行限流逻辑，根据返回值判断是否对本次请求触发限流行为。假如限流的 key 为每次请求的 uri，每次请求消耗 1 个令牌，那么执行 Evalsha 命令进行限流判断的具体操作为：<code>EVALSHA ${sha1} 1 ${uri} 1 ${当前时间戳} </code>（第一个数字 1 代表脚本可接收的参数中有 1 个Key，第二个数字 1 代表本次请求消耗一个令牌）；执行完这条命令后如果返回值是 1 代表桶中令牌够用，请求通过；如果返回值为 0 代表桶中令牌不够，触发限流；如果返回值为 -1 代表本次请求的 uri 未配置限流策略，可根据自己的实际业务场景判断是通过还是拒绝。</p>
+<h3 id="redis相关操作">Redis相关操作</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 通过 SCRIPT LOAD 生成的 sha1 校验码</span>
+root@e2ea48309e5f:/home/lua/rate-limiting# redis-cli SCRIPT LOAD <span class="s2">&#34;</span><span class="k">$(</span>cat /home/lua/rate-limiting/demo.lua<span class="k">)</span><span class="s2">&#34;</span>
+<span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span>
+
+<span class="c1"># 执行命令 参数解释：1个key 缓存key为test 每次1个令牌 当前时间</span>
+root@e2ea48309e5f:/home/lua/rate-limiting# redis-cli
+127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</code></pre></div><h2 id="五总结">五、总结</h2>
+<p>本文主要介绍了四种限流的算法，分别为：固定窗口计数器算法、滑动窗口计数算法、漏桶算法、令牌桶算法。</p>
+<ul>
+<li>固定窗口计数算法简单易实现，其缺陷是可能在中间的某一秒内通过的请求数是限流阈值的两倍，该算法仅适用于对限流准确度要求不高的应用场景。</li>
+<li>滑动窗口计数算法解决了固定窗口计数算法的缺陷，但是该算法较难实现，因为要记录每次请求所以可能出现比较占用内存比较多的情况。</li>
+<li>漏桶算法可以做到均匀平滑的限制请求，Ngixn 热 limit_req 模块也是采用此种算法。因为匀速处理请求的缘故所以该算法应对限流阈值内的突发请求无法及时处理。</li>
+<li>令牌桶算法解决了以上三个算法的所有缺陷，是一种相对比较完美的限流算法，也是限流场景中应用最为广泛的算法。使用 Redis + Lua脚本的方式可以简单的实现。</li>
+</ul>
+<h2 id="转自">转自</h2>
+<p><a href="http://s.iarno.cn/akFmqR">http://s.iarno.cn/akFmqR</a></p>
+</article><section class="article labels"><a class="category" href=/categories/lua/>Lua</a><a class="tag" href=/tags/%E9%99%90%E6%B5%81/>限流</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/plugin-dev1/"><span class="iconfont icon-article"></span>Kong - 自定义插件开发(一)</a></p><p><a class="link" href="/article/lua-shared-dict/"><span class="iconfont icon-article"></span>ngx_lua模块中使用lua_shared_dict共享内存变量</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

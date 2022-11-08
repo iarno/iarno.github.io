@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="core文件, 内核文件, gdb" name="keywords">
+<meta content="Core 文件分析 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Core 文件分析&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Core 文件分析" /><meta name="twitter:image" content="https://s2.loli.net/2022/06/22/dzhbckuf7fr4p51.png" /><body><section id="header">
+    <title>Core 文件分析 - IARNO</title>
+    <meta content="阿諾个人博客 - core 文件分析" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Core 文件分析</h1><p class="article date">June 27, 2022</p></section><article class="article markdown-body"><p><img class="cover" src="https://s2.loli.net/2022/06/22/dzhbcKUF7fR4P51.png" alt></p><p>ulimit和core文件的分析方法。</p>
+<h2 id="unlimit设置">unlimit设置</h2>
+<p><code>ulimit -c unlimited</code> 生成core文件,就是程序运行发行段错误时的文件</p>
+<h4 id="参数说明">参数说明:</h4>
+<p><code>-a</code> 显示目前资源限制的设定。</p>
+<p><code>-c</code> &lt;core文件上限&gt; 设定core文件的最大值,单位为区块。</p>
+<p><code>-d</code> &lt;数据节区大小&gt; 程序数据节区的最大值,单位为KB。</p>
+<p><code>-f </code>&lt;文件大小&gt; shell所能建立的最大文件,单位为区块。</p>
+<p><code>-H </code>设定资源的硬性限制,也就是管理员所设下的限制。</p>
+<p><code>-m</code> &lt;内存大小&gt; 指定可使用内存的上限,单位为KB。</p>
+<p><code>-n</code> &lt;文件数目&gt; 指定同一时间最多可开启的文件数。</p>
+<p><code>-p</code> &lt;缓冲区大小&gt; 指定管道缓冲区的大小,单位512字节。</p>
+<p><code>-s</code> &lt;堆叠大小&gt; 指定堆叠的上限,单位为KB。</p>
+<p><code>-S </code>设定资源的弹性限制。</p>
+<p><code>-t</code> &lt;CPU时间&gt; 指定CPU使用时间的上限,单位为秒。</p>
+<p><code>-u</code> &lt;程序数目&gt; 用户最多可开启的程序数目。</p>
+<p><code>-v</code> &lt;虚拟内存大小&gt; 指定可使用的虚拟内存上限,单位为KB</p>
+<h2 id="core文件">core文件</h2>
+<blockquote>
+<p>开发和使用Unix程序时, 有时程序莫名其妙的死了, 却没有任何的提示(有时候会提示core dumped). 这时候可以查看一下有没有形如core.进程号的文件生成, 这个文件便是操作系统把程序down掉时的内存内容扔出来生成的, 它可以做为调试程序的参考。
+core dump又叫核心转储, 当程序运行过程中发生异常, 程序异常退出时, 由操作系统把程序当前的内存状况存储在一个core文件中, 叫core dump.</p>
+</blockquote>
+<h4 id="设置core-dump的核心转储文件目录和命名规则">设置Core Dump的核心转储文件目录和命名规则</h4>
+<p>在默认的情况下,很多系统的core文件是生成在你运行程序的目录下,或者你在程序中chdir后的那个目录,然后在core文件的后面加了一个 pid。在实际工作中,这样可能会造成很多目录下产生core文件,不便于管理,实际上,在2.6下,core文件的生成位置和文件名的命名都是可以配置 的。</p>
+<p><code>/proc/sys/kernel/core_uses_pid</code> 可以控制产生的core文件的文件名中是否添加pid作为扩展,如果添加则文件内容为1,否则为0</p>
+<p><code>proc/sys/kernel/core_pattern</code> 可以设置格式化的core文件保存位置或文件名,比如原来文件内容是core-%e
+可以这样修改:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;/tmp/core-%e-%p&#34;</span> &gt; core_pattern
+</code></pre></div><p>将会控制所产生的core文件会存放到/corefile目录下,产生的文件名为core-命令名-pid-时间戳
+以下是参数列表:</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="o">%</span><span class="nx">p</span> <span class="o">-</span> <span class="nx">insert</span> <span class="nx">pid</span> <span class="nx">into</span> <span class="nx">filename</span> <span class="nx">添加pid</span>
+<span class="o">%</span><span class="nx">u</span> <span class="o">-</span> <span class="nx">insert</span> <span class="nx">current</span> <span class="nx">uid</span> <span class="nx">into</span> <span class="nx">filename</span> <span class="nx">添加当前uid</span>
+<span class="o">%</span><span class="nx">g</span> <span class="o">-</span> <span class="nx">insert</span> <span class="nx">current</span> <span class="nx">gid</span> <span class="nx">into</span> <span class="nx">filename</span> <span class="nx">添加当前gid</span>
+<span class="o">%</span><span class="nx">s</span> <span class="o">-</span> <span class="nx">insert</span> <span class="nx">signal</span> <span class="nx">that</span> <span class="nx">caused</span> <span class="nx">the</span> <span class="nx">coredump</span> <span class="nx">into</span> <span class="nx">the</span> <span class="nx">filename</span> <span class="nx">添加导致产生core的信号</span>
+<span class="o">%</span><span class="nx">t</span> <span class="o">-</span> <span class="nx">insert</span> <span class="nx">UNIX</span> <span class="nx">time</span> <span class="nx">that</span> <span class="nx">the</span> <span class="nx">coredump</span> <span class="nx">occurred</span> <span class="nx">into</span> <span class="nx">filename</span> <span class="nx">添加core文件生成时的unix时间</span>
+<span class="o">%</span><span class="nx">h</span> <span class="o">-</span> <span class="nx">insert</span> <span class="nx">hostname</span> <span class="nx">where</span> <span class="nx">the</span> <span class="nx">coredump</span> <span class="nx">happened</span> <span class="nx">into</span> <span class="nx">filename</span> <span class="nx">添加主机名</span>
+<span class="o">%</span><span class="nx">e</span> <span class="o">-</span> <span class="nx">insert</span> <span class="nx">coredumping</span> <span class="nx">executable</span> <span class="nx">name</span> <span class="nx">into</span> <span class="nx">filename</span> <span class="nx">添加命令名</span>
+</code></pre></div><h2 id="分析core文件">分析core文件</h2>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">gdb</span> <span class="o">-</span><span class="nx">c</span> <span class="nx">core文件路径</span> <span class="p">[</span><span class="nx">应用程序的路径</span><span class="p">]</span>
+
+<span class="err">#</span> <span class="nx">分析php</span> <span class="nx">core文件</span>
+<span class="nx">sudo</span> <span class="nx">gdb</span> <span class="o">-</span><span class="nx">e</span> <span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">local</span><span class="o">/</span><span class="nx">php</span><span class="o">/</span><span class="nx">sbin</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">fpm</span> <span class="o">-</span><span class="nx">c</span> <span class="nx">core</span><span class="mf">.7569</span>
+</code></pre></div><p>进去后输入<code>where</code>或<code>bt</code>回车, 就可以显示程序在哪一行当掉的, 在哪个函数中.</p>
+<h2 id="为什么没有core文件生成">为什么没有core文件生成</h2>
+<p>有时候程序down了, 但是core文件却没有生成. core文件的生成跟你当前系统的环境设置有关系, 可以用下面的语句设置一下, 然后再运行程序便成生成core文件.</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">ulimit</span> <span class="o">-</span><span class="nx">c</span> <span class="nx">unlimited</span>
+</code></pre></div><h2 id="参考">参考</h2>
+<p><a href="https://blog.csdn.net/u013427969/article/details/83962303">https://blog.csdn.net/u013427969/article/details/83962303</a></p>
+<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html</a></p></article><section class="article labels"><a class="category" href=/categories/linux/>Linux</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/conda/"><span class="iconfont icon-article"></span>Conda 包管理工具</a></p><p><a class="link" href="/article/dig/"><span class="iconfont icon-article"></span>Dig 命令使用详解</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

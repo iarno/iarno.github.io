@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Lua on IARNO</title>
+    <link>/categories/lua/</link>
+    <description>Recent content in Lua on IARNO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2022 Arno.</copyright>
+    <lastBuildDate>Wed, 21 Apr 2021 23:06:53 +0800</lastBuildDate>
+    
+        <atom:link href="/categories/lua/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>限流算法实践</title>
+      <link>/article/rate-limiting/</link>
+      <pubDate>Wed, 21 Apr 2021 23:06:53 +0800</pubDate>
+      
+      <guid>/article/rate-limiting/</guid>
+      <description>一、限流简介 什么是限流 在不同场景下限流的定义也各不相同，可以是每秒请求数、每秒事务处理数、网络流量。 通常我们所说的限流指的是限制到达系统并发</description>
+      
+    </item>
+    
+    <item>
+      <title>ngx_lua模块中使用lua_shared_dict共享内存变量</title>
+      <link>/article/lua-shared-dict/</link>
+      <pubDate>Mon, 19 Apr 2021 21:36:52 +0800</pubDate>
+      
+      <guid>/article/lua-shared-dict/</guid>
+      <description>lua_shared_dict 在ngx_lua模块中使用共享内存字典项相关API的前提条件是已经使用lua_shared_dict命令定义了一个字典项对象，该命令的具体</description>
+      
+    </item>
+    
+    <item>
+      <title>openresty 跑定时任务配置、ngx.timer.every接口使用</title>
+      <link>/article/lua-timer/</link>
+      <pubDate>Mon, 19 Apr 2021 21:36:52 +0800</pubDate>
+      
+      <guid>/article/lua-timer/</guid>
+      <description>&lt;p&gt;openresty的定时任务是要跟worker绑定的。如果不绑定特定的worker，那么所有启动的woker都会去执行定时任务。&lt;/p&gt;
+&lt;p&gt;一般情况下默认绑定worker_id=0的，这样在nginx整个进程里面，就只执行一个timer。&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

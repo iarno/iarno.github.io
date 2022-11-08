@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="mac, 虚拟机, vm, centos" name="keywords">
+<meta content="Mac 安装VM虚拟机及网络配置 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Mac 安装VM虚拟机及网络配置&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Mac 安装VM虚拟机及网络配置" /><meta name="twitter:image" content="https://i.loli.net/2021/09/11/m9roptcljmqj3fx.jpg" /><body><section id="header">
+    <title>Mac 安装VM虚拟机及网络配置 - IARNO</title>
+    <meta content="阿諾个人博客 - Mac 安装VM虚拟机" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Mac 安装VM虚拟机及网络配置</h1><p class="article date">September 11, 2021</p></section><article class="article markdown-body"><p><img class="cover" src="https://i.loli.net/2021/09/11/M9RoPTCLJmqj3Fx.jpg" alt></p><h2 id="安装vmware-fusion">安装VMware Fusion</h2>
+<p>Mac 安装VM虚拟机 、centos虚拟机创建、网络相关配置。</p>
+<h4 id="官网地址">官网地址</h4>
+<p><a href="https://www.vmware.com/cn/products/fusion/fusion-evaluation.html">https://www.vmware.com/cn/products/fusion/fusion-evaluation.html</a></p>
+<h2 id="下载centos镜像">下载Centos镜像</h2>
+<h4 id="官网地址-1">官网地址</h4>
+<p><a href="https://www.centos.org/download/">https://www.centos.org/download/</a></p>
+<h2 id="创建centos虚拟机">创建Centos虚拟机</h2>
+<h4 id="将已下载好的centos镜像拖拽进来">将已下载好的centos镜像拖拽进来</h4>
+<p><img  src="https://i.loli.net/2021/09/11/fhv1WnwojpMlNLY.png"
+        alt="image-20210911200847691"/></p>
+<p><img  src="https://i.loli.net/2021/09/11/G6ERlBsmJuzPUhf.png"
+        alt="image-20210911201134507"/></p>
+<p><img  src="https://i.loli.net/2021/09/11/58mfiXrJtYTLAdV.png"
+        alt="image-20210911201329133"/></p>
+<p><img  src="https://i.loli.net/2021/09/11/tJ8TUdmhGYq9nXw.png"
+        alt="image-20210911201350602"/></p>
+<p><img  src="https://i.loli.net/2021/09/11/yNTD7PkhS4VuCv8.png"
+        alt="image-20210911201502328"/></p>
+<h4 id="保存完之后启动虚拟机即可">保存完之后启动虚拟机即可！</h4>
+<h4 id="注-默认会提示网络问题可以先忽略进入到虚拟机具体网络配置如下">注: 默认会提示网络问题可以先忽略进入到虚拟机，具体网络配置如下。</h4>
+<p><img  src="https://i.loli.net/2021/09/11/5MANVoC6mHYTzlr.png"
+        alt="image-20210911201632120"/></p>
+<h2 id="centos虚拟机网络配置-">Centos虚拟机网络配置 ！！！</h2>
+<p><img  src="https://i.loli.net/2021/09/11/caPeswLhXnF9JTQ.png"
+        alt="image-20210911203320159"/></p>
+<h4 id="网络选择与我的mac共享或wi-fi">网络选择“与我的Mac共享”或“WI-FI”</h4>
+<p><img  src="https://i.loli.net/2021/09/11/TndL6CRZQwaPmq1.png"
+        alt="image-20210911203409940"/></p>
+<h2 id="配置虚拟机网络">配置虚拟机网络</h2>
+<h4 id="系统偏好设置网络查看wifi项">系统偏好设置网络查看WIFI项</h4>
+<p><img  src="https://i.loli.net/2021/09/11/3zsLSTuo64c91Mr.png"
+        alt="image-20210911203617739"/></p>
+<h4 id="配置虚拟机ifcfg-ens33文件">配置虚拟机ifcfg-ens33文件</h4>
+<h4 id="gateway-对应值为-系统偏好设置-网络-wifi-tcpip--中的路由器值">GATEWAY 对应值为 系统偏好设置-网络-wifi-TCP/IP  中的路由器值</h4>
+<h4 id="dns--对应值为-系统偏好设置-网络-dns--有几个配置就配置几个即可">DNS  对应值为 系统偏好设置-网络-DNS  有几个配置就配置几个即可</h4>
+<p><img  src="https://i.loli.net/2021/09/11/euAB2SihtlUEgJx.png"
+        alt="image-20210911204049234"/></p>
+<h4 id="配置完之后重启network">配置完之后重启network</h4>
+<p><code>/bin/systemctl restart network.service</code></p></article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/>虚拟机</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/lvs-1/"><span class="iconfont icon-article"></span>LVS负载均衡实践</a></p><p><a class="link" href="/article/plugin-dev4/"><span class="iconfont icon-article"></span>Kong - 自定义插件开发(四)</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

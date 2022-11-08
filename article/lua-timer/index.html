@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="lua, openresty, 定时任务" name="keywords">
+<meta content="openresty 跑定时任务配置、ngx.timer.every接口使用 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>openresty 跑定时任务配置、ngx.timer.every接口使用&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="openresty 跑定时任务配置、ngx.timer.every接口使用" /><body><section id="header">
+    <title>openresty 跑定时任务配置、ngx.timer.every接口使用 - IARNO</title>
+    <meta content="阿諾个人博客 - openresty 跑定时任务配置、ngx.timer.every接口使用。" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://iarno.cn/article/tesseract/"target="_blank">随笔</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">openresty 跑定时任务配置、ngx.timer.every接口使用</h1><p class="article date">April 19, 2021</p></section><article class="article markdown-body"><p>openresty的定时任务是要跟worker绑定的。如果不绑定特定的worker，那么所有启动的woker都会去执行定时任务。</p>
+<p>一般情况下默认绑定worker_id=0的，这样在nginx整个进程里面，就只执行一个timer。</p>
+<p>在conf中具体的位置可以写自己的任务逻辑。</p>
+<p>具体的nginx.conf配置如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">worker_processes</span>  <span class="mi">1</span><span class="p">;</span>
+<span class="k">error_log</span> <span class="s">logs/error.log</span><span class="p">;</span>
+<span class="k">events</span> <span class="p">{</span>
+    <span class="kn">worker_connections</span> <span class="mi">1024</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="k">http</span> <span class="p">{</span>
+    <span class="kn">init_worker_by_lua_block</span> <span class="p">{</span>
+         <span class="kn">local</span> <span class="s">delay</span> <span class="p">=</span> <span class="mi">2</span>  <span class="s">--</span> <span class="s">in</span> <span class="s">seconds</span>
+         <span class="s">local</span> <span class="s">new_timer</span> <span class="p">=</span> <span class="s">ngx.timer.at</span>
+         <span class="s">local</span> <span class="s">log</span> <span class="p">=</span> <span class="s">ngx.log</span>
+         <span class="s">local</span> <span class="s">ERR</span> <span class="p">=</span> <span class="s">ngx.ERR</span>
+         <span class="s">local</span> <span class="s">check</span>
+
+         <span class="s">check</span> <span class="p">=</span> <span class="s">function(premature)</span>
+             <span class="s">if</span> <span class="s">not</span> <span class="s">premature</span> <span class="s">then</span>
+                 <span class="s">--</span> <span class="s">do</span> <span class="s">the</span> <span class="s">health</span> <span class="s">check</span> <span class="s">or</span> <span class="s">other</span> <span class="s">routine</span> <span class="s">work</span>
+                 <span class="s">log(ERR,</span> <span class="s">&#34;mm</span> <span class="s">test</span> <span class="s">mm</span> <span class="s">test&#34;)</span>
+                 <span class="s">local</span> <span class="s">ok,</span> <span class="s">err</span> <span class="p">=</span> <span class="s">new_timer(delay,</span> <span class="s">check)</span>
+                 <span class="s">if</span> <span class="s">not</span> <span class="s">ok</span> <span class="s">then</span>
+                     <span class="s">log(ERR,</span> <span class="s">&#34;failed</span> <span class="s">to</span> <span class="s">create</span> <span class="s">timer:</span> <span class="s">&#34;,</span> <span class="s">err)</span>
+                     <span class="s">return</span>
+                 <span class="s">end</span>
+             <span class="s">end</span>
+         <span class="s">end</span>
+
+         <span class="s">if</span> <span class="mi">0</span> <span class="p">==</span> <span class="s">ngx.worker.id()</span> <span class="s">then</span>
+             <span class="s">local</span> <span class="s">ok,</span> <span class="s">err</span> <span class="p">=</span> <span class="s">new_timer(delay,</span> <span class="s">check)</span>
+             <span class="s">if</span> <span class="s">not</span> <span class="s">ok</span> <span class="s">then</span>
+                 <span class="s">log(ERR,</span> <span class="s">&#34;failed</span> <span class="s">to</span> <span class="s">create</span> <span class="s">timer:</span> <span class="s">&#34;,</span> <span class="s">err)</span>
+                 <span class="s">return</span>
+             <span class="s">end</span>
+         <span class="s">end</span>
+    <span class="err">}</span>
+
+    <span class="s">server</span> <span class="p">{</span>
+        <span class="kn">listen</span> <span class="mi">8081</span><span class="p">;</span>
+        <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+            <span class="kn">default_type</span> <span class="s">text/html</span><span class="p">;</span>
+            <span class="kn">content_by_lua</span> <span class="s">&#39;</span>
+                <span class="s">ngx.say(&#34;&lt;p&gt;hello,</span> <span class="s">world&lt;/p&gt;&#34;)</span>
+            <span class="s">&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kn">location</span> <span class="p">=</span> <span class="s">/app/test</span> <span class="p">{</span>
+            <span class="kn">content_by_lua_block</span> <span class="p">{</span>
+                <span class="kn">local</span> <span class="s">res</span> <span class="p">=</span> <span class="s">ngx.location.capture(</span>
+                                <span class="s">&#34;/sum&#34;,</span> <span class="p">{</span><span class="kn">args={a=3,</span> <span class="s">b=8</span><span class="err">}}</span>
+                                <span class="s">)</span>
+                <span class="s">ngx.say(&#34;status:&#34;,</span> <span class="s">res.status,</span> <span class="s">&#34;</span> <span class="s">response:&#34;,</span> <span class="s">res.body)</span>
+            <span class="err">}</span>
+        <span class="err">}</span>
+        <span class="s">location</span> <span class="p">=</span> <span class="s">/sum</span> <span class="p">{</span>
+            <span class="kn">internal</span><span class="p">;</span>
+            <span class="kn">content_by_lua_block</span> <span class="p">{</span>
+                <span class="kn">ngx.sleep(0.1)</span>
+                <span class="s">local</span> <span class="s">args</span> <span class="p">=</span> <span class="s">ngx.req.get_uri_args()</span>
+                <span class="s">ngx.print(tonumber(args.a)</span> <span class="s">+</span> <span class="s">tonumber(args.b))</span>
+            <span class="err">}</span>
+        <span class="err">}</span>
+
+        <span class="s">location</span> <span class="p">=</span> <span class="s">/subduction</span> <span class="p">{</span>
+            <span class="kn">internal</span><span class="p">;</span>
+            <span class="kn">content_by_lua_block</span> <span class="p">{</span>
+                <span class="kn">ngx.sleep(0.1)</span>
+                <span class="s">local</span> <span class="s">args</span> <span class="p">=</span> <span class="s">ngx.req.get_uri_args()</span>
+                <span class="s">ngx.print(tonumber(args.a)</span> <span class="s">-</span> <span class="s">tonumber(args.b))</span>
+            <span class="err">}</span>
+        <span class="err">}</span>
+
+        <span class="s">location</span> <span class="p">=</span> <span class="s">/app/test_parallels</span> <span class="p">{</span>
+            <span class="kn">content_by_lua_block</span> <span class="p">{</span>
+                <span class="kn">local</span> <span class="s">start_time</span> <span class="p">=</span> <span class="s">ngx.now()</span>
+                <span class="s">local</span> <span class="s">res1,</span> <span class="s">res2</span> <span class="p">=</span> <span class="s">ngx.location.capture_multi(</span> <span class="p">{</span>
+                                <span class="kn">{&#34;/sum&#34;,</span> <span class="p">{</span><span class="kn">args={a=3,</span> <span class="s">b=8</span><span class="err">}}}</span><span class="s">,</span>
+                                <span class="p">{</span><span class="kn">&#34;/subduction&#34;,</span> <span class="p">{</span><span class="kn">args={a=3,</span> <span class="s">b=8</span><span class="err">}}}</span>
+                            <span class="err">}</span><span class="s">)</span>
+                <span class="s">ngx.say(&#34;status:&#34;,</span> <span class="s">res1.status,</span> <span class="s">&#34;</span> <span class="s">response:&#34;,</span> <span class="s">res1.body)</span>
+                <span class="s">ngx.say(&#34;status:&#34;,</span> <span class="s">res2.status,</span> <span class="s">&#34;</span> <span class="s">response:&#34;,</span> <span class="s">res2.body)</span>
+                <span class="s">ngx.say(&#34;time</span> <span class="s">used:&#34;,</span> <span class="s">ngx.now()</span> <span class="s">-</span> <span class="s">start_time)</span>
+            <span class="err">}</span>
+        <span class="err">}</span>
+
+        <span class="s">location</span> <span class="p">=</span> <span class="s">/app/test_queue</span> <span class="p">{</span>
+            <span class="kn">content_by_lua_block</span> <span class="p">{</span>
+                <span class="kn">local</span> <span class="s">start_time</span> <span class="p">=</span> <span class="s">ngx.now()</span>
+                <span class="s">local</span> <span class="s">res1</span> <span class="p">=</span> <span class="s">ngx.location.capture_multi(</span> <span class="p">{</span>
+                                <span class="kn">{&#34;/sum&#34;,</span> <span class="p">{</span><span class="kn">args={a=3,</span> <span class="s">b=8</span><span class="err">}}}</span>
+                            <span class="err">}</span><span class="s">)</span>
+                <span class="s">local</span> <span class="s">res2</span> <span class="p">=</span> <span class="s">ngx.location.capture_multi(</span> <span class="p">{</span>
+                                <span class="kn">{&#34;/subduction&#34;,</span> <span class="p">{</span><span class="kn">args={a=3,</span> <span class="s">b=8</span><span class="err">}}}</span>
+                            <span class="err">}</span><span class="s">)</span>
+                <span class="s">ngx.say(&#34;status:&#34;,</span> <span class="s">res1.status,</span> <span class="s">&#34;</span> <span class="s">response:&#34;,</span> <span class="s">res1.body)</span>
+                <span class="s">ngx.say(&#34;status:&#34;,</span> <span class="s">res2.status,</span> <span class="s">&#34;</span> <span class="s">response:&#34;,</span> <span class="s">res2.body)</span>
+                <span class="s">ngx.say(&#34;time</span> <span class="s">used:&#34;,</span> <span class="s">ngx.now()</span> <span class="s">-</span> <span class="s">start_time)</span>
+            <span class="err">}</span>
+        <span class="err">}</span>
+<span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div><p>注意init_worker_by_lua_block是放在http里面的。因为此处只配置了error.log，因此是打印的err级别的日志，方便观察。</p>
+<p>接下来启动ngin：sudo nginx -p <code>pwd</code>/ -c conf/nginx.conf</p>
+<p>然后tailf logs/error.log:</p>
+<p><img  src="https://i.loli.net/2021/04/19/svOozES8kAJIlMB.png"
+        alt="img"/></p>
+<p>追日志会发现，每隔2s就会打印一条日志。</p>
+<h2 id="二使用ngxtimerevery接口">二、使用ngx.timer.every接口</h2>
+<p>ngx提供了最新的ngx.timer.every接口，再来试一下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-nginx" data-lang="nginx">    <span class="k">init_worker_by_lua_block</span> <span class="p">{</span>
+         <span class="kn">local</span> <span class="s">delay</span> <span class="p">=</span> <span class="mi">2</span>  <span class="s">--</span> <span class="s">in</span> <span class="s">seconds</span>
+         <span class="s">--</span> <span class="s">local</span> <span class="s">new_timer</span> <span class="p">=</span> <span class="s">ngx.timer.at</span>
+         <span class="s">local</span> <span class="s">log</span> <span class="p">=</span> <span class="s">ngx.log</span>
+         <span class="s">local</span> <span class="s">ERR</span> <span class="p">=</span> <span class="s">ngx.ERR</span>
+         <span class="s">local</span> <span class="s">check</span>
+
+         <span class="s">check</span> <span class="p">=</span> <span class="s">function(premature)</span>
+             <span class="s">if</span> <span class="s">not</span> <span class="s">premature</span> <span class="s">then</span>
+                 <span class="s">--</span> <span class="s">do</span> <span class="s">the</span> <span class="s">health</span> <span class="s">check</span> <span class="s">or</span> <span class="s">other</span> <span class="s">routine</span> <span class="s">work</span>
+                 <span class="s">log(ERR,</span> <span class="s">&#34;mm</span> <span class="s">test</span> <span class="s">mm</span> <span class="s">test&#34;)</span>
+                 <span class="s">--</span> <span class="s">local</span> <span class="s">ok,</span> <span class="s">err</span> <span class="p">=</span> <span class="s">new_timer(delay,</span> <span class="s">check)</span>
+                 <span class="s">--</span> <span class="s">if</span> <span class="s">not</span> <span class="s">ok</span> <span class="s">then</span>
+                 <span class="s">--</span>     <span class="s">log(ERR,</span> <span class="s">&#34;failed</span> <span class="s">to</span> <span class="s">create</span> <span class="s">timer:</span> <span class="s">&#34;,</span> <span class="s">err)</span>
+                 <span class="s">--</span>     <span class="s">return</span>
+                 <span class="s">--</span>  <span class="s">end</span>
+             <span class="s">end</span>
+         <span class="s">end</span>
+
+         <span class="s">if</span> <span class="mi">0</span> <span class="p">==</span> <span class="s">ngx.worker.id()</span> <span class="s">then</span>
+             <span class="s">local</span> <span class="s">ok,</span> <span class="s">err</span> <span class="p">=</span> <span class="s">ngx.timer.every(delay,</span> <span class="s">check)</span>
+             <span class="s">if</span> <span class="s">not</span> <span class="s">ok</span> <span class="s">then</span>
+                 <span class="s">log(ERR,</span> <span class="s">&#34;failed</span> <span class="s">to</span> <span class="s">create</span> <span class="s">timer:</span> <span class="s">&#34;,</span> <span class="s">err)</span>
+                 <span class="s">return</span>
+             <span class="s">end</span>
+         <span class="s">end</span>
+    <span class="err">}</span>
+</code></pre></div><h2 id="转自">转自</h2>
+<p><a href="https://www.cnblogs.com/sonofelice/p/8259712.html">https://www.cnblogs.com/sonofelice/p/8259712.html</a></p></article><section class="article labels"><a class="category" href=/categories/lua/>Lua</a><a class="tag" href=/tags/timer/>timer</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/lua-shared-dict/"><span class="iconfont icon-article"></span>ngx_lua模块中使用lua_shared_dict共享内存变量</a></p><p><a class="link" href="/article/lsof/"><span class="iconfont icon-article"></span>too many open files 问题定位</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Arno.</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

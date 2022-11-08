@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>压测 on IARNO</title>
+    <link>/tags/%E5%8E%8B%E6%B5%8B/</link>
+    <description>Recent content in 压测 on IARNO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2022 Arno.</copyright>
+    <lastBuildDate>Fri, 04 Sep 2020 21:04:12 +0800</lastBuildDate>
+    
+        <atom:link href="/tags/%E5%8E%8B%E6%B5%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>wrk压测</title>
+      <link>/article/wrk/</link>
+      <pubDate>Fri, 04 Sep 2020 21:04:12 +0800</pubDate>
+      
+      <guid>/article/wrk/</guid>
+      <description>&lt;p&gt;用过了很多压测工具，却一直没找到中意的那款。最近试了wrk感觉不错，写下这份使用指南给自己备忘用，如果能帮到你，那也很好。&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

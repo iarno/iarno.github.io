@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Linux on IARNO</title>
+    <link>/categories/linux/</link>
+    <description>Recent content in Linux on IARNO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2022 Arno.</copyright>
+    <lastBuildDate>Wed, 06 Jul 2022 21:49:37 +0800</lastBuildDate>
+    
+        <atom:link href="/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cloc 代码统计</title>
+      <link>/article/cloc/</link>
+      <pubDate>Wed, 06 Jul 2022 21:49:37 +0800</pubDate>
+      
+      <guid>/article/cloc/</guid>
+      <description>&lt;p&gt;代码统计工具。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Core 文件分析</title>
+      <link>/article/core/</link>
+      <pubDate>Mon, 27 Jun 2022 22:31:37 +0800</pubDate>
+      
+      <guid>/article/core/</guid>
+      <description>&lt;p&gt;ulimit和core文件的分析方法。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Dig 命令使用详解</title>
+      <link>/article/dig/</link>
+      <pubDate>Mon, 27 Jun 2022 22:28:37 +0800</pubDate>
+      
+      <guid>/article/dig/</guid>
+      <description>&lt;p&gt;dig 命令使用详解。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>wrk压测</title>
+      <link>/article/wrk/</link>
+      <pubDate>Fri, 04 Sep 2020 21:04:12 +0800</pubDate>
+      
+      <guid>/article/wrk/</guid>
+      <description>&lt;p&gt;用过了很多压测工具，却一直没找到中意的那款。最近试了wrk感觉不错，写下这份使用指南给自己备忘用，如果能帮到你，那也很好。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>如何测试端口通不通</title>
+      <link>/article/nc/</link>
+      <pubDate>Fri, 04 Sep 2020 21:04:12 +0800</pubDate>
+      
+      <guid>/article/nc/</guid>
+      <description>&lt;p&gt;一般情况下使用&lt;code&gt;telnet ip port&lt;/code&gt;判断端口通不通，其实测试方法不止这一种，本文主要介绍&lt;code&gt;nc&lt;/code&gt;检测工具。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Centos安装Nodejs</title>
+      <link>/article/%E5%AE%89%E8%A3%85nodejs/</link>
+      <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
+      
+      <guid>/article/%E5%AE%89%E8%A3%85nodejs/</guid>
+      <description>&lt;p&gt;Nodejs官网下载 下载最新稳定版https://nodejs.org/dist/v10.16.0/node-v10.16.0-linux-x64.tar.xz&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>
