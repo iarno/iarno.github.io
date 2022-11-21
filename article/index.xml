@@ -634,15 +634,5 @@
       
     </item>
     
-    <item>
-      <title></title>
-      <link>/article/test/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/article/test/</guid>
-      <description>TEST </description>
-      
-    </item>
-    
   </channel>
 </rss>
