@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>proxy代理 on IARNO</title>
+    <link>/tags/proxy%E4%BB%A3%E7%90%86/</link>
+    <description>Recent content in proxy代理 on IARNO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2022 Arno.</copyright>
+    <lastBuildDate>Thu, 24 Nov 2022 18:30:37 +0800</lastBuildDate>
+    
+        <atom:link href="/tags/proxy%E4%BB%A3%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>gin proxy代理</title>
+      <link>/article/gin-proxy/</link>
+      <pubDate>Thu, 24 Nov 2022 18:30:37 +0800</pubDate>
+      
+      <guid>/article/gin-proxy/</guid>
+      <description>&lt;p&gt;gin使用&lt;code&gt;httputil.NewSingleHostReverseProxy&lt;/code&gt;实现proxy服务代理。&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>
