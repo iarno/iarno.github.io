@@ -23,6 +23,16 @@
     </item>
     
     <item>
+      <title>gin当请求对象为数组时，binding不生效问题解决</title>
+      <link>/article/gin-binding/</link>
+      <pubDate>Thu, 24 Nov 2022 18:30:37 +0800</pubDate>
+      
+      <guid>/article/gin-binding/</guid>
+      <description>&lt;p&gt;gin当请求对象为数组时，binding不生效问题解决。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
       <title>Gomonkey测试框架</title>
       <link>/article/gomonkey/</link>
       <pubDate>Mon, 27 Jun 2022 22:25:37 +0800</pubDate>
