@@ -7,10 +7,40 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2022 Arno.</copyright>
-    <lastBuildDate>Thu, 24 Nov 2022 18:30:37 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 25 Feb 2023 21:00:37 +0800</lastBuildDate>
     
         <atom:link href="/categories/go/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>gin Bind 参数绑定</title>
+      <link>/article/gin-should-binding/</link>
+      <pubDate>Sat, 25 Feb 2023 21:00:37 +0800</pubDate>
+      
+      <guid>/article/gin-should-binding/</guid>
+      <description>&lt;p&gt;gin Bind 参数绑定。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>gin binding tag</title>
+      <link>/article/binding-tag/</link>
+      <pubDate>Sat, 25 Feb 2023 20:40:37 +0800</pubDate>
+      
+      <guid>/article/binding-tag/</guid>
+      <description>&lt;p&gt;golang binding tag。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>golang连接mysql数据库导出csv文件</title>
+      <link>/article/export-csv/</link>
+      <pubDate>Sat, 25 Feb 2023 19:30:37 +0800</pubDate>
+      
+      <guid>/article/export-csv/</guid>
+      <description>&lt;p&gt;golang连接mysql数据库导出csv文件。&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>gin proxy代理</title>

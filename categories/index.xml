@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2022 Arno.</copyright>
-    <lastBuildDate>Thu, 24 Nov 2022 18:30:37 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 25 Feb 2023 21:00:37 +0800</lastBuildDate>
     
         <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,9 +15,19 @@
     <item>
       <title>Go</title>
       <link>/categories/go/</link>
-      <pubDate>Thu, 24 Nov 2022 18:30:37 +0800</pubDate>
+      <pubDate>Sat, 25 Feb 2023 21:00:37 +0800</pubDate>
       
       <guid>/categories/go/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Mysql</title>
+      <link>/categories/mysql/</link>
+      <pubDate>Sat, 25 Feb 2023 20:30:37 +0800</pubDate>
+      
+      <guid>/categories/mysql/</guid>
       <description></description>
       
     </item>
@@ -68,16 +78,6 @@
       <pubDate>Wed, 21 Apr 2021 23:06:53 +0800</pubDate>
       
       <guid>/categories/lua/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>Mysql</title>
-      <link>/categories/mysql/</link>
-      <pubDate>Thu, 22 Oct 2020 21:51:43 +0800</pubDate>
-      
-      <guid>/categories/mysql/</guid>
       <description></description>
       
     </item>
