@@ -9,7 +9,7 @@
     <title>进程管理 - IARNO</title>
     <meta content="阿諾个人博客 - " property="og:description">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?s=&amp;sitesearch=www.iarno.cn"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?s=&amp;sitesearch=www.iarno.cn%20%e7%bd%91%e5%85%b3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><section class="article header"><h1>进程管理</h1></section><ul class="note list"><li class="item"><a class="note" href="/article/supervisor%E7%AE%A1%E7%90%86golang%E7%A8%8B%E5%BA%8F/">
             <p class="note title">supervisor管理golang程序</p><p class="note date">August 29, 2020</p><p class="note content">最近在鼓捣golang守护进程的实现，无意发现了supervisor这个有意思的东西。supervisor是一个unix的系统进程管理软件，可以用它来管理apache、nginx等服务，若服务挂了可以让它们自动重启。当然也可以用来实现golang的守护进程，下面描述下具体实现。
