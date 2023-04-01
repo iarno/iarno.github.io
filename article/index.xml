@@ -14,16 +14,6 @@
     
     <item>
       <title>centos搭建etcd集群</title>
-      <link>/article/binding-tag/</link>
-      <pubDate>Sat, 01 Apr 2023 20:40:37 +0800</pubDate>
-      
-      <guid>/article/binding-tag/</guid>
-      <description>&lt;p&gt;Etcd是一款分布式的键值存储系统，常用于分布式系统中的服务发现、配置管理等场景。&lt;/p&gt;</description>
-      
-    </item>
-    
-    <item>
-      <title>centos搭建etcd集群</title>
       <link>/article/etcd/</link>
       <pubDate>Sat, 01 Apr 2023 20:40:37 +0800</pubDate>
       
@@ -39,6 +29,16 @@
       
       <guid>/article/gin-should-binding/</guid>
       <description>&lt;p&gt;gin Bind 参数绑定。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>gin binding tag</title>
+      <link>/article/binding-tag/</link>
+      <pubDate>Sat, 25 Feb 2023 20:40:37 +0800</pubDate>
+      
+      <guid>/article/binding-tag/</guid>
+      <description>&lt;p&gt;golang binding tag。&lt;/p&gt;</description>
       
     </item>
     
