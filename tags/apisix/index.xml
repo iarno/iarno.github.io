@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>IARNO</title>
-    <link>/</link>
-    <description>Recent content on IARNO</description>
+    <title>APISIX on IARNO</title>
+    <link>/tags/apisix/</link>
+    <description>Recent content in APISIX on IARNO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2023 IARNO</copyright>
     <lastBuildDate>Sat, 01 Apr 2023 20:40:37 +0800</lastBuildDate>
     
-        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/tags/apisix/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Articles</title>
-      <link>/article/</link>
+      <title>centos搭建etcd集群</title>
+      <link>/article/etcd/</link>
       <pubDate>Sat, 01 Apr 2023 20:40:37 +0800</pubDate>
       
-      <guid>/article/</guid>
-      <description></description>
+      <guid>/article/etcd/</guid>
+      <description>&lt;p&gt;etcd是一款分布式的键值存储系统，常用于分布式系统中的服务发现、配置管理等场景。&lt;/p&gt;</description>
       
     </item>
     

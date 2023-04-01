@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="etcd, centos, etcd集群, 网关, apisix, gateway" name="keywords">
+<meta content="centos搭建etcd集群 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>centos搭建etcd集群&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="centos搭建etcd集群" /><body><section id="header">
+    <title>centos搭建etcd集群 - IARNO</title>
+    <meta content="阿諾个人博客 - centos搭建etcd集群" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav">
+    <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">centos搭建etcd集群</h1><p class="article date">April 1, 2023</p></section><article class="article markdown-body"><p>etcd是一款分布式的键值存储系统，常用于分布式系统中的服务发现、配置管理等场景。</p>
+<p>etcd基于Raft一致性算法实现了数据的高可用和强一致性，可以支持数千台机器的集群。通过将数据存储在内存中并异步持久化到磁盘上，Etcd在性能和数据可靠性之间取得了很好的平衡。</p>
+<p>etcd被广泛用于Kubernetes中的服务发现和配置管理，例如存储Pod的状态、控制器的配置等。</p>
+<h2 id="一etcd的特点">一、etcd的特点</h2>
+<ol>
+<li>分布式：Etcd采用分布式的架构，支持多台机器构成的集群。在集群中，每个节点都可以读写数据，同时也会复制数据到其他节点，以保证数据的可靠性和一致性。</li>
+<li>高可用性：Etcd采用Raft一致性算法来实现数据的高可用性和强一致性。在集群中，如果某个节点出现故障，其他节点会自动接管该节点的工作，保证数据的可用性和服务的连续性。</li>
+<li>强一致性：Etcd保证了数据的强一致性，即任何时候，任何一个节点读取到的数据都是最新的。在写入数据时，Etcd会保证所有节点都成功写入数据后才返回成功结果，以保证数据的一致性。</li>
+<li>高性能：Etcd采用了内存存储和异步持久化的方式，以保证读写操作的高性能。同时，Etcd还提供了一套简单易用的HTTP API，使得开发人员可以方便地进行数据读写和监控。</li>
+<li>简单易用：Etcd提供了一套简单易用的API，使得开发人员可以方便地进行数据读写和监控。同时，Etcd还提供了命令行工具和图形化管理界面，以方便用户进行集群的管理和维护。</li>
+<li>安全性：Etcd支持TLS加密和身份认证，以保证数据的安全性。同时，Etcd还提供了访问控制机制，可以控制不同用户和应用程序对数据的访问权限。</li>
+</ol>
+<h2 id="二概念术语">二、概念术语</h2>
+<ul>
+<li>
+<p><strong>Member：</strong> 一个etcd实例。它管理着一个Node，并且可以为客户端请求提供服务。</p>
+</li>
+<li>
+<p>**Peer：**对同一个etcd集群中另外一个Member的称呼。</p>
+</li>
+<li>
+<p><strong>Client：</strong> 向etcd集群发送HTTP请求的客户端。</p>
+</li>
+<li>
+<p>**WAL：**预写式日志，etcd用于持久化存储的日志格式。</p>
+</li>
+<li>
+<p>**Leader：**Raft算法中通过竞选而产生的处理所有数据提交的节点。</p>
+</li>
+<li>
+<p>**Follower：**竞选失败的节点作为Raft中的从属节点，为算法提供强一致性保证。</p>
+</li>
+<li>
+<p>**Candidate：**当Follower超过一定时间接收不到Leader的心跳时转变为Candidate开始竞选。</p>
+</li>
+<li>
+<p>**Term：**某个节点成为Leader到下一次竞选时间，称为一个Term。</p>
+</li>
+</ul>
+<h2 id="三集群安装部署">三、集群安装部署</h2>
+<blockquote>
+<p>etcd版本为3.5.4, 本示例使用的二进制安装。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>etcd name</th>
+<th>IP地址</th>
+<th>节点说明</th>
+<th>etcd版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd-node-1</td>
+<td>172.16.63.131</td>
+<td>初始化节点</td>
+<td>3.5.4</td>
+</tr>
+<tr>
+<td>etcd-node-2</td>
+<td>172.16.63.132</td>
+<td>初始化节点</td>
+<td>3.5.4</td>
+</tr>
+<tr>
+<td>etcd-node-3</td>
+<td>172.16.63.133</td>
+<td>新增节点</td>
+<td>3.5.4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="31-集群安装">3.1 集群安装</h3>
+<p>3个节点安装etcd</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">ETCD_VERSION</span><span class="o">=</span><span class="s1">&#39;3.5.4&#39;</span>
+wget https://github.com/etcd-io/etcd/releases/download/v<span class="si">${</span><span class="nv">ETCD_VERSION</span><span class="si">}</span>/etcd-v<span class="si">${</span><span class="nv">ETCD_VERSION</span><span class="si">}</span>-linux-amd64.tar.gz
+tar -xvf etcd-v<span class="si">${</span><span class="nv">ETCD_VERSION</span><span class="si">}</span>-linux-amd64.tar.gz <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>  <span class="nb">cd</span> etcd-v<span class="si">${</span><span class="nv">ETCD_VERSION</span><span class="si">}</span>-linux-amd64 <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>  sudo cp -a etcd etcdctl /usr/bin/
+</code></pre></div><h3 id="32-参数说明">3.2 参数说明</h3>
+<blockquote>
+<p>etcd可以指定config配置文件启动服务,  也可以参数形式启动,  其他参数具体说明略。</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost iarno<span class="o">]</span><span class="c1"># etcd --help</span>
+Usage:
+  ......
+  
+  etcd --config-file <span class="c1"># config配置文件地址 json文件</span>
+    Path to the server configuration file. Note that <span class="k">if</span> a configuration file is provided, other <span class="nb">command</span> line flags and environment variables will be ignored.
+   
+   ......省略
+
+Member: <span class="c1"># 本节点etcd信息</span>
+  --name <span class="s1">&#39;default&#39;</span>  <span class="c1"># 名称</span>
+    Human-readable name <span class="k">for</span> this member.
+  --data-dir <span class="s1">&#39;${name}.etcd&#39;</span> <span class="c1"># 数据存放路径</span>
+    Path to the data directory.
+  --listen-peer-urls <span class="s1">&#39;http://localhost:2380&#39;</span> <span class="c1"># 该节点接受其他节点连接的地址, 可理解为本机会启动一个2380端口服务</span>
+    List of URLs to listen on <span class="k">for</span> peer traffic.
+  --listen-client-urls <span class="s1">&#39;http://localhost:2379&#39;</span> <span class="c1"># etcd客户端地址, 可理解为本机会启动一个2379端口服务</span>
+    List of URLs to listen on <span class="k">for</span> client traffic.
+
+   ......省略
+
+Clustering: <span class="c1"># 集群</span>
+  --initial-advertise-peer-urls <span class="s1">&#39;http://localhost:2380&#39;</span> <span class="c1"># 指定该节点在集群中作为Peer节点时，用于广播宣传自己的URL地址</span>
+    List of this member<span class="s1">&#39;s peer URLs to advertise to the rest of the cluster.
+</span><span class="s1">  --initial-cluster &#39;</span><span class="nv">default</span><span class="o">=</span>http://localhost:2380<span class="s1">&#39; # 用于指定Etcd集群的成员。每个成员由一个&lt;name&gt;=&lt;url&gt;的键值对表示，其中&lt;name&gt;是成员的名称，&lt;url&gt;是成员的Peer URL地址。
+</span><span class="s1">    Initial cluster configuration for bootstrapping.
+</span><span class="s1">  --initial-cluster-state &#39;</span>new<span class="s1">&#39; # 初始集群状态, existing后期新加节点需要
+</span><span class="s1">    Initial cluster state (&#39;</span>new<span class="s1">&#39; or &#39;</span>existing<span class="s1">&#39;).
+</span><span class="s1">  --initial-cluster-token &#39;</span>etcd-cluster<span class="s1">&#39; # 集群初始token
+</span><span class="s1">    Initial cluster token for the etcd cluster during bootstrap.
+</span><span class="s1">    Specifying this can protect you from unintended cross-cluster interaction when running multiple clusters.
+</span><span class="s1">  --advertise-client-urls &#39;</span>http://localhost:2379<span class="s1">&#39; # 用于指定Etcd集群的客户端接入地址
+</span><span class="s1">    List of this member&#39;</span>s client URLs to advertise to the public.
+    The client URLs advertised should be accessible to machines that talk to etcd cluster. etcd client libraries parse these URLs to connect to the cluster.
+
+	 ......省略
+</code></pre></div><h3 id="33-服务启动">3.3 服务启动</h3>
+<blockquote>
+<p>如果启动参数<code>listen-client-urls</code>未加<code>127.0.0.1:2379</code>,  之后执行<code>etcdctl</code>命令查看集群相关信息必须携带 <code>--endpoints=${HOST_1}:2379,${HOST_2}:2379</code> 参数, 否则命令会报错。</p>
+</blockquote>
+<p><strong>etcd-node-1</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">TOKEN</span><span class="o">=</span>my-etcd-token-1
+<span class="nv">CLUSTER_STATE</span><span class="o">=</span>new
+<span class="nv">NAME_1</span><span class="o">=</span>etcd-node-1
+<span class="nv">NAME_2</span><span class="o">=</span>etcd-node-2
+<span class="nv">HOST_1</span><span class="o">=</span>172.16.63.131
+<span class="nv">HOST_2</span><span class="o">=</span>172.16.63.132
+<span class="nv">CLUSTER</span><span class="o">=</span><span class="si">${</span><span class="nv">NAME_1</span><span class="si">}</span><span class="o">=</span>http://<span class="si">${</span><span class="nv">HOST_1</span><span class="si">}</span>:2380,<span class="si">${</span><span class="nv">NAME_2</span><span class="si">}</span><span class="o">=</span>http://<span class="si">${</span><span class="nv">HOST_2</span><span class="si">}</span>:2380,<span class="si">${</span><span class="nv">NAME_3</span><span class="si">}</span><span class="o">=</span>http://<span class="si">${</span><span class="nv">HOST_3</span><span class="si">}</span>:2380
+
+<span class="c1"># For node 1</span>
+<span class="nv">THIS_NAME</span><span class="o">=</span><span class="si">${</span><span class="nv">NAME_1</span><span class="si">}</span>
+<span class="nv">THIS_IP</span><span class="o">=</span><span class="si">${</span><span class="nv">HOST_1</span><span class="si">}</span>
+nohup etcd --data-dir<span class="o">=</span>data.etcd --name <span class="si">${</span><span class="nv">THIS_NAME</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>	--initial-advertise-peer-urls http://<span class="si">${</span><span class="nv">THIS_IP</span><span class="si">}</span>:2380 <span class="se">\
+</span><span class="se"></span>	--listen-peer-urls http://<span class="si">${</span><span class="nv">THIS_IP</span><span class="si">}</span>:2380 <span class="se">\
+</span><span class="se"></span>	--advertise-client-urls http://127.0.0.1:2379,http://<span class="si">${</span><span class="nv">THIS_IP</span><span class="si">}</span>:2379 <span class="se">\
+</span><span class="se"></span>	--listen-client-urls http://127.0.0.1:2379,http://<span class="si">${</span><span class="nv">THIS_IP</span><span class="si">}</span>:2379 <span class="se">\
+</span><span class="se"></span>	--initial-cluster <span class="si">${</span><span class="nv">CLUSTER</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>	--initial-cluster-state <span class="si">${</span><span class="nv">CLUSTER_STATE</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>	--initial-cluster-token <span class="si">${</span><span class="nv">TOKEN</span><span class="si">}</span><span class="p">&amp;</span>
+</code></pre></div><p><strong>etcd-node-2</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">TOKEN</span><span class="o">=</span>my-etcd-token-1
+<span class="nv">CLUSTER_STATE</span><span class="o">=</span>new
+<span class="nv">NAME_1</span><span class="o">=</span>etcd-node-1
+<span class="nv">NAME_2</span><span class="o">=</span>etcd-node-2
+<span class="nv">HOST_1</span><span class="o">=</span>172.16.63.131
+<span class="nv">HOST_2</span><span class="o">=</span>172.16.63.132
+<span class="nv">CLUSTER</span><span class="o">=</span><span class="si">${</span><span class="nv">NAME_1</span><span class="si">}</span><span class="o">=</span>http://<span class="si">${</span><span class="nv">HOST_1</span><span class="si">}</span>:2380,<span class="si">${</span><span class="nv">NAME_2</span><span class="si">}</span><span class="o">=</span>http://<span class="si">${</span><span class="nv">HOST_2</span><span class="si">}</span>:2380,<span class="si">${</span><span class="nv">NAME_3</span><span class="si">}</span><span class="o">=</span>http://<span class="si">${</span><span class="nv">HOST_3</span><span class="si">}</span>:2380
+
+<span class="c1"># For node 2</span>
+<span class="nv">THIS_NAME</span><span class="o">=</span><span class="si">${</span><span class="nv">NAME_2</span><span class="si">}</span>
+<span class="nv">THIS_IP</span><span class="o">=</span><span class="si">${</span><span class="nv">HOST_2</span><span class="si">}</span>
+nohup etcd --data-dir<span class="o">=</span>data.etcd --name <span class="si">${</span><span class="nv">THIS_NAME</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>	--initial-advertise-peer-urls http://<span class="si">${</span><span class="nv">THIS_IP</span><span class="si">}</span>:2380 <span class="se">\
+</span><span class="se"></span>	--listen-peer-urls http://<span class="si">${</span><span class="nv">THIS_IP</span><span class="si">}</span>:2380 <span class="se">\
+</span><span class="se"></span>	--advertise-client-urls http://127.0.0.1:2379,http://<span class="si">${</span><span class="nv">THIS_IP</span><span class="si">}</span>:2379 <span class="se">\
+</span><span class="se"></span>	--listen-client-urls http://127.0.0.1:2379,http://<span class="si">${</span><span class="nv">THIS_IP</span><span class="si">}</span>:2379 <span class="se">\
+</span><span class="se"></span>	--initial-cluster <span class="si">${</span><span class="nv">CLUSTER</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>	--initial-cluster-state <span class="si">${</span><span class="nv">CLUSTER_STATE</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>	--initial-cluster-token <span class="si">${</span><span class="nv">TOKEN</span><span class="si">}</span><span class="p">&amp;</span>
+</code></pre></div><h3 id="34-查看member信息">3.4 查看member信息</h3>
+<p><code>started</code>说明节点状态正常。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost etcd-v3.5.4-linux-amd64<span class="o">]</span><span class="c1"># etcdctl member list -w table</span>
++------------------+---------+-------------+---------------------------+-------------------------------------------------+------------+
+<span class="p">|</span>        ID        <span class="p">|</span> STATUS  <span class="p">|</span>    NAME     <span class="p">|</span>        PEER ADDRS         <span class="p">|</span>                  CLIENT ADDRS                   <span class="p">|</span> IS LEARNER <span class="p">|</span>
++------------------+---------+-------------+---------------------------+-------------------------------------------------+------------+
+<span class="p">|</span> 2da4f3ecb804e704 <span class="p">|</span> started <span class="p">|</span> etcd-node-2 <span class="p">|</span> http://172.16.63.132:2380 <span class="p">|</span> http://127.0.0.1:2379,http://172.16.63.132:2379 <span class="p">|</span>      <span class="nb">false</span> <span class="p">|</span>
+<span class="p">|</span> 8f3d892540699071 <span class="p">|</span> started <span class="p">|</span> etcd-node-1 <span class="p">|</span> http://172.16.63.131:2380 <span class="p">|</span> http://127.0.0.1:2379,http://172.16.63.131:2379 <span class="p">|</span>      <span class="nb">false</span> <span class="p">|</span>
++------------------+---------+-------------+---------------------------+-------------------------------------------------+------------+
+</code></pre></div><h3 id="35-简单写入数据测试">3.5 简单写入数据测试</h3>
+<blockquote>
+<p>注: etcd版本不兼容,  此版本使用put写入数据。</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># etcd-node-1</span>
+<span class="o">[</span>root@localhost etcd-v3.5.4-linux-amd64<span class="o">]</span><span class="c1"># etcdctl put greeting &#34;Hello, etcd&#34;</span>
+OK
+
+<span class="c1"># etcd-node-2</span>
+<span class="o">[</span>root@localhost etcd-v3.5.4-linux-amd64<span class="o">]</span><span class="c1"># etcdctl get greeting</span>
+greeting
+Hello, etcd
+</code></pre></div><h3 id="36-新增节点">3.6 新增节点</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 在 etcd-node-1 或 etcd-node-2 节点上执行此命令</span>
+
+<span class="nv">NAME_1</span><span class="o">=</span>etcd-node-1
+<span class="nv">NAME_2</span><span class="o">=</span>etcd-node-2
+<span class="nv">NAME_3</span><span class="o">=</span>etcd-node-3
+<span class="nv">HOST_1</span><span class="o">=</span>172.16.63.131
+<span class="nv">HOST_2</span><span class="o">=</span>172.16.63.132
+<span class="nv">HOST_3</span><span class="o">=</span>172.16.63.133 <span class="c1"># new member</span>
+etcdctl --endpoints<span class="o">=</span><span class="si">${</span><span class="nv">HOST_1</span><span class="si">}</span>:2379,<span class="si">${</span><span class="nv">HOST_2</span><span class="si">}</span>:2379 <span class="se">\
+</span><span class="se"></span>	member add <span class="si">${</span><span class="nv">NAME_4</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>	--peer-urls<span class="o">=</span>http://<span class="si">${</span><span class="nv">HOST_3</span><span class="si">}</span>:2380
+</code></pre></div><h3 id="37-新节点启动服务">3.7 新节点启动服务</h3>
+<blockquote>
+<p>注意，CLUSTER_STATE 为 existing</p>
+</blockquote>
+<p><strong>etcd-node-3</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">TOKEN</span><span class="o">=</span>my-etcd-token-1
+<span class="nv">CLUSTER_STATE</span><span class="o">=</span>existing
+<span class="nv">NAME_1</span><span class="o">=</span>etcd-node-1
+<span class="nv">NAME_2</span><span class="o">=</span>etcd-node-2
+<span class="nv">NAME_3</span><span class="o">=</span>etcd-node-3
+<span class="nv">HOST_1</span><span class="o">=</span>172.16.63.131
+<span class="nv">HOST_2</span><span class="o">=</span>172.16.63.132
+<span class="nv">HOST_3</span><span class="o">=</span>172.16.63.133
+<span class="nv">CLUSTER</span><span class="o">=</span><span class="si">${</span><span class="nv">NAME_1</span><span class="si">}</span><span class="o">=</span>http://<span class="si">${</span><span class="nv">HOST_1</span><span class="si">}</span>:2380,<span class="si">${</span><span class="nv">NAME_2</span><span class="si">}</span><span class="o">=</span>http://<span class="si">${</span><span class="nv">HOST_2</span><span class="si">}</span>:2380,<span class="si">${</span><span class="nv">NAME_3</span><span class="si">}</span><span class="o">=</span>http://<span class="si">${</span><span class="nv">HOST_3</span><span class="si">}</span>:2380
+
+<span class="nv">THIS_NAME</span><span class="o">=</span><span class="si">${</span><span class="nv">NAME_3</span><span class="si">}</span>
+<span class="nv">THIS_IP</span><span class="o">=</span><span class="si">${</span><span class="nv">HOST_3</span><span class="si">}</span>
+nohup etcd --data-dir<span class="o">=</span>data.etcd --name <span class="si">${</span><span class="nv">THIS_NAME</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>	--initial-advertise-peer-urls http://<span class="si">${</span><span class="nv">THIS_IP</span><span class="si">}</span>:2380 <span class="se">\
+</span><span class="se"></span>	--listen-peer-urls http://<span class="si">${</span><span class="nv">THIS_IP</span><span class="si">}</span>:2380 <span class="se">\
+</span><span class="se"></span>	--advertise-client-urls http://127.0.0.1:2379,http://<span class="si">${</span><span class="nv">THIS_IP</span><span class="si">}</span>:2379 <span class="se">\
+</span><span class="se"></span>	--listen-client-urls http://127.0.0.1:2379,http://<span class="si">${</span><span class="nv">THIS_IP</span><span class="si">}</span>:2379 <span class="se">\
+</span><span class="se"></span>	--initial-cluster <span class="si">${</span><span class="nv">CLUSTER</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>	--initial-cluster-state <span class="si">${</span><span class="nv">CLUSTER_STATE</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>	--initial-cluster-token <span class="si">${</span><span class="nv">TOKEN</span><span class="si">}</span><span class="p">&amp;</span>
+</code></pre></div><h3 id="38-移除节点">3.8 移除节点</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">etcdctl member remove <span class="si">${</span><span class="nv">MEMBER_ID</span><span class="si">}</span>
+</code></pre></div><h2 id="四参考">四、参考</h2>
+<p><a href="https://etcd.io/docs/v3.5/tutorials/how-to-deal-with-membership/">https://etcd.io/docs/v3.5/tutorials/how-to-deal-with-membership/</a></p>
+<p><a href="https://juejin.cn/post/6844904031186321416">https://juejin.cn/post/6844904031186321416</a></p></article><section class="article labels"><a class="category" href=/categories/linux/>Linux</a><a class="tag" href=/tags/apisix/>APISIX</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/binding-tag/"><span class="iconfont icon-article"></span>centos搭建etcd集群</a></p><p><a class="link" href="/article/gin-should-binding/"><span class="iconfont icon-article"></span>gin Bind 参数绑定</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2023 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

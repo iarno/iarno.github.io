@@ -23,16 +23,6 @@
     </item>
     
     <item>
-      <title>gin binding tag</title>
-      <link>/article/binding-tag/</link>
-      <pubDate>Sat, 25 Feb 2023 20:40:37 +0800</pubDate>
-      
-      <guid>/article/binding-tag/</guid>
-      <description>&lt;p&gt;golang binding tag。&lt;/p&gt;</description>
-      
-    </item>
-    
-    <item>
       <title>golang连接mysql数据库导出csv文件</title>
       <link>/article/export-csv/</link>
       <pubDate>Sat, 25 Feb 2023 19:30:37 +0800</pubDate>
