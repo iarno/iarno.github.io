@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2023 IARNO</copyright>
-    <lastBuildDate>Sat, 01 Apr 2023 20:40:37 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 02 Apr 2023 20:40:37 +0800</lastBuildDate>
     
         <atom:link href="/article/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>centos搭建apisix网关</title>
+      <link>/article/apisix/</link>
+      <pubDate>Sun, 02 Apr 2023 20:40:37 +0800</pubDate>
+      
+      <guid>/article/apisix/</guid>
+      <description>&lt;p&gt;Apache APISIX 是 Apache 软件基金会下的云原生 API 网关，它兼具动态、实时、高性能等特点，提供了负载均衡、动态上游、灰度发布（金丝雀发布）、服务熔断、身份认证、可观测性等丰富的流量管理功能。&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>centos搭建etcd集群</title>

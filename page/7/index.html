@@ -12,7 +12,9 @@
         <span class="header right-side"><div class="nav wrap"><nav class="nav">
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
-</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><ul class="note list"><li class="item"><a class="note" href="/article/utf8-bin%E5%92%8Cutf8-general-ci%E7%BC%96%E7%A0%81%E7%9A%84%E5%8C%BA%E5%88%AB/">
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><ul class="note list"><li class="item"><a class="note" href="/article/supervisor%E7%AE%A1%E7%90%86golang%E7%A8%8B%E5%BA%8F/">
+            <p class="note title">supervisor管理golang程序</p><p class="note date">August 29, 2020</p><p class="note content">最近在鼓捣golang守护进程的实现，无意发现了supervisor这个有意思的东西。supervisor是一个unix的系统进程管理软件，可以用它来管理apache、nginx等服务，若服务挂了可以让它们自动重启。当然也可以用来实现golang的守护进程，下面描述下具体实现。
+<span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="category" href="/categories/go/">Go</a><a class="tag" href="/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a></p></li><li class="item"><a class="note" href="/article/utf8-bin%E5%92%8Cutf8-general-ci%E7%BC%96%E7%A0%81%E7%9A%84%E5%8C%BA%E5%88%AB/">
             <p class="note title">utf8_bin和utf8_general_ci编码的区别</p><p class="note date">August 29, 2020</p><p class="note content">MySQL中存在多种格式的utf8编码，其中最常见的两种为：
 utf8_bin 将字符串中的每一个字符用二进制数据存储，区分大小写; utf8_genera_ci 不区分大小写，ci为case insensitive的缩写，即大小写不敏感，为utf8默认编码。
 <span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="category" href="/categories/mysql/">Mysql</a><a class="tag" href="/tags/%E7%BC%96%E7%A0%81/">编码</a></p></li><li class="item"><a class="note" href="/article/%E5%88%86%E6%9E%90mysql-binlog-%E6%97%A5%E5%BF%97/">
