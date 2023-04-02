@@ -138,7 +138,7 @@ Clustering: <span class="c1"># 集群</span>
 <p>如果启动参数<code>listen-client-urls</code>未加<code>127.0.0.1:2379</code>,  之后执行<code>etcdctl</code>命令查看集群相关信息必须携带 <code>--endpoints=${HOST_1}:2379,${HOST_2}:2379</code> 参数, 否则命令会报错。</p>
 </blockquote>
 <p><strong>etcd-node-1</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">TOKEN</span><span class="o">=</span>my-etcd-token-1
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">TOKEN</span><span class="o">=</span>my-etcd-token-1
 <span class="nv">CLUSTER_STATE</span><span class="o">=</span>new
 <span class="nv">NAME_1</span><span class="o">=</span>etcd-node-1
 <span class="nv">NAME_2</span><span class="o">=</span>etcd-node-2
@@ -158,7 +158,7 @@ nohup etcd --data-dir<span class="o">=</span>data.etcd --name <span class="si">$
 </span><span class="se"></span>	--initial-cluster-state <span class="si">${</span><span class="nv">CLUSTER_STATE</span><span class="si">}</span> <span class="se">\
 </span><span class="se"></span>	--initial-cluster-token <span class="si">${</span><span class="nv">TOKEN</span><span class="si">}</span><span class="p">&amp;</span>
 </code></pre></div><p><strong>etcd-node-2</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">TOKEN</span><span class="o">=</span>my-etcd-token-1
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">TOKEN</span><span class="o">=</span>my-etcd-token-1
 <span class="nv">CLUSTER_STATE</span><span class="o">=</span>new
 <span class="nv">NAME_1</span><span class="o">=</span>etcd-node-1
 <span class="nv">NAME_2</span><span class="o">=</span>etcd-node-2
@@ -215,7 +215,7 @@ etcdctl --endpoints<span class="o">=</span><span class="si">${</span><span class
 <p>注意，CLUSTER_STATE 为 existing</p>
 </blockquote>
 <p><strong>etcd-node-3</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">TOKEN</span><span class="o">=</span>my-etcd-token-1
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">TOKEN</span><span class="o">=</span>my-etcd-token-1
 <span class="nv">CLUSTER_STATE</span><span class="o">=</span>existing
 <span class="nv">NAME_1</span><span class="o">=</span>etcd-node-1
 <span class="nv">NAME_2</span><span class="o">=</span>etcd-node-2
