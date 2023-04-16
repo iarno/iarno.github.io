@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="stable diffusion, AI作画, 图像AI" name="keywords">
+<meta content="stable diffusion webui 安装 - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>stable diffusion webui 安装&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="stable diffusion webui 安装" /><body><section id="header">
+    <title>stable diffusion webui 安装 - IARNO</title>
+    <meta content="阿諾个人博客 - stable diffusion webui 安装及问题汇总" property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav">
+    <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">stable diffusion webui 安装</h1><p class="article date">April 16, 2023</p></section><article class="article markdown-body"><p>Stable Diffusion是一个文本到图像的潜在扩散模型，由CompVis、Stability AI和LAION的研究人员和工程师创建。它使用来自LAION-5B数据库子集的512x512图像进行训练。使用这个模型，可以生成包括人脸在内的任何图像，因为有开源的预训练模型，所以我们也可以在自己的机器上运行它。</p>
+<h1 id="一本地安装">一、本地安装</h1>
+<blockquote>
+<p>Tip:  Python 版本为 3.10.6</p>
+</blockquote>
+<pre><code class="language-ba" data-lang="ba">git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+
+cd stable-diffusion-webui/
+
+# 请切换Python venv, 魔法上网, 下载时间比较长
+git config --global http.proxy http://127.0.0.1:10887
+pip install --upgrade pip
+export http_proxy=http://127.0.0.1:10887;export https_proxy=http://127.0.0.1:10887;
+sh ./webui.sh
+</code></pre><h1 id="二安装报错汇总">二、安装报错汇总</h1>
+<h2 id="21-安装gfpgan报错">2.1 安装gfpgan报错</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Installing gfpgan
+Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">&#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/launch.py&#34;</span>, line 355, in &lt;module&gt;
+    prepare_environment<span class="o">()</span>
+  File <span class="s2">&#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/launch.py&#34;</span>, line 263, in prepare_environment
+    run_pip<span class="o">(</span>f<span class="s2">&#34;install {gfpgan_package}&#34;</span>, <span class="s2">&#34;gfpgan&#34;</span><span class="o">)</span>
+  File <span class="s2">&#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/launch.py&#34;</span>, line 129, in run_pip
+    <span class="k">return</span> run<span class="o">(</span>f<span class="s1">&#39;&#34;{python}&#34; -m pip {args} --prefer-binary{index_url_line}&#39;</span>, <span class="nv">desc</span><span class="o">=</span>f<span class="s2">&#34;Installing {desc}&#34;</span>, <span class="nv">errdesc</span><span class="o">=</span>f<span class="s2">&#34;Couldn&#39;t install {desc}&#34;</span><span class="o">)</span>
+  File <span class="s2">&#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/launch.py&#34;</span>, line 97, in run
+    raise RuntimeError<span class="o">(</span>message<span class="o">)</span>
+RuntimeError: Couldn<span class="s1">&#39;t install gfpgan.
+</span><span class="s1">Command: &#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/venv/bin/python3.10&#34; -m pip install git+https://github.com/TencentARC/GFPGAN.git@8d2447a2d918f8eba5a4a01463fd48e45126a379 --prefer-binary
+</span><span class="s1">Error code: 2
+</span><span class="s1">stdout: Collecting git+https://github.com/TencentARC/GFPGAN.git@8d2447a2d918f8eba5a4a01463fd48e45126a379
+</span><span class="s1">  Cloning https://github.com/TencentARC/GFPGAN.git (to revision 8d2447a2d918f8eba5a4a01463fd48e45126a379) to /private/var/folders/qw/4fkzpn79447fkgjgk19pq_6h0000gn/T/pip-req-build-0i1rio01
+</span><span class="s1">  
+</span><span class="s1">  
+</span><span class="s1">stderr:   Running command git clone --filter=blob:none --quiet https://github.com/TencentARC/GFPGAN.git /private/var/folders/qw/4fkzpn79447fkgjgk19pq_6h0000gn/T/pip-req-build-0i1rio01
+</span><span class="s1">  Running command git rev-parse -q --verify &#39;</span>sha^8d2447a2d918f8eba5a4a01463fd48e45126a379<span class="err">&#39;</span>
+  Running <span class="nb">command</span> git fetch -q https://github.com/TencentARC/GFPGAN.git 8d2447a2d918f8eba5a4a01463fd48e45126a379
+  Running <span class="nb">command</span> git checkout -q 8d2447a2d918f8eba5a4a01463fd48e45126a379
+</code></pre></div><p><strong>解决方案:</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git config --global http.proxy http://127.0.0.1:10887
+</code></pre></div><h2 id="22-未下载模型导致服务无法运行">2.2 未下载模型导致服务无法运行</h2>
+<div class="highlight"><pre class="chroma"><code class="language-basic" data-lang="basic"><span class="vg">No</span><span class="w"> </span><span class="vg">checkpoints</span><span class="w"> </span><span class="vg">found</span><span class="o">.</span><span class="w"> </span><span class="vg">When</span><span class="w"> </span><span class="vg">searching</span><span class="w"> </span><span class="vg">for</span><span class="w"> </span><span class="vg">checkpoints</span><span class="p">,</span><span class="w"> </span><span class="vg">looked</span><span class="w"> </span><span class="nl">at:</span>
+<span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="vg">file</span><span class="w"> </span><span class="o">/</span><span class="vg">Users</span><span class="o">/</span><span class="vg">liuli</span><span class="o">/</span><span class="vg">Devspace</span><span class="o">/</span><span class="vg">chatgpt</span><span class="o">/</span><span class="vg">stable</span><span class="o">-</span><span class="vg">diffusion</span><span class="o">-</span><span class="vg">webui</span><span class="o">/</span><span class="vg">model</span><span class="o">.</span><span class="vg">ckpt</span>
+<span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="vg">directory</span><span class="w"> </span><span class="o">/</span><span class="vg">Users</span><span class="o">/</span><span class="vg">liuli</span><span class="o">/</span><span class="vg">Devspace</span><span class="o">/</span><span class="vg">chatgpt</span><span class="o">/</span><span class="vg">stable</span><span class="o">-</span><span class="vg">diffusion</span><span class="o">-</span><span class="vg">webui</span><span class="o">/</span><span class="vg">models</span><span class="o">/</span><span class="vg">Stable</span><span class="o">-</span><span class="vg">diffusion</span>
+<span class="vg">Can</span><span class="c1">&#39;t run without a checkpoint. Find and place a .ckpt or .safetensors file into any of those locations. The program will exit.</span>
+</code></pre></div><p><strong>解决方案:</strong></p>
+<p>下载<a href="https://huggingface.co/models"target="_blank">模型,</a>  并将下载的模型放到 <code>stable-diffusion-webui/models/Stable-diffusion</code> 目录中。</p>
+<h1 id="三使用colab搭建">三、使用Colab搭建</h1>
+<blockquote>
+<p>Colab 免费时长为12小时</p>
+</blockquote>
+<p>本地模型生成图片会受限于💻配置问题,  推荐使用谷歌免费 <code>Colab</code> 服务搭建,  避免多次下载  <code>Model</code>  模型,  可以考虑使用挂载谷歌云盘的方式(提前将下载好的Model上传至谷歌云盘)。</p>
+<h2 id="31-安装教程">3.1 安装教程:</h2>
+<p><a href="http://xhslink.com/6lTt8o">http://xhslink.com/6lTt8o</a></p>
+<h2 id="32-修改项">3.2 修改项</h2>
+<p><strong>挂载云盘:</strong></p>
+<p><img  src="https://images.iarno.cn/images/1681646478386.png"
+        alt="image-20230416200116930"/></p>
+<p><strong>拷贝云盘模型:</strong></p>
+<p><img  src="https://images.iarno.cn/images/1681646591713.png"
+        alt="image-20230416200311072"/></p>
+<h1 id="四参考">四、参考</h1>
+<p><a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui.git">https://github.com/AUTOMATIC1111/stable-diffusion-webui.git</a></p>
+<p><a href="https://github.com/camenduru/stable-diffusion-webui-colab.git">https://github.com/camenduru/stable-diffusion-webui-colab.git</a></p>
+<p><a href="http://xhslink.com/6lTt8o">http://xhslink.com/6lTt8o</a></p>
+<p><a href="https://www.bilibili.com/video/BV1vX4y1k7d4?vd_source=59a19d02212b7e9ac600f7c97d180b9d">https://www.bilibili.com/video/BV1vX4y1k7d4?vd_source=59a19d02212b7e9ac600f7c97d180b9d</a></p>
+<p><a href="https://www.bilibili.com/video/BV1fL411U77A?vd_source=59a19d02212b7e9ac600f7c97d180b9d">https://www.bilibili.com/video/BV1fL411U77A?vd_source=59a19d02212b7e9ac600f7c97d180b9d</a></p></article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/stable-diffusion/>stable diffusion</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/apisix/"><span class="iconfont icon-article"></span>centos搭建apisix网关</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2023 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>
