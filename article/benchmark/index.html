@@ -13,7 +13,7 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Golang benchmark 性能测试</h1><p class="article date">June 22, 2022</p></section><article class="article markdown-body"><p><img class="cover" src="https://s2.loli.net/2022/06/22/pJymZ8hP1UVcoaC.png" alt></p><p>基准测试是测量一个程序在固定工作负载下的性能，Go语言也提供了可以支持基准性能测试的<code>benchmark</code>。</p>
+    <h1 class="article title">Golang benchmark 性能测试</h1><p class="article date">June 22, 2022</p></section><article class="article markdown-body"><p><img class="cover" src="https://s2.loli.net/2022/06/22/pJymZ8hP1UVcoaC.png" alt></p><p>这篇文章详述了Go语言的benchmark性能测试的使用方法和解析。它详细阐述了go test命令的参数及其作用，并通过一个实例展示了如何进行性能测试和结果分析。文章还介绍了如何利用pprof进行性能分析，并提供了相关的参考链接。</p>
 <h2 id="使用方法">使用方法</h2>
 <p>下面展示一个基准测试的示例代码来剖析下它的使用方式：</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Benchmark_test</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>

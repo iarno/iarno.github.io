@@ -70,8 +70,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/%E5%88%86%E6%9E%90mysql-binlog-%E6%97%A5%E5%BF%97/</guid>
-      <description>&lt;h2 id=&#34;相关命令&#34;&gt;相关命令&lt;/h2&gt;
-&lt;p&gt;分析Mysql的Binlog日志，按&lt;code&gt;时间&lt;/code&gt;维度查询&lt;code&gt;mysql&lt;/code&gt;操作记录。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何分析MySQL的Binlog日志。首先，我们需要确认mysqlbinlog命令是否存在。然后，文章提供了几种不同的命令来解析Binlog日志，包括全量解析、按时间范围解析、只解析某个数据库和只解析某个binlog文件。最后，文章解释了在解析过程中可能遇到的错误，这些错误可能是由于MySQL版本问题造成的，建议使用高于5.6版本的MySQL进行分析。&lt;/p&gt;</description>
       
     </item>
     

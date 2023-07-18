@@ -18,9 +18,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/%E8%B7%A8%E5%9F%9F/</guid>
-      <description>&lt;h2 id=&#34;一什么是跨域&#34;&gt;一、什么是跨域&lt;/h2&gt;
-&lt;h5 id=&#34;url的组成&#34;&gt;url的组成&lt;/h5&gt;
-&lt;p&gt;JavaScript出于安全方面的考虑，不允许跨域调用其他页面的对象。那什么是跨域呢，简单地理解就是因为JavaScript同源策略的限制，&lt;code&gt;a.com&lt;/code&gt;域名下的js无法操作&lt;code&gt;b.com&lt;/code&gt;或是&lt;code&gt;c.a.com&lt;/code&gt;域名下的对象。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要讨论了跨域的概念、同源策略及其限制，以及如何处理跨域问题。文章首先解释了什么是跨域，然后介绍了同源策略及其对Cookie、LocalStorage、IndexedDB等存储性内容、DOM节点和AJAX请求的限制。最后，文章详细介绍了CORS（跨源资源共享）的原理和优缺点，并提供了PHP代码示例，展示了如何在服务器端添加CORS头部和验证Referer以防止CSRF攻击。&lt;/p&gt;</description>
       
     </item>
     

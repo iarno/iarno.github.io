@@ -13,7 +13,8 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">分析Mysql Binlog 日志</h1><p class="article date">August 29, 2020</p></section><article class="article markdown-body"><h2 id="相关命令">相关命令</h2>
+    <h1 class="article title">分析Mysql Binlog 日志</h1><p class="article date">August 29, 2020</p></section><article class="article markdown-body"><p>这篇文章主要介绍了如何分析MySQL的Binlog日志。首先，我们需要确认mysqlbinlog命令是否存在。然后，文章提供了几种不同的命令来解析Binlog日志，包括全量解析、按时间范围解析、只解析某个数据库和只解析某个binlog文件。最后，文章解释了在解析过程中可能遇到的错误，这些错误可能是由于MySQL版本问题造成的，建议使用高于5.6版本的MySQL进行分析。</p>
+<h2 id="相关命令">相关命令</h2>
 <p>分析Mysql的Binlog日志，按<code>时间</code>维度查询<code>mysql</code>操作记录。</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#查看mysqlbinlog命令是否存在</span>
 &gt;mysqlbinlog
