@@ -18,9 +18,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAvpn/</guid>
-      <description>&lt;h4 id=&#34;快速开始&#34;&gt;快速开始&lt;/h4&gt;
-&lt;p&gt;首先，在你的 Linux 服务器* 上全新安装一个 Ubuntu LTS, Debian 或者 CentOS 系统。&lt;/p&gt;
-&lt;p&gt;使用以下命令快速搭建 IPsec VPN 服务器：&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文提供了在阿里云服务器上设置VPN服务器的全面指南。它涵盖了Linux服务器的初始设置，IPsec VPN的安装，以及从iOS和Mac设备连接到VPN的详细说明。文章还提供了故障排除链接和进一步阅读的参考。&lt;/p&gt;</description>
       
     </item>
     
