@@ -13,7 +13,7 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Core 文件分析</h1><p class="article date">June 27, 2022</p></section><article class="article markdown-body"><p><img class="cover" src="https://s2.loli.net/2022/06/22/dzhbcKUF7fR4P51.png" alt></p><p>ulimit和core文件的分析方法。</p>
+    <h1 class="article title">Core 文件分析</h1><p class="article date">June 27, 2022</p></section><article class="article markdown-body"><p><img class="cover" src="https://s2.loli.net/2022/06/22/dzhbcKUF7fR4P51.png" alt></p><p>这篇文章主要介绍了Linux下的core文件分析方法。首先，文章解释了如何使用ulimit命令设置生成core文件，以及各参数的含义。接着，文章详细描述了core文件的生成过程和作用，以及如何设置core dump的文件目录和命名规则。文章还提供了如何使用gdb工具分析core文件的方法，并解释了在什么情况下可能不会生成core文件以及如何解决。最后，文章提供了相关的参考链接。</p>
 <h2 id="unlimit设置">unlimit设置</h2>
 <p><code>ulimit -c unlimited</code> 生成core文件,就是程序运行发行段错误时的文件</p>
 <h4 id="参数说明">参数说明:</h4>

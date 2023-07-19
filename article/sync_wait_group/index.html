@@ -13,7 +13,7 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Golang 协程异步请求</h1><p class="article date">December 28, 2020</p></section><article class="article markdown-body"><p>协程（coroutine）是Go语言中的轻量级线程实现，由Go运行时（runtime）管理。</p>
+    <h1 class="article title">Golang 协程异步请求</h1><p class="article date">December 28, 2020</p></section><article class="article markdown-body"><p>这篇文章介绍了如何在Go语言中使用协程进行异步请求。文章首先解释了协程是Go语言中的轻量级线程实现，由Go运行时管理。然后，通过一个示例展示了如何使用sync.WaitGroup来同步多个协程。示例中，我们创建了两个协程，每个协程都会调用getData()函数并将结果存储在rel映射中。最后，我们等待所有协程完成，然后打印rel映射的内容。运行结果显示，两个协程都成功地获取了数据并存储在rel映射中。</p>
 <h2 id="demo">Demo</h2>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 

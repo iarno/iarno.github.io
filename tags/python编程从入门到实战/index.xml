@@ -18,7 +18,7 @@
       <pubDate>Wed, 24 Aug 2022 22:31:37 +0800</pubDate>
       
       <guid>/article/django-01/</guid>
-      <description>&lt;p&gt;Django 项目实践01。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章是关于Django项目实践的教程。首先，我们介绍了如何安装Django。然后，我们创建了一个新的Django项目，并进行了数据库的初始化。接着，我们启动了Django服务，并展示了如何在浏览器中查看项目。最后，我们创建了一个新的应用程序，并定义了一个简单的模型。这篇文章是对Django项目实践的基础介绍，适合初学者阅读。&lt;/p&gt;</description>
       
     </item>
     
@@ -28,7 +28,7 @@
       <pubDate>Wed, 06 Jul 2022 23:09:37 +0800</pubDate>
       
       <guid>/article/py-test/</guid>
-      <description>&lt;p&gt;Python代码测试。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章是关于Python单元测试的教程。文章首先介绍了Python代码测试的重要性，然后详细解释了如何使用Python的unittest模块进行单元测试。文章中还提供了一个简单的单元测试示例，包括如何创建测试类，如何编写测试方法，以及如何使用断言进行测试。这篇文章对于想要学习Python单元测试的读者来说是非常有帮助的。&lt;/p&gt;</description>
       
     </item>
     
@@ -38,7 +38,7 @@
       <pubDate>Mon, 04 Jul 2022 22:41:37 +0800</pubDate>
       
       <guid>/article/py-file/</guid>
-      <description>&lt;p&gt;Python异常处理 try-except。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了Python的异常处理方法，主要讲解了try-except语句的使用。文章通过一个实例，展示了如何使用try-except语句来处理文件读取时可能出现的FileNotFoundError异常。当文件不存在时，程序会捕获这个异常，并打印出&amp;quot;file not found&amp;rdquo;。如果文件存在且无异常，程序会读取文件内容并打印出来。&lt;/p&gt;</description>
       
     </item>
     
@@ -48,7 +48,7 @@
       <pubDate>Sun, 03 Jul 2022 20:40:37 +0800</pubDate>
       
       <guid>/article/py-except/</guid>
-      <description>&lt;p&gt;Python文件读取、写入。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了Python中文件的读取和写入操作。首先，通过open函数和with关键字，我们可以方便地打开文件并在不再需要时自动关闭。文章详细介绍了如何读取文件的每一行，包括如何去除空行。然后，文章展示了如何将文件的内容读取到列表中。在文件写入部分，我们学习了如何使用不同的模式（如写入模式和附加模式）来写入文件。如果文件不存在，Python会自动创建。&lt;/p&gt;</description>
       
     </item>
     
@@ -58,7 +58,7 @@
       <pubDate>Wed, 02 Mar 2022 09:38:37 +0800</pubDate>
       
       <guid>/article/py_list/</guid>
-      <description>&lt;p&gt;列表由一系列按特定顺序排列的元素组成。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章是关于Python列表的详细教程。它首先介绍了如何访问和修改列表元素，然后讲解了如何在列表末尾添加元素和在列表中插入元素。接着，文章详细解释了如何使用del和pop()方法根据索引删除元素，以及如何根据值删除元素。文章还介绍了sort()和sorted()方法进行列表排序，以及如何倒序打印列表元素和获取列表长度。最后，文章讲解了如何遍历整个列表，创建数值列表和数字列表，以及如何使用列表解析和列表切片。&lt;/p&gt;</description>
       
     </item>
     
@@ -68,7 +68,7 @@
       <pubDate>Mon, 28 Feb 2022 10:46:37 +0800</pubDate>
       
       <guid>/article/py_string/</guid>
-      <description>&lt;p&gt;变量和简单数据类型：字符串、整数、浮点数、常量。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了Python中的变量和简单数据类型，包括字符串、整数、浮点数和常量。在字符串部分，文章详细解释了如何使用方法修改字符串中的大小写，如何在字符串中使用变量，如何使用制表符和换行符添加空格，以及如何删除字符串两端的特殊字符。在数字部分，文章讲解了整数和浮点数的基本操作，以及如何在数字中使用下划线。此外，文章还介绍了如何给多个变量赋值，以及如何定义常量。&lt;/p&gt;</description>
       
     </item>
     

@@ -13,7 +13,8 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">utf8_bin和utf8_general_ci编码的区别</h1><p class="article date">August 29, 2020</p></section><article class="article markdown-body"><p>MySQL中存在多种格式的utf8编码，其中最常见的两种为：</p>
+    <h1 class="article title">utf8_bin和utf8_general_ci编码的区别</h1><p class="article date">August 29, 2020</p></section><article class="article markdown-body"><p>本文主要介绍了MySQL中utf8_bin和utf8_general_ci两种编码格式的区别。utf8_bin编码将字符串中的每个字符用二进制数据存储，区分大小写。而utf8_general_ci编码则不区分大小写，是utf8的默认编码。通过实例演示了在插入数据时，两种编码方式对大小写的处理差异。因此，在选择编码时，应注意这种区别。</p>
+<p>MySQL中存在多种格式的utf8编码，其中最常见的两种为：</p>
 <p><code>utf8_bin</code> 将字符串中的每一个字符用二进制数据存储，区分大小写;
 <code>utf8_genera_ci</code> 不区分大小写，ci为case insensitive的缩写，即大小写不敏感，为utf8默认编码。</p>
 <h2 id="示例">示例：</h2>

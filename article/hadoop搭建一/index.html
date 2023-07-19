@@ -13,7 +13,8 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Hadoop 环境搭建（一）</h1><p class="article date">April 21, 2022</p></section><article class="article markdown-body"><p>大多数教程都是从  <a href="http://s.iarno.cn/pegHbK">http://s.iarno.cn/pegHbK</a> 下载安装包，目前该网站已收费，所以另寻途径安装hadoop环境。</p>
+    <h1 class="article title">Hadoop 环境搭建（一）</h1><p class="article date">April 21, 2022</p></section><article class="article markdown-body"><p>这篇文章是关于如何在ECS实例上快速搭建Hadoop伪分布式环境的教程。主要步骤包括安装JDK，安装Hadoop，配置Hadoop，配置SSH免密登录，以及启动Hadoop。每个步骤都有详细的命令和操作说明，以及相关的参考链接。完成所有步骤后，可以通过访问特定的URL来验证Hadoop环境是否已成功搭建。</p>
+<p>大多数教程都是从  <a href="http://s.iarno.cn/pegHbK">http://s.iarno.cn/pegHbK</a> 下载安装包，目前该网站已收费，所以另寻途径安装hadoop环境。</p>
 <h2 id="背景信息">背景信息</h2>
 <p>Hadoop是一款由Apache基金会用Java语言开发的分布式开源软件框架，用户可以在不了解分布式底层细节的情况下，开发分布式程序，充分利用集群的能力进行高速运算和存储。Hadoop的核心部件是HDFS（Hadoop Distributed File System）和MapReduce：</p>
 <ul>

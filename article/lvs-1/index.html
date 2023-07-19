@@ -13,7 +13,7 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">LVS负载均衡实践</h1><p class="article date">September 16, 2021</p></section><article class="article markdown-body"><p>LVS负载均衡操作与实践。</p>
+    <h1 class="article title">LVS负载均衡实践</h1><p class="article date">September 16, 2021</p></section><article class="article markdown-body"><p>这篇文章详细介绍了如何使用LVS进行负载均衡的实践操作。首先，文章列出了所需的服务器IP和角色，然后分别介绍了在LVS服务器和WEB服务器上的配置步骤。在LVS服务器上，主要是安装ipvsadm，配置VIP网卡和使用ipvsadm配置VIP。在WEB服务器上，主要是安装nginx服务，配置index.html文件，修改arp_ignore和arp_announce配置，以及环回接口配置VIP。最后，文章展示了如何在LVS服务器上添加rs，以及如何访问VIP。</p>
 <h2 id="机器说明">机器说明</h2>
 <p><code>192.168.199.10</code>lvs服务器、<code>192.168.199.11</code>web服务器1、<code>192.168.199.12</code>web服务器2、<code>192.168.199.100</code>vip。</p>
 <table>

@@ -13,7 +13,7 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">gin Bind 参数绑定</h1><p class="article date">February 25, 2023</p></section><article class="article markdown-body"><p>gin Bind 参数绑定。</p>
+    <h1 class="article title">gin Bind 参数绑定</h1><p class="article date">February 25, 2023</p></section><article class="article markdown-body"><p>这篇文章主要讲述了Gin框架中的参数绑定功能，包括Bind和ShouldBind的区别以及使用方法。Bind在出错时会返回400状态码，而ShouldBind则允许用户自定义错误码。文章还详细介绍了ShouldBind和ShouldBindJSON的使用场景，前者主要用于非GET请求的json参数绑定，后者则专门用于json参数的绑定。</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">params</span> <span class="kd">struct</span> <span class="p">{</span>
 	<span class="nx">Total</span> <span class="kt">int</span> <span class="s">`form:&#34;total&#34; json:&#34;total&#34; binding:&#34;omitempty,numeric&#34;`</span>
 <span class="p">}</span>

@@ -13,7 +13,8 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">通过图片url获取图片尺寸大小</h1><p class="article date">October 28, 2020</p></section><article class="article markdown-body"><p>通过图片<code>url</code>获取图片尺寸大小(<code>size</code>)</p>
+    <h1 class="article title">通过图片url获取图片尺寸大小</h1><p class="article date">October 28, 2020</p></section><article class="article markdown-body"><p>这篇文章介绍了如何通过Go语言获取图片URL的尺寸大小。首先，我们需要导入image/gif，image/jpeg，image/png这三个包，以便解码不同格式的图片。然后，我们使用http.Get方法获取图片，使用image.Decode解码图片，最后通过m.Bounds().Dx()，m.Bounds().Dy()和m.Bounds().Size()获取图片的宽度、高度和尺寸。</p>
+<p>通过图片<code>url</code>获取图片尺寸大小(<code>size</code>)</p>
 <h2 id="问题">问题</h2>
 <p>当使用<code>image.Decode</code>时报<code>image: unknown format·</code>
 这是因为忘记引入包<code>import _ &quot;image/jpeg&quot;</code>，image包不知道怎么Decode图片，需要导入&quot;image/jpeg&quot;去解码jpg图片。

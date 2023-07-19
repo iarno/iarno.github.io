@@ -13,7 +13,8 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">pcntl_fork 多进程</h1><p class="article date">August 29, 2020</p></section><article class="article markdown-body"><h2 id="pcntl-简介">pcntl 简介</h2>
+    <h1 class="article title">pcntl_fork 多进程</h1><p class="article date">August 29, 2020</p></section><article class="article markdown-body"><p>这篇文章主要介绍了PHP的pcntl_fork函数，这是一个用于创建子进程的函数。文章详细解释了如何使用这个函数，并通过代码示例展示了其用法。文章还进行了一个实验，测试了在创建子进程后，是父进程先执行还是子进程先执行。实验结果显示，pcntl_fork会首先执行父进程的逻辑，然后再执行子进程的逻辑。</p>
+<h2 id="pcntl-简介">pcntl 简介</h2>
 <p>PHP的进程控制支持实现了Unix方式的进程创建, 程序执行, 信号处理以及进程的中断。 进程控制不能被应用在Web服务器环境，当其被用于Web服务环境时可能会带来意外的结果。</p>
 <p>这份文档用于阐述每个进程控制函数的通常用法。关于Unix进程控制的更多信息建议您查阅 系统文档中关于fork（2）,waitpid（2），signal（2）等的部分或更全面的参考资料比如 《Unix环境高级编程》（作者：W. Richard Stevens，Addison-Wesley出版）。</p>
 <p>PCNTL现在使用了ticks作为信号处理的回调机制，ticks在速度上远远超过了之前的处理机制。 这个变化与“用户ticks”遵循了相同的语义。您可以使用declare() 语句在程序中指定允许发生回调的位置。这使得我们对异步事件处理的开销最小化。在编译PHP时 启用pcntl将始终承担这种开销，不论您的脚本中是否真正使用了pcntl。</p>

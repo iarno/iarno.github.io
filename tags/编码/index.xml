@@ -18,9 +18,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/utf8-bin%E5%92%8Cutf8-general-ci%E7%BC%96%E7%A0%81%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
-      <description>&lt;p&gt;MySQL中存在多种格式的utf8编码，其中最常见的两种为：&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;utf8_bin&lt;/code&gt; 将字符串中的每一个字符用二进制数据存储，区分大小写;
-&lt;code&gt;utf8_genera_ci&lt;/code&gt; 不区分大小写，ci为case insensitive的缩写，即大小写不敏感，为utf8默认编码。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文主要介绍了MySQL中utf8_bin和utf8_general_ci两种编码格式的区别。utf8_bin编码将字符串中的每个字符用二进制数据存储，区分大小写。而utf8_general_ci编码则不区分大小写，是utf8的默认编码。通过实例演示了在插入数据时，两种编码方式对大小写的处理差异。因此，在选择编码时，应注意这种区别。&lt;/p&gt;</description>
       
     </item>
     

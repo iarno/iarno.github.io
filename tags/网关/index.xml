@@ -18,7 +18,7 @@
       <pubDate>Thu, 15 Jul 2021 21:10:57 +0800</pubDate>
       
       <guid>/article/plugin-dev4/</guid>
-      <description>&lt;p&gt;使用Go语言开发自定义插件。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何使用Go语言开发自定义插件。首先，我们需要下载并安装go-pluginserver，然后在CentOS环境下安装C相关的编译环境。接着，我们可以下载官方的插件示例，并通过Go语言编写自己的插件。最后，我们需要配置相关的环境变量并启动Kong服务。文章还提供了Konga插件的示例图和相关参考链接。&lt;/p&gt;</description>
       
     </item>
     
@@ -28,7 +28,7 @@
       <pubDate>Wed, 14 Jul 2021 21:10:57 +0800</pubDate>
       
       <guid>/article/plugin-dev3/</guid>
-      <description>&lt;p&gt;使用自定义插件，Docker容器启动相关配置如下：&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用Docker启动Kong并加载自定义插件。详细介绍了Docker启动命令中的环境变量和挂载路径的配置。特别注意，如果出现ntt-auth plugin is in use but not enabled错误，需要检查插件路径和KONG_PLUGINS环境变量。&lt;/p&gt;</description>
       
     </item>
     
@@ -38,7 +38,7 @@
       <pubDate>Tue, 13 Jul 2021 22:12:57 +0800</pubDate>
       
       <guid>/article/plugin-dev2/</guid>
-      <description>生命周期 Kong 插件允许您在请求/响应或 tcp 流连接的生命周期的多个入口点注入自定义逻辑（在 Lua 中），因为它由 Kong 代理。为此，必须实现base_plugi</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在Kong中开发自定义插件。首先，它解释了Kong插件的生命周期，并展示了如何在Lua中实现base_plugin.lua接口的方法。然后，文章提供了一个NttAuthHandler插件的示例，包括access、init_worker和log阶段的实现。接着，文章介绍了如何定义插件的schema。最后，文章讨论了在Docker容器部署中如何使用lua_shared_dict共享内存，并提供了Kong Nginx模板的相关配置。&lt;/p&gt;</description>
       
     </item>
     
@@ -48,7 +48,7 @@
       <pubDate>Tue, 13 Jul 2021 21:41:57 +0800</pubDate>
       
       <guid>/article/plugin-dev1/</guid>
-      <description>介绍 将您的插件视为一组Lua 模块。本章中描述的每个文件都被视为一个单独的模块。如果它们的名称遵循以下约定，Kong 将检测并加载您的插件模块：</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何开发Kong自定义插件。首先，将插件视为一组Lua模块，Kong会检测并加载遵循特定命名约定的插件模块。插件由两个强制性模块组成：handler.lua和schema.lua。一些插件可能需要更深入地集成到Kong中，例如在数据库中有自己的表，或在Admin API中公开端点等，这些都可以通过向插件添加新模块来完成。&lt;/p&gt;</description>
       
     </item>
     
@@ -58,10 +58,7 @@
       <pubDate>Tue, 17 Nov 2020 22:22:01 +0800</pubDate>
       
       <guid>/article/postgresql-centos/</guid>
-      <description>&lt;h2 id=&#34;1进入官网下载所需版本&#34;&gt;1、进入官网下载所需版本&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.postgresql.org/download/linux/redhat/&#34;&gt;https://www.postgresql.org/download/linux/redhat/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img  src=&#34;https://i.loli.net/2020/11/17/6yQwYKjJUbh89k3.png&#34;
-        alt=&#34;image-20201117222643658&#34;/&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何使用Go语言开发自定义插件。首先，我们需要下载并安装go-pluginserver，然后在CentOS环境下安装C相关的编译环境。接着，我们可以下载官方的插件示例，并通过Go语言编写自己的插件。最后，我们需要配置相关的环境变量并启动Kong服务。文章还提供了Konga插件的示例图和相关参考链接。&lt;/p&gt;</description>
       
     </item>
     
@@ -71,8 +68,7 @@
       <pubDate>Sat, 14 Nov 2020 21:19:05 +0800</pubDate>
       
       <guid>/article/kong-centos/</guid>
-      <description>&lt;h2 id=&#34;下载安装包&#34;&gt;下载安装包：&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://bintray.com/kong/kong-community-edition-rpm/download_file?file_path=centos/7/kong-community-edition-1.0.2.el7.noarch.rpm&#34;&gt;https://bintray.com/kong/kong-community-edition-rpm/download_file?file_path=centos/7/kong-community-edition-1.0.2.el7.noarch.rpm&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在CentOS 7上安装和配置Kong网关。首先，提供了Kong安装包的下载链接，然后详细说明了如何使用YUM命令进行安装。接着，文章介绍了如何准备PostgreSQL数据库，并给出了创建用户和数据库的命令。然后，文章描述了如何配置Kong的数据库连接，并提供了相关的命令。最后，文章介绍了如何启动、检查和停止Kong服务。&lt;/p&gt;</description>
       
     </item>
     
@@ -82,7 +78,7 @@
       <pubDate>Tue, 27 Oct 2020 23:37:50 +0800</pubDate>
       
       <guid>/article/upstream/</guid>
-      <description>环境说明 注：由于docker network原因，宿主机127.0.0.1可能会访问不到，可直接使用外网域名+端口 # 开放两个测试的微服务接口 http://myhost1:8881</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何配置Kong网关进行负载均衡。首先，文章提供了两个微服务接口用于测试。然后，通过Konga和Kong Admin API两种方式分别进行了详细的配置步骤说明。在Konga部分，包括了如何配置upstream、Service发布、Route匹配规则以及验证结果。在Kong Admin API部分，也包括了如何配置upstream、service和route。最后，文章提供了通过浏览器和命令行API进行测试的方法。&lt;/p&gt;</description>
       
     </item>
     
@@ -92,7 +88,7 @@
       <pubDate>Wed, 21 Oct 2020 22:41:57 +0800</pubDate>
       
       <guid>/article/kong-plugins/</guid>
-      <description>CREATE CONSUMER Cerdentials 默认为所有consumer 创建 例： Username: test Password：test Route 添加插件 添加 Basic Auth 插件 添加成功 Postman 发送请求 注：header中的 Autho</description>
+      <description>&lt;p&gt;这篇文章主要介绍了Konga插件的使用案例，包括创建消费者、添加凭证、路由添加插件以及使用Postman发送请求等步骤。文章详细解释了如何添加Basic Auth插件，并通过图文并茂的方式展示了操作流程。同时，文章还提供了相关参考链接，供读者深入学习。&lt;/p&gt;</description>
       
     </item>
     
@@ -102,7 +98,7 @@
       <pubDate>Fri, 16 Oct 2020 21:55:17 +0800</pubDate>
       
       <guid>/article/konga/</guid>
-      <description>konga使用 konga安装请参考Docker安装kong网关 Url：http://127.0.0.1:1337 注册账号并登陆平台 配置DAS</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何使用Konga，包括安装、配置Dashboard、创建Service、配置路由以及使用Postman请求网关。文章首先提供了Konga的安装链接，然后详细解释了如何配置Dashboard，包括如何查找Kong Admin URL。接着，文章介绍了如何创建Service和配置路由，特别强调了在配置路由时，对于hosts、paths、methods等配置项需要按回车键来应用每个输入的值。最后，文章展示了如何使用Postman请求网关，包括请求的端口和Headers头的配置。&lt;/p&gt;</description>
       
     </item>
     
@@ -112,7 +108,7 @@
       <pubDate>Fri, 16 Oct 2020 21:47:24 +0800</pubDate>
       
       <guid>/article/docker-kong/</guid>
-      <description>创建Docker network $ docker network create kong-net 创建数据库 本案例使用的是PostgreSQL数据库 Cassandra数据库 $ docker run -d --name kong-database \ --network=kong-net \ -p 9042:9042 \ cassandra:3 Postgr</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何使用Docker安装Kong网关。首先，创建一个Docker网络，然后创建PostgreSQL或Cassandra数据库。接着，准备数据库并启动Kong服务。Kong服务默认监听8000、8443、8001和8444端口。验证Kong服务后，安装Konga，一个Kong的管理界面。最后，提供了几个参考链接，包括Kong的官方文档和其他相关文章。&lt;/p&gt;</description>
       
     </item>
     

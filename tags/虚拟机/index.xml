@@ -18,8 +18,7 @@
       <pubDate>Sat, 11 Sep 2021 20:00:00 +0800</pubDate>
       
       <guid>/article/mac-vm/</guid>
-      <description>&lt;h2 id=&#34;安装vmware-fusion&#34;&gt;安装VMware Fusion&lt;/h2&gt;
-&lt;p&gt;Mac 安装VM虚拟机 、centos虚拟机创建、网络相关配置。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在Mac上安装VM虚拟机和Centos虚拟机，并进行网络配置。首先，从VMware官网下载并安装VMware Fusion。然后，从Centos官网下载Centos镜像，并在VMware Fusion中创建Centos虚拟机。最后，进行虚拟机网络配置，包括选择网络模式，查看WIFI项，配置虚拟机的ifcfg-ens33文件，设置GATEWAY和DNS，最后重启network服务。&lt;/p&gt;</description>
       
     </item>
     

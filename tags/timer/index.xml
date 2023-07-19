@@ -18,8 +18,7 @@
       <pubDate>Mon, 19 Apr 2021 21:36:52 +0800</pubDate>
       
       <guid>/article/lua-timer/</guid>
-      <description>&lt;p&gt;openresty的定时任务是要跟worker绑定的。如果不绑定特定的worker，那么所有启动的woker都会去执行定时任务。&lt;/p&gt;
-&lt;p&gt;一般情况下默认绑定worker_id=0的，这样在nginx整个进程里面，就只执行一个timer。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在OpenResty中配置和使用定时任务。首先，文章解释了定时任务需要与worker绑定，通常默认绑定到worker_id=0，这样在Nginx进程中只执行一个timer。然后，文章提供了在nginx.conf中配置定时任务的具体方法。接着，文章介绍了如何使用ngx.timer.every接口，这是ngx提供的最新接口。最后，文章提供了一些相关的日志输出和错误处理方法。&lt;/p&gt;</description>
       
     </item>
     

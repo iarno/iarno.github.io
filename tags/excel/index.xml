@@ -18,9 +18,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/golang-excel%E5%AF%BC%E5%87%BA/</guid>
-      <description>&lt;h2 id=&#34;excel-导出&#34;&gt;Excel 导出&lt;/h2&gt;
-&lt;h4 id=&#34;github-地址&#34;&gt;Github 地址&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/360EntSecGroup-Skylar/excelize&#34;&gt;https://github.com/360EntSecGroup-Skylar/excelize&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用Golang进行Excel文件的导出。它详细解释了如何使用excelize库创建一个新的Excel文件，并设置单元格的值。然后，它展示了如何将这个Excel文件作为一个下载响应发送给客户端。文章还提供了相关的Github和文档链接，供读者进一步学习和探索。&lt;/p&gt;</description>
       
     </item>
     

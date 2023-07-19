@@ -13,7 +13,8 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Kong - 自定义插件开发(三)</h1><p class="article date">July 14, 2021</p></section><article class="article markdown-body"><p>使用自定义插件，Docker容器启动相关配置如下：</p>
+    <h1 class="article title">Kong - 自定义插件开发(三)</h1><p class="article date">July 14, 2021</p></section><article class="article markdown-body"><p>这篇文章介绍了如何使用Docker启动Kong并加载自定义插件。详细介绍了Docker启动命令中的环境变量和挂载路径的配置。特别注意，如果出现ntt-auth plugin is in use but not enabled错误，需要检查插件路径和KONG_PLUGINS环境变量。</p>
+<p>使用自定义插件，Docker容器启动相关配置如下：</p>
 <h2 id="docker-启动">Docker 启动</h2>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo docker run -d --name kong-2.2.1 <span class="se">\
 </span><span class="se"></span>     -e <span class="s2">&#34;KONG_DATABASE=cassandra&#34;</span> <span class="se">\

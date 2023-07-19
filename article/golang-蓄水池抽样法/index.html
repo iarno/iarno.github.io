@@ -13,9 +13,10 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Golang 蓄水池抽样法</h1><p class="article date">August 29, 2020</p></section><article class="article markdown-body"><p>使用蓄水池抽样法，等概率随机抽取。</p>
+    <h1 class="article title">Golang 蓄水池抽样法</h1><p class="article date">August 29, 2020</p></section><article class="article markdown-body"><p>这篇文章介绍了如何在Go语言中实现蓄水池抽样法。蓄水池抽样法是一种等概率随机抽取的方法，适用于从大量数据中抽取样本。文章首先构建了一个可以放置m个元素的蓄水池，然后将前m个数依次放入。从第m+1个元素开始，以m/n的概率决定元素是否被替换到池子中。当遍历完所有元素后，就可以得出随机挑选的k个元素。该方法的时间复杂度为O(n)。</p>
 <h2 id="相关文章">相关文章</h2>
 <p><a href="https://www.cnblogs.com/snowInPluto/p/5996269.html">https://www.cnblogs.com/snowInPluto/p/5996269.html</a></p>
+<!--more-->
 <h2 id="代码示例">代码示例</h2>
 <div class="highlight"><pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">const</span> <span class="nx">Num</span> <span class="p">=</span> <span class="mi">10</span>
 

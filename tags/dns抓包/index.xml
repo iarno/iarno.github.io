@@ -18,7 +18,7 @@
       <pubDate>Wed, 22 Jun 2022 21:52:37 +0800</pubDate>
       
       <guid>/article/tcpdump-dns/</guid>
-      <description>&lt;p&gt;使用&lt;code&gt;tcpdump&lt;/code&gt;抓包域名dns解析过程。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用tcpdump工具抓取和分析域名DNS解析过程。首先，使用tcpdump命令启动对DNS报文的抓包。然后，使用host命令进行DNS查询。最后，分析tcpdump的输出结果，解读DNS查询和应答报文的内容。文章还提到了如何使用tcpdump的-X选项以16进制和ASCII方式打印报文内容，以及如何将抓到的数据包写入到文件中，然后导入到Wireshark中查看。&lt;/p&gt;</description>
       
     </item>
     

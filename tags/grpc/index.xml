@@ -18,7 +18,7 @@
       <pubDate>Mon, 28 Dec 2020 19:46:28 +0800</pubDate>
       
       <guid>/article/grpc/</guid>
-      <description>相关定义 在.proto文件中定义一个服务。 使用protocol buffer编译器生成客户端和服务端代码。 使用gRPC的Go API为你的服务写</description>
+      <description>&lt;p&gt;这篇文章介绍了如何在Go中使用gRPC。首先，它解释了如何在.proto文件中定义服务，并使用protocol buffer编译器生成客户端和服务端代码。然后，它详细介绍了如何安装gRPC包，设置环境变量，以及如何创建gRPC服务器和客户端。最后，它提供了一个完整的gRPC示例代码，并提供了代码的GitHub链接。&lt;/p&gt;</description>
       
     </item>
     

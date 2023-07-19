@@ -18,7 +18,7 @@
       <pubDate>Thu, 24 Nov 2022 18:30:37 +0800</pubDate>
       
       <guid>/article/gin-proxy/</guid>
-      <description>&lt;p&gt;gin使用&lt;code&gt;httputil.NewSingleHostReverseProxy&lt;/code&gt;实现proxy服务代理。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用Go语言的Gin框架和httputil.NewSingleHostReverseProxy方法实现代理服务。文章提供了详细的代码示例，展示了如何创建一个反向代理，将请求转发到指定的远程服务器。同时，文章还解释了如何设置请求的头部、主机、URL方案和路径等信息。&lt;/p&gt;</description>
       
     </item>
     

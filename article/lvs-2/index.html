@@ -13,7 +13,7 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">LVS + Keepalived实现集群高可用</h1><p class="article date">September 17, 2021</p></section><article class="article markdown-body"><p>LVS + Keepalived集群高可用实践。</p>
+    <h1 class="article title">LVS + Keepalived实现集群高可用</h1><p class="article date">September 17, 2021</p></section><article class="article markdown-body"><p>本文详细介绍了如何使用LVS和Keepalived实现集群高可用。首先，我们在LVS服务器上安装ipvsadm和keepalived服务，然后在WEB服务器上安装nginx服务并配置index.html文件。接着，我们在LVS服务器上配置keepalived.conf文件和RS服务，最后通过访问VIP来验证配置的正确性。整个过程中，我们详细解释了每一步的操作和配置的含义，帮助读者更好地理解和实践。</p>
 <h2 id="机器说明">机器说明</h2>
 <table>
 <thead>

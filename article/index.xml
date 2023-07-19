@@ -18,7 +18,7 @@
       <pubDate>Fri, 14 Jul 2023 20:47:20 +0800</pubDate>
       
       <guid>/article/golang%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/</guid>
-      <description>&lt;p&gt;golang 数据库连接池maxOpenConns、maxIdleConns、maxIdleTime、maxLifeTime相关配置说明。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了Golang数据库连接池的四个参数：maxOpenConns、maxIdleConns、maxIdleTime、maxLifeTime的设置和使用。其中，maxOpenConns是连接池最多同时打开的连接数，maxIdleConns是连接池里最大空闲连接数，maxIdleTime是连接池里面的连接最大空闲时长，maxLifeTime是连接池里面的连接最大存活时长。文章还详细解释了这些参数的设置原则和注意事项。&lt;/p&gt;</description>
       
     </item>
     
@@ -48,7 +48,7 @@
       <pubDate>Sat, 01 Apr 2023 20:40:37 +0800</pubDate>
       
       <guid>/article/etcd/</guid>
-      <description>&lt;p&gt;etcd是一款分布式的键值存储系统，常用于分布式系统中的服务发现、配置管理等场景。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在CentOS系统上搭建etcd集群。首先，文章详细解释了etcd的特点和相关概念。然后，文章通过实例详细介绍了如何在三个节点上安装etcd，包括初始化节点和新增节点。最后，文章还介绍了如何移除节点。文章的内容详细且实用，对于需要在CentOS系统上搭建etcd集群的读者来说非常有帮助。&lt;/p&gt;</description>
       
     </item>
     
@@ -58,7 +58,7 @@
       <pubDate>Sat, 25 Feb 2023 21:00:37 +0800</pubDate>
       
       <guid>/article/gin-should-binding/</guid>
-      <description>&lt;p&gt;gin Bind 参数绑定。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要讲述了Gin框架中的参数绑定功能，包括Bind和ShouldBind的区别以及使用方法。Bind在出错时会返回400状态码，而ShouldBind则允许用户自定义错误码。文章还详细介绍了ShouldBind和ShouldBindJSON的使用场景，前者主要用于非GET请求的json参数绑定，后者则专门用于json参数的绑定。&lt;/p&gt;</description>
       
     </item>
     
@@ -78,7 +78,7 @@
       <pubDate>Sat, 25 Feb 2023 20:30:37 +0800</pubDate>
       
       <guid>/article/mysql-join/</guid>
-      <description>&lt;p&gt;mysql join、inner join、left join 、right join 详解。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章详细解释了MySQL中的join、inner join、left join和right join的用法。通过实例展示了如何在两张表之间进行有效连接，以及如何使用左连接和右连接来处理不存在的数据。文章还包含了一些实用的MySQL命令和查询结果，以帮助读者更好地理解这些概念。&lt;/p&gt;</description>
       
     </item>
     
@@ -88,7 +88,7 @@
       <pubDate>Sat, 25 Feb 2023 19:30:37 +0800</pubDate>
       
       <guid>/article/export-csv/</guid>
-      <description>&lt;p&gt;golang连接mysql数据库导出csv文件。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用Go语言连接MySQL数据库并导出CSV文件。首先，我们需要使用sql.Open函数连接到数据库。然后，我们使用db.Query函数查询用户数据。接着，我们将查询结果添加到一个二维字符串数组中，准备写入CSV文件。最后，我们调用WriteCsv函数将数据写入CSV文件。这个函数首先创建一个新的文件，然后使用csv.NewWriter创建一个新的CSV writer，最后将数据写入文件并刷新writer。&lt;/p&gt;</description>
       
     </item>
     
@@ -98,7 +98,7 @@
       <pubDate>Thu, 24 Nov 2022 18:30:37 +0800</pubDate>
       
       <guid>/article/gin-proxy/</guid>
-      <description>&lt;p&gt;gin使用&lt;code&gt;httputil.NewSingleHostReverseProxy&lt;/code&gt;实现proxy服务代理。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用Go语言的Gin框架和httputil.NewSingleHostReverseProxy方法实现代理服务。文章提供了详细的代码示例，展示了如何创建一个反向代理，将请求转发到指定的远程服务器。同时，文章还解释了如何设置请求的头部、主机、URL方案和路径等信息。&lt;/p&gt;</description>
       
     </item>
     
@@ -108,7 +108,7 @@
       <pubDate>Thu, 24 Nov 2022 18:30:37 +0800</pubDate>
       
       <guid>/article/gin-binding/</guid>
-      <description>&lt;p&gt;gin当请求对象为数组时，binding不生效问题解决。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要解决了在使用Go语言的gin框架进行请求绑定时，如果请求对象为数组，绑定可能不会生效的问题。文章首先展示了问题的产生，然后提供了解决方案：在数组类型的绑定标签中，将required改为dive。这样，gin就会递归验证数组中的每一个对象。最后，文章提供了相关的参考链接。&lt;/p&gt;</description>
       
     </item>
     
@@ -118,7 +118,7 @@
       <pubDate>Wed, 24 Aug 2022 22:31:37 +0800</pubDate>
       
       <guid>/article/django-01/</guid>
-      <description>&lt;p&gt;Django 项目实践01。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章是关于Django项目实践的教程。首先，我们介绍了如何安装Django。然后，我们创建了一个新的Django项目，并进行了数据库的初始化。接着，我们启动了Django服务，并展示了如何在浏览器中查看项目。最后，我们创建了一个新的应用程序，并定义了一个简单的模型。这篇文章是对Django项目实践的基础介绍，适合初学者阅读。&lt;/p&gt;</description>
       
     </item>
     
@@ -128,7 +128,7 @@
       <pubDate>Wed, 06 Jul 2022 23:09:37 +0800</pubDate>
       
       <guid>/article/py-test/</guid>
-      <description>&lt;p&gt;Python代码测试。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章是关于Python单元测试的教程。文章首先介绍了Python代码测试的重要性，然后详细解释了如何使用Python的unittest模块进行单元测试。文章中还提供了一个简单的单元测试示例，包括如何创建测试类，如何编写测试方法，以及如何使用断言进行测试。这篇文章对于想要学习Python单元测试的读者来说是非常有帮助的。&lt;/p&gt;</description>
       
     </item>
     
@@ -138,7 +138,7 @@
       <pubDate>Wed, 06 Jul 2022 21:49:37 +0800</pubDate>
       
       <guid>/article/cloc/</guid>
-      <description>&lt;p&gt;代码统计工具。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文介绍了cloc代码统计工具的安装和使用方法。cloc可以统计代码文件的数量、空行、注释和代码行数。通过执行cloc命令，可以得到详细的统计结果，包括各种语言的文件数、空行数、注释数和代码行数。这是一个非常实用的工具，可以帮助我们更好地理解和管理代码。&lt;/p&gt;</description>
       
     </item>
     
@@ -148,7 +148,7 @@
       <pubDate>Mon, 04 Jul 2022 22:41:37 +0800</pubDate>
       
       <guid>/article/py-file/</guid>
-      <description>&lt;p&gt;Python异常处理 try-except。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了Python的异常处理方法，主要讲解了try-except语句的使用。文章通过一个实例，展示了如何使用try-except语句来处理文件读取时可能出现的FileNotFoundError异常。当文件不存在时，程序会捕获这个异常，并打印出&amp;quot;file not found&amp;rdquo;。如果文件存在且无异常，程序会读取文件内容并打印出来。&lt;/p&gt;</description>
       
     </item>
     
@@ -158,7 +158,7 @@
       <pubDate>Sun, 03 Jul 2022 20:40:37 +0800</pubDate>
       
       <guid>/article/py-except/</guid>
-      <description>&lt;p&gt;Python文件读取、写入。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了Python中文件的读取和写入操作。首先，通过open函数和with关键字，我们可以方便地打开文件并在不再需要时自动关闭。文章详细介绍了如何读取文件的每一行，包括如何去除空行。然后，文章展示了如何将文件的内容读取到列表中。在文件写入部分，我们学习了如何使用不同的模式（如写入模式和附加模式）来写入文件。如果文件不存在，Python会自动创建。&lt;/p&gt;</description>
       
     </item>
     
@@ -168,7 +168,7 @@
       <pubDate>Thu, 30 Jun 2022 22:54:37 +0800</pubDate>
       
       <guid>/article/conda/</guid>
-      <description>&lt;p&gt;Conda是一个开源软件包管理系统和环境管理系统。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了Conda包管理工具的使用，包括安装方法、设置镜像源、创建和激活环境等操作。同时，文章还解答了在使用过程中可能遇到的问题，如设置清华源问题和激活后包版本未变的问题，并给出了解决方案。最后，文章提供了一些参考链接，包括Conda的官方文档和其他相关教程。&lt;/p&gt;</description>
       
     </item>
     
@@ -178,7 +178,7 @@
       <pubDate>Mon, 27 Jun 2022 22:31:37 +0800</pubDate>
       
       <guid>/article/core/</guid>
-      <description>&lt;p&gt;ulimit和core文件的分析方法。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了Linux下的core文件分析方法。首先，文章解释了如何使用ulimit命令设置生成core文件，以及各参数的含义。接着，文章详细描述了core文件的生成过程和作用，以及如何设置core dump的文件目录和命名规则。文章还提供了如何使用gdb工具分析core文件的方法，并解释了在什么情况下可能不会生成core文件以及如何解决。最后，文章提供了相关的参考链接。&lt;/p&gt;</description>
       
     </item>
     
@@ -188,7 +188,7 @@
       <pubDate>Mon, 27 Jun 2022 22:28:37 +0800</pubDate>
       
       <guid>/article/dig/</guid>
-      <description>&lt;p&gt;dig 命令使用详解。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章详细介绍了如何使用 dig 命令来查询 DNS 信息。首先，它解释了如何使用 dig 命令查询单个主机的信息，然后介绍了如何从指定的 DNS 服务器上进行查询，最后，文章还讲解了如何使用 dig 的 -x 选项来反向解析 IP 地址对应的域名。文章中还包含了一些实际的命令示例和结果输出，帮助读者更好地理解和使用 dig 命令。&lt;/p&gt;</description>
       
     </item>
     
@@ -198,7 +198,7 @@
       <pubDate>Mon, 27 Jun 2022 22:25:37 +0800</pubDate>
       
       <guid>/article/gomonkey/</guid>
-      <description>&lt;p&gt;Golang 单元测试工具。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了Golang的单元测试工具Gomonkey。Gomonkey支持为函数、成员方法、函数变量、接口和全局变量打桩。文章详细展示了如何使用Gomonkey进行单元测试，并列出了可能导致打桩失败的原因。同时，文章还解释了什么是内联，并展示了如何禁用内联进行测试。&lt;/p&gt;</description>
       
     </item>
     
@@ -208,7 +208,7 @@
       <pubDate>Mon, 27 Jun 2022 21:58:37 +0800</pubDate>
       
       <guid>/article/goconvey/</guid>
-      <description>&lt;p&gt;GoConvey是一款针对Golang的测试框架&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了GoConvey测试框架的使用。GoConvey是一款针对Golang的测试框架，可以管理和运行测试用例，提供丰富的断言函数，并支持Web界面特性。文章详细介绍了如何安装GoConvey，如何编写测试用例，并展示了测试用例的执行结果。同时，文章还提供了一些编写测试用例的建议和参考链接。&lt;/p&gt;</description>
       
     </item>
     
@@ -218,7 +218,7 @@
       <pubDate>Wed, 22 Jun 2022 21:52:37 +0800</pubDate>
       
       <guid>/article/tcpdump-dns/</guid>
-      <description>&lt;p&gt;使用&lt;code&gt;tcpdump&lt;/code&gt;抓包域名dns解析过程。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用tcpdump工具抓取和分析域名DNS解析过程。首先，使用tcpdump命令启动对DNS报文的抓包。然后，使用host命令进行DNS查询。最后，分析tcpdump的输出结果，解读DNS查询和应答报文的内容。文章还提到了如何使用tcpdump的-X选项以16进制和ASCII方式打印报文内容，以及如何将抓到的数据包写入到文件中，然后导入到Wireshark中查看。&lt;/p&gt;</description>
       
     </item>
     
@@ -228,7 +228,7 @@
       <pubDate>Wed, 22 Jun 2022 21:45:37 +0800</pubDate>
       
       <guid>/article/golang-json/</guid>
-      <description>&lt;p&gt;Json 作为一种重要的数据格式，具有良好的可读性以及自描述性，广泛地应用在各种数据传输场景中。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要分析了Go语言中不同JSON库的性能。作者测试了ffjson、easyjson、jsoniter、codecjson和jsonparser等库，结果显示easyjson在序列化和反序列化方面表现最优，性能提升显著。jsoniter性能也很好，且100%兼容原生库。ffjson和codecjson的性能提升不明显，而jsonparser并不适合这样的场景。作者建议在追求极致性能时考虑使用easyjson，否则使用jsoniter。&lt;/p&gt;</description>
       
     </item>
     
@@ -248,7 +248,7 @@
       <pubDate>Mon, 25 Apr 2022 21:24:37 +0800</pubDate>
       
       <guid>/article/maven/</guid>
-      <description>&lt;p&gt;Maven 是一个项目管理工具，可以对 Java 项目进行构建、依赖管理。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文主要介绍了Maven的安装和使用，包括项目构建、依赖管理等。首先，我们需要下载并配置Maven，然后通过pom.xml文件进行项目管理。文章详细解释了如何使用Maven创建Java应用，以及如何构建和测试项目。最后，我们学习了如何执行jar包，包括pom.xml文件中需要引入的assembly插件和执行命令。&lt;/p&gt;</description>
       
     </item>
     
@@ -258,7 +258,7 @@
       <pubDate>Thu, 21 Apr 2022 15:21:37 +0800</pubDate>
       
       <guid>/article/hadoop%E6%90%AD%E5%BB%BA%E4%B8%80/</guid>
-      <description>&lt;p&gt;大多数教程都是从  &lt;a href=&#34;http://s.iarno.cn/pegHbK&#34;&gt;http://s.iarno.cn/pegHbK&lt;/a&gt; 下载安装包，目前该网站已收费，所以另寻途径安装hadoop环境。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章是关于如何在ECS实例上快速搭建Hadoop伪分布式环境的教程。主要步骤包括安装JDK，安装Hadoop，配置Hadoop，配置SSH免密登录，以及启动Hadoop。每个步骤都有详细的命令和操作说明，以及相关的参考链接。完成所有步骤后，可以通过访问特定的URL来验证Hadoop环境是否已成功搭建。&lt;/p&gt;</description>
       
     </item>
     
@@ -268,7 +268,7 @@
       <pubDate>Wed, 02 Mar 2022 09:38:37 +0800</pubDate>
       
       <guid>/article/py_list/</guid>
-      <description>&lt;p&gt;列表由一系列按特定顺序排列的元素组成。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章是关于Python列表的详细教程。它首先介绍了如何访问和修改列表元素，然后讲解了如何在列表末尾添加元素和在列表中插入元素。接着，文章详细解释了如何使用del和pop()方法根据索引删除元素，以及如何根据值删除元素。文章还介绍了sort()和sorted()方法进行列表排序，以及如何倒序打印列表元素和获取列表长度。最后，文章讲解了如何遍历整个列表，创建数值列表和数字列表，以及如何使用列表解析和列表切片。&lt;/p&gt;</description>
       
     </item>
     
@@ -278,7 +278,7 @@
       <pubDate>Mon, 28 Feb 2022 10:46:37 +0800</pubDate>
       
       <guid>/article/py_string/</guid>
-      <description>&lt;p&gt;变量和简单数据类型：字符串、整数、浮点数、常量。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了Python中的变量和简单数据类型，包括字符串、整数、浮点数和常量。在字符串部分，文章详细解释了如何使用方法修改字符串中的大小写，如何在字符串中使用变量，如何使用制表符和换行符添加空格，以及如何删除字符串两端的特殊字符。在数字部分，文章讲解了整数和浮点数的基本操作，以及如何在数字中使用下划线。此外，文章还介绍了如何给多个变量赋值，以及如何定义常量。&lt;/p&gt;</description>
       
     </item>
     
@@ -288,7 +288,7 @@
       <pubDate>Fri, 17 Sep 2021 22:00:00 +0800</pubDate>
       
       <guid>/article/lvs-2/</guid>
-      <description>&lt;p&gt;LVS + Keepalived集群高可用实践。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文详细介绍了如何使用LVS和Keepalived实现集群高可用。首先，我们在LVS服务器上安装ipvsadm和keepalived服务，然后在WEB服务器上安装nginx服务并配置index.html文件。接着，我们在LVS服务器上配置keepalived.conf文件和RS服务，最后通过访问VIP来验证配置的正确性。整个过程中，我们详细解释了每一步的操作和配置的含义，帮助读者更好地理解和实践。&lt;/p&gt;</description>
       
     </item>
     
@@ -298,7 +298,7 @@
       <pubDate>Thu, 16 Sep 2021 23:00:00 +0800</pubDate>
       
       <guid>/article/lvs-1/</guid>
-      <description>&lt;p&gt;LVS负载均衡操作与实践。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章详细介绍了如何使用LVS进行负载均衡的实践操作。首先，文章列出了所需的服务器IP和角色，然后分别介绍了在LVS服务器和WEB服务器上的配置步骤。在LVS服务器上，主要是安装ipvsadm，配置VIP网卡和使用ipvsadm配置VIP。在WEB服务器上，主要是安装nginx服务，配置index.html文件，修改arp_ignore和arp_announce配置，以及环回接口配置VIP。最后，文章展示了如何在LVS服务器上添加rs，以及如何访问VIP。&lt;/p&gt;</description>
       
     </item>
     
@@ -308,8 +308,7 @@
       <pubDate>Sat, 11 Sep 2021 20:00:00 +0800</pubDate>
       
       <guid>/article/mac-vm/</guid>
-      <description>&lt;h2 id=&#34;安装vmware-fusion&#34;&gt;安装VMware Fusion&lt;/h2&gt;
-&lt;p&gt;Mac 安装VM虚拟机 、centos虚拟机创建、网络相关配置。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在Mac上安装VM虚拟机和Centos虚拟机，并进行网络配置。首先，从VMware官网下载并安装VMware Fusion。然后，从Centos官网下载Centos镜像，并在VMware Fusion中创建Centos虚拟机。最后，进行虚拟机网络配置，包括选择网络模式，查看WIFI项，配置虚拟机的ifcfg-ens33文件，设置GATEWAY和DNS，最后重启network服务。&lt;/p&gt;</description>
       
     </item>
     
@@ -319,7 +318,7 @@
       <pubDate>Thu, 15 Jul 2021 21:10:57 +0800</pubDate>
       
       <guid>/article/plugin-dev4/</guid>
-      <description>&lt;p&gt;使用Go语言开发自定义插件。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何使用Go语言开发自定义插件。首先，我们需要下载并安装go-pluginserver，然后在CentOS环境下安装C相关的编译环境。接着，我们可以下载官方的插件示例，并通过Go语言编写自己的插件。最后，我们需要配置相关的环境变量并启动Kong服务。文章还提供了Konga插件的示例图和相关参考链接。&lt;/p&gt;</description>
       
     </item>
     
@@ -329,7 +328,7 @@
       <pubDate>Wed, 14 Jul 2021 21:10:57 +0800</pubDate>
       
       <guid>/article/plugin-dev3/</guid>
-      <description>&lt;p&gt;使用自定义插件，Docker容器启动相关配置如下：&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用Docker启动Kong并加载自定义插件。详细介绍了Docker启动命令中的环境变量和挂载路径的配置。特别注意，如果出现ntt-auth plugin is in use but not enabled错误，需要检查插件路径和KONG_PLUGINS环境变量。&lt;/p&gt;</description>
       
     </item>
     
@@ -339,7 +338,7 @@
       <pubDate>Tue, 13 Jul 2021 22:12:57 +0800</pubDate>
       
       <guid>/article/plugin-dev2/</guid>
-      <description>生命周期 Kong 插件允许您在请求/响应或 tcp 流连接的生命周期的多个入口点注入自定义逻辑（在 Lua 中），因为它由 Kong 代理。为此，必须实现base_plugi</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在Kong中开发自定义插件。首先，它解释了Kong插件的生命周期，并展示了如何在Lua中实现base_plugin.lua接口的方法。然后，文章提供了一个NttAuthHandler插件的示例，包括access、init_worker和log阶段的实现。接着，文章介绍了如何定义插件的schema。最后，文章讨论了在Docker容器部署中如何使用lua_shared_dict共享内存，并提供了Kong Nginx模板的相关配置。&lt;/p&gt;</description>
       
     </item>
     
@@ -349,7 +348,7 @@
       <pubDate>Tue, 13 Jul 2021 21:41:57 +0800</pubDate>
       
       <guid>/article/plugin-dev1/</guid>
-      <description>介绍 将您的插件视为一组Lua 模块。本章中描述的每个文件都被视为一个单独的模块。如果它们的名称遵循以下约定，Kong 将检测并加载您的插件模块：</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何开发Kong自定义插件。首先，将插件视为一组Lua模块，Kong会检测并加载遵循特定命名约定的插件模块。插件由两个强制性模块组成：handler.lua和schema.lua。一些插件可能需要更深入地集成到Kong中，例如在数据库中有自己的表，或在Admin API中公开端点等，这些都可以通过向插件添加新模块来完成。&lt;/p&gt;</description>
       
     </item>
     
@@ -359,7 +358,7 @@
       <pubDate>Wed, 21 Apr 2021 23:06:53 +0800</pubDate>
       
       <guid>/article/rate-limiting/</guid>
-      <description>一、限流简介 什么是限流 在不同场景下限流的定义也各不相同，可以是每秒请求数、每秒事务处理数、网络流量。 通常我们所说的限流指的是限制到达系统并发</description>
+      <description>&lt;p&gt;本文主要介绍了四种限流算法：固定窗口计数器算法、滑动窗口计数算法、漏桶算法、令牌桶算法，并通过Lua脚本和Redis实现了令牌桶算法。文章详细解释了如何使用Redis的SCRIPT LOAD和EVALSHA命令来执行限流逻辑，并通过返回值判断是否触发限流行为。最后，文章对四种算法进行了比较和总结，认为令牌桶算法是一种相对完美的限流算法，适用于大多数限流场景。&lt;/p&gt;</description>
       
     </item>
     
@@ -369,7 +368,7 @@
       <pubDate>Mon, 19 Apr 2021 21:36:52 +0800</pubDate>
       
       <guid>/article/lua-shared-dict/</guid>
-      <description>lua_shared_dict 在ngx_lua模块中使用共享内存字典项相关API的前提条件是已经使用lua_shared_dict命令定义了一个字典项对象，该命令的具体</description>
+      <description>&lt;p&gt;本文介绍了在ngx_lua模块中如何使用lua_shared_dict命令定义共享内存字典项对象，并通过ngx.shared.DICT接口获取这些对象。文章详细解释了相关语法和示例，包括如何设置和获取共享内存上的值。同时，还讨论了在Nginx重启和退出时，共享内存字典项的行为。&lt;/p&gt;</description>
       
     </item>
     
@@ -379,8 +378,7 @@
       <pubDate>Mon, 19 Apr 2021 21:36:52 +0800</pubDate>
       
       <guid>/article/lua-timer/</guid>
-      <description>&lt;p&gt;openresty的定时任务是要跟worker绑定的。如果不绑定特定的worker，那么所有启动的woker都会去执行定时任务。&lt;/p&gt;
-&lt;p&gt;一般情况下默认绑定worker_id=0的，这样在nginx整个进程里面，就只执行一个timer。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在OpenResty中配置和使用定时任务。首先，文章解释了定时任务需要与worker绑定，通常默认绑定到worker_id=0，这样在Nginx进程中只执行一个timer。然后，文章提供了在nginx.conf中配置定时任务的具体方法。接着，文章介绍了如何使用ngx.timer.every接口，这是ngx提供的最新接口。最后，文章提供了一些相关的日志输出和错误处理方法。&lt;/p&gt;</description>
       
     </item>
     
@@ -390,7 +388,7 @@
       <pubDate>Wed, 17 Mar 2021 22:10:00 +0800</pubDate>
       
       <guid>/article/lsof/</guid>
-      <description>错误 socket：too many open files 问题原因 系统资源限制小（ulimit -a 查看open files限制） 数据库打开文件限制小（登录数据库 show variables like &#39;%o</description>
+      <description>&lt;p&gt;这篇文章主要解决了&amp;quot;too many open files&amp;quot;问题的定位。首先，它列出了可能的问题原因，包括系统资源限制小，数据库打开文件限制小，以及程序代码问题。然后，文章详细介绍了如何使用ulimit命令查看和调整资源限制，特别是打开文件数的限制。最后，文章介绍了如何使用lsof命令查看打开文件数，包括查看某个进程打开文件数和查看当前系统打开文件数。&lt;/p&gt;</description>
       
     </item>
     
@@ -400,17 +398,7 @@
       <pubDate>Mon, 28 Dec 2020 19:46:37 +0800</pubDate>
       
       <guid>/article/pprof/</guid>
-      <description>&lt;h2 id=&#34;pprof&#34;&gt;pprof&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 导入包
-&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
-  &lt;span class=&#34;s&#34;&gt;&amp;#34;github.com/DeanThompson/ginpprof&amp;#34;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-
-
-&lt;span class=&#34;c1&#34;&gt;// gin框架直接集成
-&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;router&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;gin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;New&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;ginpprof&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Wrapper&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;router&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用Gin pprof进行Go语言的性能分析。首先，通过导入github.com/DeanThompson/ginpprof包并使用ginpprof.Wrapper(router)将其集成到gin框架中。然后，通过命令行工具go tool pprof获取和分析程序的性能数据。文章还提供了如何使用top命令查看当前内存使用情况，并建议定期使用此命令以检测是否存在内存持续增长的情况。最后，文章提供了两个参考链接，供读者深入学习。&lt;/p&gt;</description>
       
     </item>
     
@@ -420,7 +408,7 @@
       <pubDate>Mon, 28 Dec 2020 19:46:28 +0800</pubDate>
       
       <guid>/article/grpc/</guid>
-      <description>相关定义 在.proto文件中定义一个服务。 使用protocol buffer编译器生成客户端和服务端代码。 使用gRPC的Go API为你的服务写</description>
+      <description>&lt;p&gt;这篇文章介绍了如何在Go中使用gRPC。首先，它解释了如何在.proto文件中定义服务，并使用protocol buffer编译器生成客户端和服务端代码。然后，它详细介绍了如何安装gRPC包，设置环境变量，以及如何创建gRPC服务器和客户端。最后，它提供了一个完整的gRPC示例代码，并提供了代码的GitHub链接。&lt;/p&gt;</description>
       
     </item>
     
@@ -430,7 +418,7 @@
       <pubDate>Mon, 28 Dec 2020 19:46:18 +0800</pubDate>
       
       <guid>/article/sync_wait_group/</guid>
-      <description>&lt;p&gt;协程（coroutine）是Go语言中的轻量级线程实现，由Go运行时（runtime）管理。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何在Go语言中使用协程进行异步请求。文章首先解释了协程是Go语言中的轻量级线程实现，由Go运行时管理。然后，通过一个示例展示了如何使用sync.WaitGroup来同步多个协程。示例中，我们创建了两个协程，每个协程都会调用getData()函数并将结果存储在rel映射中。最后，我们等待所有协程完成，然后打印rel映射的内容。运行结果显示，两个协程都成功地获取了数据并存储在rel映射中。&lt;/p&gt;</description>
       
     </item>
     
@@ -440,10 +428,7 @@
       <pubDate>Tue, 17 Nov 2020 22:22:01 +0800</pubDate>
       
       <guid>/article/postgresql-centos/</guid>
-      <description>&lt;h2 id=&#34;1进入官网下载所需版本&#34;&gt;1、进入官网下载所需版本&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.postgresql.org/download/linux/redhat/&#34;&gt;https://www.postgresql.org/download/linux/redhat/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img  src=&#34;https://i.loli.net/2020/11/17/6yQwYKjJUbh89k3.png&#34;
-        alt=&#34;image-20201117222643658&#34;/&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何使用Go语言开发自定义插件。首先，我们需要下载并安装go-pluginserver，然后在CentOS环境下安装C相关的编译环境。接着，我们可以下载官方的插件示例，并通过Go语言编写自己的插件。最后，我们需要配置相关的环境变量并启动Kong服务。文章还提供了Konga插件的示例图和相关参考链接。&lt;/p&gt;</description>
       
     </item>
     
@@ -453,8 +438,7 @@
       <pubDate>Sat, 14 Nov 2020 21:19:05 +0800</pubDate>
       
       <guid>/article/kong-centos/</guid>
-      <description>&lt;h2 id=&#34;下载安装包&#34;&gt;下载安装包：&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://bintray.com/kong/kong-community-edition-rpm/download_file?file_path=centos/7/kong-community-edition-1.0.2.el7.noarch.rpm&#34;&gt;https://bintray.com/kong/kong-community-edition-rpm/download_file?file_path=centos/7/kong-community-edition-1.0.2.el7.noarch.rpm&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在CentOS 7上安装和配置Kong网关。首先，提供了Kong安装包的下载链接，然后详细说明了如何使用YUM命令进行安装。接着，文章介绍了如何准备PostgreSQL数据库，并给出了创建用户和数据库的命令。然后，文章描述了如何配置Kong的数据库连接，并提供了相关的命令。最后，文章介绍了如何启动、检查和停止Kong服务。&lt;/p&gt;</description>
       
     </item>
     
@@ -464,7 +448,7 @@
       <pubDate>Wed, 28 Oct 2020 22:37:06 +0800</pubDate>
       
       <guid>/article/image-url-size/</guid>
-      <description>通过图片url获取图片尺寸大小(size) 问题 当使用image.Decode时报image: unknown format· 这是因为忘记引入包import _</description>
+      <description>&lt;p&gt;这篇文章介绍了如何通过Go语言获取图片URL的尺寸大小。首先，我们需要导入image/gif，image/jpeg，image/png这三个包，以便解码不同格式的图片。然后，我们使用http.Get方法获取图片，使用image.Decode解码图片，最后通过m.Bounds().Dx()，m.Bounds().Dy()和m.Bounds().Size()获取图片的宽度、高度和尺寸。&lt;/p&gt;</description>
       
     </item>
     
@@ -474,7 +458,7 @@
       <pubDate>Tue, 27 Oct 2020 23:37:50 +0800</pubDate>
       
       <guid>/article/upstream/</guid>
-      <description>环境说明 注：由于docker network原因，宿主机127.0.0.1可能会访问不到，可直接使用外网域名+端口 # 开放两个测试的微服务接口 http://myhost1:8881</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何配置Kong网关进行负载均衡。首先，文章提供了两个微服务接口用于测试。然后，通过Konga和Kong Admin API两种方式分别进行了详细的配置步骤说明。在Konga部分，包括了如何配置upstream、Service发布、Route匹配规则以及验证结果。在Kong Admin API部分，也包括了如何配置upstream、service和route。最后，文章提供了通过浏览器和命令行API进行测试的方法。&lt;/p&gt;</description>
       
     </item>
     
@@ -484,7 +468,7 @@
       <pubDate>Sun, 25 Oct 2020 20:00:56 +0800</pubDate>
       
       <guid>/article/network/</guid>
-      <description>大纲结构 一.带宽与宽带的区别是什么？ 带宽是量词，指的是网速的大小，比如1Mbps的意思是一兆比特每秒，这个数值就是指带宽。 宽带是名词，说明网</description>
+      <description>&lt;p&gt;这篇文章主要解释了宽带、带宽、流量、网速、内网、外网之间的区别。宽带是一种业务，带宽是传输速度。内网IP只在局域网内部具有唯一性，而公网IP具有世界范围的唯一性。文章还介绍了如何判断一个IP地址是内网IP还是公网IP，包括直观法和经验法。最后，文章提到了一些关于网络的常见误解和实际情况。&lt;/p&gt;</description>
       
     </item>
     
@@ -494,7 +478,7 @@
       <pubDate>Thu, 22 Oct 2020 21:51:43 +0800</pubDate>
       
       <guid>/article/mysql-excel/</guid>
-      <description>命令 mysql -h x.x.x.x -P 3306 -u用户名 -p密码 -e &amp;#34;select * from test&amp;#34; 数据库 &amp;gt; /tmp/test.xls 说明 -h ：数据库Host -P： 数据库端口 -u： 用户名 -p： 密码 -e：sql语句 /tmp/t</description>
+      <description>&lt;p&gt;本文介绍了如何使用MySQL命令行工具导出Excel表格或txt文件。主要通过mysql -h x.x.x.x -P 3306 -u用户名 -p密码 -e &amp;ldquo;select * from test&amp;rdquo; 数据库 &amp;gt; /tmp/test.xls这条命令实现。其中，-h代表数据库Host，-P代表数据库端口，-u代表用户名，-p代表密码，-e代表sql语句，/tmp/test.xls代表文件名。&lt;/p&gt;</description>
       
     </item>
     
@@ -504,7 +488,7 @@
       <pubDate>Wed, 21 Oct 2020 22:41:57 +0800</pubDate>
       
       <guid>/article/kong-plugins/</guid>
-      <description>CREATE CONSUMER Cerdentials 默认为所有consumer 创建 例： Username: test Password：test Route 添加插件 添加 Basic Auth 插件 添加成功 Postman 发送请求 注：header中的 Autho</description>
+      <description>&lt;p&gt;这篇文章主要介绍了Konga插件的使用案例，包括创建消费者、添加凭证、路由添加插件以及使用Postman发送请求等步骤。文章详细解释了如何添加Basic Auth插件，并通过图文并茂的方式展示了操作流程。同时，文章还提供了相关参考链接，供读者深入学习。&lt;/p&gt;</description>
       
     </item>
     
@@ -514,7 +498,7 @@
       <pubDate>Fri, 16 Oct 2020 21:55:17 +0800</pubDate>
       
       <guid>/article/konga/</guid>
-      <description>konga使用 konga安装请参考Docker安装kong网关 Url：http://127.0.0.1:1337 注册账号并登陆平台 配置DAS</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何使用Konga，包括安装、配置Dashboard、创建Service、配置路由以及使用Postman请求网关。文章首先提供了Konga的安装链接，然后详细解释了如何配置Dashboard，包括如何查找Kong Admin URL。接着，文章介绍了如何创建Service和配置路由，特别强调了在配置路由时，对于hosts、paths、methods等配置项需要按回车键来应用每个输入的值。最后，文章展示了如何使用Postman请求网关，包括请求的端口和Headers头的配置。&lt;/p&gt;</description>
       
     </item>
     
@@ -524,7 +508,7 @@
       <pubDate>Fri, 16 Oct 2020 21:47:24 +0800</pubDate>
       
       <guid>/article/docker-kong/</guid>
-      <description>创建Docker network $ docker network create kong-net 创建数据库 本案例使用的是PostgreSQL数据库 Cassandra数据库 $ docker run -d --name kong-database \ --network=kong-net \ -p 9042:9042 \ cassandra:3 Postgr</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何使用Docker安装Kong网关。首先，创建一个Docker网络，然后创建PostgreSQL或Cassandra数据库。接着，准备数据库并启动Kong服务。Kong服务默认监听8000、8443、8001和8444端口。验证Kong服务后，安装Konga，一个Kong的管理界面。最后，提供了几个参考链接，包括Kong的官方文档和其他相关文章。&lt;/p&gt;</description>
       
     </item>
     
@@ -534,7 +518,7 @@
       <pubDate>Sat, 26 Sep 2020 20:37:11 +0800</pubDate>
       
       <guid>/article/user-burp/</guid>
-      <description>正版Burp Suite无法修改线程数，本文主要介绍破解版本的使用流程。 破解之后下载的正版无法正常启动 ￣□￣｜｜ 启动 注：如对路径有疑问请查看m</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何使用破解版本的Burp Suite，一个多线程请求工具。首先，文章详细解释了如何启动软件，包括运行关键的burp-loader-keygen.jar文件。然后，文章逐步指导读者如何配置host，请求信息，请求数量，线程数，并执行请求。每个步骤都配有清晰的图片指导。&lt;/p&gt;</description>
       
     </item>
     
@@ -544,7 +528,7 @@
       <pubDate>Sat, 26 Sep 2020 20:16:02 +0800</pubDate>
       
       <guid>/article/burp/</guid>
-      <description>1、官网下载社区版BurpSuite 2、下载注册机 3、载安装的JDK10 （版本太高破解不了） 4、安装JDK1.8 5、按参考链接破解 1、官网下</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在MacOS上安装并破解BurpSuite。首先，从官网下载社区版的BurpSuite，然后下载注册机。由于JDK10版本过高无法破解，需要卸载JDK10并安装JDK1.8。设置好JDK环境变量后，将注册机的文件拷贝进app目录，修改vmoptions.txt文件，运行注册机并按照指示进行破解。&lt;/p&gt;</description>
       
     </item>
     
@@ -554,7 +538,7 @@
       <pubDate>Tue, 08 Sep 2020 21:38:21 +0800</pubDate>
       
       <guid>/article/idea/</guid>
-      <description>&lt;p&gt;IDEA2020.2激活码，IDEA2020.2破解，IDEA2020破解教程，idea2020最新破解教程&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何破解 IntelliJ IDEA，包括 IDEA2020.2 的激活码和破解教程。文章提供了 IDEA 的下载链接和激活码的下载链接，以及如何使用 jetbrains-agent.jar 文件进行激活的步骤。请注意，这些信息仅供个人学习使用，不得用于商业用途。&lt;/p&gt;</description>
       
     </item>
     
@@ -564,7 +548,7 @@
       <pubDate>Fri, 04 Sep 2020 21:04:12 +0800</pubDate>
       
       <guid>/article/wrk/</guid>
-      <description>&lt;p&gt;用过了很多压测工具，却一直没找到中意的那款。最近试了wrk感觉不错，写下这份使用指南给自己备忘用，如果能帮到你，那也很好。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章是关于wrk压测工具的使用指南。它首先介绍了如何安装wrk，然后详细解释了wrk的基本使用方法，包括如何查看使用帮助、版本信息，以及如何进行简单的压测。文章还介绍了如何增加header参数进行压测，以及如何压测POST接口。在每个示例后，作者都对结果进行了详细的注释和解释。&lt;/p&gt;</description>
       
     </item>
     
@@ -574,7 +558,7 @@
       <pubDate>Fri, 04 Sep 2020 21:04:12 +0800</pubDate>
       
       <guid>/article/nc/</guid>
-      <description>&lt;p&gt;一般情况下使用&lt;code&gt;telnet ip port&lt;/code&gt;判断端口通不通，其实测试方法不止这一种，本文主要介绍&lt;code&gt;nc&lt;/code&gt;检测工具。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用telnet和nc命令来测试端口是否开放。首先，使用telnet ip port命令来判断端口是否通，如果连接被拒绝则端口不通。然后，文章介绍了nc命令的使用，通过nc -v localhost port命令来检测端口，如果显示Connection refused则端口不通，如果显示Connection to x.x.x.x port [tcp/http] succeeded!则端口通。&lt;/p&gt;</description>
       
     </item>
     
@@ -594,9 +578,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/golang-excel%E5%AF%BC%E5%87%BA/</guid>
-      <description>&lt;h2 id=&#34;excel-导出&#34;&gt;Excel 导出&lt;/h2&gt;
-&lt;h4 id=&#34;github-地址&#34;&gt;Github 地址&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/360EntSecGroup-Skylar/excelize&#34;&gt;https://github.com/360EntSecGroup-Skylar/excelize&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用Golang进行Excel文件的导出。它详细解释了如何使用excelize库创建一个新的Excel文件，并设置单元格的值。然后，它展示了如何将这个Excel文件作为一个下载响应发送给客户端。文章还提供了相关的Github和文档链接，供读者进一步学习和探索。&lt;/p&gt;</description>
       
     </item>
     
@@ -606,9 +588,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/golang-%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7%E6%B3%95/</guid>
-      <description>&lt;p&gt;使用蓄水池抽样法，等概率随机抽取。&lt;/p&gt;
-&lt;h2 id=&#34;相关文章&#34;&gt;相关文章&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/snowInPluto/p/5996269.html&#34;&gt;https://www.cnblogs.com/snowInPluto/p/5996269.html&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何在Go语言中实现蓄水池抽样法。蓄水池抽样法是一种等概率随机抽取的方法，适用于从大量数据中抽取样本。文章首先构建了一个可以放置m个元素的蓄水池，然后将前m个数依次放入。从第m+1个元素开始，以m/n的概率决定元素是否被替换到池子中。当遍历完所有元素后，就可以得出随机挑选的k个元素。该方法的时间复杂度为O(n)。&lt;/p&gt;</description>
       
     </item>
     
@@ -618,7 +598,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/hexo%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/</guid>
-      <description>&lt;h4 id=&#34;1将你原来电脑上已经配置好并生成的hexo目录拷到你的新电脑上注意无需拷全部只拷如下几个目录&#34;&gt;1.将你原来电脑上已经配置好并生成的hexo目录拷到你的新电脑上，注意无需拷全部，只拷如下几个目录：&lt;/h4&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何迁移Hexo博客。首先，将原电脑上配置好的Hexo目录拷贝到新电脑，包括_config.yml、package.json、scaffolds/、source/和themes/等文件和目录。然后在新电脑上配置Hexo环境，包括安装Node.js和Hexo。接着，将博客中的node_modules设置为环境变量。最后，进入Hexo目录，安装模块并部署。&lt;/p&gt;</description>
       
     </item>
     
@@ -628,7 +608,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/mysql%E6%9F%A5%E8%AF%A2%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5%E9%87%8D%E5%A4%8D%E7%9A%84%E5%80%BC/</guid>
-      <description>代码示例 SELECT * FROM 表名 (字段1,字段2) IN (SELECT 字段1,字段2 FROM 表名 GROUP BY 字段1,字段2 HAVING COUNT(*)&amp;gt;1) ORDER BY 字段1;</description>
+      <description>本文介绍了如何在MySQL中查询多个字段重复的值。文章提供了一段SQL查询语句，该语句可以从指定的表中找出在特定字段（字段1和字段2）上有重</description>
       
     </item>
     
@@ -638,8 +618,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/pcntl-fork-%E5%A4%9A%E8%BF%9B%E7%A8%8B/</guid>
-      <description>&lt;h2 id=&#34;pcntl-简介&#34;&gt;pcntl 简介&lt;/h2&gt;
-&lt;p&gt;PHP的进程控制支持实现了Unix方式的进程创建, 程序执行, 信号处理以及进程的中断。 进程控制不能被应用在Web服务器环境，当其被用于Web服务环境时可能会带来意外的结果。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了PHP的pcntl_fork函数，这是一个用于创建子进程的函数。文章详细解释了如何使用这个函数，并通过代码示例展示了其用法。文章还进行了一个实验，测试了在创建子进程后，是父进程先执行还是子进程先执行。实验结果显示，pcntl_fork会首先执行父进程的逻辑，然后再执行子进程的逻辑。&lt;/p&gt;</description>
       
     </item>
     
@@ -649,14 +628,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/php%E5%86%85%E5%AE%B9%E7%BC%93%E5%AD%98yac/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;Yac 是为PHP实现的一个基于共享内存, 无锁的内容Cache&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;yac的两个应用场景&#34;&gt;Yac的两个应用场景:&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;让PHP进程之间共享一些简单的数据&lt;/li&gt;
-&lt;li&gt;高效地缓存一些页面结果&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了PHP内容缓存Yac的基本使用和安装方法。Yac是一个基于共享内存，无锁的内容缓存，主要应用于让PHP进程之间共享一些简单的数据和高效地缓存一些页面结果。文章详细介绍了如何下载和安装Yac，以及如何在php.ini中进行配置。同时，文章也列出了使用Yac的一些限制，例如缓存的键长度不超过48字节，缓存值不能超过60兆字节等。最后，文章通过一个简单的例子展示了如何在PHP中使用Yac进行数据的存取。&lt;/p&gt;</description>
       
     </item>
     
@@ -676,9 +648,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/utf8-bin%E5%92%8Cutf8-general-ci%E7%BC%96%E7%A0%81%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
-      <description>&lt;p&gt;MySQL中存在多种格式的utf8编码，其中最常见的两种为：&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;utf8_bin&lt;/code&gt; 将字符串中的每一个字符用二进制数据存储，区分大小写;
-&lt;code&gt;utf8_genera_ci&lt;/code&gt; 不区分大小写，ci为case insensitive的缩写，即大小写不敏感，为utf8默认编码。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文主要介绍了MySQL中utf8_bin和utf8_general_ci两种编码格式的区别。utf8_bin编码将字符串中的每个字符用二进制数据存储，区分大小写。而utf8_general_ci编码则不区分大小写，是utf8的默认编码。通过实例演示了在插入数据时，两种编码方式对大小写的处理差异。因此，在选择编码时，应注意这种区别。&lt;/p&gt;</description>
       
     </item>
     

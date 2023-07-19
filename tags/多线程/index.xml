@@ -18,7 +18,7 @@
       <pubDate>Sat, 26 Sep 2020 20:37:11 +0800</pubDate>
       
       <guid>/article/user-burp/</guid>
-      <description>正版Burp Suite无法修改线程数，本文主要介绍破解版本的使用流程。 破解之后下载的正版无法正常启动 ￣□￣｜｜ 启动 注：如对路径有疑问请查看m</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何使用破解版本的Burp Suite，一个多线程请求工具。首先，文章详细解释了如何启动软件，包括运行关键的burp-loader-keygen.jar文件。然后，文章逐步指导读者如何配置host，请求信息，请求数量，线程数，并执行请求。每个步骤都配有清晰的图片指导。&lt;/p&gt;</description>
       
     </item>
     
@@ -28,7 +28,7 @@
       <pubDate>Sat, 26 Sep 2020 20:16:02 +0800</pubDate>
       
       <guid>/article/burp/</guid>
-      <description>1、官网下载社区版BurpSuite 2、下载注册机 3、载安装的JDK10 （版本太高破解不了） 4、安装JDK1.8 5、按参考链接破解 1、官网下</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在MacOS上安装并破解BurpSuite。首先，从官网下载社区版的BurpSuite，然后下载注册机。由于JDK10版本过高无法破解，需要卸载JDK10并安装JDK1.8。设置好JDK环境变量后，将注册机的文件拷贝进app目录，修改vmoptions.txt文件，运行注册机并按照指示进行破解。&lt;/p&gt;</description>
       
     </item>
     

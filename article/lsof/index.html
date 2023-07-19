@@ -13,7 +13,8 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">too many open files 问题定位</h1><p class="article date">March 17, 2021</p></section><article class="article markdown-body"><h2 id="错误">错误</h2>
+    <h1 class="article title">too many open files 问题定位</h1><p class="article date">March 17, 2021</p></section><article class="article markdown-body"><p>这篇文章主要解决了&quot;too many open files&quot;问题的定位。首先，它列出了可能的问题原因，包括系统资源限制小，数据库打开文件限制小，以及程序代码问题。然后，文章详细介绍了如何使用ulimit命令查看和调整资源限制，特别是打开文件数的限制。最后，文章介绍了如何使用lsof命令查看打开文件数，包括查看某个进程打开文件数和查看当前系统打开文件数。</p>
+<h2 id="错误">错误</h2>
 <p><code>socket：too many open files</code></p>
 <h4 id="问题原因">问题原因</h4>
 <ul>

@@ -18,7 +18,7 @@
       <pubDate>Wed, 21 Apr 2021 23:06:53 +0800</pubDate>
       
       <guid>/article/rate-limiting/</guid>
-      <description>一、限流简介 什么是限流 在不同场景下限流的定义也各不相同，可以是每秒请求数、每秒事务处理数、网络流量。 通常我们所说的限流指的是限制到达系统并发</description>
+      <description>&lt;p&gt;本文主要介绍了四种限流算法：固定窗口计数器算法、滑动窗口计数算法、漏桶算法、令牌桶算法，并通过Lua脚本和Redis实现了令牌桶算法。文章详细解释了如何使用Redis的SCRIPT LOAD和EVALSHA命令来执行限流逻辑，并通过返回值判断是否触发限流行为。最后，文章对四种算法进行了比较和总结，认为令牌桶算法是一种相对完美的限流算法，适用于大多数限流场景。&lt;/p&gt;</description>
       
     </item>
     
@@ -28,7 +28,7 @@
       <pubDate>Mon, 19 Apr 2021 21:36:52 +0800</pubDate>
       
       <guid>/article/lua-shared-dict/</guid>
-      <description>lua_shared_dict 在ngx_lua模块中使用共享内存字典项相关API的前提条件是已经使用lua_shared_dict命令定义了一个字典项对象，该命令的具体</description>
+      <description>&lt;p&gt;本文介绍了在ngx_lua模块中如何使用lua_shared_dict命令定义共享内存字典项对象，并通过ngx.shared.DICT接口获取这些对象。文章详细解释了相关语法和示例，包括如何设置和获取共享内存上的值。同时，还讨论了在Nginx重启和退出时，共享内存字典项的行为。&lt;/p&gt;</description>
       
     </item>
     
@@ -38,8 +38,7 @@
       <pubDate>Mon, 19 Apr 2021 21:36:52 +0800</pubDate>
       
       <guid>/article/lua-timer/</guid>
-      <description>&lt;p&gt;openresty的定时任务是要跟worker绑定的。如果不绑定特定的worker，那么所有启动的woker都会去执行定时任务。&lt;/p&gt;
-&lt;p&gt;一般情况下默认绑定worker_id=0的，这样在nginx整个进程里面，就只执行一个timer。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在OpenResty中配置和使用定时任务。首先，文章解释了定时任务需要与worker绑定，通常默认绑定到worker_id=0，这样在Nginx进程中只执行一个timer。然后，文章提供了在nginx.conf中配置定时任务的具体方法。接着，文章介绍了如何使用ngx.timer.every接口，这是ngx提供的最新接口。最后，文章提供了一些相关的日志输出和错误处理方法。&lt;/p&gt;</description>
       
     </item>
     

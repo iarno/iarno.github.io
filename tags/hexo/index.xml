@@ -18,7 +18,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/hexo%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/</guid>
-      <description>&lt;h4 id=&#34;1将你原来电脑上已经配置好并生成的hexo目录拷到你的新电脑上注意无需拷全部只拷如下几个目录&#34;&gt;1.将你原来电脑上已经配置好并生成的hexo目录拷到你的新电脑上，注意无需拷全部，只拷如下几个目录：&lt;/h4&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何迁移Hexo博客。首先，将原电脑上配置好的Hexo目录拷贝到新电脑，包括_config.yml、package.json、scaffolds/、source/和themes/等文件和目录。然后在新电脑上配置Hexo环境，包括安装Node.js和Hexo。接着，将博客中的node_modules设置为环境变量。最后，进入Hexo目录，安装模块并部署。&lt;/p&gt;</description>
       
     </item>
     

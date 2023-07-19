@@ -18,7 +18,7 @@
       <pubDate>Fri, 17 Sep 2021 22:00:00 +0800</pubDate>
       
       <guid>/article/lvs-2/</guid>
-      <description>&lt;p&gt;LVS + Keepalived集群高可用实践。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文详细介绍了如何使用LVS和Keepalived实现集群高可用。首先，我们在LVS服务器上安装ipvsadm和keepalived服务，然后在WEB服务器上安装nginx服务并配置index.html文件。接着，我们在LVS服务器上配置keepalived.conf文件和RS服务，最后通过访问VIP来验证配置的正确性。整个过程中，我们详细解释了每一步的操作和配置的含义，帮助读者更好地理解和实践。&lt;/p&gt;</description>
       
     </item>
     
@@ -28,7 +28,7 @@
       <pubDate>Thu, 16 Sep 2021 23:00:00 +0800</pubDate>
       
       <guid>/article/lvs-1/</guid>
-      <description>&lt;p&gt;LVS负载均衡操作与实践。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章详细介绍了如何使用LVS进行负载均衡的实践操作。首先，文章列出了所需的服务器IP和角色，然后分别介绍了在LVS服务器和WEB服务器上的配置步骤。在LVS服务器上，主要是安装ipvsadm，配置VIP网卡和使用ipvsadm配置VIP。在WEB服务器上，主要是安装nginx服务，配置index.html文件，修改arp_ignore和arp_announce配置，以及环回接口配置VIP。最后，文章展示了如何在LVS服务器上添加rs，以及如何访问VIP。&lt;/p&gt;</description>
       
     </item>
     

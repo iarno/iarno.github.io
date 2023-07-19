@@ -13,7 +13,7 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Golang json 性能分析</h1><p class="article date">June 22, 2022</p></section><article class="article markdown-body"><p><img class="cover" src="https://s2.loli.net/2022/06/22/4fcYdxtOMJ7rDEj.jpg" alt></p><p>Json 作为一种重要的数据格式，具有良好的可读性以及自描述性，广泛地应用在各种数据传输场景中。</p>
+    <h1 class="article title">Golang json 性能分析</h1><p class="article date">June 22, 2022</p></section><article class="article markdown-body"><p><img class="cover" src="https://s2.loli.net/2022/06/22/4fcYdxtOMJ7rDEj.jpg" alt></p><p>这篇文章主要分析了Go语言中不同JSON库的性能。作者测试了ffjson、easyjson、jsoniter、codecjson和jsonparser等库，结果显示easyjson在序列化和反序列化方面表现最优，性能提升显著。jsoniter性能也很好，且100%兼容原生库。ffjson和codecjson的性能提升不明显，而jsonparser并不适合这样的场景。作者建议在追求极致性能时考虑使用easyjson，否则使用jsoniter。</p>
 <p>Go 语言里面原生支持了这种数据格式的序列化以及反序列化，内部使用反射机制实现，性能有点差，在高度依赖 json 解析的应用里，往往会成为性能瓶颈，好在已有很多第三方库帮我们解决了这个问题，但是这么多库，对于像我这种有选择困难症的人来说，到底要怎么选择呢，下面就给大家来一一分析一下</p>
 <h2 id="ffjson">ffjson</h2>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">go get -u github.com/pquerna/ffjson

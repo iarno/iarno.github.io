@@ -18,7 +18,7 @@
       <pubDate>Mon, 28 Dec 2020 19:46:18 +0800</pubDate>
       
       <guid>/article/sync_wait_group/</guid>
-      <description>&lt;p&gt;协程（coroutine）是Go语言中的轻量级线程实现，由Go运行时（runtime）管理。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何在Go语言中使用协程进行异步请求。文章首先解释了协程是Go语言中的轻量级线程实现，由Go运行时管理。然后，通过一个示例展示了如何使用sync.WaitGroup来同步多个协程。示例中，我们创建了两个协程，每个协程都会调用getData()函数并将结果存储在rel映射中。最后，我们等待所有协程完成，然后打印rel映射的内容。运行结果显示，两个协程都成功地获取了数据并存储在rel映射中。&lt;/p&gt;</description>
       
     </item>
     

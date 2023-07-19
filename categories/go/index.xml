@@ -18,7 +18,7 @@
       <pubDate>Sat, 25 Feb 2023 21:00:37 +0800</pubDate>
       
       <guid>/article/gin-should-binding/</guid>
-      <description>&lt;p&gt;gin Bind 参数绑定。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要讲述了Gin框架中的参数绑定功能，包括Bind和ShouldBind的区别以及使用方法。Bind在出错时会返回400状态码，而ShouldBind则允许用户自定义错误码。文章还详细介绍了ShouldBind和ShouldBindJSON的使用场景，前者主要用于非GET请求的json参数绑定，后者则专门用于json参数的绑定。&lt;/p&gt;</description>
       
     </item>
     
@@ -38,7 +38,7 @@
       <pubDate>Sat, 25 Feb 2023 19:30:37 +0800</pubDate>
       
       <guid>/article/export-csv/</guid>
-      <description>&lt;p&gt;golang连接mysql数据库导出csv文件。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用Go语言连接MySQL数据库并导出CSV文件。首先，我们需要使用sql.Open函数连接到数据库。然后，我们使用db.Query函数查询用户数据。接着，我们将查询结果添加到一个二维字符串数组中，准备写入CSV文件。最后，我们调用WriteCsv函数将数据写入CSV文件。这个函数首先创建一个新的文件，然后使用csv.NewWriter创建一个新的CSV writer，最后将数据写入文件并刷新writer。&lt;/p&gt;</description>
       
     </item>
     
@@ -48,7 +48,7 @@
       <pubDate>Thu, 24 Nov 2022 18:30:37 +0800</pubDate>
       
       <guid>/article/gin-proxy/</guid>
-      <description>&lt;p&gt;gin使用&lt;code&gt;httputil.NewSingleHostReverseProxy&lt;/code&gt;实现proxy服务代理。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用Go语言的Gin框架和httputil.NewSingleHostReverseProxy方法实现代理服务。文章提供了详细的代码示例，展示了如何创建一个反向代理，将请求转发到指定的远程服务器。同时，文章还解释了如何设置请求的头部、主机、URL方案和路径等信息。&lt;/p&gt;</description>
       
     </item>
     
@@ -58,7 +58,7 @@
       <pubDate>Thu, 24 Nov 2022 18:30:37 +0800</pubDate>
       
       <guid>/article/gin-binding/</guid>
-      <description>&lt;p&gt;gin当请求对象为数组时，binding不生效问题解决。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要解决了在使用Go语言的gin框架进行请求绑定时，如果请求对象为数组，绑定可能不会生效的问题。文章首先展示了问题的产生，然后提供了解决方案：在数组类型的绑定标签中，将required改为dive。这样，gin就会递归验证数组中的每一个对象。最后，文章提供了相关的参考链接。&lt;/p&gt;</description>
       
     </item>
     
@@ -68,7 +68,7 @@
       <pubDate>Mon, 27 Jun 2022 22:25:37 +0800</pubDate>
       
       <guid>/article/gomonkey/</guid>
-      <description>&lt;p&gt;Golang 单元测试工具。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了Golang的单元测试工具Gomonkey。Gomonkey支持为函数、成员方法、函数变量、接口和全局变量打桩。文章详细展示了如何使用Gomonkey进行单元测试，并列出了可能导致打桩失败的原因。同时，文章还解释了什么是内联，并展示了如何禁用内联进行测试。&lt;/p&gt;</description>
       
     </item>
     
@@ -78,7 +78,7 @@
       <pubDate>Mon, 27 Jun 2022 21:58:37 +0800</pubDate>
       
       <guid>/article/goconvey/</guid>
-      <description>&lt;p&gt;GoConvey是一款针对Golang的测试框架&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了GoConvey测试框架的使用。GoConvey是一款针对Golang的测试框架，可以管理和运行测试用例，提供丰富的断言函数，并支持Web界面特性。文章详细介绍了如何安装GoConvey，如何编写测试用例，并展示了测试用例的执行结果。同时，文章还提供了一些编写测试用例的建议和参考链接。&lt;/p&gt;</description>
       
     </item>
     
@@ -88,7 +88,7 @@
       <pubDate>Wed, 22 Jun 2022 21:45:37 +0800</pubDate>
       
       <guid>/article/golang-json/</guid>
-      <description>&lt;p&gt;Json 作为一种重要的数据格式，具有良好的可读性以及自描述性，广泛地应用在各种数据传输场景中。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要分析了Go语言中不同JSON库的性能。作者测试了ffjson、easyjson、jsoniter、codecjson和jsonparser等库，结果显示easyjson在序列化和反序列化方面表现最优，性能提升显著。jsoniter性能也很好，且100%兼容原生库。ffjson和codecjson的性能提升不明显，而jsonparser并不适合这样的场景。作者建议在追求极致性能时考虑使用easyjson，否则使用jsoniter。&lt;/p&gt;</description>
       
     </item>
     
@@ -108,17 +108,7 @@
       <pubDate>Mon, 28 Dec 2020 19:46:37 +0800</pubDate>
       
       <guid>/article/pprof/</guid>
-      <description>&lt;h2 id=&#34;pprof&#34;&gt;pprof&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 导入包
-&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
-  &lt;span class=&#34;s&#34;&gt;&amp;#34;github.com/DeanThompson/ginpprof&amp;#34;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-
-
-&lt;span class=&#34;c1&#34;&gt;// gin框架直接集成
-&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;router&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;gin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;New&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;ginpprof&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Wrapper&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;router&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用Gin pprof进行Go语言的性能分析。首先，通过导入github.com/DeanThompson/ginpprof包并使用ginpprof.Wrapper(router)将其集成到gin框架中。然后，通过命令行工具go tool pprof获取和分析程序的性能数据。文章还提供了如何使用top命令查看当前内存使用情况，并建议定期使用此命令以检测是否存在内存持续增长的情况。最后，文章提供了两个参考链接，供读者深入学习。&lt;/p&gt;</description>
       
     </item>
     
@@ -128,7 +118,7 @@
       <pubDate>Mon, 28 Dec 2020 19:46:28 +0800</pubDate>
       
       <guid>/article/grpc/</guid>
-      <description>相关定义 在.proto文件中定义一个服务。 使用protocol buffer编译器生成客户端和服务端代码。 使用gRPC的Go API为你的服务写</description>
+      <description>&lt;p&gt;这篇文章介绍了如何在Go中使用gRPC。首先，它解释了如何在.proto文件中定义服务，并使用protocol buffer编译器生成客户端和服务端代码。然后，它详细介绍了如何安装gRPC包，设置环境变量，以及如何创建gRPC服务器和客户端。最后，它提供了一个完整的gRPC示例代码，并提供了代码的GitHub链接。&lt;/p&gt;</description>
       
     </item>
     
@@ -138,7 +128,7 @@
       <pubDate>Mon, 28 Dec 2020 19:46:18 +0800</pubDate>
       
       <guid>/article/sync_wait_group/</guid>
-      <description>&lt;p&gt;协程（coroutine）是Go语言中的轻量级线程实现，由Go运行时（runtime）管理。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何在Go语言中使用协程进行异步请求。文章首先解释了协程是Go语言中的轻量级线程实现，由Go运行时管理。然后，通过一个示例展示了如何使用sync.WaitGroup来同步多个协程。示例中，我们创建了两个协程，每个协程都会调用getData()函数并将结果存储在rel映射中。最后，我们等待所有协程完成，然后打印rel映射的内容。运行结果显示，两个协程都成功地获取了数据并存储在rel映射中。&lt;/p&gt;</description>
       
     </item>
     
@@ -148,7 +138,7 @@
       <pubDate>Wed, 28 Oct 2020 22:37:06 +0800</pubDate>
       
       <guid>/article/image-url-size/</guid>
-      <description>通过图片url获取图片尺寸大小(size) 问题 当使用image.Decode时报image: unknown format· 这是因为忘记引入包import _</description>
+      <description>&lt;p&gt;这篇文章介绍了如何通过Go语言获取图片URL的尺寸大小。首先，我们需要导入image/gif，image/jpeg，image/png这三个包，以便解码不同格式的图片。然后，我们使用http.Get方法获取图片，使用image.Decode解码图片，最后通过m.Bounds().Dx()，m.Bounds().Dy()和m.Bounds().Size()获取图片的宽度、高度和尺寸。&lt;/p&gt;</description>
       
     </item>
     
@@ -158,9 +148,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/golang-excel%E5%AF%BC%E5%87%BA/</guid>
-      <description>&lt;h2 id=&#34;excel-导出&#34;&gt;Excel 导出&lt;/h2&gt;
-&lt;h4 id=&#34;github-地址&#34;&gt;Github 地址&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/360EntSecGroup-Skylar/excelize&#34;&gt;https://github.com/360EntSecGroup-Skylar/excelize&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用Golang进行Excel文件的导出。它详细解释了如何使用excelize库创建一个新的Excel文件，并设置单元格的值。然后，它展示了如何将这个Excel文件作为一个下载响应发送给客户端。文章还提供了相关的Github和文档链接，供读者进一步学习和探索。&lt;/p&gt;</description>
       
     </item>
     
@@ -170,9 +158,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/golang-%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7%E6%B3%95/</guid>
-      <description>&lt;p&gt;使用蓄水池抽样法，等概率随机抽取。&lt;/p&gt;
-&lt;h2 id=&#34;相关文章&#34;&gt;相关文章&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/snowInPluto/p/5996269.html&#34;&gt;https://www.cnblogs.com/snowInPluto/p/5996269.html&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何在Go语言中实现蓄水池抽样法。蓄水池抽样法是一种等概率随机抽取的方法，适用于从大量数据中抽取样本。文章首先构建了一个可以放置m个元素的蓄水池，然后将前m个数依次放入。从第m+1个元素开始，以m/n的概率决定元素是否被替换到池子中。当遍历完所有元素后，就可以得出随机挑选的k个元素。该方法的时间复杂度为O(n)。&lt;/p&gt;</description>
       
     </item>
     

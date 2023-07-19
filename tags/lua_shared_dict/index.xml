@@ -18,7 +18,7 @@
       <pubDate>Mon, 19 Apr 2021 21:36:52 +0800</pubDate>
       
       <guid>/article/lua-shared-dict/</guid>
-      <description>lua_shared_dict 在ngx_lua模块中使用共享内存字典项相关API的前提条件是已经使用lua_shared_dict命令定义了一个字典项对象，该命令的具体</description>
+      <description>&lt;p&gt;本文介绍了在ngx_lua模块中如何使用lua_shared_dict命令定义共享内存字典项对象，并通过ngx.shared.DICT接口获取这些对象。文章详细解释了相关语法和示例，包括如何设置和获取共享内存上的值。同时，还讨论了在Nginx重启和退出时，共享内存字典项的行为。&lt;/p&gt;</description>
       
     </item>
     

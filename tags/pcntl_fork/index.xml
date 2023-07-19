@@ -18,8 +18,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/pcntl-fork-%E5%A4%9A%E8%BF%9B%E7%A8%8B/</guid>
-      <description>&lt;h2 id=&#34;pcntl-简介&#34;&gt;pcntl 简介&lt;/h2&gt;
-&lt;p&gt;PHP的进程控制支持实现了Unix方式的进程创建, 程序执行, 信号处理以及进程的中断。 进程控制不能被应用在Web服务器环境，当其被用于Web服务环境时可能会带来意外的结果。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了PHP的pcntl_fork函数，这是一个用于创建子进程的函数。文章详细解释了如何使用这个函数，并通过代码示例展示了其用法。文章还进行了一个实验，测试了在创建子进程后，是父进程先执行还是子进程先执行。实验结果显示，pcntl_fork会首先执行父进程的逻辑，然后再执行子进程的逻辑。&lt;/p&gt;</description>
       
     </item>
     

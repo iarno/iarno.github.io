@@ -13,7 +13,7 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">centos搭建etcd集群</h1><p class="article date">April 1, 2023</p></section><article class="article markdown-body"><p>etcd是一款分布式的键值存储系统，常用于分布式系统中的服务发现、配置管理等场景。</p>
+    <h1 class="article title">centos搭建etcd集群</h1><p class="article date">April 1, 2023</p></section><article class="article markdown-body"><p>这篇文章主要介绍了如何在CentOS系统上搭建etcd集群。首先，文章详细解释了etcd的特点和相关概念。然后，文章通过实例详细介绍了如何在三个节点上安装etcd，包括初始化节点和新增节点。最后，文章还介绍了如何移除节点。文章的内容详细且实用，对于需要在CentOS系统上搭建etcd集群的读者来说非常有帮助。</p>
 <p>etcd基于Raft一致性算法实现了数据的高可用和强一致性，可以支持数千台机器的集群。通过将数据存储在内存中并异步持久化到磁盘上，Etcd在性能和数据可靠性之间取得了很好的平衡。</p>
 <p>etcd被广泛用于Kubernetes中的服务发现和配置管理，例如存储Pod的状态、控制器的配置等。</p>
 <h2 id="一etcd的特点">一、etcd的特点</h2>

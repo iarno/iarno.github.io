@@ -28,7 +28,7 @@
       <pubDate>Sat, 01 Apr 2023 20:40:37 +0800</pubDate>
       
       <guid>/article/etcd/</guid>
-      <description>&lt;p&gt;etcd是一款分布式的键值存储系统，常用于分布式系统中的服务发现、配置管理等场景。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在CentOS系统上搭建etcd集群。首先，文章详细解释了etcd的特点和相关概念。然后，文章通过实例详细介绍了如何在三个节点上安装etcd，包括初始化节点和新增节点。最后，文章还介绍了如何移除节点。文章的内容详细且实用，对于需要在CentOS系统上搭建etcd集群的读者来说非常有帮助。&lt;/p&gt;</description>
       
     </item>
     

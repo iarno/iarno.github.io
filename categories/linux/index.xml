@@ -28,7 +28,7 @@
       <pubDate>Sat, 01 Apr 2023 20:40:37 +0800</pubDate>
       
       <guid>/article/etcd/</guid>
-      <description>&lt;p&gt;etcd是一款分布式的键值存储系统，常用于分布式系统中的服务发现、配置管理等场景。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了如何在CentOS系统上搭建etcd集群。首先，文章详细解释了etcd的特点和相关概念。然后，文章通过实例详细介绍了如何在三个节点上安装etcd，包括初始化节点和新增节点。最后，文章还介绍了如何移除节点。文章的内容详细且实用，对于需要在CentOS系统上搭建etcd集群的读者来说非常有帮助。&lt;/p&gt;</description>
       
     </item>
     
@@ -38,7 +38,7 @@
       <pubDate>Wed, 06 Jul 2022 21:49:37 +0800</pubDate>
       
       <guid>/article/cloc/</guid>
-      <description>&lt;p&gt;代码统计工具。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文介绍了cloc代码统计工具的安装和使用方法。cloc可以统计代码文件的数量、空行、注释和代码行数。通过执行cloc命令，可以得到详细的统计结果，包括各种语言的文件数、空行数、注释数和代码行数。这是一个非常实用的工具，可以帮助我们更好地理解和管理代码。&lt;/p&gt;</description>
       
     </item>
     
@@ -48,7 +48,7 @@
       <pubDate>Mon, 27 Jun 2022 22:31:37 +0800</pubDate>
       
       <guid>/article/core/</guid>
-      <description>&lt;p&gt;ulimit和core文件的分析方法。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章主要介绍了Linux下的core文件分析方法。首先，文章解释了如何使用ulimit命令设置生成core文件，以及各参数的含义。接着，文章详细描述了core文件的生成过程和作用，以及如何设置core dump的文件目录和命名规则。文章还提供了如何使用gdb工具分析core文件的方法，并解释了在什么情况下可能不会生成core文件以及如何解决。最后，文章提供了相关的参考链接。&lt;/p&gt;</description>
       
     </item>
     
@@ -58,7 +58,7 @@
       <pubDate>Mon, 27 Jun 2022 22:28:37 +0800</pubDate>
       
       <guid>/article/dig/</guid>
-      <description>&lt;p&gt;dig 命令使用详解。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章详细介绍了如何使用 dig 命令来查询 DNS 信息。首先，它解释了如何使用 dig 命令查询单个主机的信息，然后介绍了如何从指定的 DNS 服务器上进行查询，最后，文章还讲解了如何使用 dig 的 -x 选项来反向解析 IP 地址对应的域名。文章中还包含了一些实际的命令示例和结果输出，帮助读者更好地理解和使用 dig 命令。&lt;/p&gt;</description>
       
     </item>
     
@@ -68,7 +68,7 @@
       <pubDate>Fri, 04 Sep 2020 21:04:12 +0800</pubDate>
       
       <guid>/article/wrk/</guid>
-      <description>&lt;p&gt;用过了很多压测工具，却一直没找到中意的那款。最近试了wrk感觉不错，写下这份使用指南给自己备忘用，如果能帮到你，那也很好。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章是关于wrk压测工具的使用指南。它首先介绍了如何安装wrk，然后详细解释了wrk的基本使用方法，包括如何查看使用帮助、版本信息，以及如何进行简单的压测。文章还介绍了如何增加header参数进行压测，以及如何压测POST接口。在每个示例后，作者都对结果进行了详细的注释和解释。&lt;/p&gt;</description>
       
     </item>
     
@@ -78,7 +78,7 @@
       <pubDate>Fri, 04 Sep 2020 21:04:12 +0800</pubDate>
       
       <guid>/article/nc/</guid>
-      <description>&lt;p&gt;一般情况下使用&lt;code&gt;telnet ip port&lt;/code&gt;判断端口通不通，其实测试方法不止这一种，本文主要介绍&lt;code&gt;nc&lt;/code&gt;检测工具。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用telnet和nc命令来测试端口是否开放。首先，使用telnet ip port命令来判断端口是否通，如果连接被拒绝则端口不通。然后，文章介绍了nc命令的使用，通过nc -v localhost port命令来检测端口，如果显示Connection refused则端口不通，如果显示Connection to x.x.x.x port [tcp/http] succeeded!则端口通。&lt;/p&gt;</description>
       
     </item>
     

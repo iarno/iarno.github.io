@@ -18,9 +18,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/golang-%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7%E6%B3%95/</guid>
-      <description>&lt;p&gt;使用蓄水池抽样法，等概率随机抽取。&lt;/p&gt;
-&lt;h2 id=&#34;相关文章&#34;&gt;相关文章&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/snowInPluto/p/5996269.html&#34;&gt;https://www.cnblogs.com/snowInPluto/p/5996269.html&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何在Go语言中实现蓄水池抽样法。蓄水池抽样法是一种等概率随机抽取的方法，适用于从大量数据中抽取样本。文章首先构建了一个可以放置m个元素的蓄水池，然后将前m个数依次放入。从第m+1个元素开始，以m/n的概率决定元素是否被替换到池子中。当遍历完所有元素后，就可以得出随机挑选的k个元素。该方法的时间复杂度为O(n)。&lt;/p&gt;</description>
       
     </item>
     

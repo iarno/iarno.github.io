@@ -13,7 +13,7 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">golang数据库连接池参数设置</h1><p class="article date">July 14, 2023</p></section><article class="article markdown-body"><p>golang 数据库连接池maxOpenConns、maxIdleConns、maxIdleTime、maxLifeTime相关配置说明。</p>
+    <h1 class="article title">golang数据库连接池参数设置</h1><p class="article date">July 14, 2023</p></section><article class="article markdown-body"><p>这篇文章主要介绍了Golang数据库连接池的四个参数：maxOpenConns、maxIdleConns、maxIdleTime、maxLifeTime的设置和使用。其中，maxOpenConns是连接池最多同时打开的连接数，maxIdleConns是连接池里最大空闲连接数，maxIdleTime是连接池里面的连接最大空闲时长，maxLifeTime是连接池里面的连接最大存活时长。文章还详细解释了这些参数的设置原则和注意事项。</p>
 <h1 id="setmaxopenconnsmaxopenconns">SetMaxOpenConns(maxOpenConns)</h1>
 <p>连接池最多同时打开的连接数。</p>
 <p>这个maxOpenConns理应要设置得比mysql服务器的max_connections值要小。</p>

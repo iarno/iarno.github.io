@@ -18,7 +18,7 @@
       <pubDate>Wed, 17 Mar 2021 22:10:00 +0800</pubDate>
       
       <guid>/article/lsof/</guid>
-      <description>错误 socket：too many open files 问题原因 系统资源限制小（ulimit -a 查看open files限制） 数据库打开文件限制小（登录数据库 show variables like &#39;%o</description>
+      <description>&lt;p&gt;这篇文章主要解决了&amp;quot;too many open files&amp;quot;问题的定位。首先，它列出了可能的问题原因，包括系统资源限制小，数据库打开文件限制小，以及程序代码问题。然后，文章详细介绍了如何使用ulimit命令查看和调整资源限制，特别是打开文件数的限制。最后，文章介绍了如何使用lsof命令查看打开文件数，包括查看某个进程打开文件数和查看当前系统打开文件数。&lt;/p&gt;</description>
       
     </item>
     

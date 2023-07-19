@@ -18,7 +18,7 @@
       <pubDate>Wed, 24 Aug 2022 22:31:37 +0800</pubDate>
       
       <guid>/article/django-01/</guid>
-      <description>&lt;p&gt;Django 项目实践01。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章是关于Django项目实践的教程。首先，我们介绍了如何安装Django。然后，我们创建了一个新的Django项目，并进行了数据库的初始化。接着，我们启动了Django服务，并展示了如何在浏览器中查看项目。最后，我们创建了一个新的应用程序，并定义了一个简单的模型。这篇文章是对Django项目实践的基础介绍，适合初学者阅读。&lt;/p&gt;</description>
       
     </item>
     

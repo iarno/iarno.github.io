@@ -18,7 +18,7 @@
       <pubDate>Wed, 28 Oct 2020 22:37:06 +0800</pubDate>
       
       <guid>/article/image-url-size/</guid>
-      <description>通过图片url获取图片尺寸大小(size) 问题 当使用image.Decode时报image: unknown format· 这是因为忘记引入包import _</description>
+      <description>&lt;p&gt;这篇文章介绍了如何通过Go语言获取图片URL的尺寸大小。首先，我们需要导入image/gif，image/jpeg，image/png这三个包，以便解码不同格式的图片。然后，我们使用http.Get方法获取图片，使用image.Decode解码图片，最后通过m.Bounds().Dx()，m.Bounds().Dy()和m.Bounds().Size()获取图片的宽度、高度和尺寸。&lt;/p&gt;</description>
       
     </item>
     

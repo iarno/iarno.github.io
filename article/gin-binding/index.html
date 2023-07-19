@@ -13,7 +13,7 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">gin当请求对象为数组时，binding不生效问题解决</h1><p class="article date">November 24, 2022</p></section><article class="article markdown-body"><p>gin当请求对象为数组时，binding不生效问题解决。</p>
+    <h1 class="article title">gin当请求对象为数组时，binding不生效问题解决</h1><p class="article date">November 24, 2022</p></section><article class="article markdown-body"><p>这篇文章主要解决了在使用Go语言的gin框架进行请求绑定时，如果请求对象为数组，绑定可能不会生效的问题。文章首先展示了问题的产生，然后提供了解决方案：在数组类型的绑定标签中，将required改为dive。这样，gin就会递归验证数组中的每一个对象。最后，文章提供了相关的参考链接。</p>
 <h2 id="请求结构体如下">请求结构体如下</h2>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 学生结构
 </span><span class="c1"></span><span class="kd">type</span> <span class="nx">StudentParam</span> <span class="kd">struct</span> <span class="p">{</span>

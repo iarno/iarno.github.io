@@ -13,7 +13,8 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">openresty 跑定时任务配置、ngx.timer.every接口使用</h1><p class="article date">April 19, 2021</p></section><article class="article markdown-body"><p>openresty的定时任务是要跟worker绑定的。如果不绑定特定的worker，那么所有启动的woker都会去执行定时任务。</p>
+    <h1 class="article title">openresty 跑定时任务配置、ngx.timer.every接口使用</h1><p class="article date">April 19, 2021</p></section><article class="article markdown-body"><p>这篇文章主要介绍了如何在OpenResty中配置和使用定时任务。首先，文章解释了定时任务需要与worker绑定，通常默认绑定到worker_id=0，这样在Nginx进程中只执行一个timer。然后，文章提供了在nginx.conf中配置定时任务的具体方法。接着，文章介绍了如何使用ngx.timer.every接口，这是ngx提供的最新接口。最后，文章提供了一些相关的日志输出和错误处理方法。</p>
+<p>openresty的定时任务是要跟worker绑定的。如果不绑定特定的worker，那么所有启动的woker都会去执行定时任务。</p>
 <p>一般情况下默认绑定worker_id=0的，这样在nginx整个进程里面，就只执行一个timer。</p>
 <p>在conf中具体的位置可以写自己的任务逻辑。</p>
 <p>具体的nginx.conf配置如下：</p>

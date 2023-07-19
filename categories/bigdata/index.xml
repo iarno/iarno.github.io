@@ -18,7 +18,7 @@
       <pubDate>Mon, 25 Apr 2022 21:24:37 +0800</pubDate>
       
       <guid>/article/maven/</guid>
-      <description>&lt;p&gt;Maven 是一个项目管理工具，可以对 Java 项目进行构建、依赖管理。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文主要介绍了Maven的安装和使用，包括项目构建、依赖管理等。首先，我们需要下载并配置Maven，然后通过pom.xml文件进行项目管理。文章详细解释了如何使用Maven创建Java应用，以及如何构建和测试项目。最后，我们学习了如何执行jar包，包括pom.xml文件中需要引入的assembly插件和执行命令。&lt;/p&gt;</description>
       
     </item>
     
@@ -28,7 +28,7 @@
       <pubDate>Thu, 21 Apr 2022 15:21:37 +0800</pubDate>
       
       <guid>/article/hadoop%E6%90%AD%E5%BB%BA%E4%B8%80/</guid>
-      <description>&lt;p&gt;大多数教程都是从  &lt;a href=&#34;http://s.iarno.cn/pegHbK&#34;&gt;http://s.iarno.cn/pegHbK&lt;/a&gt; 下载安装包，目前该网站已收费，所以另寻途径安装hadoop环境。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章是关于如何在ECS实例上快速搭建Hadoop伪分布式环境的教程。主要步骤包括安装JDK，安装Hadoop，配置Hadoop，配置SSH免密登录，以及启动Hadoop。每个步骤都有详细的命令和操作说明，以及相关的参考链接。完成所有步骤后，可以通过访问特定的URL来验证Hadoop环境是否已成功搭建。&lt;/p&gt;</description>
       
     </item>
     

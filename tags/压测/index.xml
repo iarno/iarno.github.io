@@ -18,7 +18,7 @@
       <pubDate>Fri, 04 Sep 2020 21:04:12 +0800</pubDate>
       
       <guid>/article/wrk/</guid>
-      <description>&lt;p&gt;用过了很多压测工具，却一直没找到中意的那款。最近试了wrk感觉不错，写下这份使用指南给自己备忘用，如果能帮到你，那也很好。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章是关于wrk压测工具的使用指南。它首先介绍了如何安装wrk，然后详细解释了wrk的基本使用方法，包括如何查看使用帮助、版本信息，以及如何进行简单的压测。文章还介绍了如何增加header参数进行压测，以及如何压测POST接口。在每个示例后，作者都对结果进行了详细的注释和解释。&lt;/p&gt;</description>
       
     </item>
     

@@ -13,7 +13,8 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">如何测试端口通不通</h1><p class="article date">September 4, 2020</p></section><article class="article markdown-body"><p>一般情况下使用<code>telnet ip port</code>判断端口通不通，其实测试方法不止这一种，本文主要介绍<code>nc</code>检测工具。</p>
+    <h1 class="article title">如何测试端口通不通</h1><p class="article date">September 4, 2020</p></section><article class="article markdown-body"><p>这篇文章介绍了如何使用telnet和nc命令来测试端口是否开放。首先，使用telnet ip port命令来判断端口是否通，如果连接被拒绝则端口不通。然后，文章介绍了nc命令的使用，通过nc -v localhost port命令来检测端口，如果显示Connection refused则端口不通，如果显示Connection to x.x.x.x port [tcp/http] succeeded!则端口通。</p>
+<p>一般情况下使用<code>telnet ip port</code>判断端口通不通，其实测试方法不止这一种，本文主要介绍<code>nc</code>检测工具。</p>
 <h2 id="1使用telnet判断">1、使用telnet判断</h2>
 <p>1）先用telnet连接不存在的端口</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># telnet 10.0.250.3 80</span>

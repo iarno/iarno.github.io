@@ -13,7 +13,8 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Gin pprof性能分析</h1><p class="article date">December 28, 2020</p></section><article class="article markdown-body"><h2 id="pprof">pprof</h2>
+    <h1 class="article title">Gin pprof性能分析</h1><p class="article date">December 28, 2020</p></section><article class="article markdown-body"><p>这篇文章介绍了如何使用Gin pprof进行Go语言的性能分析。首先，通过导入github.com/DeanThompson/ginpprof包并使用ginpprof.Wrapper(router)将其集成到gin框架中。然后，通过命令行工具go tool pprof获取和分析程序的性能数据。文章还提供了如何使用top命令查看当前内存使用情况，并建议定期使用此命令以检测是否存在内存持续增长的情况。最后，文章提供了两个参考链接，供读者深入学习。</p>
+<h2 id="pprof">pprof</h2>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 导入包
 </span><span class="c1"></span><span class="kn">import</span> <span class="p">(</span>
   <span class="s">&#34;github.com/DeanThompson/ginpprof&#34;</span>
