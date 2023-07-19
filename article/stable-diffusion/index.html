@@ -18,16 +18,16 @@
 <blockquote>
 <p>Tip:  Python 版本为 3.10.6</p>
 </blockquote>
-<pre><code class="language-ba" data-lang="ba">git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 
-cd stable-diffusion-webui/
+<span class="nb">cd</span> stable-diffusion-webui/
 
-# 请切换Python venv, 魔法上网, 下载时间比较长
+<span class="c1"># 请切换Python venv, 魔法上网, 下载时间比较长</span>
 git config --global http.proxy http://127.0.0.1:10887
 pip install --upgrade pip
-export http_proxy=http://127.0.0.1:10887;export https_proxy=http://127.0.0.1:10887;
+<span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://127.0.0.1:10887<span class="p">;</span><span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>http://127.0.0.1:10887<span class="p">;</span>
 sh ./webui.sh
-</code></pre><h1 id="二安装报错汇总">二、安装报错汇总</h1>
+</code></pre></div><h1 id="二安装报错汇总">二、安装报错汇总</h1>
 <h2 id="21-安装gfpgan报错">2.1 安装gfpgan报错</h2>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Installing gfpgan
 Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
