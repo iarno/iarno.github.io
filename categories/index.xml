@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2023 IARNO</copyright>
-    <lastBuildDate>Fri, 14 Jul 2023 20:47:20 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 31 Oct 2023 22:00:00 +0800</lastBuildDate>
     
         <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux</title>
+      <link>/categories/linux/</link>
+      <pubDate>Tue, 31 Oct 2023 22:00:00 +0800</pubDate>
+      
+      <guid>/categories/linux/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>Mysql</title>
@@ -28,16 +38,6 @@
       <pubDate>Sun, 16 Apr 2023 16:00:37 +0800</pubDate>
       
       <guid>/categories/%E5%85%B6%E4%BB%96/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>/categories/linux/</link>
-      <pubDate>Sun, 02 Apr 2023 20:40:37 +0800</pubDate>
-      
-      <guid>/categories/linux/</guid>
       <description></description>
       
     </item>

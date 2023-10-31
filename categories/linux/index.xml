@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2023 IARNO</copyright>
-    <lastBuildDate>Sun, 02 Apr 2023 20:40:37 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 31 Oct 2023 22:00:00 +0800</lastBuildDate>
     
         <atom:link href="/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>使用cURL获得请求和响应时间</title>
+      <link>/article/curl/</link>
+      <pubDate>Tue, 31 Oct 2023 22:00:00 +0800</pubDate>
+      
+      <guid>/article/curl/</guid>
+      <description>&lt;p&gt;Stable Diffusion是一个文本到图像的潜在扩散模型，由CompVis、Stability AI和LAION的研究人员和工程师创建。它使用来自LAION-5B数据库子集的512x512图像进行训练。使用这个模型，可以生成包括人脸在内的任何图像，因为有开源的预训练模型，所以我们也可以在自己的机器上运行它。&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>centos搭建apisix网关</title>
