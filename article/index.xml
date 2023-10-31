@@ -18,7 +18,7 @@
       <pubDate>Tue, 31 Oct 2023 22:00:00 +0800</pubDate>
       
       <guid>/article/curl/</guid>
-      <description>&lt;p&gt;Stable Diffusion是一个文本到图像的潜在扩散模型，由CompVis、Stability AI和LAION的研究人员和工程师创建。它使用来自LAION-5B数据库子集的512x512图像进行训练。使用这个模型，可以生成包括人脸在内的任何图像，因为有开源的预训练模型，所以我们也可以在自己的机器上运行它。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用cURL工具获取请求和响应时间。首先，它解释了cURL输出的各个时间参数的含义，包括DNS解析时间、TCP连接建立时间、上层协议连接时间、请求开始到响应开始的时间、请求开始到第一个字节传输的时间，以及整个请求的总时间。然后，文章详细介绍了如何使用cURL进行请求，包括创建一个格式化的输出文件，以及如何发起请求。最后，它解释了请求命令中的各个参数的作用。&lt;/p&gt;</description>
       
     </item>
     

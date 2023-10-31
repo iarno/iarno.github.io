@@ -13,7 +13,7 @@
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
 </nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">使用cURL获得请求和响应时间</h1><p class="article date">October 31, 2023</p></section><article class="article markdown-body"><p>Stable Diffusion是一个文本到图像的潜在扩散模型，由CompVis、Stability AI和LAION的研究人员和工程师创建。它使用来自LAION-5B数据库子集的512x512图像进行训练。使用这个模型，可以生成包括人脸在内的任何图像，因为有开源的预训练模型，所以我们也可以在自己的机器上运行它。</p>
+    <h1 class="article title">使用cURL获得请求和响应时间</h1><p class="article date">October 31, 2023</p></section><article class="article markdown-body"><p>这篇文章介绍了如何使用cURL工具获取请求和响应时间。首先，它解释了cURL输出的各个时间参数的含义，包括DNS解析时间、TCP连接建立时间、上层协议连接时间、请求开始到响应开始的时间、请求开始到第一个字节传输的时间，以及整个请求的总时间。然后，文章详细介绍了如何使用cURL进行请求，包括创建一个格式化的输出文件，以及如何发起请求。最后，它解释了请求命令中的各个参数的作用。</p>
 <h1 id="一文本输出示例">一、文本输出示例</h1>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"> time_namelookup:  0.001s
       time_connect:  0.037s
