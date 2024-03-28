@@ -38,14 +38,14 @@ time_starttransfer:  0.092s
 </ul>
 <h1 id="二使用">二、使用</h1>
 <h4 id="21-创建一个文本文件curl-formattxt-粘贴下面内容">2.1 创建一个文本文件<code>curl-format.txt</code>， 粘贴下面内容</h4>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">   time_namelookup:  %{time_namelookup}s\n
-        time_connect:  %{time_connect}s\n
-     time_appconnect:  %{time_appconnect}s\n
-    time_pretransfer:  %{time_pretransfer}s\n
-       time_redirect:  %{time_redirect}s\n
-  time_starttransfer:  %{time_starttransfer}s\n
-                     ----------\n
-          time_total:  %{time_total}s\n
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">   time_namelookup:  %<span class="o">{</span>time_namelookup<span class="o">}</span>s<span class="se">\n</span>
+        time_connect:  %<span class="o">{</span>time_connect<span class="o">}</span>s<span class="se">\n</span>
+     time_appconnect:  %<span class="o">{</span>time_appconnect<span class="o">}</span>s<span class="se">\n</span>
+    time_pretransfer:  %<span class="o">{</span>time_pretransfer<span class="o">}</span>s<span class="se">\n</span>
+       time_redirect:  %<span class="o">{</span>time_redirect<span class="o">}</span>s<span class="se">\n</span>
+  time_starttransfer:  %<span class="o">{</span>time_starttransfer<span class="o">}</span>s<span class="se">\n</span>
+                     ----------<span class="se">\n</span>
+          time_total:  %<span class="o">{</span>time_total<span class="o">}</span>s<span class="se">\n</span>
 
 </code></pre></div><h4 id="22-发起请求">2.2 发起请求</h4>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">curl -w <span class="s2">&#34;@curl-format.txt&#34;</span> -o /dev/null -s <span class="s2">&#34;http://iarno.cn/&#34;</span>
