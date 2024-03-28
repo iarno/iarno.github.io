@@ -4,7 +4,7 @@
 <meta name="supported-color-schemes" content="light dark">
 <meta content="" name="keywords">
 <meta content="Lua - IARNO" property="og:title">
-<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Lua&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><link rel="alternate" type="application/rss+xml" href="/categories/lua/index.xml" title="IARNO" /><meta name="twitter:card" content="summary" />
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Lua&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.90eb836236464f85eeb64271ffe50808a653ce2162ebe201edeb70f3e9f5ef27806a374702a054a5b289bd60f0170c51.css" integrity="sha384-kOuDYjZGT4XutkJx/&#43;UICKZTziFi6&#43;IB7etw8&#43;n17yeAajdHAqBUpbKJvWDwFwxR"><link rel="alternate" type="application/rss+xml" href="/categories/lua/index.xml" title="IARNO" /><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Lua" /><body><section id="header">
     <title>Lua - IARNO</title>
     <meta content="阿諾个人博客 - " property="og:description">
@@ -12,7 +12,12 @@
         <span class="header right-side"><div class="nav wrap"><nav class="nav">
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
-</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><section class="article header"><h1>Lua</h1></section><ul class="note list"><li class="item"><a class="note" href="/article/rate-limiting/">
+</nav></div></span>
+        <button id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
+        <button id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+    </div><div class="site slogan">
+            <span class="title">努力升级中的凡人</span>
+        </div></section><section id="content"><section class="article header"><h1>Lua</h1></section><ul class="note list"><li class="item"><a class="note" href="/article/rate-limiting/">
             <p class="note title">限流算法实践</p><p class="note date">April 21, 2021</p><p class="note content">本文主要介绍了四种限流算法：固定窗口计数器算法、滑动窗口计数算法、漏桶算法、令牌桶算法，并通过Lua脚本和Redis实现了令牌桶算法。文章详细解释了如何使用Redis的SCRIPT LOAD和EVALSHA命令来执行限流逻辑，并通过返回值判断是否触发限流行为。最后，文章对四种算法进行了比较和总结，认为令牌桶算法是一种相对完美的限流算法，适用于大多数限流场景。
 <span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="category" href="/categories/lua/">Lua</a><a class="tag" href="/tags/%E9%99%90%E6%B5%81/">限流</a></p></li><li class="item"><a class="note" href="/article/lua-shared-dict/">
             <p class="note title">ngx_lua模块中使用lua_shared_dict共享内存变量</p><p class="note date">April 19, 2021</p><p class="note content">本文介绍了在ngx_lua模块中如何使用lua_shared_dict命令定义共享内存字典项对象，并通过ngx.shared.DICT接口获取这些对象。文章详细解释了相关语法和示例，包括如何设置和获取共享内存上的值。同时，还讨论了在Nginx重启和退出时，共享内存字典项的行为。
@@ -20,6 +25,81 @@
             <p class="note title">openresty 跑定时任务配置、ngx.timer.every接口使用</p><p class="note date">April 19, 2021</p><p class="note content">这篇文章主要介绍了如何在OpenResty中配置和使用定时任务。首先，文章解释了定时任务需要与worker绑定，通常默认绑定到worker_id=0，这样在Nginx进程中只执行一个timer。然后，文章提供了在nginx.conf中配置定时任务的具体方法。接着，文章介绍了如何使用ngx.timer.every接口，这是ngx提供的最新接口。最后，文章提供了一些相关的日志输出和错误处理方法。
 <span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="category" href="/categories/lua/">Lua</a><a class="tag" href="/tags/timer/">timer</a></p></li></ul></section><section id="footer"><div class="footer-wrap">
     <p class="copyright">©2023 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
-            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+            onload="renderMathInElement(document.body);"></script><script>
+        var theme = localStorage.getItem('theme');
+        if (window.matchMedia('(prefers-color-scheme: light)').matches && theme == null) {
+            document.getElementById('light-btn').classList.add('data-theme-btn');
+        }
+
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches && theme == null) {
+            document.getElementById('dark-btn').classList.add('data-theme-btn');
+        }
+
+        if (theme == "dark") {
+            document.getElementById('dark-btn').classList.add('data-theme-btn');
+        }
+
+        if (theme == "light") {
+            document.getElementById('light-btn').classList.add('data-theme-btn');
+        }
+
+        function toggleTheme(theme) {
+            if (theme === "light") {
+                localStorage.setItem('theme', 'light');
+            }
+
+            if (theme === "dark") {
+                localStorage.setItem('theme', 'dark');
+            }
+
+            location.reload();
+        }
+
+
+        if (theme == "light") {
+            
+            var styleSheets = document.styleSheets;
+
+            
+            for (var i = 0; i < styleSheets.length; i++) {
+                var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+
+                
+                for (var j = 0; j < rules.length; j++) {
+                    var rule = rules[j];
+
+                    
+                    if (rule.media && rule.media.mediaText === '(prefers-color-scheme: dark)') {
+                        
+                        rule.media.mediaText = '(prefers-color-scheme: light)';
+                        
+                    }
+                }
+            }
+        }
+
+        if (theme == "dark") {
+            
+            var styleSheets = document.styleSheets;
+
+            
+            for (var i = 0; i < styleSheets.length; i++) {
+                var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+
+                
+                for (var j = 0; j < rules.length; j++) {
+                    var rule = rules[j];
+
+                    
+                    if (rule.media && rule.media.mediaText === '(prefers-color-scheme: light)') {
+                        
+                        rule.media.mediaText = '(prefers-color-scheme: dark)';
+                        
+                    }
+                }
+            }
+        }
+
+    </script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
 
 </html>

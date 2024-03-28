@@ -4,7 +4,7 @@
 <meta name="supported-color-schemes" content="light dark">
 <meta content="抽样, Go" name="keywords">
 <meta content="Golang 蓄水池抽样法 - IARNO" property="og:title">
-<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Golang 蓄水池抽样法&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.221e83d0ce14762a4e8c9208ed74fff80a0cbf6c8c48e712e9cd609a237013a7bc4831b37bfb16b4ec3e4eca495904d5.css" integrity="sha384-Ih6D0M4UdipOjJII7XT/&#43;AoMv2yMSOcS6c1gmiNwE6e8SDGze/sWtOw&#43;TspJWQTV"><meta name="twitter:card" content="summary" />
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Golang 蓄水池抽样法&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.90eb836236464f85eeb64271ffe50808a653ce2162ebe201edeb70f3e9f5ef27806a374702a054a5b289bd60f0170c51.css" integrity="sha384-kOuDYjZGT4XutkJx/&#43;UICKZTziFi6&#43;IB7etw8&#43;n17yeAajdHAqBUpbKJvWDwFwxR"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Golang 蓄水池抽样法" /><body><section id="header">
     <title>Golang 蓄水池抽样法 - IARNO</title>
     <meta content="阿諾个人博客 - golang 蓄水池抽样法。" property="og:description">
@@ -12,7 +12,12 @@
         <span class="header right-side"><div class="nav wrap"><nav class="nav">
     <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
 
-</nav></div></span></div><div class="site slogan"><span class="title">努力升级中的凡人</span></div></section><section id="content"><div class="article-container"><section class="article header">
+</nav></div></span>
+        <button id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
+        <button id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+    </div><div class="site slogan">
+            <span class="title">努力升级中的凡人</span>
+        </div></section><section id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">Golang 蓄水池抽样法</h1><p class="article date">August 29, 2020</p></section><article class="article markdown-body"><p>这篇文章介绍了如何在Go语言中实现蓄水池抽样法。蓄水池抽样法是一种等概率随机抽取的方法，适用于从大量数据中抽取样本。文章首先构建了一个可以放置m个元素的蓄水池，然后将前m个数依次放入。从第m+1个元素开始，以m/n的概率决定元素是否被替换到池子中。当遍历完所有元素后，就可以得出随机挑选的k个元素。该方法的时间复杂度为O(n)。</p>
 <h2 id="相关文章">相关文章</h2>
 <p><a href="https://www.cnblogs.com/snowInPluto/p/5996269.html">https://www.cnblogs.com/snowInPluto/p/5996269.html</a></p>
@@ -47,6 +52,81 @@
 </section></div>
 <div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/golang-excel%E5%AF%BC%E5%87%BA/"><span class="iconfont icon-article"></span>Golang excel导出</a></p><p><a class="link" href="/article/hexo%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/"><span class="iconfont icon-article"></span>hexo博客迁移</a></p></section></div></section><section id="footer"><div class="footer-wrap">
     <p class="copyright">©2023 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
-            onload="renderMathInElement(document.body);"></script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+            onload="renderMathInElement(document.body);"></script><script>
+        var theme = localStorage.getItem('theme');
+        if (window.matchMedia('(prefers-color-scheme: light)').matches && theme == null) {
+            document.getElementById('light-btn').classList.add('data-theme-btn');
+        }
+
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches && theme == null) {
+            document.getElementById('dark-btn').classList.add('data-theme-btn');
+        }
+
+        if (theme == "dark") {
+            document.getElementById('dark-btn').classList.add('data-theme-btn');
+        }
+
+        if (theme == "light") {
+            document.getElementById('light-btn').classList.add('data-theme-btn');
+        }
+
+        function toggleTheme(theme) {
+            if (theme === "light") {
+                localStorage.setItem('theme', 'light');
+            }
+
+            if (theme === "dark") {
+                localStorage.setItem('theme', 'dark');
+            }
+
+            location.reload();
+        }
+
+
+        if (theme == "light") {
+            
+            var styleSheets = document.styleSheets;
+
+            
+            for (var i = 0; i < styleSheets.length; i++) {
+                var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+
+                
+                for (var j = 0; j < rules.length; j++) {
+                    var rule = rules[j];
+
+                    
+                    if (rule.media && rule.media.mediaText === '(prefers-color-scheme: dark)') {
+                        
+                        rule.media.mediaText = '(prefers-color-scheme: light)';
+                        
+                    }
+                }
+            }
+        }
+
+        if (theme == "dark") {
+            
+            var styleSheets = document.styleSheets;
+
+            
+            for (var i = 0; i < styleSheets.length; i++) {
+                var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+
+                
+                for (var j = 0; j < rules.length; j++) {
+                    var rule = rules[j];
+
+                    
+                    if (rule.media && rule.media.mediaText === '(prefers-color-scheme: light)') {
+                        
+                        rule.media.mediaText = '(prefers-color-scheme: dark)';
+                        
+                    }
+                }
+            }
+        }
+
+    </script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
 
 </html>
