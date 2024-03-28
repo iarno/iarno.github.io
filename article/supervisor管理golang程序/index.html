@@ -135,13 +135,57 @@ supervisor的诞生已经10年了，现在是3+版本，所以放心使用吧。
         function toggleTheme(theme) {
             if (theme === "light") {
                 localStorage.setItem('theme', 'light');
+
+                document.getElementById('dark-btn').classList.remove('data-theme-btn');
+                document.getElementById('light-btn').classList.add('data-theme-btn');
+
+                
+                var styleSheets = document.styleSheets;
+
+                
+                for (var i = 0; i < styleSheets.length; i++) {
+                    var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+
+                    
+                    for (var j = 0; j < rules.length; j++) {
+                        var rule = rules[j];
+
+                        
+                        if (rule.media && rule.media.mediaText === '(prefers-color-scheme: dark)') {
+                            
+                            rule.media.mediaText = '(prefers-color-scheme: light)';
+                            
+                        }
+                    }
+                }
             }
 
             if (theme === "dark") {
                 localStorage.setItem('theme', 'dark');
-            }
 
-            location.reload();
+                document.getElementById('light-btn').classList.remove('data-theme-btn');
+                document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+                
+                var styleSheets = document.styleSheets;
+
+                
+                for (var i = 0; i < styleSheets.length; i++) {
+                    var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+
+                    
+                    for (var j = 0; j < rules.length; j++) {
+                        var rule = rules[j];
+
+                        
+                        if (rule.media && rule.media.mediaText === '(prefers-color-scheme: light)') {
+                            
+                            rule.media.mediaText = '(prefers-color-scheme: dark)';
+                            
+                        }
+                    }
+                }
+            }
         }
 
 
