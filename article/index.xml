@@ -7,10 +7,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2024 IARNO</copyright>
-    <lastBuildDate>Tue, 31 Oct 2023 22:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jul 2024 22:00:00 +0800</lastBuildDate>
     
         <atom:link href="/article/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>golang高并发singleflight防缓存击穿</title>
+      <link>/article/go-singleflight/</link>
+      <pubDate>Sun, 28 Jul 2024 22:00:00 +0800</pubDate>
+      
+      <guid>/article/go-singleflight/</guid>
+      <description>&lt;p&gt;本文主要分析了 Golang 中的一个第三方库，防缓存击穿利器 singleflight，包括基本使用和源码分析。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>nginx支持TLS1.3协议</title>
+      <link>/article/nginx-tls1.3/</link>
+      <pubDate>Sun, 28 Jul 2024 22:00:00 +0800</pubDate>
+      
+      <guid>/article/nginx-tls1.3/</guid>
+      <description>&lt;p&gt;Nginx支持TLS1.3，及0-RTT测试。&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>使用cURL获得请求和响应时间</title>
@@ -699,26 +719,6 @@
       
       <guid>/article/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAvpn/</guid>
       <description>&lt;p&gt;本文提供了在阿里云服务器上设置VPN服务器的全面指南。它涵盖了Linux服务器的初始设置，IPsec VPN的安装，以及从iOS和Mac设备连接到VPN的详细说明。文章还提供了故障排除链接和进一步阅读的参考。&lt;/p&gt;</description>
-      
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/article/1.-%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/article/1.-%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF/</guid>
-      <description>本文主要分析了 Golang 中的一个第三方库，防缓存击穿利器 singleflight，包括基本使用和源码分析。 1. 缓存击穿 平时开发中为了提升性能，减轻DB</description>
-      
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/article/nginx-tls1.3/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/article/nginx-tls1.3/</guid>
-      <description>Nginx支持TLS1.3，及0-RTT测试。 软件版本 需要将openssl编译到nginx中, nginx -V命令查看编译信息。 nginx/1.20.2 openssl-1.1.1w nginx.conf # 为防止重放除了</description>
       
     </item>
     

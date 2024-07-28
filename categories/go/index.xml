@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2024 IARNO</copyright>
-    <lastBuildDate>Sat, 25 Feb 2023 21:00:37 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jul 2024 22:00:00 +0800</lastBuildDate>
     
         <atom:link href="/categories/go/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>golang高并发singleflight防缓存击穿</title>
+      <link>/article/go-singleflight/</link>
+      <pubDate>Sun, 28 Jul 2024 22:00:00 +0800</pubDate>
+      
+      <guid>/article/go-singleflight/</guid>
+      <description>&lt;p&gt;本文主要分析了 Golang 中的一个第三方库，防缓存击穿利器 singleflight，包括基本使用和源码分析。&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>gin Bind 参数绑定</title>

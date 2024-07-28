@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
-    <loc>https://www.iarno.cn/article/</loc><lastmod>2023-10-31T22:00:00+08:00</lastmod></url><url>
-    <loc>https://www.iarno.cn/categories/</loc><lastmod>2023-10-31T22:00:00+08:00</lastmod></url><url>
-    <loc>https://www.iarno.cn/</loc><lastmod>2023-10-31T22:00:00+08:00</lastmod></url><url>
+    <loc>https://www.iarno.cn/article/</loc><lastmod>2024-07-28T22:00:00+08:00</lastmod></url><url>
+    <loc>https://www.iarno.cn/categories/</loc><lastmod>2024-07-28T22:00:00+08:00</lastmod></url><url>
+    <loc>https://www.iarno.cn/categories/go/</loc><lastmod>2024-07-28T22:00:00+08:00</lastmod></url><url>
+    <loc>https://www.iarno.cn/article/go-singleflight/</loc><lastmod>2024-07-28T22:00:00+08:00</lastmod></url><url>
+    <loc>https://www.iarno.cn/</loc><lastmod>2024-07-28T22:00:00+08:00</lastmod></url><url>
+    <loc>https://www.iarno.cn/categories/nginx/</loc><lastmod>2024-07-28T22:00:00+08:00</lastmod></url><url>
+    <loc>https://www.iarno.cn/article/nginx-tls1.3/</loc><lastmod>2024-07-28T22:00:00+08:00</lastmod></url><url>
     <loc>https://www.iarno.cn/categories/linux/</loc><lastmod>2023-10-31T22:00:00+08:00</lastmod></url><url>
     <loc>https://www.iarno.cn/article/curl/</loc><lastmod>2023-10-31T22:00:00+08:00</lastmod></url><url>
     <loc>https://www.iarno.cn/article/golang%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/</loc><lastmod>2023-07-14T20:47:20+08:00</lastmod></url><url>
@@ -15,7 +19,6 @@
     <loc>https://www.iarno.cn/article/apisix/</loc><lastmod>2023-04-02T20:40:37+08:00</lastmod></url><url>
     <loc>https://www.iarno.cn/article/etcd/</loc><lastmod>2023-04-01T20:40:37+08:00</lastmod></url><url>
     <loc>https://www.iarno.cn/article/gin-should-binding/</loc><lastmod>2023-02-25T21:00:37+08:00</lastmod></url><url>
-    <loc>https://www.iarno.cn/categories/go/</loc><lastmod>2023-02-25T21:00:37+08:00</lastmod></url><url>
     <loc>https://www.iarno.cn/article/binding-tag/</loc><lastmod>2023-02-25T20:40:37+08:00</lastmod></url><url>
     <loc>https://www.iarno.cn/article/mysql-join/</loc><lastmod>2023-02-25T20:30:37+08:00</lastmod></url><url>
     <loc>https://www.iarno.cn/article/export-csv/</loc><lastmod>2023-02-25T19:30:37+08:00</lastmod></url><url>
@@ -113,6 +116,4 @@
     <loc>https://www.iarno.cn/tags/%E8%B7%A8%E5%9F%9F/</loc><lastmod>2020-08-29T07:47:20+08:00</lastmod></url><url>
     <loc>https://www.iarno.cn/article/%E8%B7%A8%E5%9F%9F/</loc><lastmod>2020-08-29T07:47:20+08:00</lastmod></url><url>
     <loc>https://www.iarno.cn/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/</loc><lastmod>2020-08-29T07:47:20+08:00</lastmod></url><url>
-    <loc>https://www.iarno.cn/article/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAvpn/</loc><lastmod>2020-08-29T07:47:20+08:00</lastmod></url><url>
-    <loc>https://www.iarno.cn/article/1.-%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF/</loc></url><url>
-    <loc>https://www.iarno.cn/article/nginx-tls1.3/</loc></url></urlset>
+    <loc>https://www.iarno.cn/article/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAvpn/</loc><lastmod>2020-08-29T07:47:20+08:00</lastmod></url></urlset>

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>IARNO</title>
-    <link>/</link>
-    <description>Recent content on IARNO</description>
+    <title>Nginx on IARNO</title>
+    <link>/categories/nginx/</link>
+    <description>Recent content in Nginx on IARNO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2024 IARNO</copyright>
     <lastBuildDate>Sun, 28 Jul 2024 22:00:00 +0800</lastBuildDate>
     
-        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/categories/nginx/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Articles</title>
-      <link>/article/</link>
+      <title>nginx支持TLS1.3协议</title>
+      <link>/article/nginx-tls1.3/</link>
       <pubDate>Sun, 28 Jul 2024 22:00:00 +0800</pubDate>
       
-      <guid>/article/</guid>
-      <description></description>
+      <guid>/article/nginx-tls1.3/</guid>
+      <description>&lt;p&gt;Nginx支持TLS1.3，及0-RTT测试。&lt;/p&gt;</description>
       
     </item>
     
