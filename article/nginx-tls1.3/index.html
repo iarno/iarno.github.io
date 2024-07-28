@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta content="" name="keywords">
+<meta content=" - IARNO" property="og:title">
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>IARNO&nbsp;&ndash;&nbsp;努力升级中的凡人</title><link rel="stylesheet" href="/css/core.min.90eb836236464f85eeb64271ffe50808a653ce2162ebe201edeb70f3e9f5ef27806a374702a054a5b289bd60f0170c51.css" integrity="sha384-kOuDYjZGT4XutkJx/&#43;UICKZTziFi6&#43;IB7etw8&#43;n17yeAajdHAqBUpbKJvWDwFwxR"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="" /><body><section id="header">
+    <title> - IARNO</title>
+    <meta content="阿諾个人博客 - " property="og:description">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav">
+    <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+
+</nav></div></span>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+    </div><div class="site slogan">
+            <span class="title">努力升级中的凡人</span>
+        </div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title"></h1></section><article class="article markdown-body"><p>Nginx支持TLS1.3，及0-RTT测试。</p>
+<h2 id="软件版本">软件版本</h2>
+<p>需要将<code>openssl</code>编译到nginx中, <code>nginx -V</code>命令查看编译信息。</p>
+<p>nginx/1.20.2</p>
+<p>openssl-1.1.1w</p>
+<h2 id="nginxconf">nginx.conf</h2>
+<div class="highlight"><pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># 为防止重放除了GET、HEAD请求全都返回HTTP状态码425(浏览器会默认重发1次请求)
+</span><span class="c1"></span><span class="k">map</span> <span class="nv">$ssl_early_data$request_method</span> <span class="nv">$early_data_non_idempotent</span> <span class="p">{</span>
+    <span class="kn">&#34;1POST&#34;</span>    <span class="mi">1</span><span class="p">;</span>
+    <span class="kn">&#34;1PUT&#34;</span>     <span class="mi">1</span><span class="p">;</span>
+    <span class="kn">&#34;1DELETE&#34;</span>  <span class="mi">1</span><span class="p">;</span>
+    <span class="kn">&#34;1PATCH&#34;</span>   <span class="mi">1</span><span class="p">;</span>
+    <span class="kn">&#34;1OPTIONS&#34;</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kn">&#34;1GET&#34;</span>     <span class="mi">0</span><span class="p">;</span>
+    <span class="kn">&#34;1HEAD&#34;</span>    <span class="mi">0</span><span class="p">;</span>
+    <span class="kn">default</span>    <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">www.iarno.cn</span><span class="p">;</span>
+    <span class="kn">server_tokens</span> <span class="no">off</span><span class="p">;</span>
+
+    <span class="kn">keepalive_timeout</span> <span class="mi">5</span><span class="p">;</span>
+
+    <span class="kn">......省略</span>
+ 
+    <span class="s">include</span> <span class="s">/home/q/system/hao360cn_family_golang/conf/http/general/ssl.conf</span><span class="p">;</span>
+    <span class="kn">ssl_certificate</span> <span class="s">/usr/local/nginx/ssl/www.iarno.cn.crt</span><span class="p">;</span>
+    <span class="kn">ssl_certificate_key</span> <span class="s">/usr/local/nginx/ssl/www.iarno.cn.key</span><span class="p">;</span>
+ 
+    <span class="kn">......省略</span>
+
+    <span class="s">access_log</span> <span class="s">logs/https.log</span> <span class="s">combinedio</span> <span class="s">buffer=4k</span><span class="p">;</span>
+    <span class="kn">error_log</span>  <span class="s">logs/https_error.log</span><span class="p">;</span>
+
+    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+        <span class="kn">if</span> <span class="s">(</span><span class="nv">$early_data_non_idempotent</span><span class="s">)</span> <span class="p">{</span>
+            <span class="kn">return</span> <span class="mi">425</span><span class="p">;</span>  <span class="c1"># Non-idempotent operations return 425 Too Early
+</span><span class="c1"></span>        <span class="p">}</span>
+        <span class="kn">include</span> <span class="s">/usr/local/nginx/conf/https_proxy.conf</span><span class="p">;</span>
+        <span class="kn">......省略</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div><h2 id="sslconf">ssl.conf</h2>
+<div class="highlight"><pre class="chroma"><code class="language-nginx" data-lang="nginx">
+<span class="k">ssl_stapling</span> <span class="no">on</span><span class="p">;</span>
+<span class="k">ssl_session_tickets</span>         <span class="no">on</span><span class="p">;</span> <span class="c1"># 是否复用sesssion ticket, openssl发送early data数据后每次会新生成session
+</span><span class="c1"></span><span class="k">ssl_early_data</span>              <span class="no">on</span><span class="p">;</span> <span class="c1"># 开发early data (0-RTT)
+</span><span class="c1"></span><span class="k">ssl_session_ticket_key</span>      <span class="s">/usr/local/nginx/conf/ssl_session_ticket.key</span><span class="p">;</span>
+<span class="k">ssl_session_timeout</span>         <span class="mi">10m</span><span class="p">;</span> <span class="c1"># early_data过期时间
+</span><span class="c1"></span>
+<span class="k">ssl_protocols</span>               <span class="s">TLSv1</span> <span class="s">TLSv1.1</span> <span class="s">TLSv1.2</span> <span class="s">TLSv1.3</span><span class="p">;</span>
+<span class="k">ssl_ciphers</span>                 <span class="s">&#39;TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:ECDHE-RSA-DES-CBC3-SHA:ECDHE-ECDSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA&#39;</span><span class="p">;</span>
+<span class="k">ssl_prefer_server_ciphers</span>   <span class="no">on</span><span class="p">;</span>
+ 
+</code></pre></div><h2 id="https_proxyconf">https_proxy.conf</h2>
+<div class="highlight"><pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">proxy_set_header</span> <span class="s">Connection</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+<span class="k">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$server_name</span><span class="p">;</span>
+<span class="k">proxy_set_header</span> <span class="s">Early-Data</span> <span class="nv">$ssl_early_data</span><span class="p">;</span> <span class="c1"># 设置early data标识
+</span><span class="c1"></span>
+<span class="k">proxy_connect_timeout</span>      <span class="s">5s</span><span class="p">;</span>
+<span class="k">proxy_send_timeout</span>         <span class="s">5s</span><span class="p">;</span>
+<span class="k">proxy_read_timeout</span>         <span class="s">5s</span><span class="p">;</span>
+
+</code></pre></div><h2 id="tls13验证">TLS1.3验证</h2>
+<p><a href="https://www.ssllabs.com/ssltest/analyze.html?d=www.taobao.com&amp;latest">https://www.ssllabs.com/ssltest/analyze.html?d=www.taobao.com&amp;latest</a></p>
+<p><a href="https://github.com/drwetter/testssl.sh">https://github.com/drwetter/testssl.sh</a></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜  testssl.sh git:<span class="o">(</span>3.2<span class="o">)</span> ✗ ./testssl.sh -p www.taobao.com
+
+<span class="c1">###########################################################</span>
+    testssl.sh       3.2rc3 from https://testssl.sh/dev/
+    <span class="o">(</span>1dbd9b8 2024-07-18 09:09:13<span class="o">)</span>
+
+      This program is free software. Distribution and
+             modification under GPLv2 permitted.
+      USAGE w/o ANY WARRANTY. USE IT AT YOUR OWN RISK!
+
+       Please file bugs @ https://testssl.sh/bugs/
+
+<span class="c1">###########################################################</span>
+
+ Using <span class="s2">&#34;OpenSSL 1.0.2-bad (1.0.2k-dev)&#34;</span> <span class="o">[</span>~183 ciphers<span class="o">]</span>
+ xxxx:./bin/openssl.Darwin.x86_64
+ <span class="o">(</span>built: <span class="s2">&#34;Sep  3 14:46:36 2022&#34;</span>, platform: <span class="s2">&#34;darwin64-x86_64-cc&#34;</span><span class="o">)</span>
+
+
+Testing all IPv4 addresses <span class="o">(</span>port 443<span class="o">)</span>: 119.188.122.194 119.188.122.195
+-----------------------------------------------------------------------------------------------
+ Start 2024-07-25 15:59:51                --&gt;&gt; 119.188.122.194:443 <span class="o">(</span>www.taobao.com<span class="o">)</span> &lt;&lt;--
+
+ Further IP addresses:   119.188.122.195 2408:8719:64:54:3::3da 2408:8719:64:54:3::3db
+ rDNS <span class="o">(</span>119.188.122.194<span class="o">)</span>: --
+ Service detected:       HTTP
+
+
+ Testing protocols via sockets except NPN+ALPN
+
+ SSLv2      not offered <span class="o">(</span>OK<span class="o">)</span>
+ SSLv3      not offered <span class="o">(</span>OK<span class="o">)</span>
+ TLS <span class="m">1</span>      offered <span class="o">(</span>deprecated<span class="o">)</span>
+ TLS 1.1    offered <span class="o">(</span>deprecated<span class="o">)</span>
+ TLS 1.2    offered <span class="o">(</span>OK<span class="o">)</span>
+ TLS 1.3    offered <span class="o">(</span>OK<span class="o">)</span>: final
+ NPN/SPDY   h2, http/1.1 <span class="o">(</span>advertised<span class="o">)</span>
+ ALPN/HTTP2 h2, http/1.1 <span class="o">(</span>offered<span class="o">)</span>
+
+
+ Done 2024-07-25 15:59:59 <span class="o">[</span>0014s<span class="o">]</span> --&gt;&gt; 119.188.122.194:443 <span class="o">(</span>www.taobao.com<span class="o">)</span> &lt;&lt;--
+
+-----------------------------------------------------------------------------------------------
+ Start 2024-07-25 15:59:59                --&gt;&gt; 119.188.122.195:443 <span class="o">(</span>www.taobao.com<span class="o">)</span> &lt;&lt;--
+
+ Further IP addresses:   119.188.122.194 2408:8719:64:54:3::3da 2408:8719:64:54:3::3db
+ rDNS <span class="o">(</span>119.188.122.195<span class="o">)</span>: --
+ Service detected:       HTTP
+
+
+ Testing protocols via sockets except NPN+ALPN
+
+ SSLv2      not offered <span class="o">(</span>OK<span class="o">)</span>
+ SSLv3      not offered <span class="o">(</span>OK<span class="o">)</span>
+ TLS <span class="m">1</span>      offered <span class="o">(</span>deprecated<span class="o">)</span>
+ TLS 1.1    offered <span class="o">(</span>deprecated<span class="o">)</span>
+ TLS 1.2    offered <span class="o">(</span>OK<span class="o">)</span>
+ TLS 1.3    offered <span class="o">(</span>OK<span class="o">)</span>: final
+ NPN/SPDY   h2, http/1.1 <span class="o">(</span>advertised<span class="o">)</span>
+ ALPN/HTTP2 h2, http/1.1 <span class="o">(</span>offered<span class="o">)</span>
+
+
+ Done 2024-07-25 16:00:08 <span class="o">[</span>0023s<span class="o">]</span> --&gt;&gt; 119.188.122.195:443 <span class="o">(</span>www.taobao.com<span class="o">)</span> &lt;&lt;--
+
+-----------------------------------------------------------------------------------------------
+Done testing now all IP addresses <span class="o">(</span>on port 443<span class="o">)</span>: 119.188.122.194 119.188.122.195
+</code></pre></div><h2 id="early-data0-rtt验证">Early Data(0-RTT)验证</h2>
+<h3 id="openssl验证">openssl验证</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 第一步</span>
+➜  ~ openssl s_client -connect www.taobao.com:443 -tls1_3 -sess_out session.pem
+Connecting to 119.188.122.195
+CONNECTED<span class="o">(</span>00000006<span class="o">)</span>
+<span class="nv">depth</span><span class="o">=</span><span class="m">2</span> <span class="nv">C</span><span class="o">=</span>BE, <span class="nv">O</span><span class="o">=</span>GlobalSign nv-sa, <span class="nv">OU</span><span class="o">=</span>Root CA, <span class="nv">CN</span><span class="o">=</span>GlobalSign Root CA
+verify <span class="k">return</span>:1
+<span class="nv">depth</span><span class="o">=</span><span class="m">1</span> <span class="nv">C</span><span class="o">=</span>BE, <span class="nv">O</span><span class="o">=</span>GlobalSign nv-sa, <span class="nv">CN</span><span class="o">=</span>GlobalSign Organization Validation CA - SHA256 - G3
+verify <span class="k">return</span>:1
+<span class="nv">depth</span><span class="o">=</span><span class="m">0</span> <span class="nv">C</span><span class="o">=</span>CN, <span class="nv">ST</span><span class="o">=</span>ZheJiang, <span class="nv">L</span><span class="o">=</span>HangZhou, <span class="nv">O</span><span class="o">=</span>Alibaba <span class="o">(</span>China<span class="o">)</span> Technology Co., Ltd., <span class="nv">CN</span><span class="o">=</span>*.tbcdn.cn
+verify <span class="k">return</span>:1
+---
+Certificate chain
+ <span class="m">0</span> s:C<span class="o">=</span>CN, <span class="nv">ST</span><span class="o">=</span>ZheJiang, <span class="nv">L</span><span class="o">=</span>HangZhou, <span class="nv">O</span><span class="o">=</span>Alibaba <span class="o">(</span>China<span class="o">)</span> Technology Co., Ltd., <span class="nv">CN</span><span class="o">=</span>*.tbcdn.cn
+   i:C<span class="o">=</span>BE, <span class="nv">O</span><span class="o">=</span>GlobalSign nv-sa, <span class="nv">CN</span><span class="o">=</span>GlobalSign Organization Validation CA - SHA256 - G3
+   a:PKEY: rsaEncryption, <span class="m">2048</span> <span class="o">(</span>bit<span class="o">)</span><span class="p">;</span> sigalg: RSA-SHA256
+   v:NotBefore: Jun <span class="m">19</span> 09:06:02 <span class="m">2024</span> GMT<span class="p">;</span> NotAfter: Jul <span class="m">21</span> 09:06:01 <span class="m">2025</span> GMT
+ <span class="m">1</span> s:C<span class="o">=</span>BE, <span class="nv">O</span><span class="o">=</span>GlobalSign nv-sa, <span class="nv">CN</span><span class="o">=</span>GlobalSign Organization Validation CA - SHA256 - G3
+   i:C<span class="o">=</span>BE, <span class="nv">O</span><span class="o">=</span>GlobalSign nv-sa, <span class="nv">OU</span><span class="o">=</span>Root CA, <span class="nv">CN</span><span class="o">=</span>GlobalSign Root CA
+   a:PKEY: rsaEncryption, <span class="m">2048</span> <span class="o">(</span>bit<span class="o">)</span><span class="p">;</span> sigalg: RSA-SHA256
+   v:NotBefore: Sep  <span class="m">4</span> 00:00:00 <span class="m">2015</span> GMT<span class="p">;</span> NotAfter: Sep  <span class="m">4</span> 00:00:00 <span class="m">2025</span> GMT
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+......省略
+-----END CERTIFICATE-----
+<span class="nv">subject</span><span class="o">=</span><span class="nv">C</span><span class="o">=</span>CN, <span class="nv">ST</span><span class="o">=</span>ZheJiang, <span class="nv">L</span><span class="o">=</span>HangZhou, <span class="nv">O</span><span class="o">=</span>Alibaba <span class="o">(</span>China<span class="o">)</span> Technology Co., Ltd., <span class="nv">CN</span><span class="o">=</span>*.tbcdn.cn
+<span class="nv">issuer</span><span class="o">=</span><span class="nv">C</span><span class="o">=</span>BE, <span class="nv">O</span><span class="o">=</span>GlobalSign nv-sa, <span class="nv">CN</span><span class="o">=</span>GlobalSign Organization Validation CA - SHA256 - G3
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, <span class="m">253</span> bits
+---
+SSL handshake has <span class="nb">read</span> <span class="m">4600</span> bytes and written <span class="m">332</span> bytes
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is <span class="m">2048</span> bit
+This TLS version forbids renegotiation.
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify <span class="k">return</span> code: <span class="m">0</span> <span class="o">(</span>ok<span class="o">)</span>
+---
+---
+Post-Handshake New Session Ticket arrived:
+SSL-Session:
+		......省略
+
+    Start Time: <span class="m">1721893373</span>
+    Timeout   : <span class="m">7200</span> <span class="o">(</span>sec<span class="o">)</span>
+    Verify <span class="k">return</span> code: <span class="m">0</span> <span class="o">(</span>ok<span class="o">)</span>
+    Extended master secret: no
+    Max Early Data: <span class="m">16384</span>
+---
+<span class="nb">read</span> R BLOCK
+---
+Post-Handshake New Session Ticket arrived:
+SSL-Session:
+		......省略
+
+    Start Time: <span class="m">1721893373</span>
+    Timeout   : <span class="m">7200</span> <span class="o">(</span>sec<span class="o">)</span>
+    Verify <span class="k">return</span> code: <span class="m">0</span> <span class="o">(</span>ok<span class="o">)</span>
+    Extended master secret: no
+    Max Early Data: <span class="m">16384</span>
+---
+<span class="nb">read</span> R BLOCK
+closed
+
+<span class="c1"># 第二步</span>
+➜  ~ <span class="nb">echo</span> -e <span class="s2">&#34;GET / HTTP/1.1\r\nHost: www.taobao.com\r\n\r\n&#34;</span> &gt; early_data.txt
+➜  ~
+
+<span class="c1"># 第三步</span>
+➜  ~ openssl s_client -connect www.taobao.com:443 -tls1_3 -sess_in session.pem -early_data early_data.txt
+Connecting to 119.188.122.194
+CONNECTED<span class="o">(</span>00000006<span class="o">)</span>
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+......省略
+-----END CERTIFICATE-----
+<span class="nv">subject</span><span class="o">=</span><span class="nv">C</span><span class="o">=</span>CN, <span class="nv">ST</span><span class="o">=</span>ZheJiang, <span class="nv">L</span><span class="o">=</span>HangZhou, <span class="nv">O</span><span class="o">=</span>Alibaba <span class="o">(</span>China<span class="o">)</span> Technology Co., Ltd., <span class="nv">CN</span><span class="o">=</span>*.tbcdn.cn
+<span class="nv">issuer</span><span class="o">=</span><span class="nv">C</span><span class="o">=</span>BE, <span class="nv">O</span><span class="o">=</span>GlobalSign nv-sa, <span class="nv">CN</span><span class="o">=</span>GlobalSign Organization Validation CA - SHA256 - G3
+---
+No client certificate CA names sent
+Server Temp Key: X25519, <span class="m">253</span> bits
+---
+SSL handshake has <span class="nb">read</span> <span class="m">249</span> bytes and written <span class="m">728</span> bytes
+Verification: OK
+---
+Reused, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is <span class="m">2048</span> bit
+This TLS version forbids renegotiation.
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was accepted
+Verify <span class="k">return</span> code: <span class="m">0</span> <span class="o">(</span>ok<span class="o">)</span>
+---
+HTTP/1.1 <span class="m">200</span> OK
+Server: Tengine
+Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Date: Thu, <span class="m">25</span> Jul <span class="m">2024</span> 07:44:31 GMT
+x-server-id: 28c3d6b2523ca52c32ad72931842b19a621c8cdfdfbcaabcd5562acb7211986218860f5b9ea54579
+x-air-hostname: air-ual033043202123.center.na610
+x-air-trace-id: 7b06169817218934709936299e
+Cache-Control: max-age<span class="o">=</span>0, s-maxage<span class="o">=</span><span class="m">118</span>
+x-node: 9c0775731c8445d0bdf09cefd3e4bbf3
+x-eagleeye-id: 7b06169817218934709936299e
+x-retmsg: ok
+x-content-type: text/html<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>utf-8
+streaming-parser: open
+x-retcode: SUCCESS
+x-readtime: <span class="m">178</span>
+x-via: cn5026.l1, cache13.cn5026, l2nu16-1.l2, cache21.l2nu16-1, wormholesource033102016177.center.na610
+x-air-source: proxy
+x-xss-protection: 1<span class="p">;</span> <span class="nv">mode</span><span class="o">=</span>block
+Strict-Transport-Security: max-age<span class="o">=</span><span class="m">31536000</span>
+Ups-Target-Key: air-ual.vipserver
+X-protocol: HTTP/1.1
+EagleEye-TraceId: 7b06169817218934709936299e
+s-brt: <span class="m">181</span>
+Via: cache21.l2nu16-1<span class="o">[</span>212,162,304-0,C<span class="o">]</span>, cache14.l2nu16-1<span class="o">[</span>167,0<span class="o">]</span>, cache4.cn6806<span class="o">[</span>0,0,200-0,H<span class="o">]</span>, cache20.cn6806<span class="o">[</span>1,0<span class="o">]</span>
+Vary: Accept-Encoding
+Vary: Ali-Detector-Type, X-Host, Accept-Encoding, Origin
+etag: W/<span class="s2">&#34;bf15d-yE/eVpg40kEzpV7XQBu+BBmxaWc&#34;</span>
+Age: <span class="m">54</span>
+Ali-Swift-Global-Savetime: <span class="m">1721893471</span>
+X-Cache: HIT TCP_MEM_HIT dirn:-2:-2
+X-Swift-SaveTime: Thu, <span class="m">25</span> Jul <span class="m">2024</span> 07:44:31 GMT
+X-Swift-CacheTime: <span class="m">118</span>
+x-air-pt: pt0
+Timing-Allow-Origin: *
+EagleId: 77bc7a9917218935251046825e
+
+7a84
+
+
+
+.........  页面源代码
+
+
+
+<span class="m">0</span>
+
+---
+Post-Handshake New Session Ticket arrived: <span class="c1"># 如果nginx配置ssl_session_tickets=off才会有次内容，每次会新生成session</span>
+SSL-Session:
+		......省略
+
+    Start Time: <span class="m">1721893527</span>
+    Timeout   : <span class="m">7200</span> <span class="o">(</span>sec<span class="o">)</span>
+    Verify <span class="k">return</span> code: <span class="m">0</span> <span class="o">(</span>ok<span class="o">)</span>
+    Extended master secret: no
+    Max Early Data: <span class="m">16384</span>
+---
+<span class="nb">read</span> R BLOCK
+C097125AF87F0000:error:0A000126:SSL routines::unexpected eof <span class="k">while</span> reading:ssl/record/rec_layer_s3.c:692:
+
+</code></pre></div><h3 id="chrome浏览器验证">Chrome浏览器验证</h3>
+<p><code>chrome://flags/</code></p>
+<p>开启TLS1.3 Early Data，默认为关闭状态。</p>
+<p><img  src="https://images.iarno.cn/images/20240725171756713.png"
+        alt="image-20240725171756713"/></p>
+<p><strong>修改nginx日志格式</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">log_format</span>       <span class="s">combinedio</span>  <span class="s">&#39;</span><span class="nv">$remote_addr</span> <span class="s">-</span> <span class="nv">$remote_user</span> <span class="s">[</span><span class="nv">$time_local]</span> <span class="s">&#39;</span>
+                                 <span class="s">&#39;&#34;</span><span class="nv">$request&#34;</span> <span class="nv">$status</span> <span class="nv">$body_bytes_sent</span> <span class="s">&#39;</span>
+                                 <span class="s">&#39;&#34;</span><span class="nv">$http_referer&#34;</span> <span class="s">&#34;</span><span class="nv">$http_user_agent&#34;</span> <span class="nv">$request_length</span> <span class="nv">$request_time</span> <span class="nv">$upstream_response_time</span> <span class="nv">$ssl_early_data&#39;</span><span class="p">;</span> <span class="c1"># $ssl_early_data 访问日志新增early data标识
+</span></code></pre></div><p><img  src="https://images.iarno.cn/images/20240725172922909.png"
+        alt="image-20240725172922909"/></p>
+<h2 id="参考">参考</h2>
+<p><a href="https://blog.csdn.net/SkyChaserYu/article/details/105840504">https://blog.csdn.net/SkyChaserYu/article/details/105840504</a></p>
+<p><a href="https://www.cnblogs.com/wusanga/p/17386098.html">https://www.cnblogs.com/wusanga/p/17386098.html</a></p>
+<p><a href="https://imququ.com/post/enable-tls-1-3.html">https://imququ.com/post/enable-tls-1-3.html</a></p>
+</article><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2024 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><script>
+        var theme = localStorage.getItem('theme');
+        if (window.matchMedia('(prefers-color-scheme: light)').matches && theme == null) {
+            document.getElementById('light-btn').classList.add('data-theme-btn');
+        }
+
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches && theme == null) {
+            document.getElementById('dark-btn').classList.add('data-theme-btn');
+        }
+
+        if (theme == "dark") {
+            document.getElementById('dark-btn').classList.add('data-theme-btn');
+        }
+
+        if (theme == "light") {
+            document.getElementById('light-btn').classList.add('data-theme-btn');
+        }
+
+        function toggleTheme(theme) {
+            if (theme === "light") {
+                localStorage.setItem('theme', 'light');
+
+                document.getElementById('dark-btn').classList.remove('data-theme-btn');
+                document.getElementById('light-btn').classList.add('data-theme-btn');
+
+                
+                var styleSheets = document.styleSheets;
+
+                
+                for (var i = 0; i < styleSheets.length; i++) {
+                    var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+
+                    
+                    for (var j = 0; j < rules.length; j++) {
+                        var rule = rules[j];
+
+                        
+                        if (rule.media && rule.media.mediaText === '(prefers-color-scheme: dark)') {
+                            
+                            rule.media.mediaText = '(prefers-color-scheme: light)';
+                            
+                        }
+                    }
+                }
+            }
+
+            if (theme === "dark") {
+                localStorage.setItem('theme', 'dark');
+
+                document.getElementById('light-btn').classList.remove('data-theme-btn');
+                document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+                
+                var styleSheets = document.styleSheets;
+
+                
+                for (var i = 0; i < styleSheets.length; i++) {
+                    var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+
+                    
+                    for (var j = 0; j < rules.length; j++) {
+                        var rule = rules[j];
+
+                        
+                        if (rule.media && rule.media.mediaText === '(prefers-color-scheme: light)') {
+                            
+                            rule.media.mediaText = '(prefers-color-scheme: dark)';
+                            
+                        }
+                    }
+                }
+            }
+        }
+
+
+        if (theme == "light") {
+            
+            var styleSheets = document.styleSheets;
+
+            
+            for (var i = 0; i < styleSheets.length; i++) {
+                var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+
+                
+                for (var j = 0; j < rules.length; j++) {
+                    var rule = rules[j];
+
+                    
+                    if (rule.media && rule.media.mediaText === '(prefers-color-scheme: dark)') {
+                        
+                        rule.media.mediaText = '(prefers-color-scheme: light)';
+                        
+                    }
+                }
+            }
+        }
+
+        if (theme == "dark") {
+            
+            var styleSheets = document.styleSheets;
+
+            
+            for (var i = 0; i < styleSheets.length; i++) {
+                var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+
+                
+                for (var j = 0; j < rules.length; j++) {
+                    var rule = rules[j];
+
+                    
+                    if (rule.media && rule.media.mediaText === '(prefers-color-scheme: light)') {
+                        
+                        rule.media.mediaText = '(prefers-color-scheme: dark)';
+                        
+                    }
+                }
+            }
+        }
+
+    </script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>
