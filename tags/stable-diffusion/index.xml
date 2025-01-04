@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>stable diffusion on IARNO</title>
+    <title>Stable Diffusion on IARNO</title>
     <link>/tags/stable-diffusion/</link>
-    <description>Recent content in stable diffusion on IARNO</description>
+    <description>Recent content in Stable Diffusion on IARNO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <copyright>©2024 IARNO</copyright>
+    <copyright>©2025 IARNO</copyright>
     <lastBuildDate>Sun, 16 Apr 2023 16:00:37 +0800</lastBuildDate>
     
         <atom:link href="/tags/stable-diffusion/index.xml" rel="self" type="application/rss+xml" />

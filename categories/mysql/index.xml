@@ -6,7 +6,7 @@
     <description>Recent content in Mysql on IARNO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <copyright>©2024 IARNO</copyright>
+    <copyright>©2025 IARNO</copyright>
     <lastBuildDate>Fri, 14 Jul 2023 20:47:20 +0800</lastBuildDate>
     
         <atom:link href="/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
@@ -48,7 +48,7 @@
       <pubDate>Sat, 29 Aug 2020 07:47:20 +0800</pubDate>
       
       <guid>/article/mysql%E6%9F%A5%E8%AF%A2%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5%E9%87%8D%E5%A4%8D%E7%9A%84%E5%80%BC/</guid>
-      <description>本文介绍了如何在MySQL中查询多个字段重复的值。文章提供了一段SQL查询语句，该语句可以从指定的表中找出在特定字段（字段1和字段2）上有重</description>
+      <description>&lt;p&gt;本文介绍了如何在MySQL中查询多个字段重复的值。文章提供了一段SQL查询语句，该语句可以从指定的表中找出在特定字段（字段1和字段2）上有重复值的记录。这个查询语句首先通过子查询找出所有在字段1和字段2上有重复值的记录，然后在主查询中返回这些记录。这种方法可以帮助我们快速找出数据库中的重复记录，对于数据清理和分析非常有用。&lt;/p&gt;</description>
       
     </item>
     

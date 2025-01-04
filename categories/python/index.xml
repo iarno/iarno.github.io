@@ -6,7 +6,7 @@
     <description>Recent content in Python on IARNO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <copyright>©2024 IARNO</copyright>
+    <copyright>©2025 IARNO</copyright>
     <lastBuildDate>Wed, 24 Aug 2022 22:31:37 +0800</lastBuildDate>
     
         <atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
@@ -38,7 +38,7 @@
       <pubDate>Mon, 04 Jul 2022 22:41:37 +0800</pubDate>
       
       <guid>/article/py-file/</guid>
-      <description>&lt;p&gt;这篇文章介绍了Python的异常处理方法，主要讲解了try-except语句的使用。文章通过一个实例，展示了如何使用try-except语句来处理文件读取时可能出现的FileNotFoundError异常。当文件不存在时，程序会捕获这个异常，并打印出&amp;quot;file not found&amp;rdquo;。如果文件存在且无异常，程序会读取文件内容并打印出来。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章介绍了Python的异常处理方法，主要讲解了try-except语句的使用。文章通过一个实例，展示了如何使用try-except语句来处理文件读取时可能出现的FileNotFoundError异常。当文件不存在时，程序会捕获这个异常，并打印出&amp;quot;file not found&amp;quot;。如果文件存在且无异常，程序会读取文件内容并打印出来。&lt;/p&gt;</description>
       
     </item>
     

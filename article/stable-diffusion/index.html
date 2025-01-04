@@ -1,20 +1,80 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.140.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark">
 <meta content="stable diffusion, AI作画, 图像AI" name="keywords">
 <meta content="stable diffusion webui 安装 - IARNO" property="og:title">
-<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>stable diffusion webui 安装&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.10378bb60864db659b307ff1cb88b58847923e6c059836d0675eb97e77ac87967c8b565e9326d8fa3955aacbdc912f1d.css" integrity="sha384-EDeLtghk22WbMH/xy4i1iEeSPmwFmDbQZ165fnesh5Z8i1ZekybY&#43;jlVqsvckS8d"><meta name="twitter:card" content="summary" />
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>stable diffusion webui 安装&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.475767088e02a0cde98e83d380878f87eecec4c45d477990e99d2d01bfaed3a249b1503fa03e85ee68591c8e8dcedbe1.css" integrity="sha384-R1dnCI4CoM3pjoPTgIePh&#43;7OxMRdR3mQ6Z0tAb&#43;u06JJsVA/oD6F7mhZHI6Nztvh"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="stable diffusion webui 安装" /><body><section id="header">
     <title>stable diffusion webui 安装 - IARNO</title>
     <meta content="阿諾个人博客 - stable diffusion webui 安装及问题汇总" property="og:description">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav">
-    <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+        <span class="header right-side"><style>
+    .nav-search-container {
+      position: relative;
+      display: inline-flex;
+      align-items: center;  
+      top: 1.5px;
+    }
+  
+    .search-input {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      width: 0;
+      height: 30px;
+      border: 1px solid #aaa;
+      background-color: #f9f9f9;
+      padding: 5px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #333;
+      opacity: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+  
+    .nav-search-container:hover .search-input {
+      width: 200px;
+      opacity: 1;
+    }
+  
+    .nav-search-container:hover .search-input:focus {
+      outline: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    .icon {
+      cursor: pointer;
+      width: 14.5px;
+      height: 14.5px;
+      transition: fill 0.3s ease;
+      margin-top: 1.5px;
+    }
+</style><div class="nav wrap"><nav class="nav">
 
-</nav></div></span>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+<form action="/search/" class="nav item">
+    <div class="nav-search-container">
+        <form action="/search/" style="display:inline;">
+          <input type="text" id="search-query" class="search-input" placeholder="Search.." name="q" />
+        </form>
+        
+        <svg id="light-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745"></path>
+        </svg>
+        
+        <svg id="dark-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742" style="display:none;">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743" fill="#ffffff"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744" fill="#ffffff"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745" fill="#ffffff"></path>
+        </svg>
+     </div><a class="nav item" href="/categories/">分类</a><a class="nav item" href="/tags/">标签</a><a class="nav item" href=""></a></nav></div></span>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
     </div><div class="site slogan">
             <span class="title">努力升级中的凡人</span>
         </div></section><section id="content"><div class="article-container"><section class="article header">
@@ -23,46 +83,46 @@
 <blockquote>
 <p>Tip:  Python 版本为 3.10.6</p>
 </blockquote>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
-
-<span class="nb">cd</span> stable-diffusion-webui/
-
-<span class="c1"># 请切换Python venv, 魔法上网, 下载时间比较长</span>
-git config --global http.proxy http://127.0.0.1:10887
-pip install --upgrade pip
-<span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://127.0.0.1:10887<span class="p">;</span><span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>http://127.0.0.1:10887<span class="p">;</span>
-sh ./webui.sh
-</code></pre></div><h1 id="二安装报错汇总">二、安装报错汇总</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> stable-diffusion-webui/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 请切换Python venv, 魔法上网, 下载时间比较长</span>
+</span></span><span class="line"><span class="cl">git config --global http.proxy http://127.0.0.1:10887
+</span></span><span class="line"><span class="cl">pip install --upgrade pip
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://127.0.0.1:10887<span class="p">;</span><span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>http://127.0.0.1:10887<span class="p">;</span>
+</span></span><span class="line"><span class="cl">sh ./webui.sh
+</span></span></code></pre></div><h1 id="二安装报错汇总">二、安装报错汇总</h1>
 <h2 id="21-安装gfpgan报错">2.1 安装gfpgan报错</h2>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Installing gfpgan
-Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
-  File <span class="s2">&#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/launch.py&#34;</span>, line 355, in &lt;module&gt;
-    prepare_environment<span class="o">()</span>
-  File <span class="s2">&#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/launch.py&#34;</span>, line 263, in prepare_environment
-    run_pip<span class="o">(</span>f<span class="s2">&#34;install {gfpgan_package}&#34;</span>, <span class="s2">&#34;gfpgan&#34;</span><span class="o">)</span>
-  File <span class="s2">&#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/launch.py&#34;</span>, line 129, in run_pip
-    <span class="k">return</span> run<span class="o">(</span>f<span class="s1">&#39;&#34;{python}&#34; -m pip {args} --prefer-binary{index_url_line}&#39;</span>, <span class="nv">desc</span><span class="o">=</span>f<span class="s2">&#34;Installing {desc}&#34;</span>, <span class="nv">errdesc</span><span class="o">=</span>f<span class="s2">&#34;Couldn&#39;t install {desc}&#34;</span><span class="o">)</span>
-  File <span class="s2">&#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/launch.py&#34;</span>, line 97, in run
-    raise RuntimeError<span class="o">(</span>message<span class="o">)</span>
-RuntimeError: Couldn<span class="s1">&#39;t install gfpgan.
-</span><span class="s1">Command: &#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/venv/bin/python3.10&#34; -m pip install git+https://github.com/TencentARC/GFPGAN.git@8d2447a2d918f8eba5a4a01463fd48e45126a379 --prefer-binary
-</span><span class="s1">Error code: 2
-</span><span class="s1">stdout: Collecting git+https://github.com/TencentARC/GFPGAN.git@8d2447a2d918f8eba5a4a01463fd48e45126a379
-</span><span class="s1">  Cloning https://github.com/TencentARC/GFPGAN.git (to revision 8d2447a2d918f8eba5a4a01463fd48e45126a379) to /private/var/folders/qw/4fkzpn79447fkgjgk19pq_6h0000gn/T/pip-req-build-0i1rio01
-</span><span class="s1">  
-</span><span class="s1">  
-</span><span class="s1">stderr:   Running command git clone --filter=blob:none --quiet https://github.com/TencentARC/GFPGAN.git /private/var/folders/qw/4fkzpn79447fkgjgk19pq_6h0000gn/T/pip-req-build-0i1rio01
-</span><span class="s1">  Running command git rev-parse -q --verify &#39;</span>sha^8d2447a2d918f8eba5a4a01463fd48e45126a379<span class="err">&#39;</span>
-  Running <span class="nb">command</span> git fetch -q https://github.com/TencentARC/GFPGAN.git 8d2447a2d918f8eba5a4a01463fd48e45126a379
-  Running <span class="nb">command</span> git checkout -q 8d2447a2d918f8eba5a4a01463fd48e45126a379
-</code></pre></div><p><strong>解决方案:</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git config --global http.proxy http://127.0.0.1:10887
-</code></pre></div><h2 id="22-未下载模型导致服务无法运行">2.2 未下载模型导致服务无法运行</h2>
-<div class="highlight"><pre class="chroma"><code class="language-basic" data-lang="basic"><span class="vg">No</span><span class="w"> </span><span class="vg">checkpoints</span><span class="w"> </span><span class="vg">found</span><span class="o">.</span><span class="w"> </span><span class="vg">When</span><span class="w"> </span><span class="vg">searching</span><span class="w"> </span><span class="vg">for</span><span class="w"> </span><span class="vg">checkpoints</span><span class="p">,</span><span class="w"> </span><span class="vg">looked</span><span class="w"> </span><span class="nl">at:</span>
-<span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="vg">file</span><span class="w"> </span><span class="o">/</span><span class="vg">Users</span><span class="o">/</span><span class="vg">liuli</span><span class="o">/</span><span class="vg">Devspace</span><span class="o">/</span><span class="vg">chatgpt</span><span class="o">/</span><span class="vg">stable</span><span class="o">-</span><span class="vg">diffusion</span><span class="o">-</span><span class="vg">webui</span><span class="o">/</span><span class="vg">model</span><span class="o">.</span><span class="vg">ckpt</span>
-<span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="vg">directory</span><span class="w"> </span><span class="o">/</span><span class="vg">Users</span><span class="o">/</span><span class="vg">liuli</span><span class="o">/</span><span class="vg">Devspace</span><span class="o">/</span><span class="vg">chatgpt</span><span class="o">/</span><span class="vg">stable</span><span class="o">-</span><span class="vg">diffusion</span><span class="o">-</span><span class="vg">webui</span><span class="o">/</span><span class="vg">models</span><span class="o">/</span><span class="vg">Stable</span><span class="o">-</span><span class="vg">diffusion</span>
-<span class="vg">Can</span><span class="c1">&#39;t run without a checkpoint. Find and place a .ckpt or .safetensors file into any of those locations. The program will exit.</span>
-</code></pre></div><p><strong>解决方案:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Installing gfpgan
+</span></span><span class="line"><span class="cl">Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+</span></span><span class="line"><span class="cl">  File <span class="s2">&#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/launch.py&#34;</span>, line 355, in &lt;module&gt;
+</span></span><span class="line"><span class="cl">    prepare_environment<span class="o">()</span>
+</span></span><span class="line"><span class="cl">  File <span class="s2">&#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/launch.py&#34;</span>, line 263, in prepare_environment
+</span></span><span class="line"><span class="cl">    run_pip<span class="o">(</span>f<span class="s2">&#34;install {gfpgan_package}&#34;</span>, <span class="s2">&#34;gfpgan&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">  File <span class="s2">&#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/launch.py&#34;</span>, line 129, in run_pip
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> run<span class="o">(</span>f<span class="s1">&#39;&#34;{python}&#34; -m pip {args} --prefer-binary{index_url_line}&#39;</span>, <span class="nv">desc</span><span class="o">=</span>f<span class="s2">&#34;Installing {desc}&#34;</span>, <span class="nv">errdesc</span><span class="o">=</span>f<span class="s2">&#34;Couldn&#39;t install {desc}&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">  File <span class="s2">&#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/launch.py&#34;</span>, line 97, in run
+</span></span><span class="line"><span class="cl">    raise RuntimeError<span class="o">(</span>message<span class="o">)</span>
+</span></span><span class="line"><span class="cl">RuntimeError: Couldn<span class="s1">&#39;t install gfpgan.
+</span></span></span><span class="line"><span class="cl"><span class="s1">Command: &#34;/Users/iarno/Devspace/chatgpt/stable-diffusion-webui/venv/bin/python3.10&#34; -m pip install git+https://github.com/TencentARC/GFPGAN.git@8d2447a2d918f8eba5a4a01463fd48e45126a379 --prefer-binary
+</span></span></span><span class="line"><span class="cl"><span class="s1">Error code: 2
+</span></span></span><span class="line"><span class="cl"><span class="s1">stdout: Collecting git+https://github.com/TencentARC/GFPGAN.git@8d2447a2d918f8eba5a4a01463fd48e45126a379
+</span></span></span><span class="line"><span class="cl"><span class="s1">  Cloning https://github.com/TencentARC/GFPGAN.git (to revision 8d2447a2d918f8eba5a4a01463fd48e45126a379) to /private/var/folders/qw/4fkzpn79447fkgjgk19pq_6h0000gn/T/pip-req-build-0i1rio01
+</span></span></span><span class="line"><span class="cl"><span class="s1">  
+</span></span></span><span class="line"><span class="cl"><span class="s1">  
+</span></span></span><span class="line"><span class="cl"><span class="s1">stderr:   Running command git clone --filter=blob:none --quiet https://github.com/TencentARC/GFPGAN.git /private/var/folders/qw/4fkzpn79447fkgjgk19pq_6h0000gn/T/pip-req-build-0i1rio01
+</span></span></span><span class="line"><span class="cl"><span class="s1">  Running command git rev-parse -q --verify &#39;</span>sha^8d2447a2d918f8eba5a4a01463fd48e45126a379<span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">  Running <span class="nb">command</span> git fetch -q https://github.com/TencentARC/GFPGAN.git 8d2447a2d918f8eba5a4a01463fd48e45126a379
+</span></span><span class="line"><span class="cl">  Running <span class="nb">command</span> git checkout -q 8d2447a2d918f8eba5a4a01463fd48e45126a379
+</span></span></code></pre></div><p><strong>解决方案:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git config --global http.proxy http://127.0.0.1:10887
+</span></span></code></pre></div><h2 id="22-未下载模型导致服务无法运行">2.2 未下载模型导致服务无法运行</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-basic" data-lang="basic"><span class="line"><span class="cl"><span class="vg">No</span><span class="w"> </span><span class="vg">checkpoints</span><span class="w"> </span><span class="vg">found</span><span class="o">.</span><span class="w"> </span><span class="vg">When</span><span class="w"> </span><span class="vg">searching</span><span class="w"> </span><span class="vg">for</span><span class="w"> </span><span class="vg">checkpoints</span><span class="p">,</span><span class="w"> </span><span class="vg">looked</span><span class="w"> </span><span class="nl">at:</span>
+</span></span><span class="line"><span class="cl"><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="vg">file</span><span class="w"> </span><span class="o">/</span><span class="vg">Users</span><span class="o">/</span><span class="vg">liuli</span><span class="o">/</span><span class="vg">Devspace</span><span class="o">/</span><span class="vg">chatgpt</span><span class="o">/</span><span class="vg">stable</span><span class="o">-</span><span class="vg">diffusion</span><span class="o">-</span><span class="vg">webui</span><span class="o">/</span><span class="vg">model</span><span class="o">.</span><span class="vg">ckpt</span>
+</span></span><span class="line"><span class="cl"><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="vg">directory</span><span class="w"> </span><span class="o">/</span><span class="vg">Users</span><span class="o">/</span><span class="vg">liuli</span><span class="o">/</span><span class="vg">Devspace</span><span class="o">/</span><span class="vg">chatgpt</span><span class="o">/</span><span class="vg">stable</span><span class="o">-</span><span class="vg">diffusion</span><span class="o">-</span><span class="vg">webui</span><span class="o">/</span><span class="vg">models</span><span class="o">/</span><span class="vg">Stable</span><span class="o">-</span><span class="vg">diffusion</span>
+</span></span><span class="line"><span class="cl"><span class="vg">Can</span><span class="c1">&#39;t run without a checkpoint. Find and place a .ckpt or .safetensors file into any of those locations. The program will exit.</span>
+</span></span></code></pre></div><p><strong>解决方案:</strong></p>
 <p>下载<a href="https://huggingface.co/models"target="_blank">模型,</a>  并将下载的模型放到 <code>stable-diffusion-webui/models/Stable-diffusion</code> 目录中。</p>
 <h1 id="三使用colab搭建">三、使用Colab搭建</h1>
 <blockquote>
@@ -70,7 +130,7 @@ RuntimeError: Couldn<span class="s1">&#39;t install gfpgan.
 </blockquote>
 <p>本地模型生成图片会受限于💻配置问题,  推荐使用谷歌免费 <code>Colab</code> 服务搭建,  避免多次下载  <code>Model</code>  模型,  可以考虑使用挂载谷歌云盘的方式(提前将下载好的Model上传至谷歌云盘)。</p>
 <h2 id="31-安装教程">3.1 安装教程:</h2>
-<p><a href="http://xhslink.com/6lTt8o">http://xhslink.com/6lTt8o</a></p>
+<p><a href="http://xhslink.com/6lTt8o"target="_blank">http://xhslink.com/6lTt8o</a></p>
 <h2 id="32-修改项">3.2 修改项</h2>
 <p><strong>挂载云盘:</strong></p>
 <p><img  src="https://images.iarno.cn/images/1681646478386.png"
@@ -79,14 +139,14 @@ RuntimeError: Couldn<span class="s1">&#39;t install gfpgan.
 <p><img  src="https://images.iarno.cn/images/1681646591713.png"
         alt="image-20230416200311072"/></p>
 <h1 id="四参考">四、参考</h1>
-<p><a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui.git">https://github.com/AUTOMATIC1111/stable-diffusion-webui.git</a></p>
-<p><a href="https://github.com/camenduru/stable-diffusion-webui-colab.git">https://github.com/camenduru/stable-diffusion-webui-colab.git</a></p>
-<p><a href="http://xhslink.com/6lTt8o">http://xhslink.com/6lTt8o</a></p>
-<p><a href="https://www.bilibili.com/video/BV1vX4y1k7d4?vd_source=59a19d02212b7e9ac600f7c97d180b9d">https://www.bilibili.com/video/BV1vX4y1k7d4?vd_source=59a19d02212b7e9ac600f7c97d180b9d</a></p>
-<p><a href="https://www.bilibili.com/video/BV1fL411U77A?vd_source=59a19d02212b7e9ac600f7c97d180b9d">https://www.bilibili.com/video/BV1fL411U77A?vd_source=59a19d02212b7e9ac600f7c97d180b9d</a></p></article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/stable-diffusion/>stable diffusion</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+<p><a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui.git"target="_blank">https://github.com/AUTOMATIC1111/stable-diffusion-webui.git</a></p>
+<p><a href="https://github.com/camenduru/stable-diffusion-webui-colab.git"target="_blank">https://github.com/camenduru/stable-diffusion-webui-colab.git</a></p>
+<p><a href="http://xhslink.com/6lTt8o"target="_blank">http://xhslink.com/6lTt8o</a></p>
+<p><a href="https://www.bilibili.com/video/BV1vX4y1k7d4?vd_source=59a19d02212b7e9ac600f7c97d180b9d"target="_blank">https://www.bilibili.com/video/BV1vX4y1k7d4?vd_source=59a19d02212b7e9ac600f7c97d180b9d</a></p>
+<p><a href="https://www.bilibili.com/video/BV1fL411U77A?vd_source=59a19d02212b7e9ac600f7c97d180b9d"target="_blank">https://www.bilibili.com/video/BV1fL411U77A?vd_source=59a19d02212b7e9ac600f7c97d180b9d</a></p></article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/stable-diffusion/>stable diffusion</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.cf11b1e30804a8568fadb3035f7b3c65071e10bff9bdd8a53a5c597a10340808edc5eb2ba31a11d3ab00c22da54b3e29.js#pubid=ra-1234567891" integrity="sha384-zxGx4wgEqFaPrbMDX3s8ZQceEL/5vdilOlxZehA0CAjtxesroxoR06sAwi2lSz4p"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
 </section></div>
 <div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/golang%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/"><span class="iconfont icon-article"></span>golang数据库连接池参数设置</a></p><p><a class="link" href="/article/apisix/"><span class="iconfont icon-article"></span>centos搭建apisix网关</a></p></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2024 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    <p class="copyright">©2025 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
             onload="renderMathInElement(document.body);"></script><script>
         var theme = localStorage.getItem('theme');
         if (window.matchMedia('(prefers-color-scheme: light)').matches && theme == null) {
@@ -99,10 +159,21 @@ RuntimeError: Couldn<span class="s1">&#39;t install gfpgan.
 
         if (theme == "dark") {
             document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'none';
+            darkIcon.style.display = 'block';
         }
 
         if (theme == "light") {
             document.getElementById('light-btn').classList.add('data-theme-btn');
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'block';
+            darkIcon.style.display = 'none';
         }
 
         function toggleTheme(theme) {
@@ -111,6 +182,12 @@ RuntimeError: Couldn<span class="s1">&#39;t install gfpgan.
 
                 document.getElementById('dark-btn').classList.remove('data-theme-btn');
                 document.getElementById('light-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'block';
+                darkIcon.style.display = 'none';
 
                 
                 var styleSheets = document.styleSheets;
@@ -138,6 +215,12 @@ RuntimeError: Couldn<span class="s1">&#39;t install gfpgan.
 
                 document.getElementById('light-btn').classList.remove('data-theme-btn');
                 document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'block';
 
                 
                 var styleSheets = document.styleSheets;
@@ -206,6 +289,6 @@ RuntimeError: Couldn<span class="s1">&#39;t install gfpgan.
             }
         }
 
-    </script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+    </script><script src="/js/hljs.min.8a2658ccca6d9e87a439ee65a5d1d1e166af57afdffd06d778243afc50968a2e8188303a6368ca04f679dd21a49af5bf.js" integrity="sha384-iiZYzMptnoekOe5lpdHR4WavV6/f/QbXeCQ6/FCWii6BiDA6Y2jKBPZ53SGkmvW/"></script><script>hljs.initHighlightingOnLoad();</script></body>
 
 </html>

@@ -6,7 +6,7 @@
     <description>Recent content on IARNO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <copyright>©2024 IARNO</copyright>
+    <copyright>©2025 IARNO</copyright>
     <lastBuildDate>Sun, 28 Jul 2024 22:00:00 +0800</lastBuildDate>
     
         <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
@@ -18,6 +18,16 @@
       <pubDate>Sun, 28 Jul 2024 22:00:00 +0800</pubDate>
       
       <guid>/article/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Search Results</title>
+      <link>/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/search/</guid>
       <description></description>
       
     </item>

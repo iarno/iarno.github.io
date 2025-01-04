@@ -1,20 +1,80 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.140.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark">
 <meta content="go test, 单元测试, gomonkey" name="keywords">
 <meta content="Gomonkey测试框架 - IARNO" property="og:title">
-<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Gomonkey测试框架&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.10378bb60864db659b307ff1cb88b58847923e6c059836d0675eb97e77ac87967c8b565e9326d8fa3955aacbdc912f1d.css" integrity="sha384-EDeLtghk22WbMH/xy4i1iEeSPmwFmDbQZ165fnesh5Z8i1ZekybY&#43;jlVqsvckS8d"><meta name="twitter:card" content="summary" />
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>Gomonkey测试框架&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.475767088e02a0cde98e83d380878f87eecec4c45d477990e99d2d01bfaed3a249b1503fa03e85ee68591c8e8dcedbe1.css" integrity="sha384-R1dnCI4CoM3pjoPTgIePh&#43;7OxMRdR3mQ6Z0tAb&#43;u06JJsVA/oD6F7mhZHI6Nztvh"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Gomonkey测试框架" /><meta name="twitter:image" content="https://s2.loli.net/2022/06/27/msotkgke6jqbe2g.png" /><body><section id="header">
     <title>Gomonkey测试框架 - IARNO</title>
     <meta content="阿諾个人博客 - gomonkey测试框架使用" property="og:description">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav">
-    <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+        <span class="header right-side"><style>
+    .nav-search-container {
+      position: relative;
+      display: inline-flex;
+      align-items: center;  
+      top: 1.5px;
+    }
+  
+    .search-input {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      width: 0;
+      height: 30px;
+      border: 1px solid #aaa;
+      background-color: #f9f9f9;
+      padding: 5px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #333;
+      opacity: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+  
+    .nav-search-container:hover .search-input {
+      width: 200px;
+      opacity: 1;
+    }
+  
+    .nav-search-container:hover .search-input:focus {
+      outline: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    .icon {
+      cursor: pointer;
+      width: 14.5px;
+      height: 14.5px;
+      transition: fill 0.3s ease;
+      margin-top: 1.5px;
+    }
+</style><div class="nav wrap"><nav class="nav">
 
-</nav></div></span>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+<form action="/search/" class="nav item">
+    <div class="nav-search-container">
+        <form action="/search/" style="display:inline;">
+          <input type="text" id="search-query" class="search-input" placeholder="Search.." name="q" />
+        </form>
+        
+        <svg id="light-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745"></path>
+        </svg>
+        
+        <svg id="dark-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742" style="display:none;">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743" fill="#ffffff"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744" fill="#ffffff"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745" fill="#ffffff"></path>
+        </svg>
+     </div><a class="nav item" href="/categories/">分类</a><a class="nav item" href="/tags/">标签</a><a class="nav item" href=""></a></nav></div></span>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
     </div><div class="site slogan">
             <span class="title">努力升级中的凡人</span>
         </div></section><section id="content"><div class="article-container"><section class="article header">
@@ -38,199 +98,199 @@
 <li><code>gomonkey</code> 对于私有成员方法的打桩失败。<code>go1.6</code> 版本的反射机制支持私有成员方法的查询，而<code> go1.7</code> 及之后的版本却不支持，所以当用户使用 <code>go1.7</code> 及之后的版本时，<code>gomonkey</code> 对于私有成员方法的打桩会触发异常。</li>
 </ul>
 <h2 id="示例">示例</h2>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">monkey</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;fmt&#34;</span>
-	<span class="s">&#34;reflect&#34;</span>
-	<span class="s">&#34;testing&#34;</span>
-
-	<span class="s">&#34;github.com/agiledragon/gomonkey&#34;</span>
-	<span class="p">.</span> <span class="s">&#34;github.com/smartystreets/goconvey/convey&#34;</span>
-<span class="p">)</span>
-
-<span class="c1">// ###############################################################
-</span><span class="c1">// ########################## ApplyFunc ##########################
-</span><span class="c1">// ###############################################################
-</span><span class="c1"></span>
-<span class="kd">func</span> <span class="nf">logicFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">sum</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">netWorkFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">err</span>
-	<span class="p">}</span>
-
-	<span class="k">return</span> <span class="nx">sum</span><span class="p">,</span> <span class="kc">nil</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">netWorkFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">a</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">b</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="p">{</span>
-		<span class="nx">errmsg</span> <span class="o">:=</span> <span class="s">&#34;a&lt;0 &amp;&amp; b&lt;0&#34;</span> <span class="c1">//gomonkey有bug，函数一定要有栈分配变量，不然mock不住
-</span><span class="c1"></span>		<span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;%v&#34;</span><span class="p">,</span> <span class="nx">errmsg</span><span class="p">)</span>
-	<span class="p">}</span>
-
-	<span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">,</span> <span class="kc">nil</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">TestApplyFunc</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;Test ApplyFunc: &#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-
-		<span class="c1">// 为函数打桩
-</span><span class="c1"></span>		<span class="kd">var</span> <span class="nx">patches</span> <span class="p">=</span> <span class="nx">gomonkey</span><span class="p">.</span><span class="nf">ApplyFunc</span><span class="p">(</span><span class="nx">netWorkFunc</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-			<span class="k">return</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">nil</span>
-		<span class="p">})</span>
-		<span class="k">defer</span> <span class="nx">patches</span><span class="p">.</span><span class="nf">Reset</span><span class="p">()</span>
-
-		<span class="nx">sum</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">logicFunc</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="c1">// logicFunc中调用了netWorkFunc
-</span><span class="c1"></span>
-		<span class="nf">So</span><span class="p">(</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-		<span class="nf">So</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">ShouldBeNil</span><span class="p">)</span>
-	<span class="p">})</span>
-<span class="p">}</span>
-
-<span class="c1">// ###############################################################
-</span><span class="c1">// ######################### ApplyMethod #########################
-</span><span class="c1">// ###############################################################
-</span><span class="c1"></span>
-<span class="kd">type</span> <span class="nx">myType</span> <span class="kd">struct</span> <span class="p">{</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">myType</span><span class="p">)</span> <span class="nf">logicFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">sum</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">.</span><span class="nf">NetWorkFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">err</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="nx">sum</span><span class="p">,</span> <span class="kc">nil</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">myType</span><span class="p">)</span> <span class="nf">NetWorkFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">a</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">b</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="p">{</span>
-		<span class="nx">errmsg</span> <span class="o">:=</span> <span class="s">&#34;a&lt;0 &amp;&amp; b&lt;0&#34;</span>
-		<span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;%v&#34;</span><span class="p">,</span> <span class="nx">errmsg</span><span class="p">)</span>
-	<span class="p">}</span>
-
-	<span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">,</span> <span class="kc">nil</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">TestApplyMethod</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;Test ApplyMethod: &#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-		<span class="kd">var</span> <span class="nx">p</span> <span class="o">*</span><span class="nx">myType</span>
-		<span class="nx">patches</span> <span class="o">:=</span> <span class="nx">gomonkey</span><span class="p">.</span><span class="nf">ApplyMethod</span><span class="p">(</span><span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">p</span><span class="p">),</span> <span class="s">&#34;NetWorkFunc&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">_</span> <span class="o">*</span><span class="nx">myType</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-			<span class="k">return</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">nil</span>
-		<span class="p">})</span>
-		<span class="k">defer</span> <span class="nx">patches</span><span class="p">.</span><span class="nf">Reset</span><span class="p">()</span>
-
-		<span class="kd">var</span> <span class="nx">m</span> <span class="nx">myType</span>
-		<span class="nx">sum</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">.</span><span class="nf">logicFunc</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-		<span class="nf">So</span><span class="p">(</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-		<span class="nf">So</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">ShouldBeNil</span><span class="p">)</span>
-	<span class="p">})</span>
-<span class="p">}</span>
-
-
-<span class="c1">// ###############################################################
-</span><span class="c1">// ######################### ApplyGlobalVar ######################
-</span><span class="c1">// ###############################################################
-</span><span class="c1"></span>
-<span class="kd">var</span> <span class="nx">num</span> <span class="p">=</span> <span class="mi">10</span>
-
-<span class="kd">func</span> <span class="nf">TestApplyGlobalVar</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;Test ApplyGlobalVar: &#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-
-        <span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;change&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-            <span class="nx">patches</span> <span class="o">:=</span> <span class="nx">gomonkey</span><span class="p">.</span><span class="nf">ApplyGlobalVar</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">num</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
-            <span class="k">defer</span> <span class="nx">patches</span><span class="p">.</span><span class="nf">Reset</span><span class="p">()</span>
-            <span class="nf">So</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
-        <span class="p">})</span>
-
-        <span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;recover&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-            <span class="nf">So</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-        <span class="p">})</span>
-    <span class="p">})</span>
-<span class="p">}</span>
-
-<span class="c1">// ###############################################################
-</span><span class="c1">// ########################## ApplyFuncSeq #######################
-</span><span class="c1">// ###############################################################
-</span><span class="c1"></span>
-
-<span class="kd">func</span> <span class="nf">getInt</span><span class="p">()</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">a</span> <span class="o">:=</span> <span class="mi">100</span>
-    <span class="k">return</span> <span class="nx">a</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">TestMockFuncSeq</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;Test ApplyFuncSeq: &#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">outputs</span> <span class="o">:=</span> <span class="p">[]</span><span class="nx">gomonkey</span><span class="p">.</span><span class="nx">OutputCell</span><span class="p">{</span>
-            <span class="p">{</span><span class="nx">Values</span><span class="p">:</span><span class="nx">gomonkey</span><span class="p">.</span><span class="nx">Params</span><span class="p">{</span><span class="mi">2</span><span class="p">},</span> <span class="nx">Times</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
-            <span class="p">{</span><span class="nx">Values</span><span class="p">:</span><span class="nx">gomonkey</span><span class="p">.</span><span class="nx">Params</span><span class="p">{</span><span class="mi">1</span><span class="p">},</span> <span class="nx">Times</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span>
-            <span class="p">{</span><span class="nx">Values</span><span class="p">:</span><span class="nx">gomonkey</span><span class="p">.</span><span class="nx">Params</span><span class="p">{</span><span class="mi">3</span><span class="p">},</span> <span class="nx">Times</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span>
-        <span class="p">}</span>
-        <span class="kd">var</span> <span class="nx">p1</span> <span class="p">=</span> <span class="nx">gomonkey</span><span class="p">.</span><span class="nf">ApplyFuncSeq</span><span class="p">(</span><span class="nx">getInt</span><span class="p">,</span> <span class="nx">outputs</span><span class="p">)</span>
-        <span class="k">defer</span> <span class="nx">p1</span><span class="p">.</span><span class="nf">Reset</span><span class="p">()</span>
-
-        <span class="nf">So</span><span class="p">(</span><span class="nf">getInt</span><span class="p">(),</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="nf">So</span><span class="p">(</span><span class="nf">getInt</span><span class="p">(),</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="nf">So</span><span class="p">(</span><span class="nf">getInt</span><span class="p">(),</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-        <span class="nf">So</span><span class="p">(</span><span class="nf">getInt</span><span class="p">(),</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="p">})</span>
-
-	<span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;Test ApplyFuncSeq: &#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span> <span class="p">()</span>  <span class="p">{</span>
-		<span class="nf">So</span><span class="p">(</span><span class="nf">getInt</span><span class="p">(),</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-	<span class="p">})</span>
-<span class="p">}</span>
-</code></pre></div><h2 id="执行命令">执行命令</h2>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="p">[</span><span class="nx">iarno</span><span class="err">@</span><span class="nx">nd01v</span> <span class="nx">monkey</span><span class="p">]</span><span class="err">$</span> <span class="k">go</span> <span class="nx">test</span> <span class="o">-</span><span class="nx">v</span> <span class="o">-</span><span class="nx">gcflags</span><span class="p">=</span><span class="o">-</span><span class="nx">l</span> <span class="p">.</span>
-<span class="o">==</span><span class="p">=</span> <span class="nx">RUN</span>   <span class="nx">TestApplyFunc</span>
-
-  <span class="nx">Test</span> <span class="nx">ApplyFunc</span><span class="p">:</span> <span class="err">✔✔</span>
-
-
-<span class="mi">2</span> <span class="nx">total</span> <span class="nx">assertions</span>
-
-<span class="o">---</span> <span class="nx">PASS</span><span class="p">:</span> <span class="nf">TestApplyFunc</span> <span class="p">(</span><span class="mf">0.00</span><span class="nx">s</span><span class="p">)</span>
-<span class="o">==</span><span class="p">=</span> <span class="nx">RUN</span>   <span class="nx">TestApplyMethod</span>
-
-  <span class="nx">Test</span> <span class="nx">ApplyMethod</span><span class="p">:</span> <span class="err">✔✔</span>
-
-
-<span class="mi">4</span> <span class="nx">total</span> <span class="nx">assertions</span>
-
-<span class="o">---</span> <span class="nx">PASS</span><span class="p">:</span> <span class="nf">TestApplyMethod</span> <span class="p">(</span><span class="mf">0.00</span><span class="nx">s</span><span class="p">)</span>
-<span class="o">==</span><span class="p">=</span> <span class="nx">RUN</span>   <span class="nx">TestApplyGlobalVar</span>
-
-  <span class="nx">Test</span> <span class="nx">ApplyGlobalVar</span><span class="p">:</span> 
-    <span class="nx">change</span> <span class="err">✔</span>
-    <span class="nx">recover</span> <span class="err">✔</span>
-
-
-<span class="mi">6</span> <span class="nx">total</span> <span class="nx">assertions</span>
-
-<span class="o">---</span> <span class="nx">PASS</span><span class="p">:</span> <span class="nf">TestApplyGlobalVar</span> <span class="p">(</span><span class="mf">0.00</span><span class="nx">s</span><span class="p">)</span>
-<span class="o">==</span><span class="p">=</span> <span class="nx">RUN</span>   <span class="nx">TestMockFuncSeq</span>
-
-  <span class="nx">Test</span> <span class="nx">ApplyFuncSeq</span><span class="p">:</span> <span class="err">✔✔✔✔</span>
-
-
-<span class="mi">10</span> <span class="nx">total</span> <span class="nx">assertions</span>
-
-
-  <span class="nx">Test</span> <span class="nx">ApplyFuncSeq</span><span class="p">:</span> <span class="err">✔</span>
-
-
-<span class="mi">11</span> <span class="nx">total</span> <span class="nx">assertions</span>
-
-<span class="o">---</span> <span class="nx">PASS</span><span class="p">:</span> <span class="nf">TestMockFuncSeq</span> <span class="p">(</span><span class="mf">0.00</span><span class="nx">s</span><span class="p">)</span>
-<span class="nx">PASS</span>
-<span class="nx">ok</span>      <span class="nx">hellogolang</span><span class="o">/</span><span class="nf">monkey</span>      <span class="p">(</span><span class="nx">cached</span><span class="p">)</span>
-</code></pre></div><h2 id="什么是内联">什么是内联</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">monkey</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;reflect&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;testing&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/agiledragon/gomonkey&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">.</span> <span class="s">&#34;github.com/smartystreets/goconvey/convey&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ###############################################################
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ########################## ApplyFunc ##########################
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ###############################################################
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">logicFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sum</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">netWorkFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">sum</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">netWorkFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">a</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">b</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">errmsg</span> <span class="o">:=</span> <span class="s">&#34;a&lt;0 &amp;&amp; b&lt;0&#34;</span> <span class="c1">//gomonkey有bug，函数一定要有栈分配变量，不然mock不住
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;%v&#34;</span><span class="p">,</span> <span class="nx">errmsg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestApplyFunc</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;Test ApplyFunc: &#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// 为函数打桩
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="kd">var</span> <span class="nx">patches</span> <span class="p">=</span> <span class="nx">gomonkey</span><span class="p">.</span><span class="nf">ApplyFunc</span><span class="p">(</span><span class="nx">netWorkFunc</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="p">})</span>
+</span></span><span class="line"><span class="cl">		<span class="k">defer</span> <span class="nx">patches</span><span class="p">.</span><span class="nf">Reset</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">sum</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">logicFunc</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="c1">// logicFunc中调用了netWorkFunc
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">		<span class="nf">So</span><span class="p">(</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">So</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">ShouldBeNil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ###############################################################
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ######################### ApplyMethod #########################
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ###############################################################
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">myType</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">myType</span><span class="p">)</span> <span class="nf">logicFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sum</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">.</span><span class="nf">NetWorkFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">sum</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">myType</span><span class="p">)</span> <span class="nf">NetWorkFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">a</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">b</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">errmsg</span> <span class="o">:=</span> <span class="s">&#34;a&lt;0 &amp;&amp; b&lt;0&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;%v&#34;</span><span class="p">,</span> <span class="nx">errmsg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestApplyMethod</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;Test ApplyMethod: &#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">var</span> <span class="nx">p</span> <span class="o">*</span><span class="nx">myType</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">patches</span> <span class="o">:=</span> <span class="nx">gomonkey</span><span class="p">.</span><span class="nf">ApplyMethod</span><span class="p">(</span><span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">p</span><span class="p">),</span> <span class="s">&#34;NetWorkFunc&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">_</span> <span class="o">*</span><span class="nx">myType</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="p">})</span>
+</span></span><span class="line"><span class="cl">		<span class="k">defer</span> <span class="nx">patches</span><span class="p">.</span><span class="nf">Reset</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="kd">var</span> <span class="nx">m</span> <span class="nx">myType</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">sum</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">.</span><span class="nf">logicFunc</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">So</span><span class="p">(</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">So</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">ShouldBeNil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ###############################################################
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ######################### ApplyGlobalVar ######################
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ###############################################################
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">num</span> <span class="p">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestApplyGlobalVar</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;Test ApplyGlobalVar: &#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;change&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">patches</span> <span class="o">:=</span> <span class="nx">gomonkey</span><span class="p">.</span><span class="nf">ApplyGlobalVar</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">num</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">defer</span> <span class="nx">patches</span><span class="p">.</span><span class="nf">Reset</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">So</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;recover&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">So</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ###############################################################
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ########################## ApplyFuncSeq #######################
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ###############################################################
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">getInt</span><span class="p">()</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">a</span> <span class="o">:=</span> <span class="mi">100</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">a</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestMockFuncSeq</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;Test ApplyFuncSeq: &#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">outputs</span> <span class="o">:=</span> <span class="p">[]</span><span class="nx">gomonkey</span><span class="p">.</span><span class="nx">OutputCell</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span><span class="nx">Values</span><span class="p">:</span><span class="nx">gomonkey</span><span class="p">.</span><span class="nx">Params</span><span class="p">{</span><span class="mi">2</span><span class="p">},</span> <span class="nx">Times</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span><span class="nx">Values</span><span class="p">:</span><span class="nx">gomonkey</span><span class="p">.</span><span class="nx">Params</span><span class="p">{</span><span class="mi">1</span><span class="p">},</span> <span class="nx">Times</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span><span class="nx">Values</span><span class="p">:</span><span class="nx">gomonkey</span><span class="p">.</span><span class="nx">Params</span><span class="p">{</span><span class="mi">3</span><span class="p">},</span> <span class="nx">Times</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">p1</span> <span class="p">=</span> <span class="nx">gomonkey</span><span class="p">.</span><span class="nf">ApplyFuncSeq</span><span class="p">(</span><span class="nx">getInt</span><span class="p">,</span> <span class="nx">outputs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">defer</span> <span class="nx">p1</span><span class="p">.</span><span class="nf">Reset</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nf">So</span><span class="p">(</span><span class="nf">getInt</span><span class="p">(),</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">So</span><span class="p">(</span><span class="nf">getInt</span><span class="p">(),</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">So</span><span class="p">(</span><span class="nf">getInt</span><span class="p">(),</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">So</span><span class="p">(</span><span class="nf">getInt</span><span class="p">(),</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">Convey</span><span class="p">(</span><span class="s">&#34;Test ApplyFuncSeq: &#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span> <span class="p">()</span>  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">So</span><span class="p">(</span><span class="nf">getInt</span><span class="p">(),</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="执行命令">执行命令</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">iarno</span><span class="err">@</span><span class="nx">nd01v</span> <span class="nx">monkey</span><span class="p">]</span><span class="err">$</span> <span class="k">go</span> <span class="nx">test</span> <span class="o">-</span><span class="nx">v</span> <span class="o">-</span><span class="nx">gcflags</span><span class="p">=</span><span class="o">-</span><span class="nx">l</span> <span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="p">=</span> <span class="nx">RUN</span>   <span class="nx">TestApplyFunc</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">Test</span> <span class="nx">ApplyFunc</span><span class="p">:</span> <span class="err">✔✔</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">2</span> <span class="nx">total</span> <span class="nx">assertions</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">---</span> <span class="nx">PASS</span><span class="p">:</span> <span class="nf">TestApplyFunc</span> <span class="p">(</span><span class="mf">0.00</span><span class="nx">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="p">=</span> <span class="nx">RUN</span>   <span class="nx">TestApplyMethod</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">Test</span> <span class="nx">ApplyMethod</span><span class="p">:</span> <span class="err">✔✔</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">4</span> <span class="nx">total</span> <span class="nx">assertions</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">---</span> <span class="nx">PASS</span><span class="p">:</span> <span class="nf">TestApplyMethod</span> <span class="p">(</span><span class="mf">0.00</span><span class="nx">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="p">=</span> <span class="nx">RUN</span>   <span class="nx">TestApplyGlobalVar</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">Test</span> <span class="nx">ApplyGlobalVar</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl">    <span class="nx">change</span> <span class="err">✔</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">recover</span> <span class="err">✔</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">6</span> <span class="nx">total</span> <span class="nx">assertions</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">---</span> <span class="nx">PASS</span><span class="p">:</span> <span class="nf">TestApplyGlobalVar</span> <span class="p">(</span><span class="mf">0.00</span><span class="nx">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="p">=</span> <span class="nx">RUN</span>   <span class="nx">TestMockFuncSeq</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">Test</span> <span class="nx">ApplyFuncSeq</span><span class="p">:</span> <span class="err">✔✔✔✔</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">10</span> <span class="nx">total</span> <span class="nx">assertions</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">Test</span> <span class="nx">ApplyFuncSeq</span><span class="p">:</span> <span class="err">✔</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">11</span> <span class="nx">total</span> <span class="nx">assertions</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">---</span> <span class="nx">PASS</span><span class="p">:</span> <span class="nf">TestMockFuncSeq</span> <span class="p">(</span><span class="mf">0.00</span><span class="nx">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">PASS</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ok</span>      <span class="nx">hellogolang</span><span class="o">/</span><span class="nf">monkey</span>      <span class="p">(</span><span class="nx">cached</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="什么是内联">什么是内联</h2>
 <p>为了减少函数调用时的堆栈等开销，对于简短的函数，会在编译时，直接内嵌调用的代码。</p>
 <p>我们禁用下内联，然后执行，<code> go test -v -gcflags=-l monkey_test.go</code></p>
 <h2 id="参考">参考</h2>
-<p><a href="https://github.com/agiledragon/gomonkey">https://github.com/agiledragon/gomonkey</a></p>
-<p><a href="https://juejin.cn/post/7111691109528502286">https://juejin.cn/post/7111691109528502286</a></p></article><section class="article labels"><a class="category" href=/categories/go/>Go</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+<p><a href="https://github.com/agiledragon/gomonkey"target="_blank">https://github.com/agiledragon/gomonkey</a></p>
+<p><a href="https://juejin.cn/post/7111691109528502286"target="_blank">https://juejin.cn/post/7111691109528502286</a></p></article><section class="article labels"><a class="category" href=/categories/go/>Go</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.cf11b1e30804a8568fadb3035f7b3c65071e10bff9bdd8a53a5c597a10340808edc5eb2ba31a11d3ab00c22da54b3e29.js#pubid=ra-1234567891" integrity="sha384-zxGx4wgEqFaPrbMDX3s8ZQceEL/5vdilOlxZehA0CAjtxesroxoR06sAwi2lSz4p"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
 </section></div>
 <div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/dig/"><span class="iconfont icon-article"></span>Dig 命令使用详解</a></p><p><a class="link" href="/article/goconvey/"><span class="iconfont icon-article"></span>GoConvey测试框架</a></p></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2024 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    <p class="copyright">©2025 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
             onload="renderMathInElement(document.body);"></script><script>
         var theme = localStorage.getItem('theme');
         if (window.matchMedia('(prefers-color-scheme: light)').matches && theme == null) {
@@ -243,10 +303,21 @@
 
         if (theme == "dark") {
             document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'none';
+            darkIcon.style.display = 'block';
         }
 
         if (theme == "light") {
             document.getElementById('light-btn').classList.add('data-theme-btn');
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'block';
+            darkIcon.style.display = 'none';
         }
 
         function toggleTheme(theme) {
@@ -255,6 +326,12 @@
 
                 document.getElementById('dark-btn').classList.remove('data-theme-btn');
                 document.getElementById('light-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'block';
+                darkIcon.style.display = 'none';
 
                 
                 var styleSheets = document.styleSheets;
@@ -282,6 +359,12 @@
 
                 document.getElementById('light-btn').classList.remove('data-theme-btn');
                 document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'block';
 
                 
                 var styleSheets = document.styleSheets;
@@ -350,6 +433,6 @@
             }
         }
 
-    </script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+    </script><script src="/js/hljs.min.8a2658ccca6d9e87a439ee65a5d1d1e166af57afdffd06d778243afc50968a2e8188303a6368ca04f679dd21a49af5bf.js" integrity="sha384-iiZYzMptnoekOe5lpdHR4WavV6/f/QbXeCQ6/FCWii6BiDA6Y2jKBPZ53SGkmvW/"></script><script>hljs.initHighlightingOnLoad();</script></body>
 
 </html>

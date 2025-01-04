@@ -1,62 +1,122 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.140.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark">
 <meta content="tcpdump, 域名dns解析, 域名解析抓包" name="keywords">
 <meta content="使用tcpdump查看域名DNS解析过程 - IARNO" property="og:title">
-<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>使用tcpdump查看域名DNS解析过程&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.10378bb60864db659b307ff1cb88b58847923e6c059836d0675eb97e77ac87967c8b565e9326d8fa3955aacbdc912f1d.css" integrity="sha384-EDeLtghk22WbMH/xy4i1iEeSPmwFmDbQZ165fnesh5Z8i1ZekybY&#43;jlVqsvckS8d"><meta name="twitter:card" content="summary" />
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>使用tcpdump查看域名DNS解析过程&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.475767088e02a0cde98e83d380878f87eecec4c45d477990e99d2d01bfaed3a249b1503fa03e85ee68591c8e8dcedbe1.css" integrity="sha384-R1dnCI4CoM3pjoPTgIePh&#43;7OxMRdR3mQ6Z0tAb&#43;u06JJsVA/oD6F7mhZHI6Nztvh"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="使用tcpdump查看域名DNS解析过程" /><meta name="twitter:image" content="https://s2.loli.net/2022/06/22/dzhbckuf7fr4p51.png" /><body><section id="header">
     <title>使用tcpdump查看域名DNS解析过程 - IARNO</title>
     <meta content="阿諾个人博客 - 使用tcpdump查看域名DNS解析过程" property="og:description">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav">
-    <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+        <span class="header right-side"><style>
+    .nav-search-container {
+      position: relative;
+      display: inline-flex;
+      align-items: center;  
+      top: 1.5px;
+    }
+  
+    .search-input {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      width: 0;
+      height: 30px;
+      border: 1px solid #aaa;
+      background-color: #f9f9f9;
+      padding: 5px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #333;
+      opacity: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+  
+    .nav-search-container:hover .search-input {
+      width: 200px;
+      opacity: 1;
+    }
+  
+    .nav-search-container:hover .search-input:focus {
+      outline: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    .icon {
+      cursor: pointer;
+      width: 14.5px;
+      height: 14.5px;
+      transition: fill 0.3s ease;
+      margin-top: 1.5px;
+    }
+</style><div class="nav wrap"><nav class="nav">
 
-</nav></div></span>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+<form action="/search/" class="nav item">
+    <div class="nav-search-container">
+        <form action="/search/" style="display:inline;">
+          <input type="text" id="search-query" class="search-input" placeholder="Search.." name="q" />
+        </form>
+        
+        <svg id="light-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745"></path>
+        </svg>
+        
+        <svg id="dark-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742" style="display:none;">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743" fill="#ffffff"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744" fill="#ffffff"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745" fill="#ffffff"></path>
+        </svg>
+     </div><a class="nav item" href="/categories/">分类</a><a class="nav item" href="/tags/">标签</a><a class="nav item" href=""></a></nav></div></span>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
     </div><div class="site slogan">
             <span class="title">努力升级中的凡人</span>
         </div></section><section id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">使用tcpdump查看域名DNS解析过程</h1><p class="article date">June 22, 2022</p></section><article class="article markdown-body"><p><img class="cover" src="https://s2.loli.net/2022/06/22/dzhbcKUF7fR4P51.png" alt></p><p>这篇文章介绍了如何使用tcpdump工具抓取和分析域名DNS解析过程。首先，使用tcpdump命令启动对DNS报文的抓包。然后，使用host命令进行DNS查询。最后，分析tcpdump的输出结果，解读DNS查询和应答报文的内容。文章还提到了如何使用tcpdump的-X选项以16进制和ASCII方式打印报文内容，以及如何将抓到的数据包写入到文件中，然后导入到Wireshark中查看。</p>
 <h2 id="1-启动-tcpdump-对-dns-报文进行抓包">1 .启动 tcpdump 对 DNS 报文进行抓包</h2>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">tcpdump</span> <span class="o">-</span><span class="nx">i</span> <span class="nx">eth0</span> <span class="o">-</span><span class="nx">nt</span> <span class="o">-</span><span class="nx">s</span> <span class="mi">500</span> <span class="nx">port</span> <span class="nx">domain</span>
-</code></pre></div><p>使用<code>port domain</code>来过滤数据包，表示只抓取使用 domain（域名）服务的数据包，即 DNS 查询和应答报文</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="o">-</span><span class="nx">i</span>     <span class="nx">Listen</span> <span class="nx">on</span> <span class="kd">interface</span><span class="p">.</span>  <span class="nx">If</span> <span class="nx">unspecified</span><span class="p">,</span> <span class="nx">tcpdump</span> <span class="nx">searches</span> <span class="nx">the</span> <span class="nx">system</span> <span class="kd">interface</span> <span class="nx">list</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">lowest</span> <span class="nx">numbered</span><span class="p">,</span>
-       <span class="nx">configured</span> <span class="nx">up</span> <span class="kd">interface</span> <span class="p">(</span><span class="nx">excluding</span> <span class="nx">loopback</span><span class="p">).</span> <span class="nx">Ties</span> <span class="nx">are</span> <span class="nx">broken</span> <span class="nx">by</span> <span class="nx">choosing</span> <span class="nx">the</span> <span class="nx">earliest</span> <span class="nx">match</span><span class="p">.</span>
-
-       <span class="nx">On</span> <span class="nx">Linux</span> <span class="nx">systems</span> <span class="nx">with</span> <span class="mf">2.2</span> <span class="nx">or</span> <span class="nx">later</span> <span class="nx">kernels</span><span class="p">,</span> 
-       <span class="nx">an</span> <span class="kd">interface</span> <span class="nx">argument</span> <span class="nx">of</span> <span class="err">‘‘</span><span class="nx">any</span><span class="err">’’</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">used</span> <span class="nx">to</span> <span class="nx">capture</span> <span class="nx">packets</span> <span class="nx">from</span> <span class="nx">all</span> <span class="nx">interfaces</span><span class="p">.</span>          
-       <span class="nx">Note</span> <span class="nx">that</span> <span class="nx">captures</span> <span class="nx">on</span> <span class="nx">the</span> <span class="err">‘‘</span><span class="nx">any</span><span class="err">’’</span> <span class="nx">device</span> <span class="nx">will</span> <span class="nx">not</span> <span class="nx">be</span> <span class="nx">done</span> <span class="nx">in</span> <span class="nx">promiscuous</span> <span class="nx">mode</span><span class="p">.</span>
-       
-       <span class="nx">If</span> <span class="nx">the</span> <span class="o">-</span><span class="nx">D</span> <span class="nx">flag</span> <span class="nx">is</span> <span class="nx">supported</span><span class="p">,</span> <span class="nx">an</span> <span class="kd">interface</span> <span class="nx">number</span> <span class="nx">as</span> <span class="nx">printed</span> <span class="nx">by</span> <span class="nx">that</span> <span class="nx">flag</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">used</span> <span class="nx">as</span> <span class="nx">the</span> <span class="kd">interface</span> <span class="nx">argument</span><span class="p">.</span>
-
-<span class="o">-</span><span class="nx">n</span>     <span class="nx">Don</span><span class="err">’</span><span class="nx">t</span> <span class="nx">convert</span> <span class="nx">host</span> <span class="nx">addresses</span> <span class="nx">to</span> <span class="nx">names</span><span class="p">.</span>  <span class="nx">This</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">used</span> <span class="nx">to</span> <span class="nx">avoid</span> <span class="nx">DNS</span> <span class="nx">lookups</span><span class="p">.</span>
-<span class="o">-</span><span class="nx">t</span>     <span class="nx">Don</span><span class="err">’</span><span class="nx">t</span> <span class="nx">print</span> <span class="nx">a</span> <span class="nx">timestamp</span> <span class="nx">on</span> <span class="nx">each</span> <span class="nx">dump</span> <span class="nx">line</span><span class="p">.</span>
-
-<span class="o">-</span><span class="nx">s</span>     <span class="nx">Snarf</span> <span class="nx">snaplen</span> <span class="nx">bytes</span> <span class="nx">of</span> <span class="nx">data</span> <span class="nx">from</span> <span class="nx">each</span> <span class="nx">packet</span> <span class="nx">rather</span> <span class="nx">than</span> <span class="nx">the</span> <span class="k">default</span> <span class="nx">of</span> <span class="mi">65535</span> <span class="nx">bytes</span><span class="p">.</span>  
-       <span class="nx">Packets</span> <span class="nx">truncated</span> <span class="nx">because</span> <span class="nx">of</span> <span class="nx">a</span> <span class="nx">limited</span> <span class="nx">snapshot</span> <span class="nx">are</span> <span class="nx">indicated</span> <span class="nx">in</span> <span class="nx">the</span> <span class="nx">output</span> <span class="nx">with</span> <span class="err">‘‘</span><span class="p">[|</span><span class="nx">proto</span><span class="p">]</span><span class="err">’’</span><span class="p">,</span> 
-       <span class="nx">where</span> <span class="nx">proto</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nx">name</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">protocol</span> <span class="nx">level</span> <span class="nx">at</span> <span class="nx">which</span> <span class="nx">the</span> <span class="nx">truncation</span> <span class="nx">has</span> <span class="nx">occurred</span><span class="p">.</span>  
-       <span class="nx">Note</span> <span class="nx">that</span> <span class="nx">taking</span> <span class="nx">larger</span> <span class="nx">snapshots</span> <span class="nx">both</span> <span class="nx">increases</span> <span class="nx">the</span> <span class="nx">amount</span> <span class="nx">of</span> <span class="nx">time</span> <span class="nx">it</span> <span class="nx">takes</span> <span class="nx">to</span> <span class="nx">process</span> <span class="nx">packets</span> <span class="nx">and</span><span class="p">,</span> 
-       <span class="nx">effectively</span><span class="p">,</span> <span class="nx">decreases</span> <span class="nx">the</span> <span class="nx">amount</span> <span class="nx">of</span> <span class="nx">packet</span> <span class="nx">buffering</span><span class="p">.</span>  <span class="nx">This</span> <span class="nx">may</span> <span class="nx">cause</span> <span class="nx">packets</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">lost</span><span class="p">.</span>  
-       <span class="nx">You</span> <span class="nx">should</span> <span class="nx">limit</span> <span class="nx">snaplen</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">smallest</span> <span class="nx">number</span> <span class="nx">that</span> <span class="nx">will</span> <span class="nx">capture</span> <span class="nx">the</span> <span class="nx">protocol</span> <span class="nx">information</span> <span class="nx">you</span><span class="err">’</span><span class="nx">re</span> <span class="nx">interested</span> <span class="nx">in</span><span class="p">.</span>  
-       <span class="nx">Setting</span> <span class="nx">snaplen</span> <span class="nx">to</span> <span class="mi">0</span> <span class="nx">sets</span> <span class="nx">it</span> <span class="nx">to</span> <span class="nx">the</span> <span class="k">default</span> <span class="nx">of</span> <span class="mi">65535</span><span class="p">,</span> 
-       <span class="k">for</span> <span class="nx">backwards</span> <span class="nx">compatibility</span> <span class="nx">with</span> <span class="nx">recent</span> <span class="nx">older</span> <span class="nx">versions</span> <span class="nx">of</span> <span class="nx">tcpdump</span><span class="p">.</span>
-
-<span class="o">-</span><span class="nx">X</span>     <span class="nx">When</span> <span class="nx">parsing</span> <span class="nx">and</span> <span class="nx">printing</span><span class="p">,</span>  <span class="nx">in</span> <span class="nx">addition</span> <span class="nx">to</span> <span class="nx">printing</span> <span class="nx">the</span> <span class="nx">headers</span> <span class="nx">of</span> <span class="nx">each</span> <span class="nx">packet</span><span class="p">,</span> 
-       <span class="nx">print</span> <span class="nx">the</span> <span class="nx">data</span> <span class="nx">of</span> <span class="nx">each</span> <span class="nf">packet</span> <span class="p">(</span><span class="nx">minus</span> <span class="nx">its</span> <span class="nx">link</span> <span class="nx">level</span> <span class="nx">header</span><span class="p">)</span> <span class="nx">in</span> <span class="nx">hex</span> <span class="nx">and</span> <span class="nx">ASCII</span><span class="p">.</span>  
-       <span class="nx">This</span> <span class="nx">is</span> <span class="nx">very</span> <span class="nx">handy</span> <span class="k">for</span> <span class="nx">analysing</span> <span class="nx">new</span> <span class="nx">protocols</span><span class="p">.</span>
-</code></pre></div><h2 id="2-使用-host-命令进行-dns-查询">2 .使用 host 命令进行 DNS 查询</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">tcpdump</span> <span class="o">-</span><span class="nx">i</span> <span class="nx">eth0</span> <span class="o">-</span><span class="nx">nt</span> <span class="o">-</span><span class="nx">s</span> <span class="mi">500</span> <span class="nx">port</span> <span class="nx">domain</span>
+</span></span></code></pre></div><p>使用<code>port domain</code>来过滤数据包，表示只抓取使用 domain（域名）服务的数据包，即 DNS 查询和应答报文</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="o">-</span><span class="nx">i</span>     <span class="nx">Listen</span> <span class="nx">on</span> <span class="kd">interface</span><span class="p">.</span>  <span class="nx">If</span> <span class="nx">unspecified</span><span class="p">,</span> <span class="nx">tcpdump</span> <span class="nx">searches</span> <span class="nx">the</span> <span class="nx">system</span> <span class="kd">interface</span> <span class="nx">list</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">lowest</span> <span class="nx">numbered</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="nx">configured</span> <span class="nx">up</span> <span class="kd">interface</span> <span class="p">(</span><span class="nx">excluding</span> <span class="nx">loopback</span><span class="p">).</span> <span class="nx">Ties</span> <span class="nx">are</span> <span class="nx">broken</span> <span class="nx">by</span> <span class="nx">choosing</span> <span class="nx">the</span> <span class="nx">earliest</span> <span class="nx">match</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="nx">On</span> <span class="nx">Linux</span> <span class="nx">systems</span> <span class="nx">with</span> <span class="mf">2.2</span> <span class="nx">or</span> <span class="nx">later</span> <span class="nx">kernels</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">       <span class="nx">an</span> <span class="kd">interface</span> <span class="nx">argument</span> <span class="nx">of</span> <span class="err">‘‘</span><span class="nx">any</span><span class="err">’’</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">used</span> <span class="nx">to</span> <span class="nx">capture</span> <span class="nx">packets</span> <span class="nx">from</span> <span class="nx">all</span> <span class="nx">interfaces</span><span class="p">.</span>          
+</span></span><span class="line"><span class="cl">       <span class="nx">Note</span> <span class="nx">that</span> <span class="nx">captures</span> <span class="nx">on</span> <span class="nx">the</span> <span class="err">‘‘</span><span class="nx">any</span><span class="err">’’</span> <span class="nx">device</span> <span class="nx">will</span> <span class="nx">not</span> <span class="nx">be</span> <span class="nx">done</span> <span class="nx">in</span> <span class="nx">promiscuous</span> <span class="nx">mode</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">       
+</span></span><span class="line"><span class="cl">       <span class="nx">If</span> <span class="nx">the</span> <span class="o">-</span><span class="nx">D</span> <span class="nx">flag</span> <span class="nx">is</span> <span class="nx">supported</span><span class="p">,</span> <span class="nx">an</span> <span class="kd">interface</span> <span class="nx">number</span> <span class="nx">as</span> <span class="nx">printed</span> <span class="nx">by</span> <span class="nx">that</span> <span class="nx">flag</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">used</span> <span class="nx">as</span> <span class="nx">the</span> <span class="kd">interface</span> <span class="nx">argument</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="nx">n</span>     <span class="nx">Don</span><span class="err">’</span><span class="nx">t</span> <span class="nx">convert</span> <span class="nx">host</span> <span class="nx">addresses</span> <span class="nx">to</span> <span class="nx">names</span><span class="p">.</span>  <span class="nx">This</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">used</span> <span class="nx">to</span> <span class="nx">avoid</span> <span class="nx">DNS</span> <span class="nx">lookups</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="nx">t</span>     <span class="nx">Don</span><span class="err">’</span><span class="nx">t</span> <span class="nx">print</span> <span class="nx">a</span> <span class="nx">timestamp</span> <span class="nx">on</span> <span class="nx">each</span> <span class="nx">dump</span> <span class="nx">line</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="nx">s</span>     <span class="nx">Snarf</span> <span class="nx">snaplen</span> <span class="nx">bytes</span> <span class="nx">of</span> <span class="nx">data</span> <span class="nx">from</span> <span class="nx">each</span> <span class="nx">packet</span> <span class="nx">rather</span> <span class="nx">than</span> <span class="nx">the</span> <span class="k">default</span> <span class="nx">of</span> <span class="mi">65535</span> <span class="nx">bytes</span><span class="p">.</span>  
+</span></span><span class="line"><span class="cl">       <span class="nx">Packets</span> <span class="nx">truncated</span> <span class="nx">because</span> <span class="nx">of</span> <span class="nx">a</span> <span class="nx">limited</span> <span class="nx">snapshot</span> <span class="nx">are</span> <span class="nx">indicated</span> <span class="nx">in</span> <span class="nx">the</span> <span class="nx">output</span> <span class="nx">with</span> <span class="err">‘‘</span><span class="p">[|</span><span class="nx">proto</span><span class="p">]</span><span class="err">’’</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">       <span class="nx">where</span> <span class="nx">proto</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nx">name</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">protocol</span> <span class="nx">level</span> <span class="nx">at</span> <span class="nx">which</span> <span class="nx">the</span> <span class="nx">truncation</span> <span class="nx">has</span> <span class="nx">occurred</span><span class="p">.</span>  
+</span></span><span class="line"><span class="cl">       <span class="nx">Note</span> <span class="nx">that</span> <span class="nx">taking</span> <span class="nx">larger</span> <span class="nx">snapshots</span> <span class="nx">both</span> <span class="nx">increases</span> <span class="nx">the</span> <span class="nx">amount</span> <span class="nx">of</span> <span class="nx">time</span> <span class="nx">it</span> <span class="nx">takes</span> <span class="nx">to</span> <span class="nx">process</span> <span class="nx">packets</span> <span class="nx">and</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">       <span class="nx">effectively</span><span class="p">,</span> <span class="nx">decreases</span> <span class="nx">the</span> <span class="nx">amount</span> <span class="nx">of</span> <span class="nx">packet</span> <span class="nx">buffering</span><span class="p">.</span>  <span class="nx">This</span> <span class="nx">may</span> <span class="nx">cause</span> <span class="nx">packets</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">lost</span><span class="p">.</span>  
+</span></span><span class="line"><span class="cl">       <span class="nx">You</span> <span class="nx">should</span> <span class="nx">limit</span> <span class="nx">snaplen</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">smallest</span> <span class="nx">number</span> <span class="nx">that</span> <span class="nx">will</span> <span class="nx">capture</span> <span class="nx">the</span> <span class="nx">protocol</span> <span class="nx">information</span> <span class="nx">you</span><span class="err">’</span><span class="nx">re</span> <span class="nx">interested</span> <span class="nx">in</span><span class="p">.</span>  
+</span></span><span class="line"><span class="cl">       <span class="nx">Setting</span> <span class="nx">snaplen</span> <span class="nx">to</span> <span class="mi">0</span> <span class="nx">sets</span> <span class="nx">it</span> <span class="nx">to</span> <span class="nx">the</span> <span class="k">default</span> <span class="nx">of</span> <span class="mi">65535</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">       <span class="k">for</span> <span class="nx">backwards</span> <span class="nx">compatibility</span> <span class="nx">with</span> <span class="nx">recent</span> <span class="nx">older</span> <span class="nx">versions</span> <span class="nx">of</span> <span class="nx">tcpdump</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="nx">X</span>     <span class="nx">When</span> <span class="nx">parsing</span> <span class="nx">and</span> <span class="nx">printing</span><span class="p">,</span>  <span class="nx">in</span> <span class="nx">addition</span> <span class="nx">to</span> <span class="nx">printing</span> <span class="nx">the</span> <span class="nx">headers</span> <span class="nx">of</span> <span class="nx">each</span> <span class="nx">packet</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">       <span class="nx">print</span> <span class="nx">the</span> <span class="nx">data</span> <span class="nx">of</span> <span class="nx">each</span> <span class="nf">packet</span> <span class="p">(</span><span class="nx">minus</span> <span class="nx">its</span> <span class="nx">link</span> <span class="nx">level</span> <span class="nx">header</span><span class="p">)</span> <span class="nx">in</span> <span class="nx">hex</span> <span class="nx">and</span> <span class="nx">ASCII</span><span class="p">.</span>  
+</span></span><span class="line"><span class="cl">       <span class="nx">This</span> <span class="nx">is</span> <span class="nx">very</span> <span class="nx">handy</span> <span class="k">for</span> <span class="nx">analysing</span> <span class="nx">new</span> <span class="nx">protocols</span><span class="p">.</span>
+</span></span></code></pre></div><h2 id="2-使用-host-命令进行-dns-查询">2 .使用 host 命令进行 DNS 查询</h2>
 <p>命令如下：</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">host -t A www.baidu.com
-</code></pre></div><h2 id="3分析-tcpdump-输出">3.分析 tcpdump 输出</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">host -t A www.baidu.com
+</span></span></code></pre></div><h2 id="3分析-tcpdump-输出">3.分析 tcpdump 输出</h2>
 <p>当执行完第 2 步后，tcpdump 就会有输出，如下：</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="p">[</span><span class="nx">root</span><span class="err">@</span><span class="nx">iZ25p102vo3Z</span> <span class="err">~</span><span class="p">]</span><span class="err">#</span> <span class="nx">tcpdump</span> <span class="o">-</span><span class="nx">i</span> <span class="nx">eth0</span> <span class="o">-</span><span class="nx">nt</span> <span class="o">-</span><span class="nx">s</span> <span class="mi">500</span> <span class="nx">port</span> <span class="nx">domain</span>
-<span class="nx">tcpdump</span><span class="p">:</span> <span class="nx">verbose</span> <span class="nx">output</span> <span class="nx">suppressed</span><span class="p">,</span> <span class="nx">use</span> <span class="o">-</span><span class="nx">v</span> <span class="nx">or</span> <span class="o">-</span><span class="nx">vv</span> <span class="k">for</span> <span class="nx">full</span> <span class="nx">protocol</span> <span class="nx">decode</span>
-<span class="nx">listening</span> <span class="nx">on</span> <span class="nx">eth0</span><span class="p">,</span> <span class="nx">link</span><span class="o">-</span><span class="kd">type</span> <span class="nf">EN10MB</span> <span class="p">(</span><span class="nx">Ethernet</span><span class="p">),</span> <span class="nx">capture</span> <span class="nx">size</span> <span class="mi">500</span> <span class="nx">bytes</span>
-<span class="nx">IP</span> <span class="mf">10.162.201.34.48965</span> <span class="p">&gt;</span> <span class="mf">10.202.72.118</span><span class="p">.</span><span class="nx">domain</span><span class="p">:</span> <span class="mi">18831</span><span class="o">+</span> <span class="nx">A</span><span class="err">?</span> <span class="nx">www</span><span class="p">.</span><span class="nx">qq</span><span class="p">.</span><span class="nx">com</span><span class="p">.</span> <span class="p">(</span><span class="mi">28</span><span class="p">)</span>
-<span class="nx">IP</span> <span class="mf">10.202.72.118</span><span class="p">.</span><span class="nx">domain</span> <span class="p">&gt;</span> <span class="mf">10.162.201.34.48965</span><span class="p">:</span> <span class="mi">18831</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="mi">9</span> <span class="nx">A</span> <span class="mf">101.226.103.106</span> <span class="p">(</span><span class="mi">275</span><span class="p">)</span>
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">root</span><span class="err">@</span><span class="nx">iZ25p102vo3Z</span> <span class="p">~]</span><span class="err">#</span> <span class="nx">tcpdump</span> <span class="o">-</span><span class="nx">i</span> <span class="nx">eth0</span> <span class="o">-</span><span class="nx">nt</span> <span class="o">-</span><span class="nx">s</span> <span class="mi">500</span> <span class="nx">port</span> <span class="nx">domain</span>
+</span></span><span class="line"><span class="cl"><span class="nx">tcpdump</span><span class="p">:</span> <span class="nx">verbose</span> <span class="nx">output</span> <span class="nx">suppressed</span><span class="p">,</span> <span class="nx">use</span> <span class="o">-</span><span class="nx">v</span> <span class="nx">or</span> <span class="o">-</span><span class="nx">vv</span> <span class="k">for</span> <span class="nx">full</span> <span class="nx">protocol</span> <span class="nx">decode</span>
+</span></span><span class="line"><span class="cl"><span class="nx">listening</span> <span class="nx">on</span> <span class="nx">eth0</span><span class="p">,</span> <span class="nx">link</span><span class="o">-</span><span class="kd">type</span> <span class="nf">EN10MB</span> <span class="p">(</span><span class="nx">Ethernet</span><span class="p">),</span> <span class="nx">capture</span> <span class="nx">size</span> <span class="mi">500</span> <span class="nx">bytes</span>
+</span></span><span class="line"><span class="cl"><span class="nx">IP</span> <span class="mf">10.162.201.34.48965</span> <span class="p">&gt;</span> <span class="mf">10.202.72.118</span><span class="p">.</span><span class="nx">domain</span><span class="p">:</span> <span class="mi">18831</span><span class="o">+</span> <span class="nx">A</span><span class="err">?</span> <span class="nx">www</span><span class="p">.</span><span class="nx">qq</span><span class="p">.</span><span class="nx">com</span><span class="p">.</span> <span class="p">(</span><span class="mi">28</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">IP</span> <span class="mf">10.202.72.118</span><span class="p">.</span><span class="nx">domain</span> <span class="p">&gt;</span> <span class="mf">10.162.201.34.48965</span><span class="p">:</span> <span class="mi">18831</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="mi">9</span> <span class="nx">A</span> <span class="mf">101.226.103.106</span> <span class="p">(</span><span class="mi">275</span><span class="p">)</span>
+</span></span></code></pre></div><blockquote>
 <p>这两个数据包开始的“IP”指出，它们后面的内容描述的是 IP 数据报。 Tcpdump 以 “IP 地址.端口号” 的形式来描述通信的某一端； 以 “&gt;” 表示数据传输的方向，“&gt;” 前面是源端，后面是目的端。
 可见，第一个数据包是测试机器（IP 地址是 10.162.201.34）向其首选 DNS 服务器（IP 地址是 10.202.72.118） 发送的 DNS 查询报文（目标端口 53 是 DNS 服务使用的端口）， 第二个数据包是服务器反馈的 DNS 应答报文。</p>
 </blockquote>
@@ -75,16 +135,16 @@
 <p>注意：我们抓包的时候没有开启 tcpdump 的 -X 选项（或者 -x 选项）。  如果使用 -X 选项，我们将能看到 DNS 报文的每一个字节，也就能明白上面 28 字节的查询报文和 275 字节的应答报文的具体含义。</p>
 </blockquote>
 <p>上面使用 -X 选项，是以 16 进制和 ASCII 方式打印，不太直观地看出来报文内容，  这里我们可以使用 Tcpdump 将抓到的数据包写入到文件中，然后导入到 Wireshark 中查看。</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_15_187_centos ~<span class="o">]</span><span class="c1"># tcpdump -i eth0 -nt -s 500 -X port domain -w dns-dump.pcap -v</span>
-tcpdump: listening on eth0, link-type EN10MB <span class="o">(</span>Ethernet<span class="o">)</span>, capture size <span class="m">500</span> bytes
-^C2 packets captured
-<span class="m">2</span> packets received by filter
-<span class="m">0</span> packets dropped by kernel
-</code></pre></div><h2 id="转载">转载</h2>
-<p><a href="https://jaminzhang.github.io/dns/use-tcpdump-to-analyze-dns-communication/">https://jaminzhang.github.io/dns/use-tcpdump-to-analyze-dns-communication/</a></p></article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/dns%E6%8A%93%E5%8C%85/>dns抓包</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@VM_15_187_centos ~<span class="o">]</span><span class="c1"># tcpdump -i eth0 -nt -s 500 -X port domain -w dns-dump.pcap -v</span>
+</span></span><span class="line"><span class="cl">tcpdump: listening on eth0, link-type EN10MB <span class="o">(</span>Ethernet<span class="o">)</span>, capture size <span class="m">500</span> bytes
+</span></span><span class="line"><span class="cl">^C2 packets captured
+</span></span><span class="line"><span class="cl"><span class="m">2</span> packets received by filter
+</span></span><span class="line"><span class="cl"><span class="m">0</span> packets dropped by kernel
+</span></span></code></pre></div><h2 id="转载">转载</h2>
+<p><a href="https://jaminzhang.github.io/dns/use-tcpdump-to-analyze-dns-communication/"target="_blank">https://jaminzhang.github.io/dns/use-tcpdump-to-analyze-dns-communication/</a></p></article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/dns%E6%8A%93%E5%8C%85/>dns抓包</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.cf11b1e30804a8568fadb3035f7b3c65071e10bff9bdd8a53a5c597a10340808edc5eb2ba31a11d3ab00c22da54b3e29.js#pubid=ra-1234567891" integrity="sha384-zxGx4wgEqFaPrbMDX3s8ZQceEL/5vdilOlxZehA0CAjtxesroxoR06sAwi2lSz4p"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
 </section></div>
 <div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/goconvey/"><span class="iconfont icon-article"></span>GoConvey测试框架</a></p><p><a class="link" href="/article/golang-json/"><span class="iconfont icon-article"></span>Golang json 性能分析</a></p></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2024 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    <p class="copyright">©2025 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
             onload="renderMathInElement(document.body);"></script><script>
         var theme = localStorage.getItem('theme');
         if (window.matchMedia('(prefers-color-scheme: light)').matches && theme == null) {
@@ -97,10 +157,21 @@ tcpdump: listening on eth0, link-type EN10MB <span class="o">(</span>Ethernet<sp
 
         if (theme == "dark") {
             document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'none';
+            darkIcon.style.display = 'block';
         }
 
         if (theme == "light") {
             document.getElementById('light-btn').classList.add('data-theme-btn');
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'block';
+            darkIcon.style.display = 'none';
         }
 
         function toggleTheme(theme) {
@@ -109,6 +180,12 @@ tcpdump: listening on eth0, link-type EN10MB <span class="o">(</span>Ethernet<sp
 
                 document.getElementById('dark-btn').classList.remove('data-theme-btn');
                 document.getElementById('light-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'block';
+                darkIcon.style.display = 'none';
 
                 
                 var styleSheets = document.styleSheets;
@@ -136,6 +213,12 @@ tcpdump: listening on eth0, link-type EN10MB <span class="o">(</span>Ethernet<sp
 
                 document.getElementById('light-btn').classList.remove('data-theme-btn');
                 document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'block';
 
                 
                 var styleSheets = document.styleSheets;
@@ -204,6 +287,6 @@ tcpdump: listening on eth0, link-type EN10MB <span class="o">(</span>Ethernet<sp
             }
         }
 
-    </script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+    </script><script src="/js/hljs.min.8a2658ccca6d9e87a439ee65a5d1d1e166af57afdffd06d778243afc50968a2e8188303a6368ca04f679dd21a49af5bf.js" integrity="sha384-iiZYzMptnoekOe5lpdHR4WavV6/f/QbXeCQ6/FCWii6BiDA6Y2jKBPZ53SGkmvW/"></script><script>hljs.initHighlightingOnLoad();</script></body>
 
 </html>

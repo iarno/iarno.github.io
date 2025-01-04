@@ -1,170 +1,230 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.140.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark">
 <meta content="lvs, 负载均衡, keepalived" name="keywords">
 <meta content="LVS &#43; Keepalived实现集群高可用 - IARNO" property="og:title">
-<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>LVS &#43; Keepalived实现集群高可用&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.10378bb60864db659b307ff1cb88b58847923e6c059836d0675eb97e77ac87967c8b565e9326d8fa3955aacbdc912f1d.css" integrity="sha384-EDeLtghk22WbMH/xy4i1iEeSPmwFmDbQZ165fnesh5Z8i1ZekybY&#43;jlVqsvckS8d"><meta name="twitter:card" content="summary" />
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>LVS &#43; Keepalived实现集群高可用&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.475767088e02a0cde98e83d380878f87eecec4c45d477990e99d2d01bfaed3a249b1503fa03e85ee68591c8e8dcedbe1.css" integrity="sha384-R1dnCI4CoM3pjoPTgIePh&#43;7OxMRdR3mQ6Z0tAb&#43;u06JJsVA/oD6F7mhZHI6Nztvh"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="LVS &#43; Keepalived实现集群高可用" /><body><section id="header">
     <title>LVS &#43; Keepalived实现集群高可用 - IARNO</title>
     <meta content="阿諾个人博客 - LVS &#43; Keepalived实现集群高可用" property="og:description">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav">
-    <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+        <span class="header right-side"><style>
+    .nav-search-container {
+      position: relative;
+      display: inline-flex;
+      align-items: center;  
+      top: 1.5px;
+    }
+  
+    .search-input {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      width: 0;
+      height: 30px;
+      border: 1px solid #aaa;
+      background-color: #f9f9f9;
+      padding: 5px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #333;
+      opacity: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+  
+    .nav-search-container:hover .search-input {
+      width: 200px;
+      opacity: 1;
+    }
+  
+    .nav-search-container:hover .search-input:focus {
+      outline: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    .icon {
+      cursor: pointer;
+      width: 14.5px;
+      height: 14.5px;
+      transition: fill 0.3s ease;
+      margin-top: 1.5px;
+    }
+</style><div class="nav wrap"><nav class="nav">
 
-</nav></div></span>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+<form action="/search/" class="nav item">
+    <div class="nav-search-container">
+        <form action="/search/" style="display:inline;">
+          <input type="text" id="search-query" class="search-input" placeholder="Search.." name="q" />
+        </form>
+        
+        <svg id="light-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745"></path>
+        </svg>
+        
+        <svg id="dark-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742" style="display:none;">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743" fill="#ffffff"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744" fill="#ffffff"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745" fill="#ffffff"></path>
+        </svg>
+     </div><a class="nav item" href="/categories/">分类</a><a class="nav item" href="/tags/">标签</a><a class="nav item" href=""></a></nav></div></span>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
     </div><div class="site slogan">
             <span class="title">努力升级中的凡人</span>
         </div></section><section id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">LVS + Keepalived实现集群高可用</h1><p class="article date">September 17, 2021</p></section><article class="article markdown-body"><p>本文详细介绍了如何使用LVS和Keepalived实现集群高可用。首先，我们在LVS服务器上安装ipvsadm和keepalived服务，然后在WEB服务器上安装nginx服务并配置index.html文件。接着，我们在LVS服务器上配置keepalived.conf文件和RS服务，最后通过访问VIP来验证配置的正确性。整个过程中，我们详细解释了每一步的操作和配置的含义，帮助读者更好地理解和实践。</p>
 <h2 id="机器说明">机器说明</h2>
 <table>
-<thead>
-<tr>
-<th>IP</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>192.168.199.13</td>
-<td>LVS服务器</td>
-</tr>
-<tr>
-<td>192.168.199.11</td>
-<td>WEB服务器1</td>
-</tr>
-<tr>
-<td>192.168.199.12</td>
-<td>WEB服务器2</td>
-</tr>
-<tr>
-<td>192.168.199.101</td>
-<td>VIP(虚拟IP)</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>IP</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>192.168.199.13</td>
+          <td>LVS服务器</td>
+      </tr>
+      <tr>
+          <td>192.168.199.11</td>
+          <td>WEB服务器1</td>
+      </tr>
+      <tr>
+          <td>192.168.199.12</td>
+          <td>WEB服务器2</td>
+      </tr>
+      <tr>
+          <td>192.168.199.101</td>
+          <td>VIP(虚拟IP)</td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="lvs服务器">LVS服务器</h2>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 安装ipvsadm</span>
-<span class="o">[</span>root@localhost ~<span class="o">]</span> yum install ipvsadm -y
-
-<span class="c1"># 安装keepalived服务</span>
-<span class="o">[</span>root@localhost ~<span class="o">]</span> yum install keepalived -y
-</code></pre></div><h2 id="web服务器1">WEB服务器1</h2>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 安装nginx服务</span>
-<span class="o">[</span>root@localhost ~<span class="o">]</span> yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel
-<span class="o">[</span>root@localhost ~<span class="o">]</span> wget https://nginx.org/download/nginx-1.21.3.tar.gz <span class="o">&amp;&amp;</span> tar -zxf nginx-1.21.3.tar.gz <span class="o">&amp;&amp;</span> <span class="nb">cd</span> nginx-1.21.3/
-<span class="o">[</span>root@localhost ~<span class="o">]</span> ./configure <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> make install
-<span class="o">[</span>root@localhost ~<span class="o">]</span> /usr/local/nginx/sbin/nginx
-
-<span class="c1"># 配置index.html文件</span>
-<span class="o">[</span>root@localhost ~<span class="o">]</span> cat /usr/local/nginx/html/index.html
-192.168.199.11
-
-<span class="c1"># 修改arp_ignore和arp_announce配置</span>
-<span class="c1"># 注意！！！我的网卡是ens33，按自己实际网卡来操作，比如eth0目录下</span>
-<span class="o">[</span>root@localhost ~<span class="o">]</span> <span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/net/ipv4/conf/ens33/arp_ignore
-<span class="o">[</span>root@localhost ~<span class="o">]</span> <span class="nb">echo</span> <span class="m">2</span> &gt; /proc/sys/net/ipv4/conf/ens33/arp_announce
-<span class="o">[</span>root@localhost ~<span class="o">]</span> <span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/net/ipv4/conf/all/arp_ignore
-<span class="o">[</span>root@localhost ~<span class="o">]</span> <span class="nb">echo</span> <span class="m">2</span> &gt; /proc/sys/net/ipv4/conf/all/arp_announce
-
-<span class="c1"># 环回接口配置VIP，实现对内可见对外隐藏</span>
-<span class="c1"># 切记！！！ 切记！！！ 掩码是4个255</span>
-<span class="o">[</span>root@localhost ~<span class="o">]</span> ifconfig lo:2 192.168.199.101 netmask 255.255.255.255
-</code></pre></div><h2 id="web服务器2">WEB服务器2</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 安装ipvsadm</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> yum install ipvsadm -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装keepalived服务</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> yum install keepalived -y
+</span></span></code></pre></div><h2 id="web服务器1">WEB服务器1</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 安装nginx服务</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> wget https://nginx.org/download/nginx-1.21.3.tar.gz <span class="o">&amp;&amp;</span> tar -zxf nginx-1.21.3.tar.gz <span class="o">&amp;&amp;</span> <span class="nb">cd</span> nginx-1.21.3/
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> ./configure <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> make install
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> /usr/local/nginx/sbin/nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置index.html文件</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> cat /usr/local/nginx/html/index.html
+</span></span><span class="line"><span class="cl">192.168.199.11
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改arp_ignore和arp_announce配置</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 注意！！！我的网卡是ens33，按自己实际网卡来操作，比如eth0目录下</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> <span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/net/ipv4/conf/ens33/arp_ignore
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> <span class="nb">echo</span> <span class="m">2</span> &gt; /proc/sys/net/ipv4/conf/ens33/arp_announce
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> <span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/net/ipv4/conf/all/arp_ignore
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> <span class="nb">echo</span> <span class="m">2</span> &gt; /proc/sys/net/ipv4/conf/all/arp_announce
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 环回接口配置VIP，实现对内可见对外隐藏</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 切记！！！ 切记！！！ 掩码是4个255</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> ifconfig lo:2 192.168.199.101 netmask 255.255.255.255
+</span></span></code></pre></div><h2 id="web服务器2">WEB服务器2</h2>
 <p>操作同WEB服务器1</p>
 <h2 id="lvs服务器-1">LVS服务器</h2>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 修改keepalived.conf文件</span>
-<span class="o">[</span>root@localhost ~<span class="o">]</span> cat /etc/keepalived/keepalived.conf
-! Configuration File <span class="k">for</span> keepalived
-
-global_defs <span class="o">{</span>
-   <span class="c1"># ... 此处省略关于邮件的配置</span>
-   router_id LVS_01 <span class="c1"># 表示运行keepalived服务器的一个标识</span>
-<span class="o">}</span>
-vrrp_instance VI_1 <span class="o">{</span>
-    state MASTER <span class="c1"># 指定keepalived的角色，MASTER表示此主机是主服务器，BACKUP表示此主机是备用服务器</span>
-    interface ens33 <span class="c1"># 指定HA监测的网卡 根据自己实际网卡配置，例如eth0</span>
-    virtual_router_id <span class="m">51</span> <span class="c1"># 虚拟路由标识，这个标识是一个数字，同一个vrrp实例使用唯一的标识。即同一vrrp_instance下，MASTER和BACKUP必须是一致的</span>
-    priority <span class="m">100</span> <span class="c1"># 定义优先级，数字越大，优先级越高，在同一个vrrp_instance下，MASTER的优先级必须大于BACKUP的优先级</span>
-    advert_int <span class="m">1</span> <span class="c1"># 设定MASTER与BACKUP负载均衡器之间同步检查的时间间隔，单位是秒</span>
-    authentication <span class="o">{</span> <span class="c1"># 设置验证类型和密码</span>
-        auth_type PASS <span class="c1"># 设置验证类型，主要有PASS和AH两种</span>
-        auth_pass <span class="m">1111</span> <span class="c1"># 设置验证密码，在同一个vrrp_instance下，MASTER与BACKUP必须使用相同的密码才能正常通信</span>
-    <span class="o">}</span>
-    virtual_ipaddress <span class="o">{</span> <span class="c1"># 设置虚拟IP地址，可以设置多个虚拟IP地址，每行一个</span>
-        192.168.199.101/24 dev ens33 label ens33:2 <span class="c1"># 192.168.199.101为vip  ens33同上  ens33:2接口</span> 
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="c1"># 配置RS服务</span>
-virtual_server 192.168.199.101 <span class="m">80</span> <span class="o">{</span>
-    delay_loop <span class="m">6</span> <span class="c1"># 设置运行情况检查时间，单位是秒</span>
-    lb_algo rr <span class="c1"># 设置负载调度算法，这里设置为rr，即轮询算法</span>
-    lb_kind DR <span class="c1"># 设置LVS实现负载均衡的机制，有NAT、TUN、DR三个模式可选</span>
-    persistence_timeout <span class="m">50</span> <span class="c1"># 会话保持时间，单位是秒。这个选项对动态网页是非常有用的，为集群系统中的session共享提供了一个很好的解决方案。</span>
-                           <span class="c1"># 有了这个会话保持功能，用户的请求会被一直分发到某个服务节点，直到超过这个会话的保持时间。</span>
-                           <span class="c1"># 需要注意的是，这个会话保持时间是最大无响应超时时间，也就是说，用户在操作动态页面时，如果50秒内没有执行任何操作</span>
-                           <span class="c1"># 那么接下来的操作会被分发到另外的节点，但是如果用户一直在操作动态页面，则不受50秒的时间限制</span>
-    protocol TCP <span class="c1"># 指定转发协议类型，有TCP和UDP两种</span>
-
-    <span class="c1"># WEB服务器1 80端口</span>
-    real_server 192.168.199.11 <span class="m">80</span> <span class="o">{</span>
-        weight <span class="m">1</span> <span class="c1"># 配置服务节点的权值，权值大小用数字表示，数字越大，权值越高，设置权值大小可以为不同性能的服务器</span>
-                 <span class="c1"># 分配不同的负载，可以为性能高的服务器设置较高的权值，而为性能较低的服务器设置相对较低的权值，这样才能合理地利用和分配系统资源</span>
-        HTTP_GET <span class="o">{</span>
-            url <span class="o">{</span>
-              path /
-              status_code <span class="m">200</span>
-            <span class="o">}</span>
-
-            connect_timeout <span class="m">3</span> <span class="c1"># 表示3秒无响应超时</span>
-            nb_get_retry <span class="m">3</span> <span class="c1"># 表示重试次数</span>
-            delay_before_retry <span class="m">3</span> <span class="c1"># 表示重试间隔</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="c1"># WEB服务器2 80端口</span>
-    real_server 192.168.199.12 <span class="m">80</span> <span class="o">{</span>
-        weight <span class="m">1</span>
-        HTTP_GET <span class="o">{</span>
-            url <span class="o">{</span>
-              path /
-              status_code <span class="m">200</span>
-            <span class="o">}</span>
-
-            connect_timeout <span class="m">3</span>
-            nb_get_retry <span class="m">3</span>
-            delay_before_retry <span class="m">3</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="c1"># 配置完成之后重启keepalived</span>
-<span class="c1"># centos7</span>
-<span class="o">[</span>root@localhost ~<span class="o">]</span> systemctl restart keepalived.service
-
-<span class="c1"># ipvsadm 查看rs情况</span>
-<span class="c1"># ipvsadm -lnc 会查看当前连接情况</span>
-<span class="o">[</span>root@localhost ~<span class="o">]</span> ipvsadm -ln
-IP Virtual Server version 1.2.1 <span class="o">(</span><span class="nv">size</span><span class="o">=</span>4096<span class="o">)</span>
-Prot LocalAddress:Port Scheduler Flags
-  -&gt; RemoteAddress:Port           Forward Weight ActiveConn InActConn
-TCP  192.168.199.101:80 rr
-  -&gt; 192.168.199.11:80            Route   <span class="m">1</span>      <span class="m">0</span>          <span class="m">0</span>
-  -&gt; 192.168.199.12:80            Route   <span class="m">1</span>      <span class="m">0</span>          <span class="m">0</span>
-</code></pre></div><h2 id="访问vip">访问VIP</h2>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 请求结果会轮着来</span>
-<span class="o">[</span>root@localhost ~<span class="o">]</span> curl -X GET http://192.168.199.101:80
-192.168.199.11
-<span class="o">[</span>root@localhost ~<span class="o">]</span> curl -X GET http://192.168.199.101:80
-192.168.199.12
-</code></pre></div></article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/lvs/>lvs</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 修改keepalived.conf文件</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> cat /etc/keepalived/keepalived.conf
+</span></span><span class="line"><span class="cl">! Configuration File <span class="k">for</span> keepalived
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">global_defs <span class="o">{</span>
+</span></span><span class="line"><span class="cl">   <span class="c1"># ... 此处省略关于邮件的配置</span>
+</span></span><span class="line"><span class="cl">   router_id LVS_01 <span class="c1"># 表示运行keepalived服务器的一个标识</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">vrrp_instance VI_1 <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    state MASTER <span class="c1"># 指定keepalived的角色，MASTER表示此主机是主服务器，BACKUP表示此主机是备用服务器</span>
+</span></span><span class="line"><span class="cl">    interface ens33 <span class="c1"># 指定HA监测的网卡 根据自己实际网卡配置，例如eth0</span>
+</span></span><span class="line"><span class="cl">    virtual_router_id <span class="m">51</span> <span class="c1"># 虚拟路由标识，这个标识是一个数字，同一个vrrp实例使用唯一的标识。即同一vrrp_instance下，MASTER和BACKUP必须是一致的</span>
+</span></span><span class="line"><span class="cl">    priority <span class="m">100</span> <span class="c1"># 定义优先级，数字越大，优先级越高，在同一个vrrp_instance下，MASTER的优先级必须大于BACKUP的优先级</span>
+</span></span><span class="line"><span class="cl">    advert_int <span class="m">1</span> <span class="c1"># 设定MASTER与BACKUP负载均衡器之间同步检查的时间间隔，单位是秒</span>
+</span></span><span class="line"><span class="cl">    authentication <span class="o">{</span> <span class="c1"># 设置验证类型和密码</span>
+</span></span><span class="line"><span class="cl">        auth_type PASS <span class="c1"># 设置验证类型，主要有PASS和AH两种</span>
+</span></span><span class="line"><span class="cl">        auth_pass <span class="m">1111</span> <span class="c1"># 设置验证密码，在同一个vrrp_instance下，MASTER与BACKUP必须使用相同的密码才能正常通信</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    virtual_ipaddress <span class="o">{</span> <span class="c1"># 设置虚拟IP地址，可以设置多个虚拟IP地址，每行一个</span>
+</span></span><span class="line"><span class="cl">        192.168.199.101/24 dev ens33 label ens33:2 <span class="c1"># 192.168.199.101为vip  ens33同上  ens33:2接口 </span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置RS服务</span>
+</span></span><span class="line"><span class="cl">virtual_server 192.168.199.101 <span class="m">80</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    delay_loop <span class="m">6</span> <span class="c1"># 设置运行情况检查时间，单位是秒</span>
+</span></span><span class="line"><span class="cl">    lb_algo rr <span class="c1"># 设置负载调度算法，这里设置为rr，即轮询算法</span>
+</span></span><span class="line"><span class="cl">    lb_kind DR <span class="c1"># 设置LVS实现负载均衡的机制，有NAT、TUN、DR三个模式可选</span>
+</span></span><span class="line"><span class="cl">    persistence_timeout <span class="m">50</span> <span class="c1"># 会话保持时间，单位是秒。这个选项对动态网页是非常有用的，为集群系统中的session共享提供了一个很好的解决方案。</span>
+</span></span><span class="line"><span class="cl">                           <span class="c1"># 有了这个会话保持功能，用户的请求会被一直分发到某个服务节点，直到超过这个会话的保持时间。</span>
+</span></span><span class="line"><span class="cl">                           <span class="c1"># 需要注意的是，这个会话保持时间是最大无响应超时时间，也就是说，用户在操作动态页面时，如果50秒内没有执行任何操作</span>
+</span></span><span class="line"><span class="cl">                           <span class="c1"># 那么接下来的操作会被分发到另外的节点，但是如果用户一直在操作动态页面，则不受50秒的时间限制</span>
+</span></span><span class="line"><span class="cl">    protocol TCP <span class="c1"># 指定转发协议类型，有TCP和UDP两种</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># WEB服务器1 80端口</span>
+</span></span><span class="line"><span class="cl">    real_server 192.168.199.11 <span class="m">80</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        weight <span class="m">1</span> <span class="c1"># 配置服务节点的权值，权值大小用数字表示，数字越大，权值越高，设置权值大小可以为不同性能的服务器</span>
+</span></span><span class="line"><span class="cl">                 <span class="c1"># 分配不同的负载，可以为性能高的服务器设置较高的权值，而为性能较低的服务器设置相对较低的权值，这样才能合理地利用和分配系统资源</span>
+</span></span><span class="line"><span class="cl">        HTTP_GET <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            url <span class="o">{</span>
+</span></span><span class="line"><span class="cl">              path /
+</span></span><span class="line"><span class="cl">              status_code <span class="m">200</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            connect_timeout <span class="m">3</span> <span class="c1"># 表示3秒无响应超时</span>
+</span></span><span class="line"><span class="cl">            nb_get_retry <span class="m">3</span> <span class="c1"># 表示重试次数</span>
+</span></span><span class="line"><span class="cl">            delay_before_retry <span class="m">3</span> <span class="c1"># 表示重试间隔</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># WEB服务器2 80端口</span>
+</span></span><span class="line"><span class="cl">    real_server 192.168.199.12 <span class="m">80</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        weight <span class="m">1</span>
+</span></span><span class="line"><span class="cl">        HTTP_GET <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            url <span class="o">{</span>
+</span></span><span class="line"><span class="cl">              path /
+</span></span><span class="line"><span class="cl">              status_code <span class="m">200</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            connect_timeout <span class="m">3</span>
+</span></span><span class="line"><span class="cl">            nb_get_retry <span class="m">3</span>
+</span></span><span class="line"><span class="cl">            delay_before_retry <span class="m">3</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置完成之后重启keepalived</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># centos7</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> systemctl restart keepalived.service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ipvsadm 查看rs情况</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ipvsadm -lnc 会查看当前连接情况</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> ipvsadm -ln
+</span></span><span class="line"><span class="cl">IP Virtual Server version 1.2.1 <span class="o">(</span><span class="nv">size</span><span class="o">=</span>4096<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Prot LocalAddress:Port Scheduler Flags
+</span></span><span class="line"><span class="cl">  -&gt; RemoteAddress:Port           Forward Weight ActiveConn InActConn
+</span></span><span class="line"><span class="cl">TCP  192.168.199.101:80 rr
+</span></span><span class="line"><span class="cl">  -&gt; 192.168.199.11:80            Route   <span class="m">1</span>      <span class="m">0</span>          <span class="m">0</span>
+</span></span><span class="line"><span class="cl">  -&gt; 192.168.199.12:80            Route   <span class="m">1</span>      <span class="m">0</span>          <span class="m">0</span>
+</span></span></code></pre></div><h2 id="访问vip">访问VIP</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 请求结果会轮着来</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> curl -X GET http://192.168.199.101:80
+</span></span><span class="line"><span class="cl">192.168.199.11
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span> curl -X GET http://192.168.199.101:80
+</span></span><span class="line"><span class="cl">192.168.199.12
+</span></span></code></pre></div></article><section class="article labels"><a class="category" href=/categories/%E5%85%B6%E4%BB%96/>其他</a><a class="tag" href=/tags/lvs/>lvs</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.cf11b1e30804a8568fadb3035f7b3c65071e10bff9bdd8a53a5c597a10340808edc5eb2ba31a11d3ab00c22da54b3e29.js#pubid=ra-1234567891" integrity="sha384-zxGx4wgEqFaPrbMDX3s8ZQceEL/5vdilOlxZehA0CAjtxesroxoR06sAwi2lSz4p"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
 </section></div>
 <div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/py_string/"><span class="iconfont icon-article"></span>Python 变量和简单数据类型</a></p><p><a class="link" href="/article/lvs-1/"><span class="iconfont icon-article"></span>LVS负载均衡实践</a></p></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2024 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    <p class="copyright">©2025 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
             onload="renderMathInElement(document.body);"></script><script>
         var theme = localStorage.getItem('theme');
         if (window.matchMedia('(prefers-color-scheme: light)').matches && theme == null) {
@@ -177,10 +237,21 @@ TCP  192.168.199.101:80 rr
 
         if (theme == "dark") {
             document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'none';
+            darkIcon.style.display = 'block';
         }
 
         if (theme == "light") {
             document.getElementById('light-btn').classList.add('data-theme-btn');
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'block';
+            darkIcon.style.display = 'none';
         }
 
         function toggleTheme(theme) {
@@ -189,6 +260,12 @@ TCP  192.168.199.101:80 rr
 
                 document.getElementById('dark-btn').classList.remove('data-theme-btn');
                 document.getElementById('light-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'block';
+                darkIcon.style.display = 'none';
 
                 
                 var styleSheets = document.styleSheets;
@@ -216,6 +293,12 @@ TCP  192.168.199.101:80 rr
 
                 document.getElementById('light-btn').classList.remove('data-theme-btn');
                 document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'block';
 
                 
                 var styleSheets = document.styleSheets;
@@ -284,6 +367,6 @@ TCP  192.168.199.101:80 rr
             }
         }
 
-    </script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+    </script><script src="/js/hljs.min.8a2658ccca6d9e87a439ee65a5d1d1e166af57afdffd06d778243afc50968a2e8188303a6368ca04f679dd21a49af5bf.js" integrity="sha384-iiZYzMptnoekOe5lpdHR4WavV6/f/QbXeCQ6/FCWii6BiDA6Y2jKBPZ53SGkmvW/"></script><script>hljs.initHighlightingOnLoad();</script></body>
 
 </html>

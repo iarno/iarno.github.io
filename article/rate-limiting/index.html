@@ -1,20 +1,80 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.140.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark">
 <meta content="lua, redis, 限流, 令牌桶算法, 单点限流, 分布式限流" name="keywords">
 <meta content="限流算法实践 - IARNO" property="og:title">
-<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>限流算法实践&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.10378bb60864db659b307ff1cb88b58847923e6c059836d0675eb97e77ac87967c8b565e9326d8fa3955aacbdc912f1d.css" integrity="sha384-EDeLtghk22WbMH/xy4i1iEeSPmwFmDbQZ165fnesh5Z8i1ZekybY&#43;jlVqsvckS8d"><meta name="twitter:card" content="summary" />
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>限流算法实践&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.475767088e02a0cde98e83d380878f87eecec4c45d477990e99d2d01bfaed3a249b1503fa03e85ee68591c8e8dcedbe1.css" integrity="sha384-R1dnCI4CoM3pjoPTgIePh&#43;7OxMRdR3mQ6Z0tAb&#43;u06JJsVA/oD6F7mhZHI6Nztvh"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="限流算法实践" /><body><section id="header">
     <title>限流算法实践 - IARNO</title>
     <meta content="阿諾个人博客 - 服务限流及实践,令牌桶限流。" property="og:description">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav">
-    <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+        <span class="header right-side"><style>
+    .nav-search-container {
+      position: relative;
+      display: inline-flex;
+      align-items: center;  
+      top: 1.5px;
+    }
+  
+    .search-input {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      width: 0;
+      height: 30px;
+      border: 1px solid #aaa;
+      background-color: #f9f9f9;
+      padding: 5px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #333;
+      opacity: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+  
+    .nav-search-container:hover .search-input {
+      width: 200px;
+      opacity: 1;
+    }
+  
+    .nav-search-container:hover .search-input:focus {
+      outline: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    .icon {
+      cursor: pointer;
+      width: 14.5px;
+      height: 14.5px;
+      transition: fill 0.3s ease;
+      margin-top: 1.5px;
+    }
+</style><div class="nav wrap"><nav class="nav">
 
-</nav></div></span>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+<form action="/search/" class="nav item">
+    <div class="nav-search-container">
+        <form action="/search/" style="display:inline;">
+          <input type="text" id="search-query" class="search-input" placeholder="Search.." name="q" />
+        </form>
+        
+        <svg id="light-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745"></path>
+        </svg>
+        
+        <svg id="dark-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742" style="display:none;">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743" fill="#ffffff"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744" fill="#ffffff"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745" fill="#ffffff"></path>
+        </svg>
+     </div><a class="nav item" href="/categories/">分类</a><a class="nav item" href="/tags/">标签</a><a class="nav item" href=""></a></nav></div></span>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
     </div><div class="site slogan">
             <span class="title">努力升级中的凡人</span>
         </div></section><section id="content"><div class="article-container"><section class="article header">
@@ -82,7 +142,7 @@
 <li>水从桶的底部以固定的速率匀速流出，相当于在匀速处理请求</li>
 <li>当漏桶内的水满时(超过了限流阈值)则拒绝服务</li>
 </ul>
-<p>这个算法可以比较平滑均匀的限制请求，Nginx 中的 limit_req 模块的底层实现就是用的这种算法，具体可参考【NGINX和NGINX Plus的速率限制】(<a href="https://www.nginx.com/blog/rate-limiting-nginx">https://www.nginx.com/blog/rate-limiting-nginx</a>)</p>
+<p>这个算法可以比较平滑均匀的限制请求，Nginx 中的 limit_req 模块的底层实现就是用的这种算法，具体可参考【NGINX和NGINX Plus的速率限制】(<a href="https://www.nginx.com/blog/rate-limiting-nginx"target="_blank">https://www.nginx.com/blog/rate-limiting-nginx</a>)</p>
 <p>但是漏桶算法也有一定的缺陷，因为水从桶的底部以固定的速率匀速流出，当有在服务器可承受范围内的瞬时突发请求进来，这些请求会被先放入桶内，然后再匀速的进行处理，这样就会造成部分请求的延迟。所以他无法应对在限流阈值范围内的突发请求。</p>
 <h3 id="令牌桶算法">令牌桶算法</h3>
 <p><img  src="https://i.loli.net/2021/04/21/bThlfoCOVK8qSHY.png"
@@ -121,71 +181,71 @@
 <p>假如我们的限流策略是一分钟内最多能通过100个请求，那么相应的令牌产生速率为 <code>600 / 60 = 10 (个/秒)</code>。那么当限流策略刚刚配置好这一时刻就有突发的10个请求进来，此时令牌桶内还没来的及生产令牌，所以请求拿不到令牌就会被拒绝，这显然不符合我们要求。</p>
 <p>为了解决这一问题，我们在限流策略刚刚配置好后的第一个请求来临时将当前可用令牌的值设置为桶的最大容量 100，将最近一次请求时间设置为本次请求来临时一分钟后的时间戳，减去出本次请求需要的令牌后更新桶。这样，在这一分钟以内，有下一次请求进来时，从 Hash 表内取出配置计算当前时间就会小于最近一次请求的时间，随后计算生成的令牌就会是一个小于0的负数。所以在更新桶这一步，要根据生成的令牌是否为负数来决定是否更新最后一次请求时间的值。</p>
 <h3 id="用-lua-脚本实现上述逻辑">用 Lua 脚本实现上述逻辑：</h3>
-<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="kd">local</span> <span class="n">key</span> <span class="o">=</span> <span class="n">KEYS</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1">-- 要进行限流的Key，可以是 uri</span>
-<span class="kd">local</span> <span class="n">consume_permits</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">ARGV</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1">-- 请求消耗的令牌数，每个请求消耗一个</span>
-<span class="kd">local</span> <span class="n">curr_time</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">ARGV</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="c1">-- 当前时间</span>
-
-<span class="kd">local</span> <span class="n">limiter_info</span> <span class="o">=</span> <span class="n">redis.pcall</span><span class="p">(</span><span class="s2">&#34;HMGET&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&#34;last_time&#34;</span><span class="p">,</span> <span class="s2">&#34;curr_permits&#34;</span><span class="p">,</span> <span class="s2">&#34;bucket_cap&#34;</span><span class="p">,</span> <span class="s2">&#34;rate&#34;</span><span class="p">,</span> <span class="s2">&#34;period&#34;</span><span class="p">)</span>
-<span class="kr">if</span> <span class="ow">not</span> <span class="n">limiter_info</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="kr">then</span>
-    <span class="kr">return</span> <span class="o">-</span><span class="mi">1</span>
-<span class="kr">end</span>
-<span class="kd">local</span> <span class="n">last_time</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
-<span class="kd">local</span> <span class="n">curr_permits</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
-<span class="kd">local</span> <span class="n">bucket_cap</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
-<span class="kd">local</span> <span class="n">rate</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
-<span class="kd">local</span> <span class="n">period</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
-
-<span class="kd">local</span> <span class="n">total_permits</span> <span class="o">=</span> <span class="n">bucket_cap</span>
-<span class="kd">local</span> <span class="n">is_update_time</span> <span class="o">=</span> <span class="kc">true</span>
-<span class="kr">if</span> <span class="n">last_time</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="kr">then</span>
-    <span class="kd">local</span> <span class="n">new_permits</span> <span class="o">=</span> <span class="n">math.floor</span><span class="p">((</span><span class="n">curr_time</span><span class="o">-</span><span class="n">last_time</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">rate</span><span class="p">)</span>
-    <span class="kr">if</span> <span class="n">new_permits</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="kr">then</span>
-        <span class="n">new_permits</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">is_update_time</span> <span class="o">=</span> <span class="kc">false</span>
-    <span class="kr">end</span>
-
-    <span class="n">total_permits</span> <span class="o">=</span> <span class="n">new_permits</span> <span class="o">+</span> <span class="n">curr_permits</span>
-    <span class="kr">if</span> <span class="n">total_permits</span> <span class="o">&gt;</span> <span class="n">bucket_cap</span> <span class="kr">then</span>
-        <span class="n">total_permits</span> <span class="o">=</span> <span class="n">bucket_cap</span>
-    <span class="kr">end</span>
-<span class="kr">else</span>
-    <span class="n">last_time</span> <span class="o">=</span> <span class="n">curr_time</span> <span class="o">+</span> <span class="n">period</span> <span class="o">*</span> <span class="mi">1000</span>
-<span class="kr">end</span>
-
-<span class="kd">local</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="kr">if</span> <span class="n">total_permits</span> <span class="o">&gt;=</span> <span class="n">consume_permits</span> <span class="kr">then</span>
-    <span class="n">total_permits</span> <span class="o">=</span> <span class="n">total_permits</span> <span class="o">-</span> <span class="n">consume_permits</span>
-<span class="kr">else</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="kr">end</span>
-
-<span class="kr">if</span> <span class="n">is_update_time</span> <span class="kr">then</span>
-    <span class="n">redis.pcall</span><span class="p">(</span><span class="s2">&#34;HMSET&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&#34;curr_permits&#34;</span><span class="p">,</span> <span class="n">total_permits</span><span class="p">,</span> <span class="s2">&#34;last_time&#34;</span><span class="p">,</span> <span class="n">curr_time</span><span class="p">)</span>
-<span class="kr">else</span>
-    <span class="n">redis.pcall</span><span class="p">(</span><span class="s2">&#34;HSET&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&#34;curr_permits&#34;</span><span class="p">,</span> <span class="n">total_permits</span><span class="p">)</span>
-<span class="kr">end</span>
-<span class="kr">return</span> <span class="n">res</span>
-</code></pre></div><p>上述脚本在调用时接收三个参数，分别为：限流的key、请求消耗的令牌数、 当前时间戳(毫秒级别)。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">key</span> <span class="o">=</span> <span class="n">KEYS</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1">-- 要进行限流的Key，可以是 uri</span>
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">consume_permits</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">ARGV</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1">-- 请求消耗的令牌数，每个请求消耗一个</span>
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">curr_time</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">ARGV</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="c1">-- 当前时间</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">limiter_info</span> <span class="o">=</span> <span class="n">redis.pcall</span><span class="p">(</span><span class="s2">&#34;HMGET&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&#34;last_time&#34;</span><span class="p">,</span> <span class="s2">&#34;curr_permits&#34;</span><span class="p">,</span> <span class="s2">&#34;bucket_cap&#34;</span><span class="p">,</span> <span class="s2">&#34;rate&#34;</span><span class="p">,</span> <span class="s2">&#34;period&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">if</span> <span class="ow">not</span> <span class="n">limiter_info</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">return</span> <span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">last_time</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">curr_permits</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">bucket_cap</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">rate</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">period</span> <span class="o">=</span> <span class="n">tonumber</span><span class="p">(</span><span class="n">limiter_info</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">total_permits</span> <span class="o">=</span> <span class="n">bucket_cap</span>
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">is_update_time</span> <span class="o">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="kr">if</span> <span class="n">last_time</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">new_permits</span> <span class="o">=</span> <span class="n">math.floor</span><span class="p">((</span><span class="n">curr_time</span><span class="o">-</span><span class="n">last_time</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">rate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">if</span> <span class="n">new_permits</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_permits</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="n">is_update_time</span> <span class="o">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">total_permits</span> <span class="o">=</span> <span class="n">new_permits</span> <span class="o">+</span> <span class="n">curr_permits</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">if</span> <span class="n">total_permits</span> <span class="o">&gt;</span> <span class="n">bucket_cap</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">        <span class="n">total_permits</span> <span class="o">=</span> <span class="n">bucket_cap</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">end</span>
+</span></span><span class="line"><span class="cl"><span class="kr">else</span>
+</span></span><span class="line"><span class="cl">    <span class="n">last_time</span> <span class="o">=</span> <span class="n">curr_time</span> <span class="o">+</span> <span class="n">period</span> <span class="o">*</span> <span class="mi">1000</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="kr">if</span> <span class="n">total_permits</span> <span class="o">&gt;=</span> <span class="n">consume_permits</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">    <span class="n">total_permits</span> <span class="o">=</span> <span class="n">total_permits</span> <span class="o">-</span> <span class="n">consume_permits</span>
+</span></span><span class="line"><span class="cl"><span class="kr">else</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">if</span> <span class="n">is_update_time</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">    <span class="n">redis.pcall</span><span class="p">(</span><span class="s2">&#34;HMSET&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&#34;curr_permits&#34;</span><span class="p">,</span> <span class="n">total_permits</span><span class="p">,</span> <span class="s2">&#34;last_time&#34;</span><span class="p">,</span> <span class="n">curr_time</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">else</span>
+</span></span><span class="line"><span class="cl">    <span class="n">redis.pcall</span><span class="p">(</span><span class="s2">&#34;HSET&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&#34;curr_permits&#34;</span><span class="p">,</span> <span class="n">total_permits</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span><span class="line"><span class="cl"><span class="kr">return</span> <span class="n">res</span>
+</span></span></code></pre></div><p>上述脚本在调用时接收三个参数，分别为：限流的key、请求消耗的令牌数、 当前时间戳(毫秒级别)。</p>
 <p>在我们的业务代码中，先调用 Redis 的 <code>SCRIPT LOAD</code> 命令将上述脚本 Load 到 Redis 中并将该命令返回的脚本 sha1 值保存。</p>
 <p>在后续的请求进来时，调用 Redis 的<code> EVALSHA</code> 命令执行限流逻辑，根据返回值判断是否对本次请求触发限流行为。假如限流的 key 为每次请求的 uri，每次请求消耗 1 个令牌，那么执行 Evalsha 命令进行限流判断的具体操作为：<code>EVALSHA ${sha1} 1 ${uri} 1 ${当前时间戳} </code>（第一个数字 1 代表脚本可接收的参数中有 1 个Key，第二个数字 1 代表本次请求消耗一个令牌）；执行完这条命令后如果返回值是 1 代表桶中令牌够用，请求通过；如果返回值为 0 代表桶中令牌不够，触发限流；如果返回值为 -1 代表本次请求的 uri 未配置限流策略，可根据自己的实际业务场景判断是通过还是拒绝。</p>
 <h3 id="redis相关操作">Redis相关操作</h3>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 通过 SCRIPT LOAD 生成的 sha1 校验码</span>
-root@e2ea48309e5f:/home/lua/rate-limiting# redis-cli SCRIPT LOAD <span class="s2">&#34;</span><span class="k">$(</span>cat /home/lua/rate-limiting/demo.lua<span class="k">)</span><span class="s2">&#34;</span>
-<span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span>
-
-<span class="c1"># 执行命令 参数解释：1个key 缓存key为test 每次1个令牌 当前时间</span>
-root@e2ea48309e5f:/home/lua/rate-limiting# redis-cli
-127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
-<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
-<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
-<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
-<span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
-127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
-<span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
-</code></pre></div><h2 id="五总结">五、总结</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 通过 SCRIPT LOAD 生成的 sha1 校验码</span>
+</span></span><span class="line"><span class="cl">root@e2ea48309e5f:/home/lua/rate-limiting# redis-cli SCRIPT LOAD <span class="s2">&#34;</span><span class="k">$(</span>cat /home/lua/rate-limiting/demo.lua<span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 执行命令 参数解释：1个key 缓存key为test 每次1个令牌 当前时间</span>
+</span></span><span class="line"><span class="cl">root@e2ea48309e5f:/home/lua/rate-limiting# redis-cli
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; EVALSHA <span class="s2">&#34;f1acffb11bcfea38c1acf25ce4135f7b95233807&#34;</span> <span class="m">1</span> <span class="nb">test</span> <span class="m">1</span> <span class="m">1619017529</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</span></span></code></pre></div><h2 id="五总结">五、总结</h2>
 <p>本文主要介绍了四种限流的算法，分别为：固定窗口计数器算法、滑动窗口计数算法、漏桶算法、令牌桶算法。</p>
 <ul>
 <li>固定窗口计数算法简单易实现，其缺陷是可能在中间的某一秒内通过的请求数是限流阈值的两倍，该算法仅适用于对限流准确度要求不高的应用场景。</li>
@@ -194,10 +254,10 @@ root@e2ea48309e5f:/home/lua/rate-limiting# redis-cli
 <li>令牌桶算法解决了以上三个算法的所有缺陷，是一种相对比较完美的限流算法，也是限流场景中应用最为广泛的算法。使用 Redis + Lua脚本的方式可以简单的实现。</li>
 </ul>
 <h2 id="转自">转自</h2>
-<p><a href="http://s.iarno.cn/akFmqR">http://s.iarno.cn/akFmqR</a></p></article><section class="article labels"><a class="category" href=/categories/lua/>Lua</a><a class="tag" href=/tags/%E9%99%90%E6%B5%81/>限流</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+<p><a href="http://s.iarno.cn/akFmqR"target="_blank">http://s.iarno.cn/akFmqR</a></p></article><section class="article labels"><a class="category" href=/categories/lua/>Lua</a><a class="tag" href=/tags/%E9%99%90%E6%B5%81/>限流</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.cf11b1e30804a8568fadb3035f7b3c65071e10bff9bdd8a53a5c597a10340808edc5eb2ba31a11d3ab00c22da54b3e29.js#pubid=ra-1234567891" integrity="sha384-zxGx4wgEqFaPrbMDX3s8ZQceEL/5vdilOlxZehA0CAjtxesroxoR06sAwi2lSz4p"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
 </section></div>
 <div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/plugin-dev1/"><span class="iconfont icon-article"></span>Kong - 自定义插件开发(一)</a></p><p><a class="link" href="/article/lua-shared-dict/"><span class="iconfont icon-article"></span>ngx_lua模块中使用lua_shared_dict共享内存变量</a></p></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2024 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    <p class="copyright">©2025 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
             onload="renderMathInElement(document.body);"></script><script>
         var theme = localStorage.getItem('theme');
         if (window.matchMedia('(prefers-color-scheme: light)').matches && theme == null) {
@@ -210,10 +270,21 @@ root@e2ea48309e5f:/home/lua/rate-limiting# redis-cli
 
         if (theme == "dark") {
             document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'none';
+            darkIcon.style.display = 'block';
         }
 
         if (theme == "light") {
             document.getElementById('light-btn').classList.add('data-theme-btn');
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'block';
+            darkIcon.style.display = 'none';
         }
 
         function toggleTheme(theme) {
@@ -222,6 +293,12 @@ root@e2ea48309e5f:/home/lua/rate-limiting# redis-cli
 
                 document.getElementById('dark-btn').classList.remove('data-theme-btn');
                 document.getElementById('light-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'block';
+                darkIcon.style.display = 'none';
 
                 
                 var styleSheets = document.styleSheets;
@@ -249,6 +326,12 @@ root@e2ea48309e5f:/home/lua/rate-limiting# redis-cli
 
                 document.getElementById('light-btn').classList.remove('data-theme-btn');
                 document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'block';
 
                 
                 var styleSheets = document.styleSheets;
@@ -317,6 +400,6 @@ root@e2ea48309e5f:/home/lua/rate-limiting# redis-cli
             }
         }
 
-    </script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+    </script><script src="/js/hljs.min.8a2658ccca6d9e87a439ee65a5d1d1e166af57afdffd06d778243afc50968a2e8188303a6368ca04f679dd21a49af5bf.js" integrity="sha384-iiZYzMptnoekOe5lpdHR4WavV6/f/QbXeCQ6/FCWii6BiDA6Y2jKBPZ53SGkmvW/"></script><script>hljs.initHighlightingOnLoad();</script></body>
 
 </html>

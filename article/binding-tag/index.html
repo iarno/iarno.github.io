@@ -1,345 +1,405 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.140.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark">
 <meta content="golang, gin, binding" name="keywords">
 <meta content="gin binding tag - IARNO" property="og:title">
-<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>gin binding tag&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.10378bb60864db659b307ff1cb88b58847923e6c059836d0675eb97e77ac87967c8b565e9326d8fa3955aacbdc912f1d.css" integrity="sha384-EDeLtghk22WbMH/xy4i1iEeSPmwFmDbQZ165fnesh5Z8i1ZekybY&#43;jlVqsvckS8d"><meta name="twitter:card" content="summary" />
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>gin binding tag&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.475767088e02a0cde98e83d380878f87eecec4c45d477990e99d2d01bfaed3a249b1503fa03e85ee68591c8e8dcedbe1.css" integrity="sha384-R1dnCI4CoM3pjoPTgIePh&#43;7OxMRdR3mQ6Z0tAb&#43;u06JJsVA/oD6F7mhZHI6Nztvh"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="gin binding tag" /><body><section id="header">
     <title>gin binding tag - IARNO</title>
     <meta content="阿諾个人博客 - golang binding tag" property="og:description">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav">
-    <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+        <span class="header right-side"><style>
+    .nav-search-container {
+      position: relative;
+      display: inline-flex;
+      align-items: center;  
+      top: 1.5px;
+    }
+  
+    .search-input {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      width: 0;
+      height: 30px;
+      border: 1px solid #aaa;
+      background-color: #f9f9f9;
+      padding: 5px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #333;
+      opacity: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+  
+    .nav-search-container:hover .search-input {
+      width: 200px;
+      opacity: 1;
+    }
+  
+    .nav-search-container:hover .search-input:focus {
+      outline: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    .icon {
+      cursor: pointer;
+      width: 14.5px;
+      height: 14.5px;
+      transition: fill 0.3s ease;
+      margin-top: 1.5px;
+    }
+</style><div class="nav wrap"><nav class="nav">
 
-</nav></div></span>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+<form action="/search/" class="nav item">
+    <div class="nav-search-container">
+        <form action="/search/" style="display:inline;">
+          <input type="text" id="search-query" class="search-input" placeholder="Search.." name="q" />
+        </form>
+        
+        <svg id="light-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745"></path>
+        </svg>
+        
+        <svg id="dark-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742" style="display:none;">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743" fill="#ffffff"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744" fill="#ffffff"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745" fill="#ffffff"></path>
+        </svg>
+     </div><a class="nav item" href="/categories/">分类</a><a class="nav item" href="/tags/">标签</a><a class="nav item" href=""></a></nav></div></span>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
     </div><div class="site slogan">
             <span class="title">努力升级中的凡人</span>
         </div></section><section id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">gin binding tag</h1><p class="article date">February 25, 2023</p></section><article class="article markdown-body"><p>这篇文章详细介绍了在Golang中使用的各种绑定标签。包括但不限于required、unique、omitempty等，每个标签都有详细的说明和使用示例。这些标签在使用Gin框架进行数据验证时非常有用。文章还提供了一个链接，供读者进一步了解和学习这些标签的使用。</p>
 <table>
-<thead>
-<tr>
-<th>标记</th>
-<th>标记说明</th>
-<th>例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>required</td>
-<td>必填</td>
-<td>Field或Struct <code>validate:&quot;required&quot;</code></td>
-</tr>
-<tr>
-<td>unique</td>
-<td>保证唯一性,不同类型处理不同; 对于<code>map，unique</code>约束没有重复的<code>value</code>值； 对于数组和切片，没有重复的元素值</td>
-<td>Field <code>validate:&quot;unique&quot;</code></td>
-</tr>
-<tr>
-<td>omitempty</td>
-<td>空时忽略</td>
-<td>Field或Struct <code>validate:&quot;omitempty&quot;</code></td>
-</tr>
-<tr>
-<td>len</td>
-<td>长度</td>
-<td>Field <code>validate:&quot;len=0&quot;</code></td>
-</tr>
-<tr>
-<td>eq</td>
-<td>等于</td>
-<td>Field <code>validate:&quot;eq=0&quot;</code></td>
-</tr>
-<tr>
-<td>gt</td>
-<td>大于</td>
-<td>Field <code>validate:&quot;gt=0&quot;</code></td>
-</tr>
-<tr>
-<td>gte</td>
-<td>大于等于</td>
-<td>Field <code>validate:&quot;gte=0&quot;</code></td>
-</tr>
-<tr>
-<td>lt</td>
-<td>小于</td>
-<td>Field <code>validate:&quot;lt=0&quot;</code></td>
-</tr>
-<tr>
-<td>lte</td>
-<td>小于等于</td>
-<td>Field <code>validate:&quot;lte=0&quot;</code></td>
-</tr>
-<tr>
-<td>eqfield</td>
-<td>同一结构体字段相等</td>
-<td>Field <code>validate:&quot;eqfield=Field2&quot;</code></td>
-</tr>
-<tr>
-<td>nefield</td>
-<td>同一结构体字段不相等</td>
-<td>Field <code>validate:&quot;nefield=Field2&quot;</code></td>
-</tr>
-<tr>
-<td>gtfield</td>
-<td>大于同一结构体字段</td>
-<td>Field <code>validate:&quot;gtfield=Field2&quot;</code></td>
-</tr>
-<tr>
-<td>gtefield</td>
-<td>大于等于同一结构体字段</td>
-<td>Field <code>validate:&quot;gtefield=Field2&quot;</code></td>
-</tr>
-<tr>
-<td>ltfield</td>
-<td>小于同一结构体字段</td>
-<td>Field <code>validate:&quot;ltfield=Field2&quot;</code></td>
-</tr>
-<tr>
-<td>ltefield</td>
-<td>小于等于同一结构体字段</td>
-<td>Field <code>validate:&quot;ltefield=Field2&quot;</code></td>
-</tr>
-<tr>
-<td>eqcsfield</td>
-<td>跨不同结构体字段相等</td>
-<td>Struct1.Field <code>validate:&quot;eqcsfield=Struct2.Field2&quot;</code></td>
-</tr>
-<tr>
-<td>necsfield</td>
-<td>跨不同结构体字段不相等</td>
-<td>Struct1.Field <code>validate:&quot;necsfield=Struct2.Field2&quot;</code></td>
-</tr>
-<tr>
-<td>gtcsfield</td>
-<td>大于跨不同结构体字段</td>
-<td>Struct1.Field <code>validate:&quot;gtcsfield=Struct2.Field2&quot;</code></td>
-</tr>
-<tr>
-<td>gtecsfield</td>
-<td>大于等于跨不同结构体字段</td>
-<td>Struct1.Field <code>validate:&quot;gtecsfield=Struct2.Field2&quot;</code></td>
-</tr>
-<tr>
-<td>ltcsfield</td>
-<td>小于跨不同结构体字段</td>
-<td>Struct1.Field <code>validate:&quot;ltcsfield=Struct2.Field2&quot;</code></td>
-</tr>
-<tr>
-<td>ltecsfield</td>
-<td>小于等于跨不同结构体字段</td>
-<td>Struct1.Field <code>validate:&quot;ltecsfield=Struct2.Field2&quot;</code></td>
-</tr>
-<tr>
-<td>min</td>
-<td>最大值</td>
-<td>Field <code>validate:&quot;min=1&quot;</code></td>
-</tr>
-<tr>
-<td>max</td>
-<td>最小值</td>
-<td>Field <code>validate:&quot;max=2&quot;</code></td>
-</tr>
-<tr>
-<td>structonly</td>
-<td>仅验证结构体，不验证任何结构体字段</td>
-<td>Struct <code>validate:&quot;structonly&quot;</code></td>
-</tr>
-<tr>
-<td>nostructlevel</td>
-<td>不运行任何结构级别的验证</td>
-<td>Struct <code>validate:&quot;nostructlevel&quot;</code></td>
-</tr>
-<tr>
-<td>dive</td>
-<td>向下延伸验证，多层向下需要多个dive标记</td>
-<td>string <code>validate:&quot;gt=0,dive,len=1,dive,required&quot;</code></td>
-</tr>
-<tr>
-<td>dive Keys &amp; EndKeys</td>
-<td>与dive同时使用，用于对map对象的键的和值的验证，keys为键，endkeys为值</td>
-<td>map[string]string `validate:”gt=0,dive,keys,eq=1      |</td>
-</tr>
-<tr>
-<td>required_with</td>
-<td>其他字段其中一个不为空且当前字段不为空</td>
-<td>Field <code>validate:&quot;required_with=Field1 Field2&quot;</code></td>
-</tr>
-<tr>
-<td>required_with_all</td>
-<td>其他所有字段不为空且当前字段不为空</td>
-<td>Field <code>validate:&quot;required_with_all=Field1 Field2&quot;</code></td>
-</tr>
-<tr>
-<td>required_without</td>
-<td>其他字段其中一个为空且当前字段不为空</td>
-<td>Field `validate:”required_without=Field1 Field2”      |</td>
-</tr>
-<tr>
-<td>required_without_all</td>
-<td>其他所有字段为空且当前字段不为空</td>
-<td>Field <code>validate:&quot;required_without_all=Field1 Field2&quot;</code></td>
-</tr>
-<tr>
-<td>isdefault</td>
-<td>是默认值</td>
-<td>Field <code>validate:&quot;isdefault=0&quot;</code></td>
-</tr>
-<tr>
-<td>oneof</td>
-<td>其中之一</td>
-<td>Field <code>validate:&quot;oneof=5 7 9&quot;</code></td>
-</tr>
-<tr>
-<td>containsfield</td>
-<td>字段包含另一个字段</td>
-<td>Field <code>validate:&quot;containsfield=Field2&quot;</code></td>
-</tr>
-<tr>
-<td>excludesfield</td>
-<td>字段不包含另一个字段</td>
-<td>Field <code>validate:&quot;excludesfield=Field2&quot;</code></td>
-</tr>
-<tr>
-<td>unique</td>
-<td>是否唯一，通常用于切片或结构体</td>
-<td>Field <code>validate:&quot;unique&quot;</code></td>
-</tr>
-<tr>
-<td>alphanum</td>
-<td>字符串值是否只包含 ASCII 字母数字字符</td>
-<td>Field <code>validate:&quot;alphanum&quot;</code></td>
-</tr>
-<tr>
-<td>alphaunicode</td>
-<td>字符串值是否只包含 unicode 字符</td>
-<td>Field <code>validate:&quot;alphaunicode&quot;</code></td>
-</tr>
-<tr>
-<td>alphanumunicode</td>
-<td>字符串值是否只包含 unicode 字母数字字符</td>
-<td>Field <code>validate:&quot;alphanumunicode&quot;</code></td>
-</tr>
-<tr>
-<td>numeric</td>
-<td>字符串值是否包含基本的数值</td>
-<td>Field <code>validate:&quot;numeric&quot;</code></td>
-</tr>
-<tr>
-<td>hexadecimal</td>
-<td>字符串值是否包含有效的十六进制</td>
-<td>Field <code>validate:&quot;hexadecimal&quot;</code></td>
-</tr>
-<tr>
-<td>hexcolor</td>
-<td>字符串值是否包含有效的十六进制颜色</td>
-<td>Field <code>validate:&quot;hexcolor&quot;</code></td>
-</tr>
-<tr>
-<td>lowercase</td>
-<td>符串值是否只包含小写字符</td>
-<td>Field <code>validate:&quot;lowercase&quot;</code></td>
-</tr>
-<tr>
-<td>uppercase</td>
-<td>符串值是否只包含大写字符</td>
-<td>Field <code>validate:&quot;uppercase&quot;</code></td>
-</tr>
-<tr>
-<td>email</td>
-<td>字符串值包含一个有效的电子邮件</td>
-<td>Field <code>validate:&quot;email&quot;</code></td>
-</tr>
-<tr>
-<td>json</td>
-<td>字符串值是否为有效的 JSON</td>
-<td>Field <code>validate:&quot;json&quot;</code></td>
-</tr>
-<tr>
-<td>file</td>
-<td>符串值是否包含有效的文件路径，以及该文件是否存在于计算机上</td>
-<td>Field <code>validate:&quot;file&quot;</code></td>
-</tr>
-<tr>
-<td>url</td>
-<td>符串值是否包含有效的 url</td>
-<td>Field <code>validate:&quot;url&quot;</code></td>
-</tr>
-<tr>
-<td>uri</td>
-<td>符串值是否包含有效的 uri</td>
-<td>Field <code>validate:&quot;uri&quot;</code></td>
-</tr>
-<tr>
-<td>base64</td>
-<td>字符串值是否包含有效的 base64值</td>
-<td>Field <code>validate:&quot;base64&quot;</code></td>
-</tr>
-<tr>
-<td>contains</td>
-<td>字符串值包含子字符串值</td>
-<td>Field <code>validate:&quot;contains=@&quot;</code></td>
-</tr>
-<tr>
-<td>containsany</td>
-<td>字符串值包含子字符串值中的任何字符</td>
-<td>Field <code>validate:&quot;containsany=abc&quot;</code></td>
-</tr>
-<tr>
-<td>containsrune</td>
-<td>字符串值包含提供的特殊符号值</td>
-<td>Field <code>validate:&quot;containsrune=☢&quot;</code></td>
-</tr>
-<tr>
-<td>excludes</td>
-<td>字符串值不包含子字符串值</td>
-<td>Field <code>validate:&quot;excludes=@&quot;</code></td>
-</tr>
-<tr>
-<td>excludesall</td>
-<td>字符串值不包含任何子字符串值</td>
-<td>Field <code>validate:&quot;excludesall=abc&quot;</code></td>
-</tr>
-<tr>
-<td>excludesrune</td>
-<td>字符串值不包含提供的特殊符号值</td>
-<td>Field <code>validate:&quot;containsrune=☢&quot;</code></td>
-</tr>
-<tr>
-<td>startswith</td>
-<td>字符串以提供的字符串值开始</td>
-<td>Field <code>validate:&quot;startswith=abc&quot;</code></td>
-</tr>
-<tr>
-<td>endswith</td>
-<td>字符串以提供的字符串值结束</td>
-<td>Field <code>validate:&quot;endswith=abc&quot;</code></td>
-</tr>
-<tr>
-<td>ip</td>
-<td>字符串值是否包含有效的 IP 地址</td>
-<td>Field <code>validate:&quot;ip&quot;</code></td>
-</tr>
-<tr>
-<td>ipv4</td>
-<td>字符串值是否包含有效的 ipv4地址</td>
-<td>Field <code>validate:&quot;ipv4&quot;</code></td>
-</tr>
-<tr>
-<td>datetime</td>
-<td>字符串值是否包含有效的 日期</td>
-<td>Field <code>validate:&quot;datetime&quot;</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>标记</th>
+          <th>标记说明</th>
+          <th>例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>required</td>
+          <td>必填</td>
+          <td>Field或Struct <code>validate:&quot;required&quot;</code></td>
+      </tr>
+      <tr>
+          <td>unique</td>
+          <td>保证唯一性,不同类型处理不同; 对于<code>map，unique</code>约束没有重复的<code>value</code>值； 对于数组和切片，没有重复的元素值</td>
+          <td>Field <code>validate:&quot;unique&quot;</code></td>
+      </tr>
+      <tr>
+          <td>omitempty</td>
+          <td>空时忽略</td>
+          <td>Field或Struct <code>validate:&quot;omitempty&quot;</code></td>
+      </tr>
+      <tr>
+          <td>len</td>
+          <td>长度</td>
+          <td>Field <code>validate:&quot;len=0&quot;</code></td>
+      </tr>
+      <tr>
+          <td>eq</td>
+          <td>等于</td>
+          <td>Field <code>validate:&quot;eq=0&quot;</code></td>
+      </tr>
+      <tr>
+          <td>gt</td>
+          <td>大于</td>
+          <td>Field <code>validate:&quot;gt=0&quot;</code></td>
+      </tr>
+      <tr>
+          <td>gte</td>
+          <td>大于等于</td>
+          <td>Field <code>validate:&quot;gte=0&quot;</code></td>
+      </tr>
+      <tr>
+          <td>lt</td>
+          <td>小于</td>
+          <td>Field <code>validate:&quot;lt=0&quot;</code></td>
+      </tr>
+      <tr>
+          <td>lte</td>
+          <td>小于等于</td>
+          <td>Field <code>validate:&quot;lte=0&quot;</code></td>
+      </tr>
+      <tr>
+          <td>eqfield</td>
+          <td>同一结构体字段相等</td>
+          <td>Field <code>validate:&quot;eqfield=Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>nefield</td>
+          <td>同一结构体字段不相等</td>
+          <td>Field <code>validate:&quot;nefield=Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>gtfield</td>
+          <td>大于同一结构体字段</td>
+          <td>Field <code>validate:&quot;gtfield=Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>gtefield</td>
+          <td>大于等于同一结构体字段</td>
+          <td>Field <code>validate:&quot;gtefield=Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>ltfield</td>
+          <td>小于同一结构体字段</td>
+          <td>Field <code>validate:&quot;ltfield=Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>ltefield</td>
+          <td>小于等于同一结构体字段</td>
+          <td>Field <code>validate:&quot;ltefield=Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>eqcsfield</td>
+          <td>跨不同结构体字段相等</td>
+          <td>Struct1.Field <code>validate:&quot;eqcsfield=Struct2.Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>necsfield</td>
+          <td>跨不同结构体字段不相等</td>
+          <td>Struct1.Field <code>validate:&quot;necsfield=Struct2.Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>gtcsfield</td>
+          <td>大于跨不同结构体字段</td>
+          <td>Struct1.Field <code>validate:&quot;gtcsfield=Struct2.Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>gtecsfield</td>
+          <td>大于等于跨不同结构体字段</td>
+          <td>Struct1.Field <code>validate:&quot;gtecsfield=Struct2.Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>ltcsfield</td>
+          <td>小于跨不同结构体字段</td>
+          <td>Struct1.Field <code>validate:&quot;ltcsfield=Struct2.Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>ltecsfield</td>
+          <td>小于等于跨不同结构体字段</td>
+          <td>Struct1.Field <code>validate:&quot;ltecsfield=Struct2.Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>min</td>
+          <td>最大值</td>
+          <td>Field <code>validate:&quot;min=1&quot;</code></td>
+      </tr>
+      <tr>
+          <td>max</td>
+          <td>最小值</td>
+          <td>Field <code>validate:&quot;max=2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>structonly</td>
+          <td>仅验证结构体，不验证任何结构体字段</td>
+          <td>Struct <code>validate:&quot;structonly&quot;</code></td>
+      </tr>
+      <tr>
+          <td>nostructlevel</td>
+          <td>不运行任何结构级别的验证</td>
+          <td>Struct <code>validate:&quot;nostructlevel&quot;</code></td>
+      </tr>
+      <tr>
+          <td>dive</td>
+          <td>向下延伸验证，多层向下需要多个dive标记</td>
+          <td>string <code>validate:&quot;gt=0,dive,len=1,dive,required&quot;</code></td>
+      </tr>
+      <tr>
+          <td>dive Keys &amp; EndKeys</td>
+          <td>与dive同时使用，用于对map对象的键的和值的验证，keys为键，endkeys为值</td>
+          <td>map[string]string `validate:”gt=0,dive,keys,eq=1</td>
+      </tr>
+      <tr>
+          <td>required_with</td>
+          <td>其他字段其中一个不为空且当前字段不为空</td>
+          <td>Field <code>validate:&quot;required_with=Field1 Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>required_with_all</td>
+          <td>其他所有字段不为空且当前字段不为空</td>
+          <td>Field <code>validate:&quot;required_with_all=Field1 Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>required_without</td>
+          <td>其他字段其中一个为空且当前字段不为空</td>
+          <td>Field `validate:”required_without=Field1 Field2”</td>
+      </tr>
+      <tr>
+          <td>required_without_all</td>
+          <td>其他所有字段为空且当前字段不为空</td>
+          <td>Field <code>validate:&quot;required_without_all=Field1 Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>isdefault</td>
+          <td>是默认值</td>
+          <td>Field <code>validate:&quot;isdefault=0&quot;</code></td>
+      </tr>
+      <tr>
+          <td>oneof</td>
+          <td>其中之一</td>
+          <td>Field <code>validate:&quot;oneof=5 7 9&quot;</code></td>
+      </tr>
+      <tr>
+          <td>containsfield</td>
+          <td>字段包含另一个字段</td>
+          <td>Field <code>validate:&quot;containsfield=Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>excludesfield</td>
+          <td>字段不包含另一个字段</td>
+          <td>Field <code>validate:&quot;excludesfield=Field2&quot;</code></td>
+      </tr>
+      <tr>
+          <td>unique</td>
+          <td>是否唯一，通常用于切片或结构体</td>
+          <td>Field <code>validate:&quot;unique&quot;</code></td>
+      </tr>
+      <tr>
+          <td>alphanum</td>
+          <td>字符串值是否只包含 ASCII 字母数字字符</td>
+          <td>Field <code>validate:&quot;alphanum&quot;</code></td>
+      </tr>
+      <tr>
+          <td>alphaunicode</td>
+          <td>字符串值是否只包含 unicode 字符</td>
+          <td>Field <code>validate:&quot;alphaunicode&quot;</code></td>
+      </tr>
+      <tr>
+          <td>alphanumunicode</td>
+          <td>字符串值是否只包含 unicode 字母数字字符</td>
+          <td>Field <code>validate:&quot;alphanumunicode&quot;</code></td>
+      </tr>
+      <tr>
+          <td>numeric</td>
+          <td>字符串值是否包含基本的数值</td>
+          <td>Field <code>validate:&quot;numeric&quot;</code></td>
+      </tr>
+      <tr>
+          <td>hexadecimal</td>
+          <td>字符串值是否包含有效的十六进制</td>
+          <td>Field <code>validate:&quot;hexadecimal&quot;</code></td>
+      </tr>
+      <tr>
+          <td>hexcolor</td>
+          <td>字符串值是否包含有效的十六进制颜色</td>
+          <td>Field <code>validate:&quot;hexcolor&quot;</code></td>
+      </tr>
+      <tr>
+          <td>lowercase</td>
+          <td>符串值是否只包含小写字符</td>
+          <td>Field <code>validate:&quot;lowercase&quot;</code></td>
+      </tr>
+      <tr>
+          <td>uppercase</td>
+          <td>符串值是否只包含大写字符</td>
+          <td>Field <code>validate:&quot;uppercase&quot;</code></td>
+      </tr>
+      <tr>
+          <td>email</td>
+          <td>字符串值包含一个有效的电子邮件</td>
+          <td>Field <code>validate:&quot;email&quot;</code></td>
+      </tr>
+      <tr>
+          <td>json</td>
+          <td>字符串值是否为有效的 JSON</td>
+          <td>Field <code>validate:&quot;json&quot;</code></td>
+      </tr>
+      <tr>
+          <td>file</td>
+          <td>符串值是否包含有效的文件路径，以及该文件是否存在于计算机上</td>
+          <td>Field <code>validate:&quot;file&quot;</code></td>
+      </tr>
+      <tr>
+          <td>url</td>
+          <td>符串值是否包含有效的 url</td>
+          <td>Field <code>validate:&quot;url&quot;</code></td>
+      </tr>
+      <tr>
+          <td>uri</td>
+          <td>符串值是否包含有效的 uri</td>
+          <td>Field <code>validate:&quot;uri&quot;</code></td>
+      </tr>
+      <tr>
+          <td>base64</td>
+          <td>字符串值是否包含有效的 base64值</td>
+          <td>Field <code>validate:&quot;base64&quot;</code></td>
+      </tr>
+      <tr>
+          <td>contains</td>
+          <td>字符串值包含子字符串值</td>
+          <td>Field <code>validate:&quot;contains=@&quot;</code></td>
+      </tr>
+      <tr>
+          <td>containsany</td>
+          <td>字符串值包含子字符串值中的任何字符</td>
+          <td>Field <code>validate:&quot;containsany=abc&quot;</code></td>
+      </tr>
+      <tr>
+          <td>containsrune</td>
+          <td>字符串值包含提供的特殊符号值</td>
+          <td>Field <code>validate:&quot;containsrune=☢&quot;</code></td>
+      </tr>
+      <tr>
+          <td>excludes</td>
+          <td>字符串值不包含子字符串值</td>
+          <td>Field <code>validate:&quot;excludes=@&quot;</code></td>
+      </tr>
+      <tr>
+          <td>excludesall</td>
+          <td>字符串值不包含任何子字符串值</td>
+          <td>Field <code>validate:&quot;excludesall=abc&quot;</code></td>
+      </tr>
+      <tr>
+          <td>excludesrune</td>
+          <td>字符串值不包含提供的特殊符号值</td>
+          <td>Field <code>validate:&quot;containsrune=☢&quot;</code></td>
+      </tr>
+      <tr>
+          <td>startswith</td>
+          <td>字符串以提供的字符串值开始</td>
+          <td>Field <code>validate:&quot;startswith=abc&quot;</code></td>
+      </tr>
+      <tr>
+          <td>endswith</td>
+          <td>字符串以提供的字符串值结束</td>
+          <td>Field <code>validate:&quot;endswith=abc&quot;</code></td>
+      </tr>
+      <tr>
+          <td>ip</td>
+          <td>字符串值是否包含有效的 IP 地址</td>
+          <td>Field <code>validate:&quot;ip&quot;</code></td>
+      </tr>
+      <tr>
+          <td>ipv4</td>
+          <td>字符串值是否包含有效的 ipv4地址</td>
+          <td>Field <code>validate:&quot;ipv4&quot;</code></td>
+      </tr>
+      <tr>
+          <td>datetime</td>
+          <td>字符串值是否包含有效的 日期</td>
+          <td>Field <code>validate:&quot;datetime&quot;</code></td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="参考">参考</h2>
-<p><a href="https://pkg.go.dev/github.com/go-playground/validator/v10#section-readme">https://pkg.go.dev/github.com/go-playground/validator/v10#section-readme</a></p></article><section class="article labels"><a class="category" href=/categories/go/>Go</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+<p><a href="https://pkg.go.dev/github.com/go-playground/validator/v10#section-readme"target="_blank">https://pkg.go.dev/github.com/go-playground/validator/v10#section-readme</a></p></article><section class="article labels"><a class="category" href=/categories/go/>Go</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.cf11b1e30804a8568fadb3035f7b3c65071e10bff9bdd8a53a5c597a10340808edc5eb2ba31a11d3ab00c22da54b3e29.js#pubid=ra-1234567891" integrity="sha384-zxGx4wgEqFaPrbMDX3s8ZQceEL/5vdilOlxZehA0CAjtxesroxoR06sAwi2lSz4p"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
 </section></div>
 <div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/gin-should-binding/"><span class="iconfont icon-article"></span>gin Bind 参数绑定</a></p><p><a class="link" href="/article/mysql-join/"><span class="iconfont icon-article"></span>mysql join、inner join、left join 、right join 详解</a></p></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2024 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    <p class="copyright">©2025 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
             onload="renderMathInElement(document.body);"></script><script>
         var theme = localStorage.getItem('theme');
         if (window.matchMedia('(prefers-color-scheme: light)').matches && theme == null) {
@@ -352,10 +412,21 @@
 
         if (theme == "dark") {
             document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'none';
+            darkIcon.style.display = 'block';
         }
 
         if (theme == "light") {
             document.getElementById('light-btn').classList.add('data-theme-btn');
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'block';
+            darkIcon.style.display = 'none';
         }
 
         function toggleTheme(theme) {
@@ -364,6 +435,12 @@
 
                 document.getElementById('dark-btn').classList.remove('data-theme-btn');
                 document.getElementById('light-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'block';
+                darkIcon.style.display = 'none';
 
                 
                 var styleSheets = document.styleSheets;
@@ -391,6 +468,12 @@
 
                 document.getElementById('light-btn').classList.remove('data-theme-btn');
                 document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'block';
 
                 
                 var styleSheets = document.styleSheets;
@@ -459,6 +542,6 @@
             }
         }
 
-    </script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+    </script><script src="/js/hljs.min.8a2658ccca6d9e87a439ee65a5d1d1e166af57afdffd06d778243afc50968a2e8188303a6368ca04f679dd21a49af5bf.js" integrity="sha384-iiZYzMptnoekOe5lpdHR4WavV6/f/QbXeCQ6/FCWii6BiDA6Y2jKBPZ53SGkmvW/"></script><script>hljs.initHighlightingOnLoad();</script></body>
 
 </html>

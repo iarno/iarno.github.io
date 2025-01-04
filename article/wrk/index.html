@@ -1,121 +1,181 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.140.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark">
 <meta content="压测" name="keywords">
 <meta content="wrk压测 - IARNO" property="og:title">
-<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>wrk压测&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.10378bb60864db659b307ff1cb88b58847923e6c059836d0675eb97e77ac87967c8b565e9326d8fa3955aacbdc912f1d.css" integrity="sha384-EDeLtghk22WbMH/xy4i1iEeSPmwFmDbQZ165fnesh5Z8i1ZekybY&#43;jlVqsvckS8d"><meta name="twitter:card" content="summary" />
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" /><title>wrk压测&nbsp;&ndash;&nbsp;IARNO</title><link rel="stylesheet" href="/css/core.min.475767088e02a0cde98e83d380878f87eecec4c45d477990e99d2d01bfaed3a249b1503fa03e85ee68591c8e8dcedbe1.css" integrity="sha384-R1dnCI4CoM3pjoPTgIePh&#43;7OxMRdR3mQ6Z0tAb&#43;u06JJsVA/oD6F7mhZHI6Nztvh"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="wrk压测" /><body><section id="header">
     <title>wrk压测 - IARNO</title>
     <meta content="阿諾个人博客 - wrk压测。" property="og:description">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">IARNO</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav">
-    <a class="nav item" href="http://blog.iarno.cn" target="_blank">主页</a><a class="nav item" href="/categories/">分类</a><a class="nav item" href="https://www.google.com/search?q=site%3Awww.iarno.cn&#43;%E7%BD%91%E5%85%B3"target="_blank">搜索</a><a class="nav item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>Github</a>
+        <span class="header right-side"><style>
+    .nav-search-container {
+      position: relative;
+      display: inline-flex;
+      align-items: center;  
+      top: 1.5px;
+    }
+  
+    .search-input {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      width: 0;
+      height: 30px;
+      border: 1px solid #aaa;
+      background-color: #f9f9f9;
+      padding: 5px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #333;
+      opacity: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+  
+    .nav-search-container:hover .search-input {
+      width: 200px;
+      opacity: 1;
+    }
+  
+    .nav-search-container:hover .search-input:focus {
+      outline: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    .icon {
+      cursor: pointer;
+      width: 14.5px;
+      height: 14.5px;
+      transition: fill 0.3s ease;
+      margin-top: 1.5px;
+    }
+</style><div class="nav wrap"><nav class="nav">
 
-</nav></div></span>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
-        <button style="background-color: transparent; border: 0px solid; margin-top: 8px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+<form action="/search/" class="nav item">
+    <div class="nav-search-container">
+        <form action="/search/" style="display:inline;">
+          <input type="text" id="search-query" class="search-input" placeholder="Search.." name="q" />
+        </form>
+        
+        <svg id="light-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745"></path>
+        </svg>
+        
+        <svg id="dark-icon" t="1735891428136" class="icon" viewBox="0 0 1029 1024" xmlns="http://www.w3.org/2000/svg" p-id="6742" style="display:none;">
+            <path d="M763.255227 547.144339l-76.016861-9.24788a279.51809 279.51809 0 0 0 2.021852-33.557963c0-127.580077-90.193755-240.468824-214.483835-268.344067l16.749072-74.700862a351.263938 351.263938 0 0 1 274.325878 343.044929 356.575787 356.575787 0 0 1-2.596106 42.805843z" p-id="6743" fill="#ffffff"></path>
+            <path d="M463.889486 927.767008a463.985195 463.985195 0 0 1-180.578927-891.289921 463.997159 463.997159 0 0 1 361.157854 854.824798 461.006253 461.006253 0 0 1-180.578927 36.465123z m0-851.19982C250.32685 76.567188 76.543261 250.314886 76.543261 463.889486s173.783589 387.310335 387.346225 387.310335S851.211784 677.452122 851.211784 463.889486 677.452122 76.567188 463.889486 76.567188z" p-id="6744" fill="#ffffff"></path>
+            <path d="M754.342328 802.672972l54.141376-54.141376 221.327028 221.327028-54.141377 54.141376z" p-id="6745" fill="#ffffff"></path>
+        </svg>
+     </div><a class="nav item" href="/categories/">分类</a><a class="nav item" href="/tags/">标签</a><a class="nav item" href=""></a></nav></div></span>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="light-btn" onclick="toggleTheme('light')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9e9e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg></button>
+        <button style="background-color: transparent; border: 0px solid; margin-top: 8.5px;" id="dark-btn" onclick="toggleTheme('dark')"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3f4b67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
     </div><div class="site slogan">
             <span class="title">努力升级中的凡人</span>
         </div></section><section id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">wrk压测</h1><p class="article date">September 4, 2020</p></section><article class="article markdown-body"><p>这篇文章是关于wrk压测工具的使用指南。它首先介绍了如何安装wrk，然后详细解释了wrk的基本使用方法，包括如何查看使用帮助、版本信息，以及如何进行简单的压测。文章还介绍了如何增加header参数进行压测，以及如何压测POST接口。在每个示例后，作者都对结果进行了详细的注释和解释。</p>
 <h2 id="安装">安装</h2>
 <p>wrk支持大多数类UNIX系统，不支持windows。需要操作系统支持LuaJIT和OpenSSL，不过不用担心，大多数类Unix系统都支持。安装wrk非常简单，只要从github上下载wrk源码，在项目路径下执行make命令即可。</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git clone https://github.com/wg/wrk
-
-// 切换到wrk目录
-make
-</code></pre></div><p><code>make</code>之后，会在项目路径下生成可执行文件wrk，随后就可以用其进行HTTP压测了。可以把这个可执行文件拷贝到某个已在path中的路径，比如<code>/usr/local/bin</code>，这样就可以在任何路径直接使用<code>wrk</code>了。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/wg/wrk
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 切换到wrk目录
+</span></span><span class="line"><span class="cl">make
+</span></span></code></pre></div><p><code>make</code>之后，会在项目路径下生成可执行文件wrk，随后就可以用其进行HTTP压测了。可以把这个可执行文件拷贝到某个已在path中的路径，比如<code>/usr/local/bin</code>，这样就可以在任何路径直接使用<code>wrk</code>了。</p>
 <p>默认情况下<code>wrk</code>会使用自带的<code>LuaJIT</code>和<code>OpenSSL</code>，如果你想使用系统已安装的版本，可以使用<code>WITH_LUAJIT</code>和<code>WITH_OPENSSL</code>这两个选项来指定它们的路径。比如：</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">make <span class="nv">WITH_LUAJIT</span><span class="o">=</span>/usr <span class="nv">WITH_OPENSSL</span><span class="o">=</span>/usr
-</code></pre></div><h2 id="基本使用">基本使用</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">make <span class="nv">WITH_LUAJIT</span><span class="o">=</span>/usr <span class="nv">WITH_OPENSSL</span><span class="o">=</span>/usr
+</span></span></code></pre></div><h2 id="基本使用">基本使用</h2>
 <p><strong>命令行敲下<code>wrk</code>，可以看到使用帮助</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Usage: wrk &lt;options&gt; &lt;url&gt;                            
-  Options:                                            
-    -c, --connections &lt;N&gt;  Connections to keep open   
-    -d, --duration    &lt;T&gt;  Duration of <span class="nb">test</span>           
-    -t, --threads     &lt;N&gt;  Number of threads to use   
-                                                      
-    -s, --script      &lt;S&gt;  Load Lua script file       
-    -H, --header      &lt;H&gt;  Add header to request      
-        --latency          Print latency statistics   
-        --timeout     &lt;T&gt;  Socket/request timeout     
-    -v, --version          Print version details      
-                                                      
-  Numeric arguments may include a SI unit <span class="o">(</span>1k, 1M, 1G<span class="o">)</span>
-  Time arguments may include a <span class="nb">time</span> unit <span class="o">(</span>2s, 2m, 2h<span class="o">)</span>
-</code></pre></div><p>简单翻成中文：</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">使用方法: wrk &lt;选项&gt; &lt;被测HTTP服务的URL&gt;                            
-  Options:                                            
-    -c, --connections &lt;N&gt;  跟服务器建立并保持的TCP连接数量  
-    -d, --duration    &lt;T&gt;  压测时间           
-    -t, --threads     &lt;N&gt;  使用多少个线程进行压测   
-                                                      
-    -s, --script      &lt;S&gt;  指定Lua脚本路径       
-    -H, --header      &lt;H&gt;  为每一个HTTP请求添加HTTP头      
-        --latency          在压测结束后，打印延迟统计信息   
-        --timeout     &lt;T&gt;  超时时间     
-    -v, --version          打印正在使用的wrk的详细版本信息
-                                                      
-  &lt;N&gt;代表数字参数，支持国际单位 <span class="o">(</span>1k, 1M, 1G<span class="o">)</span>
-  &lt;T&gt;代表时间参数，支持时间单位 <span class="o">(</span>2s, 2m, 2h<span class="o">)</span>
-</code></pre></div><p><strong>看下版本</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">wrk -v
-
-输出：
-wrk 4.0.2 <span class="o">[</span>epoll<span class="o">]</span> Copyright <span class="o">(</span>C<span class="o">)</span> <span class="m">2012</span> Will Glozer
-</code></pre></div><p>看到是4.0.2版本的<code>wrk</code>，使用了<code>epoll</code>。这意味着我们可以用少量的线程来跟被测服务创建大量连接，进行压测。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Usage: wrk &lt;options&gt; &lt;url&gt;                            
+</span></span><span class="line"><span class="cl">  Options:                                            
+</span></span><span class="line"><span class="cl">    -c, --connections &lt;N&gt;  Connections to keep open   
+</span></span><span class="line"><span class="cl">    -d, --duration    &lt;T&gt;  Duration of <span class="nb">test</span>           
+</span></span><span class="line"><span class="cl">    -t, --threads     &lt;N&gt;  Number of threads to use   
+</span></span><span class="line"><span class="cl">                                                      
+</span></span><span class="line"><span class="cl">    -s, --script      &lt;S&gt;  Load Lua script file       
+</span></span><span class="line"><span class="cl">    -H, --header      &lt;H&gt;  Add header to request      
+</span></span><span class="line"><span class="cl">        --latency          Print latency statistics   
+</span></span><span class="line"><span class="cl">        --timeout     &lt;T&gt;  Socket/request timeout     
+</span></span><span class="line"><span class="cl">    -v, --version          Print version details      
+</span></span><span class="line"><span class="cl">                                                      
+</span></span><span class="line"><span class="cl">  Numeric arguments may include a SI unit <span class="o">(</span>1k, 1M, 1G<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  Time arguments may include a <span class="nb">time</span> unit <span class="o">(</span>2s, 2m, 2h<span class="o">)</span>
+</span></span></code></pre></div><p>简单翻成中文：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">使用方法: wrk &lt;选项&gt; &lt;被测HTTP服务的URL&gt;                            
+</span></span><span class="line"><span class="cl">  Options:                                            
+</span></span><span class="line"><span class="cl">    -c, --connections &lt;N&gt;  跟服务器建立并保持的TCP连接数量  
+</span></span><span class="line"><span class="cl">    -d, --duration    &lt;T&gt;  压测时间           
+</span></span><span class="line"><span class="cl">    -t, --threads     &lt;N&gt;  使用多少个线程进行压测   
+</span></span><span class="line"><span class="cl">                                                      
+</span></span><span class="line"><span class="cl">    -s, --script      &lt;S&gt;  指定Lua脚本路径       
+</span></span><span class="line"><span class="cl">    -H, --header      &lt;H&gt;  为每一个HTTP请求添加HTTP头      
+</span></span><span class="line"><span class="cl">        --latency          在压测结束后，打印延迟统计信息   
+</span></span><span class="line"><span class="cl">        --timeout     &lt;T&gt;  超时时间     
+</span></span><span class="line"><span class="cl">    -v, --version          打印正在使用的wrk的详细版本信息
+</span></span><span class="line"><span class="cl">                                                      
+</span></span><span class="line"><span class="cl">  &lt;N&gt;代表数字参数，支持国际单位 <span class="o">(</span>1k, 1M, 1G<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  &lt;T&gt;代表时间参数，支持时间单位 <span class="o">(</span>2s, 2m, 2h<span class="o">)</span>
+</span></span></code></pre></div><p><strong>看下版本</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wrk -v
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">输出：
+</span></span><span class="line"><span class="cl">wrk 4.0.2 <span class="o">[</span>epoll<span class="o">]</span> Copyright <span class="o">(</span>C<span class="o">)</span> <span class="m">2012</span> Will Glozer
+</span></span></code></pre></div><p>看到是4.0.2版本的<code>wrk</code>，使用了<code>epoll</code>。这意味着我们可以用少量的线程来跟被测服务创建大量连接，进行压测。</p>
 <p><strong>做一次简单压测，分析下结果</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">wrk -t8 -c200 -d30s --latency  <span class="s2">&#34;http://www.bing.com&#34;</span>
-
-输出：
-Running 30s <span class="nb">test</span> @ http://www.bing.com
-  <span class="m">8</span> threads and <span class="m">200</span> connections
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency    46.67ms  215.38ms   1.67s    95.59%
-    Req/Sec     7.91k     1.15k   10.26k    70.77%
-  Latency Distribution
-     50%    2.93ms
-     75%    3.78ms
-     90%    4.73ms
-     99%    1.35s 
-  <span class="m">1790465</span> requests in 30.01s, 684.08MB <span class="nb">read</span>
-Requests/sec:  59658.29
-Transfer/sec:     22.79MB
-</code></pre></div><p>以上使用8个线程200个连接，对bing首页进行了30秒的压测，并要求在压测结果中输出响应延迟信息。以下对压测结果进行简单注释：</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Running 30s <span class="nb">test</span> @ http://www.bing.com （压测时间30s）
-  <span class="m">8</span> threads and <span class="m">200</span> connections （共8个测试线程，200个连接）
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-              （平均值） （标准差）（最大值）（正负一个标准差所占比例）
-    Latency    46.67ms  215.38ms   1.67s    95.59%
-    （延迟）
-    Req/Sec     7.91k     1.15k   10.26k    70.77%
-    （处理中的请求数）
-  Latency Distribution （延迟分布）
-     50%    2.93ms
-     75%    3.78ms
-     90%    4.73ms
-     99%    1.35s （99分位的延迟）
-  <span class="m">1790465</span> requests in 30.01s, 684.08MB <span class="nb">read</span> （30.01秒内共处理完成了1790465个请求，读取了684.08MB数据）
-Requests/sec:  59658.29 （平均每秒处理完成59658.29个请求及QPS） 
-Transfer/sec:     22.79MB （平均每秒读取数据22.79MB）
-</code></pre></div><p>可以看到，<code>wrk</code>使用方便，结果清晰。并且因为非阻塞IO的使用，可以在普通的测试机上创建出大量的连接，从而达到较好的压测效果。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wrk -t8 -c200 -d30s --latency  <span class="s2">&#34;http://www.bing.com&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">输出：
+</span></span><span class="line"><span class="cl">Running 30s <span class="nb">test</span> @ http://www.bing.com
+</span></span><span class="line"><span class="cl">  <span class="m">8</span> threads and <span class="m">200</span> connections
+</span></span><span class="line"><span class="cl">  Thread Stats   Avg      Stdev     Max   +/- Stdev
+</span></span><span class="line"><span class="cl">    Latency    46.67ms  215.38ms   1.67s    95.59%
+</span></span><span class="line"><span class="cl">    Req/Sec     7.91k     1.15k   10.26k    70.77%
+</span></span><span class="line"><span class="cl">  Latency Distribution
+</span></span><span class="line"><span class="cl">     50%    2.93ms
+</span></span><span class="line"><span class="cl">     75%    3.78ms
+</span></span><span class="line"><span class="cl">     90%    4.73ms
+</span></span><span class="line"><span class="cl">     99%    1.35s 
+</span></span><span class="line"><span class="cl">  <span class="m">1790465</span> requests in 30.01s, 684.08MB <span class="nb">read</span>
+</span></span><span class="line"><span class="cl">Requests/sec:  59658.29
+</span></span><span class="line"><span class="cl">Transfer/sec:     22.79MB
+</span></span></code></pre></div><p>以上使用8个线程200个连接，对bing首页进行了30秒的压测，并要求在压测结果中输出响应延迟信息。以下对压测结果进行简单注释：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Running 30s <span class="nb">test</span> @ http://www.bing.com （压测时间30s）
+</span></span><span class="line"><span class="cl">  <span class="m">8</span> threads and <span class="m">200</span> connections （共8个测试线程，200个连接）
+</span></span><span class="line"><span class="cl">  Thread Stats   Avg      Stdev     Max   +/- Stdev
+</span></span><span class="line"><span class="cl">              （平均值） （标准差）（最大值）（正负一个标准差所占比例）
+</span></span><span class="line"><span class="cl">    Latency    46.67ms  215.38ms   1.67s    95.59%
+</span></span><span class="line"><span class="cl">    （延迟）
+</span></span><span class="line"><span class="cl">    Req/Sec     7.91k     1.15k   10.26k    70.77%
+</span></span><span class="line"><span class="cl">    （处理中的请求数）
+</span></span><span class="line"><span class="cl">  Latency Distribution （延迟分布）
+</span></span><span class="line"><span class="cl">     50%    2.93ms
+</span></span><span class="line"><span class="cl">     75%    3.78ms
+</span></span><span class="line"><span class="cl">     90%    4.73ms
+</span></span><span class="line"><span class="cl">     99%    1.35s （99分位的延迟）
+</span></span><span class="line"><span class="cl">  <span class="m">1790465</span> requests in 30.01s, 684.08MB <span class="nb">read</span> （30.01秒内共处理完成了1790465个请求，读取了684.08MB数据）
+</span></span><span class="line"><span class="cl">Requests/sec:  59658.29 （平均每秒处理完成59658.29个请求及QPS） 
+</span></span><span class="line"><span class="cl">Transfer/sec:     22.79MB （平均每秒读取数据22.79MB）
+</span></span></code></pre></div><p>可以看到，<code>wrk</code>使用方便，结果清晰。并且因为非阻塞IO的使用，可以在普通的测试机上创建出大量的连接，从而达到较好的压测效果。</p>
 <p><strong>增加header参数压测</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ab -c50 -n1000 -t30 -H <span class="s2">&#34;token: xxx&#34;</span> <span class="s2">&#34;http://127.0.0.1:80/test/test1?a=111&#34;</span>  <span class="c1"># 注意Header头的空格</span>
-
-wrk -t8 -c200 -d30s --header <span class="s2">&#34;token: xxx&#34;</span> --latency <span class="s2">&#34;http://127.0.0.1:80/test/test1?a=111&#34;</span> <span class="c1"># 注意Header头的空格</span>
-</code></pre></div><p><strong>压测POST接口</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ab -c50 -n1000 -t30 -H <span class="s2">&#34;token: xxx&#34;</span> <span class="s2">&#34;http://127.0.0.1:80/test/test1?a=111&#34;</span>  <span class="c1"># 注意Header头的空格</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">wrk -t8 -c200 -d30s --header <span class="s2">&#34;token: xxx&#34;</span> --latency <span class="s2">&#34;http://127.0.0.1:80/test/test1?a=111&#34;</span> <span class="c1"># 注意Header头的空格</span>
+</span></span></code></pre></div><p><strong>压测POST接口</strong></p>
 <p>如果post请求的body不为空则指定lua文件进行读取，示例如下：</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./wrk -t <span class="m">5</span> -c <span class="m">300</span> -d <span class="m">60</span> --script<span class="o">=</span>post.lua --latency https://api.midukanshu.com/logstash/userbehavior/create
-
-// post.lua文件内容
-wrk.method <span class="o">=</span> <span class="s2">&#34;POST&#34;</span>
-wrk.body <span class="o">=</span> <span class="s2">&#34;&#34;</span>
-wrk.headers<span class="o">[</span><span class="s2">&#34;Content-Type&#34;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;application/x-www-form-urlencoded&#34;</span>
-</code></pre></div></article><section class="article labels"><a class="category" href=/categories/linux/>Linux</a><a class="tag" href=/tags/%E5%8E%8B%E6%B5%8B/>压测</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.a8bf9f6f334e22a6002d9757880b6a18a0782dbe71c8c331ba76607d0b858aa3261a116797f86516d1a8b38a0cc107c7.js#pubid=ra-1234567891" integrity="sha384-qL&#43;fbzNOIqYALZdXiAtqGKB4Lb5xyMMxunZgfQuFiqMmGhFnl/hlFtGos4oMwQfH"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./wrk -t <span class="m">5</span> -c <span class="m">300</span> -d <span class="m">60</span> --script<span class="o">=</span>post.lua --latency https://api.midukanshu.com/logstash/userbehavior/create
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// post.lua文件内容
+</span></span><span class="line"><span class="cl">wrk.method <span class="o">=</span> <span class="s2">&#34;POST&#34;</span>
+</span></span><span class="line"><span class="cl">wrk.body <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">wrk.headers<span class="o">[</span><span class="s2">&#34;Content-Type&#34;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;application/x-www-form-urlencoded&#34;</span>
+</span></span></code></pre></div></article><section class="article labels"><a class="category" href=/categories/linux/>Linux</a><a class="tag" href=/tags/%E5%8E%8B%E6%B5%8B/>压测</a></section><div class="article share addthis_inline_share_toolbox"></div><script defer src="/js/addthis_widget.min.cf11b1e30804a8568fadb3035f7b3c65071e10bff9bdd8a53a5c597a10340808edc5eb2ba31a11d3ab00c22da54b3e29.js#pubid=ra-1234567891" integrity="sha384-zxGx4wgEqFaPrbMDX3s8ZQceEL/5vdilOlxZehA0CAjtxesroxoR06sAwi2lSz4p"></script><section class="article author"><img class="avatar" src="/images/gopher.svg" alt><p class="name">IARNO</p><div class="bio">服务端开发</div><div class="details"><a class="item" href="https://github.com/iarno" target="_blank"><span class="iconfont icon-github"></span>&nbsp;iarno</a><a class="item" href="mailto:iarno@qq.com" target="_blank"><span class="iconfont icon-email"></span>&nbsp;iarno@qq.com</a></div>
 </section></div>
 <div class="article bottom"><section class="article navigation"><p><a class="link" href="/article/idea/"><span class="iconfont icon-article"></span>idea 破解</a></p><p><a class="link" href="/article/nc/"><span class="iconfont icon-article"></span>如何测试端口通不通</a></p></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2024 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    <p class="copyright">©2025 IARNO</p><p style="font-size: 12px;"><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备20010474号</a></p></div></section><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
             onload="renderMathInElement(document.body);"></script><script>
         var theme = localStorage.getItem('theme');
         if (window.matchMedia('(prefers-color-scheme: light)').matches && theme == null) {
@@ -128,10 +188,21 @@ wrk.headers<span class="o">[</span><span class="s2">&#34;Content-Type&#34;</span
 
         if (theme == "dark") {
             document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'none';
+            darkIcon.style.display = 'block';
         }
 
         if (theme == "light") {
             document.getElementById('light-btn').classList.add('data-theme-btn');
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'block';
+            darkIcon.style.display = 'none';
         }
 
         function toggleTheme(theme) {
@@ -140,6 +211,12 @@ wrk.headers<span class="o">[</span><span class="s2">&#34;Content-Type&#34;</span
 
                 document.getElementById('dark-btn').classList.remove('data-theme-btn');
                 document.getElementById('light-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'block';
+                darkIcon.style.display = 'none';
 
                 
                 var styleSheets = document.styleSheets;
@@ -167,6 +244,12 @@ wrk.headers<span class="o">[</span><span class="s2">&#34;Content-Type&#34;</span
 
                 document.getElementById('light-btn').classList.remove('data-theme-btn');
                 document.getElementById('dark-btn').classList.add('data-theme-btn');
+
+                const lightIcon = document.getElementById('light-icon');
+                const darkIcon = document.getElementById('dark-icon');
+
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'block';
 
                 
                 var styleSheets = document.styleSheets;
@@ -235,6 +318,6 @@ wrk.headers<span class="o">[</span><span class="s2">&#34;Content-Type&#34;</span
             }
         }
 
-    </script><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></body>
+    </script><script src="/js/hljs.min.8a2658ccca6d9e87a439ee65a5d1d1e166af57afdffd06d778243afc50968a2e8188303a6368ca04f679dd21a49af5bf.js" integrity="sha384-iiZYzMptnoekOe5lpdHR4WavV6/f/QbXeCQ6/FCWii6BiDA6Y2jKBPZ53SGkmvW/"></script><script>hljs.initHighlightingOnLoad();</script></body>
 
 </html>
