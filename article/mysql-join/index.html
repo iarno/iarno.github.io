@@ -80,7 +80,9 @@
         </div></section><section id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">mysql join、inner join、left join 、right join 详解</h1><p class="article date">February 25, 2023</p></section><article class="article markdown-body"><p>这篇文章详细解释了MySQL中的join、inner join、left join和right join的用法。通过实例展示了如何在两张表之间进行有效连接，以及如何使用左连接和右连接来处理不存在的数据。文章还包含了一些实用的MySQL命令和查询结果，以帮助读者更好地理解这些概念。</p>
 <h2 id="join--inner-join">join &amp; inner join</h2>
+<div style="text-align:center">
 <img src="https://images.iarno.cn/images/1677331078455.png" alt="image-20230208151518822" style="zoom: 67%;" />
+</div>
 <blockquote>
 <p>理解为“有效连接”，两张表中都有的数据才会显示。</p>
 </blockquote>
@@ -135,9 +137,13 @@
 </span></span><span class="line"><span class="cl"><span class="p">|</span>  <span class="m">1</span> <span class="p">|</span> aaa    <span class="p">|</span>  <span class="m">4</span> <span class="p">|</span>    <span class="m">1</span> <span class="p">|</span> <span class="m">444</span>    <span class="p">|</span>
 </span></span><span class="line"><span class="cl">+----+--------+----+------+--------+
 </span></span><span class="line"><span class="cl"><span class="m">4</span> rows in <span class="nb">set</span> <span class="o">(</span>0.01 sec<span class="o">)</span>
-</span></span></code></pre></div><img src="https://images.iarno.cn/images/1677331078626.png" alt="image-20230208170436439" style="zoom:67%;" />
+</span></span></code></pre></div><div style="text-align:center">
+<img src="https://images.iarno.cn/images/1677331078626.png" alt="image-20230208170436439" style="zoom:67%;" />
+</div>
 <h2 id="left-join">left join</h2>
+<div style="text-align:center">
 <img src="https://images.iarno.cn/images/1677331078464.png" alt="image-20230208155137194" style="zoom:67%;" />
+</div>
 <blockquote>
 <p>以左表为主,  出左表全部数据, 右表不存在数据 null 补全。</p>
 </blockquote>
@@ -153,7 +159,9 @@
 </span></span><span class="line"><span class="cl">+----+--------+------+------+--------+
 </span></span><span class="line"><span class="cl"><span class="m">5</span> rows in <span class="nb">set</span> <span class="o">(</span>0.00 sec<span class="o">)</span>
 </span></span></code></pre></div><h2 id="right-join">right join</h2>
+<div style="text-align:center">
 <img src="https://images.iarno.cn/images/1677331078459.png" alt="image-20230208155747603" style="zoom:67%;" />
+</div>
 <blockquote>
 <p>以右表为主,  出右表全部数据, 左表不存在数据 null 补全。</p>
 </blockquote>
