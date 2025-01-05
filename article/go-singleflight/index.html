@@ -82,8 +82,10 @@
 <h2 id="1-缓存击穿">1. 缓存击穿</h2>
 <p>平时开发中为了提升性能，减轻DB压力，一般会给热点数据设置缓存，如 Redis，用户请求过来后先查询 Redis，有则直接返回，没有就会去查询数据库，然后再写入缓存。</p>
 <p>大致流程如下图所示：</p>
+<div style="text-align:center">
 <p><img  src="https://images.iarno.cn/images/1735986456595.jpg"
         alt="https://images.iarno.cn/images/1735986456595.jpg"/></p>
+</div>
 <p>以上流程存在一个问题，cache miss 后查询DB和将数据再次写入缓存这两个步骤是需要一定时间的，这段时间内的后续请求也会出现 cache miss，然后走同样的逻辑。</p>
 <p>这就是<strong>缓存击穿</strong>：某个热点数据缓存失效后，同一时间的大量请求直接被打到的了DB，会给DB造成极大压力，甚至直接打崩DB。</p>
 <p>常见的解决方案是<strong>加锁</strong>，cache miss 后请求DB之前必须先获取分布式锁，取锁失败说明是有其他请求在查询DB了，当前请求只需要循环等待并查询Redis检测取锁成功的请求把数据回写到Redis没有，如果有的话当前请求就可以直接从缓存中取数据返回了。</p>
