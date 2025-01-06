@@ -99,10 +99,20 @@
         var theme = localStorage.getItem('theme');
         if (window.matchMedia('(prefers-color-scheme: light)').matches && theme == null) {
             document.getElementById('light-btn').classList.add('data-theme-btn');
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'block';
+            darkIcon.style.display = 'none';
         }
 
         if (window.matchMedia('(prefers-color-scheme: dark)').matches && theme == null) {
             document.getElementById('dark-btn').classList.add('data-theme-btn');
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            lightIcon.style.display = 'none';
+            darkIcon.style.display = 'block';
         }
 
         if (theme == "dark") {
